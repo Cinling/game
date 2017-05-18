@@ -15,6 +15,7 @@ public class base_ai : MonoBehaviour
 	 */
 	void Update ()
 	{
-		ObjectMoveFunc.move(this.gameObject, new Vector3(0, -0.1f, 0));
+		//ObjectMoveFunc.move(this.gameObject, new Vector3(0, -0.1f, 0));
+		ObjectMoveFunc.turn(this.gameObject, 1.0f, ObjectMoveFunc.CLOCK );
 	}
 }
