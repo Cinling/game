@@ -1,0 +1,13 @@
+*.meta
+*.mat
+*.prefab
+*.cache
+Library
+Temp
+Editor
+Models
+Materials
+Scenes
+Stylized city
+fbx
+/code/unity3d/unity3d.sln
