@@ -1,4 +1,3 @@
-*.meta
 *.mat
 *.prefab
 *.cache
@@ -11,3 +10,7 @@ Scenes
 Stylized city
 fbx
 /code/unity3d/unity3d.sln
+Area730
+/code/unity3d/Assets/Area730.meta
+/code/unity3d/Assets/Cartoon Cat.meta
+Cartoon Cat
