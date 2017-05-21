@@ -8,8 +8,17 @@ using UnityEngine;
 /// </summary>
 public class ObjectMoveFunc : MonoBehaviour
 {
+	// 旋转方向
 	public const bool CLOCK = false;		// 顺时针
 	public const bool UNCLOCK = true;       // 逆时针
+
+	/// <summary>
+	/// 移动朝向
+	/// </summary>
+	public const byte DIRECTION_FORWARD = 0;	// 向前
+	public const byte DIRECTION_LEFT = 1;		// 向左
+	public const byte DIRECTION_RIGHT = 2;
+	public const byte DIRECTION_BACK = 3;
 
 
 	/// <summary>
@@ -19,8 +28,29 @@ public class ObjectMoveFunc : MonoBehaviour
 	/// </summary>
 	/// <param name="gameObject">游戏对象</param>
 	/// <param name="vector3">移动的方向</param>
-	public static void move(GameObject gameObject, Vector3 vector3)
+	public static void move(GameObject gameObject, float speed, byte direction)
 	{
+		Vector3 vector3 = new Vector3(0, 0, 0);
+		switch (direction)
+		{
+			case ObjectMoveFunc.DIRECTION_LEFT:
+				vector3.x = -speed;
+			break;
+
+			case ObjectMoveFunc.DIRECTION_RIGHT:
+				vector3.x = speed;
+			break;
+
+			case ObjectMoveFunc.DIRECTION_BACK:
+				vector3.z = -speed;
+			break;
+
+			case ObjectMoveFunc.DIRECTION_FORWARD:
+			default:
+				vector3.z = speed;
+			break;
+		}
+
 		gameObject.transform.Translate( vector3 );
 	}
 
@@ -40,6 +70,6 @@ public class ObjectMoveFunc : MonoBehaviour
 			angle = -angle;
 		}
 
-		gameObject.transform.Rotate(Vector3.forward, angle);
+		gameObject.transform.Rotate(Vector3.up, angle);
 	}
 }
