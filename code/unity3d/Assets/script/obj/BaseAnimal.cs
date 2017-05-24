@@ -9,10 +9,25 @@ using UnityEngine;
 public class BaseAnimal : MonoBehaviour
 {
 	public float speed;
+	public uint health;
+	public uint max_health;
 
 	
-	public BaseAnimal(float speed)
+	public BaseAnimal(float speed, int health)
 	{
 		this.speed = speed;
+	}
+
+
+	public void Update()
+	{
+		if (this.health > 0)
+		{
+
+		}
+		else
+		{
+
+		}
 	}
 }
