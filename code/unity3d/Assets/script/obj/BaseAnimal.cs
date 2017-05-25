@@ -7,105 +7,106 @@ using UnityEngine;
 /// </summary>
 public class BaseAnimal : MonoBehaviour
 {
-	public float speed;
+	public uint speed;
 	public uint health;
 	public uint max_health;
-	public Intent intent;
 
-	public class Intent
+	public void Start()
 	{
-		public const byte BORING = 0;   // 无聊、无意图
-		public const byte MOVE_TO = 1;  // 移动到某坐标点
-
-
-		/// <summary>
-		/// 对象的基本属性
-		/// </summary>
-		private byte intent;
-		private Vector3 vector3_target;         // 目标点
-		private GameObject gameObject_target;   // 意图目标
-
-
-		/// <summary>
-		/// 初始化意图
-		/// </summary>
-		public Intent()
-		{
-			this.intent = 0;
-		}
-
-
-		/// <summary>
-		/// 设置移动意图
-		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		/// <param name="z"></param>
-		public void setMoveTo(float x, float y, float z)
-		{
-			this.vector3_target = new Vector3( x, y, z );
-		}
-
-
-		/// <summary>
-		/// 设置移动意图
-		/// </summary>
-		/// <param name="vector3"></param>
-		public void setMoveTo(Vector3 vector3)
-		{
-			this.vector3_target = vector3;
-		}
-
-
-		/// <summary>
-		/// </summary>
-		/// <param name="gameObject">执行这个意图的游戏对象</param>
-		public void doIntent(GameObject gameObject)
-		{
-			switch (this.intent)
-			{
-				case Intent.BORING:
-				break;
-
-				case Intent.MOVE_TO:
-				break;
-			}
-		}
-	}
-
-	
-	public BaseAnimal(float speed, int health)
-	{
-		this.speed = speed;
-		this.intent = null;
+		
 	}
 
 
 	public void Update()
 	{
+		this.aiRun();
+	}
+
+	// 旋转方向
+	public const bool CLOCK = false;        // 顺时针
+	public const bool UNCLOCK = true;       // 逆时针
+
+	/// <summary>
+	/// 移动朝向
+	/// </summary>
+	public const byte DIRECTION_FORWARD = 0;    // 向前
+	public const byte DIRECTION_LEFT = 1;       // 向左
+	public const byte DIRECTION_RIGHT = 2;
+	public const byte DIRECTION_BACK = 3;
+
+
+	/// <summary>
+	/// 运行AI的方法
+	/// </summary>
+	public void aiRun()
+	{
 		if (this.health > 0)
 		{
-			// 有意图
-			if (this.intent != null)
-			{
-				this.intent.doIntent(this.gameObject);
-			}
-			// 没有意图，根据概率随机产生意图
-			else
-			{
-
-			}
+			this.move(this.speed, BaseAnimal.DIRECTION_FORWARD);
 		}
 		else
 		{
-			this.Death();
+			this.death();
 		}
 	}
 
-
-
-	public void Death()
+	/// <summary>
+	/// 死亡方法
+	/// </summary>
+	public void death()
 	{
 
+	}
+
+
+	/// <summary>
+	/// 移动方法
+	/// </summary>
+	/// <param name="gameObject"></param>
+	/// <param name="speed"></param>
+	/// <param name="direction"></param>
+	public void move(int speed, byte direction)
+	{
+		float f_speed = (float)(speed / 10000.00);
+
+		Vector3 vector3 = new Vector3( 0, 0, 0 );
+		switch (direction)
+		{
+			case ObjectMoveFunc.DIRECTION_LEFT:
+				vector3.x = -f_speed;
+			break;
+
+			case ObjectMoveFunc.DIRECTION_RIGHT:
+				vector3.x = f_speed;
+			break;
+
+			case ObjectMoveFunc.DIRECTION_BACK:
+				vector3.z = -f_speed;
+			break;
+
+			case ObjectMoveFunc.DIRECTION_FORWARD:
+			default:
+				vector3.z = f_speed;
+			break;
+		}
+
+		this.gameObject.transform.Translate( vector3 );
+	}
+
+
+	/// <summary>
+	/// 旋转方法
+	/// </summary>
+	/// <param name="gameObject"></param>
+	/// <param name="angle"></param>
+	/// <param name="clock"></param>
+	public void turn(float angle, bool clock)
+	{
+		if (clock)
+		{
+			angle = -angle;
+		}
+
+		this.gameObject.transform.Rotate( Vector3.up, angle );
 	}
 }
