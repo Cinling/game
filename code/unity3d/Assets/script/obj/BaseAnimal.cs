@@ -25,14 +25,12 @@ public class BaseAnimal : MonoBehaviour
 	// 旋转方向
 	public const bool CLOCK = false;        // 顺时针
 	public const bool UNCLOCK = true;       // 逆时针
-
-	/// <summary>
-	/// 移动朝向
-	/// </summary>
+	
+	// 移动朝向
 	public const byte DIRECTION_FORWARD = 0;    // 向前
 	public const byte DIRECTION_LEFT = 1;       // 向左
-	public const byte DIRECTION_RIGHT = 2;
-	public const byte DIRECTION_BACK = 3;
+	public const byte DIRECTION_RIGHT = 2;		// 向右
+	public const byte DIRECTION_BACK = 3;		// 向后
 
 
 	/// <summary>
@@ -65,26 +63,26 @@ public class BaseAnimal : MonoBehaviour
 	/// <param name="gameObject"></param>
 	/// <param name="speed"></param>
 	/// <param name="direction"></param>
-	public void move(int speed, byte direction)
+	public void move(uint speed, byte direction)
 	{
 		float f_speed = (float)(speed / 10000.00);
 
 		Vector3 vector3 = new Vector3( 0, 0, 0 );
 		switch (direction)
 		{
-			case ObjectMoveFunc.DIRECTION_LEFT:
+			case BaseAnimal.DIRECTION_LEFT:
 				vector3.x = -f_speed;
 			break;
 
-			case ObjectMoveFunc.DIRECTION_RIGHT:
+			case BaseAnimal.DIRECTION_RIGHT:
 				vector3.x = f_speed;
 			break;
 
-			case ObjectMoveFunc.DIRECTION_BACK:
+			case BaseAnimal.DIRECTION_BACK:
 				vector3.z = -f_speed;
 			break;
 
-			case ObjectMoveFunc.DIRECTION_FORWARD:
+			case BaseAnimal.DIRECTION_FORWARD:
 			default:
 				vector3.z = f_speed;
 			break;

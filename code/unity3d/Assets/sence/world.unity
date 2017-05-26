@@ -178,7 +178,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &227704850
 BoxCollider:
@@ -192,48 +192,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 500, y: 0, z: 500}
   m_Center: {x: 250, y: 0, z: 250}
---- !u!1001 &407815850
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4363185920984708, guid: de8d9299105f1854aa71308959d859dc, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 2.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4363185920984708, guid: de8d9299105f1854aa71308959d859dc, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4363185920984708, guid: de8d9299105f1854aa71308959d859dc, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 3.7419217
-      objectReference: {fileID: 0}
-    - target: {fileID: 4363185920984708, guid: de8d9299105f1854aa71308959d859dc, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0.000000021855694
-      objectReference: {fileID: 0}
-    - target: {fileID: 4363185920984708, guid: de8d9299105f1854aa71308959d859dc, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4363185920984708, guid: de8d9299105f1854aa71308959d859dc, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4363185920984708, guid: de8d9299105f1854aa71308959d859dc, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4363185920984708, guid: de8d9299105f1854aa71308959d859dc, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: de8d9299105f1854aa71308959d859dc, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &786509904
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +255,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1966403072
 GameObject:
