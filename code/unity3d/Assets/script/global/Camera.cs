@@ -8,13 +8,31 @@ public class Camera : MonoBehaviour
 	private float speed = 0.5f;
 	private float rotation_x;
 
+
+	// 全局初始化方法
 	void Start()
 	{
+		// 初始化镜头的角度x值
 		rotation_x = transform.localEulerAngles.x;
-		this.doMain();
+		// 创建一个Guy角色
+		createGuy();
 	}
 
+	// 全局循环
 	void Update()
+	{
+		// 镜头控制的方法
+		this.globalControl();
+
+		// 随机创建菠萝
+		this.createPineapple( Random.Range(0f, 20f), 0, Random.Range( 0f, 20f) );
+	}
+
+	/// <summary>
+	/// 2017年6月1日 22:50:59
+	/// 全局控制方法
+	/// </summary>
+	private void globalControl()
 	{
 		// 方向键控制摄像头移动
 		if (Input.GetKey( "d" ))
@@ -52,13 +70,29 @@ public class Camera : MonoBehaviour
 		}
 	}
 
-	// main 方法入口
-	public void doMain()
+	/// <summary>
+	/// 2017年6月1日 22:51:09
+	/// 基础创建角色方法
+	/// </summary>
+	/// <param name="prebPath">prefabs在Resourses下后面的路径，如："Animal/Persion/Guy"</param>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <param name="y"></param>
+	private void createPrefabs(string prebPath, float x, float y, float z)
 	{
-		//以下同理实现Sphere的动态实例化
-		//把资源加载到内存中
-		Object spherePreb = Resources.Load( "Pre/Guy", typeof( GameObject ) );
-		//用加载得到的资源对象，实例化游戏对象，实现游戏物体的动态加载
+		Object spherePreb = Resources.Load( prebPath, typeof( GameObject ) );
 		GameObject sphere = Instantiate( spherePreb ) as GameObject;
+		sphere.transform.position = new Vector3( x, y, z );
+	}
+
+	// 创建一个Guy
+	private void createGuy()
+	{
+		this.createPrefabs( "Animal/Persion/Guy", 1, 0, 2 );
+	}
+
+	private void createPineapple(float x, float y, float z)
+	{
+		this.createPrefabs( "Foot/Fruits/Pineapple", x, y, z );
 	}
 }
