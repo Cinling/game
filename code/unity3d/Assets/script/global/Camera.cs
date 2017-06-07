@@ -4,28 +4,54 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
-
 	private float speed = 0.5f;
 	private float rotation_x;
 
+	// 存储游戏对象
+	private static List<GameObject> gameObjectArrayList;
+
+	// 食物刷新的帧数间隔
+	private int foot_flush_frames_cell = 5 * 1;
+
+	// 记录游戏运行的帧数
+	private int game_frames_num = 0;
 
 	// 全局初始化方法
 	void Start()
 	{
+		Camera.gameObjectArrayList = new List<GameObject> { };
+
 		// 初始化镜头的角度x值
 		rotation_x = transform.localEulerAngles.x;
 		// 创建一个Guy角色
-		createGuy();
+		this.createGuy(2, 0, 2);
 	}
 
 	// 全局循环
 	void Update()
 	{
+		++game_frames_num;
+
 		// 镜头控制的方法
 		this.globalControl();
 
-		// 随机创建菠萝
-		this.createPineapple( Random.Range(0f, 20f), 0, Random.Range( 0f, 20f) );
+		if ( game_frames_num % foot_flush_frames_cell == 0 )
+		{
+			if (Camera.gameObjectArrayList.Count < 20)
+			{
+				// 随机创建菠萝
+				GameObject pineapple = this.createPineapple( Random.Range( 0f, 20f ), 0, Random.Range( 0f, 20f ) );
+				gameObjectArrayList.Add( pineapple );
+			}
+
+			if (Camera.gameObjectArrayList.Count > 0)
+			{
+				foreach (GameObject gameObject in Camera.gameObjectArrayList)
+				{
+					gameObject.transform.position = new Vector3( gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 0.1f );
+				}
+			}
+		}
 	}
 
 	/// <summary>
@@ -78,21 +104,23 @@ public class Camera : MonoBehaviour
 	/// <param name="x"></param>
 	/// <param name="y"></param>
 	/// <param name="y"></param>
-	private void createPrefabs(string prebPath, float x, float y, float z)
+	private GameObject createPrefabs(string prebPath, float x, float y, float z)
 	{
 		Object spherePreb = Resources.Load( prebPath, typeof( GameObject ) );
 		GameObject sphere = Instantiate( spherePreb ) as GameObject;
 		sphere.transform.position = new Vector3( x, y, z );
+
+		return sphere;
 	}
 
 	// 创建一个Guy
-	private void createGuy()
+	private GameObject createGuy(float x, float y, float z)
 	{
-		this.createPrefabs( "Animal/Persion/Guy", 1, 0, 2 );
+		return this.createPrefabs( "Animal/Persion/Guy", x, y, z );
 	}
 
-	private void createPineapple(float x, float y, float z)
+	private GameObject createPineapple(float x, float y, float z)
 	{
-		this.createPrefabs( "Foot/Fruits/Pineapple", x, y, z );
+		return this.createPrefabs( "Foot/Fruits/Pineapple", x, y, z );
 	}
 }
