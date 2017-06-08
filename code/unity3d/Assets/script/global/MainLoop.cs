@@ -26,7 +26,7 @@ public class MainLoop : MonoBehaviour
 		MainLoop.gameObjectArrayList = new List<GameObject> { };
 	}
 	
-	// Update is called once per frame
+
 	void Update () 
 	{
 
