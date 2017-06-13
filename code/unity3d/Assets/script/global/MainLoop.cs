@@ -58,7 +58,7 @@ public class MainLoop : MonoBehaviour
 	/// <param name="x"></param>
 	/// <param name="y"></param>
 	/// <param name="y"></param>
-	private GameObject createPrefabs(string prebPath, float x, float y, float z)
+	private GameObject CreatePrefabs(string prebPath, float x, float y, float z)
 	{
 		Object spherePreb = Resources.Load( prebPath, typeof( GameObject ) );
 		GameObject sphere = Instantiate( spherePreb ) as GameObject;
@@ -70,11 +70,11 @@ public class MainLoop : MonoBehaviour
 	// 创建一个Guy
 	private GameObject createGuy(float x, float y, float z)
 	{
-		return this.createPrefabs( "Animal/Persion/Guy", x, y, z );
+		return this.CreatePrefabs( "Animal/Persion/Guy", x, y, z );
 	}
 
 	private GameObject createPineapple(float x, float y, float z)
 	{
-		return this.createPrefabs( "Foot/Fruits/Pineapple", x, y, z );
+		return this.CreatePrefabs( "Foot/Fruits/Pineapple", x, y, z );
 	}
 }

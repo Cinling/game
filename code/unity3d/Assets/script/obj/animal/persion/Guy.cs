@@ -3,19 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Guy : BaseAnimal
+public class Guy : Animal
 {
-	public Guy(uint speed, uint health) : base(speed, health)
+	private const string prefab = "Animal/Persion/Guy";
+
+
+	public Guy(float x, float y, float z) : base(x, y, z, Guy.prefab)
 	{
 
 	}
 
-	protected override void ai()
+	protected override void AI()
 	{
-		
+		this.Move(this.speed, Animal.DIRECTION_FORWARD);
 	}
 
-	protected override void death()
+	protected override void Death()
 	{
 		
 	}
