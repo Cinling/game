@@ -12,6 +12,7 @@ public class Camera : MonoBehaviour
 	{
 		// 初始化镜头的角度x值
 		rotation_x = transform.localEulerAngles.x;
+		Global.StartGlobal();
 	}
 	
 	void Update()
