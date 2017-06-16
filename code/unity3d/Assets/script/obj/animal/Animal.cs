@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 所有动物的基类
 /// </summary>
-public abstract class Animal : Base
+public abstract class Animal : BaseRole
 {
 	public uint speed;		// 速度
 	public uint health;		// 当前
@@ -22,14 +22,14 @@ public abstract class Animal : Base
 		this.max_health = this.health = max_health;
 
 		Object spherePreb = Resources.Load( prefab, typeof( GameObject ) );
-		GameObject sphere = Instantiate( spherePreb ) as GameObject;
-		sphere.transform.position = new Vector3( x, y, z );
+		this.gameObject = Instantiate( spherePreb ) as GameObject;
+		gameObject.transform.position = new Vector3( x, y, z );
 	}
 
 	/// <summary>
 	/// 运行AI的方法
 	/// </summary>
-	private void AIRun()
+	public override void Do()
 	{
 		if (this.health > 0)
 		{
@@ -55,11 +55,10 @@ public abstract class Animal : Base
 	/// 移动方法
 	/// </summary>
 	/// <param name="gameObject"></param>
-	/// <param name="speed"></param>
 	/// <param name="direction"></param>
-	public void Move(uint speed, byte direction)
+	public void Move(byte direction)
 	{
-		float f_speed = (float)(speed / 10000.00);
+		float f_speed = (float)(this.speed / 10000.00);
 
 		Vector3 vector3 = new Vector3( 0, 0, 0 );
 		switch (direction)
@@ -81,8 +80,9 @@ public abstract class Animal : Base
 				vector3.z = f_speed;
 			break;
 		}
+		this.gameObject.transform.TransformVector(vector3);
 
-		this.gameObject.transform.Translate( vector3 );
+		//this.gameObject.transform.Translate( vector3 );
 	}
 
 	/// <summary>
@@ -99,17 +99,6 @@ public abstract class Animal : Base
 		}
 
 		this.gameObject.transform.Rotate( Vector3.up, angle );
-	}
-
-	public void Start()
-	{
-
-	}
-
-
-	public void Update()
-	{
-		this.AIRun();
 	}
 
 

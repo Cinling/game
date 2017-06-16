@@ -7,12 +7,15 @@ using UnityEngine;
 /// 2017年6月13日 23:16:10
 /// 所有游戏对象的基类，具有公共的属性
 /// </summary>
-public class Base : MonoBehaviour 
+public abstract class BaseRole : MonoBehaviour 
 {
 	public ulong createTime;
+	public new GameObject gameObject;
 
-	public Base()
+	public BaseRole()
 	{
 		this.createTime = Global.gameRunTime;
 	}
+
+	public abstract void Do();
 }
