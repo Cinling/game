@@ -5,20 +5,19 @@ using UnityEngine;
 
 public class Guy : Animal
 {
-	public const string prefab = "Animal/Persion/Guy";
-
-
-	public Guy(float x, float y, float z) : base(x, y, z, Guy.prefab)
-	{
-
-	}
 
 	protected override void AI()
 	{
-		this.Move(Animal.DIRECTION_FORWARD);
+		Move( Animal.DIRECTION_FORWARD );
+		Debug.Log( "move" );
 	}
 
 	protected override void Death()
+	{
+		
+	}
+
+	protected override void InitAnimalChild()
 	{
 		
 	}

@@ -11,20 +11,23 @@ public abstract class Animal : BaseRole
 	public uint health;		// 当前
 	public uint max_health;	// 最大生命值
 
-	/// <summary>
-	/// 构造函数
-	/// </summary>
-	/// <param name="speed"></param>
-	/// <param name="max_health"></param>
-	public Animal(float x, float y, float z, string prefab, uint speed=300, uint max_health=100)
-	{
-		this.speed = speed;
-		this.max_health = this.health = max_health;
 
-		Object spherePreb = Resources.Load( prefab, typeof( GameObject ) );
-		this.gameObject = Instantiate( spherePreb ) as GameObject;
-		gameObject.transform.position = new Vector3( x, y, z );
+	/// <summary>
+	/// 2017-07-03 23:16:25
+	/// 初始化方法
+	/// </summary>
+	protected override void InitBaseRoleChild()
+	{
+		this.InitAnimalChild();
 	}
+
+
+	/// <summary>
+	/// 2017-07-03 23:16:22
+	/// 初始化 Animal 子类的方法
+	/// </summary>
+	protected abstract void InitAnimalChild();
+
 
 	/// <summary>
 	/// 运行AI的方法
@@ -80,9 +83,9 @@ public abstract class Animal : BaseRole
 				vector3.z = f_speed;
 			break;
 		}
-		this.gameObject.transform.TransformVector(vector3);
+		//this.gameObject.transform.TransformVector(vector3);
 
-		//this.gameObject.transform.Translate( vector3 );
+		this.gameObject.transform.Translate( vector3 );
 	}
 
 	/// <summary>

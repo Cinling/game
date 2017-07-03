@@ -66,8 +66,8 @@ public static class Global
 		Global.gameRunTime = 0;
 		baseRoleMap = new Dictionary<uint, BaseRole>();
 
-		BaseRole guy = new Guy(1, 1, 1);
-		Global.AddBaseRole(1, guy);
+		//BaseRole guy = new Guy(1, 1, 1);
+		//Global.AddBaseRole(1, guy);
 	}
 
 
