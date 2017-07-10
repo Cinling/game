@@ -17,7 +17,8 @@ public static class Global
 
 	public static ulong gameRunTime;            // 游戏运行时间，每个逻辑帧自增一次
 
-	public static Dictionary<uint, BaseRole> baseRoleMap;		// 存储游戏对象
+	public static Dictionary<uint, GameObject> baseRoleMap;		// 存储游戏对象
+	public static uint nextKey = 0;								// 用于记录 baseRoleMap 的下一个 key
 
 
 	
@@ -28,7 +29,11 @@ public static class Global
 	/// </summary>
 	public static void Start()
 	{
-		Global.timer.Enabled = true;
+		foreach (GameObject gameObject in baseRoleMap.Values)
+		{
+			BaseRole baseRole = gameObject.GetComponent<BaseRole>();
+			baseRole.InvokeStart();
+		}
 	}
 
 	
@@ -38,7 +43,11 @@ public static class Global
 	/// </summary>
 	public static void Pause()
 	{
-		Global.timer.Enabled = false;
+		foreach (GameObject gameObject in baseRoleMap.Values)
+		{
+			BaseRole baseRole = gameObject.GetComponent<BaseRole>();
+			baseRole.InvokeStop();
+		}
 	}
 
 
@@ -49,12 +58,6 @@ public static class Global
 	static Global()
 	{
 		Global.InitData();
-
-		// 设置定时任务
-		timer = new System.Timers.Timer();
-		timer.Elapsed += TimersLoop;
-		timer.Interval = Global.logicalFrame_ms;
-		timer.Start();
 	}
 
 
@@ -64,43 +67,12 @@ public static class Global
 	private static void InitData()
 	{
 		Global.gameRunTime = 0;
-		baseRoleMap = new Dictionary<uint, BaseRole>();
+		baseRoleMap = new Dictionary<uint, GameObject>();
 
 		//BaseRole guy = new Guy(1, 1, 1);
 		//Global.AddBaseRole(1, guy);
 	}
 
-
-	/// <summary>
-	/// 2017-06-14 23:31:18
-	/// 游戏每个逻辑帧执行的方法，主要处理保持数据统一的问题
-	/// </summary>
-	private static void TimersLoop(object sender, System.Timers.ElapsedEventArgs e)
-	{
-		if (Global.lastRunEnd)
-		{
-			Global.lastRunEnd = false;
-
-			Global.MainLoop();
-
-			++Global.gameRunTime;
-			Global.lastRunEnd = true;
-		}
-	}
-
-
-	/// <summary>
-	/// 2017-06-16 23:27:47
-	/// 游戏主循环方法
-	/// </summary>
-	private static void MainLoop()
-	{
-		// 所有动态物体执行一次方法
-		foreach (BaseRole baseRole in Global.baseRoleMap.Values)
-		{
-			baseRole.Do();
-		}
-	}
 
 
 	/// <summary>
@@ -109,8 +81,12 @@ public static class Global
 	/// </summary>
 	/// <param name="key"></param>
 	/// <param name="gameObject"></param>
-	public static void AddBaseRole(uint key, BaseRole baseRole)
+	public static void AddBaseRole(uint key, GameObject baseRole)
 	{
+		if (key == 0)
+		{
+			key = ++nextKey;
+		}
 		baseRoleMap[key] = baseRole;
 	}
 
@@ -121,8 +97,18 @@ public static class Global
 	/// </summary>
 	/// <param name="key"></param>
 	/// <returns></returns>
-	public static BaseRole GetBaseRole(uint key)
+	public static GameObject GetBaseRole(uint key)
 	{
 		return baseRoleMap[key];
+	}
+
+
+	public static GameObject CreateBaseRole(string preb, float x, float y, float z)
+	{
+		Object spherePreb = Resources.Load( preb, typeof( GameObject ) );
+		GameObject sphere = MonoBehaviour.Instantiate( spherePreb ) as GameObject;
+		sphere.transform.position = new Vector3( x, y, z );
+
+		return sphere;
 	}
 }

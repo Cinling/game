@@ -12,11 +12,18 @@ public abstract class BaseRole : MonoBehaviour
 	public ulong createTime;				// 创建时的游戏帧数
 	public static float runSecond = 0.05f;	// 每个逻辑帧的秒数
 
-	public void Start()
+
+	public void Awake()
 	{
 		this.InitBaseRoleChild();
 		this.createTime = Global.gameRunTime;
 		InvokeRepeating( "Do", 0, runSecond );
+	}
+
+
+	public void Start()
+	{
+		
 	}
 
 
@@ -29,6 +36,7 @@ public abstract class BaseRole : MonoBehaviour
 	// 游戏开始方法
 	public void InvokeStart()
 	{
+		CancelInvoke();
 		InvokeRepeating( "Do", 0, runSecond );
 	}
 
