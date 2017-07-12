@@ -4,49 +4,50 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
-	private float speed = 0.5f;
-	private float rotation_x;
+	private float speed;
+	private GameObject focus_gameobject;
+	private float relative_x;       // 相对焦点的 x 值
+	private float relative_y;       // 相对焦点的 y 值
+	private float relative_z;       // 相对焦点的 z 值
 
-	// 全局初始化方法
+	// 主摄像机初始化方法
 	void Start()
 	{
-		// 初始化镜头的角度x值
-		rotation_x = transform.localEulerAngles.x;
-		//Global.Start();
+		speed = 0.5f;
+		focus_gameobject = GameObject.Find( "Helper" );
+		relative_x = this.transform.position.x - focus_gameobject.transform.position.x;
+		relative_y = this.transform.position.y - focus_gameobject.transform.position.y;
+		relative_z = this.transform.position.z - focus_gameobject.transform.position.z;
 	}
 	
 	void Update()
 	{
-		// 镜头控制的方法
-		this.moveCamera();
+		// 镜头触发的方法
+		this.controlEvent();
 	}
 
 	/// <summary>
-	/// 2017年6月1日 22:50:59
+	/// 2017年6月1日 22:50:59s
 	/// 全局控制方法
 	/// </summary>
-	private void moveCamera()
+	private void controlEvent()
 	{
 		// 方向键控制摄像头移动
 		if (Input.GetKey( "d" ))
 		{
-			Vector3 movePoistion = new Vector3( speed, 0, 0 );
-			transform.Translate( movePoistion );
+			this.moveFocus( new Vector3( speed, 0, 0 ) );
 		}
 		if (Input.GetKey( "a" ))
 		{
-			Vector3 movePoistion = new Vector3( -speed, 0, 0 );
-			transform.Translate( movePoistion );
+			this.moveFocus( new Vector3( -speed, 0, 0 ) );
 		}
 		if (Input.GetKey( "w" ))
 		{
-			Vector3 movePoistion = new Vector3( 0, speed * Mathf.Sin( rotation_x ), speed * Mathf.Sin( rotation_x ) );
-			transform.Translate( movePoistion );
+			this.moveFocus( new Vector3( 0, 0, speed ) );
 		}
 		if (Input.GetKey( "s" ))
 		{
-			Vector3 movePoistion = new Vector3( 0, -speed * Mathf.Sin( rotation_x ), -speed * Mathf.Sin( rotation_x ) );
-			transform.Translate( movePoistion );
+			this.moveFocus( new Vector3(0, 0, -speed) );
 		}
 
 		// 镜头放大
@@ -54,12 +55,16 @@ public class Camera : MonoBehaviour
 		{
 			Vector3 movePoistion = new Vector3( 0, 0, speed * 5 );
 			transform.Translate( movePoistion );
+
+			this.refreshCameraAndFocusRelative();
 		}
 		// 镜头缩小
 		if (Input.GetAxis( "Mouse ScrollWheel" ) < 0)
 		{
 			Vector3 movePoistion = new Vector3( 0, 0, -speed * 5 );
 			transform.Translate( movePoistion );
+
+			this.refreshCameraAndFocusRelative();
 		}
 
 
@@ -96,9 +101,10 @@ public class Camera : MonoBehaviour
 		{
 			float mouse_x = Input.GetAxis( "Mouse X" ) * 1f;
 			float mouse_y = Input.GetAxis( "Mouse Y" ) * 1f;
+			float move_z = 0;
 
 
-			this.transform.Rotate( new Vector3( mouse_y, mouse_x, 0 ) );
+			this.transform.Rotate( new Vector3( mouse_y, -mouse_x, move_z ) );
 
 			Quaternion rotation = this.transform.rotation;
 
@@ -122,5 +128,27 @@ public class Camera : MonoBehaviour
 		{
 			Global.Pause();
 		}
+	}
+
+
+	/// <summary>
+	/// 2017-07-12 08:37:50
+	/// 刷新镜头和焦点的相对距离
+	/// </summary>
+	private void refreshCameraAndFocusRelative()
+	{
+		relative_x = this.transform.position.x - focus_gameobject.transform.position.x;
+		relative_y = this.transform.position.y - focus_gameobject.transform.position.y;
+		relative_z = this.transform.position.z - focus_gameobject.transform.position.z;
+	}
+
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public void moveFocus(Vector3 position)
+	{
+		focus_gameobject.transform.Translate( position );
+		this.transform.position = new Vector3( focus_gameobject.transform.position.x + relative_x, focus_gameobject.transform.position.y + relative_y, focus_gameobject.transform.position.z + relative_z );
 	}
 }
