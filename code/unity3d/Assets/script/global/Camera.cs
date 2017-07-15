@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
-	private float speed;
-	private GameObject focus_gameobject;
-	private float relative_x;       // 相对焦点的 x 值
-	private float relative_y;       // 相对焦点的 y 值
-	private float relative_z;       // 相对焦点的 z 值
+	private float m_speed;
+	private GameObject m_focus_gameobject;
+
+	private float m_relative_x;			// 相对焦点的 x 值
+	private float m_relative_y;			// 相对焦点的 y 值
+	private float m_relative_z;			// 相对焦点的 z 值
+	private float m_relative_leng;		// 相对焦点的距离
 
 	// 主摄像机初始化方法
 	void Start()
 	{
-		speed = 0.5f;
-		focus_gameobject = GameObject.Find( "Helper" );
-		relative_x = this.transform.position.x - focus_gameobject.transform.position.x;
-		relative_y = this.transform.position.y - focus_gameobject.transform.position.y;
-		relative_z = this.transform.position.z - focus_gameobject.transform.position.z;
+		m_speed = 0.5f;
+		m_focus_gameobject = GameObject.Find( "Camera Helper" );
+
+		this.refreshCameraAndFocusRelative();
 	}
 	
 	void Update()
@@ -26,34 +27,37 @@ public class Camera : MonoBehaviour
 		this.controlEvent();
 	}
 
+
 	/// <summary>
 	/// 2017年6月1日 22:50:59s
 	/// 全局控制方法
 	/// </summary>
 	private void controlEvent()
 	{
+		Debug.Log(m_relative_leng);
+
 		// 方向键控制摄像头移动
 		if (Input.GetKey( "d" ))
 		{
-			this.moveFocus( new Vector3( speed, 0, 0 ) );
+			this.moveFocus( new Vector3( m_speed, 0, 0 ) );
 		}
 		if (Input.GetKey( "a" ))
 		{
-			this.moveFocus( new Vector3( -speed, 0, 0 ) );
+			this.moveFocus( new Vector3( -m_speed, 0, 0 ) );
 		}
 		if (Input.GetKey( "w" ))
 		{
-			this.moveFocus( new Vector3( 0, 0, speed ) );
+			this.moveFocus( new Vector3( 0, 0, m_speed ) );
 		}
 		if (Input.GetKey( "s" ))
 		{
-			this.moveFocus( new Vector3(0, 0, -speed) );
+			this.moveFocus( new Vector3(0, 0, -m_speed) );
 		}
 
 		// 镜头放大
 		if (Input.GetAxis( "Mouse ScrollWheel" ) > 0)
 		{
-			Vector3 movePoistion = new Vector3( 0, 0, speed * 5 );
+			Vector3 movePoistion = new Vector3( 0, 0, m_speed * 5 );
 			transform.Translate( movePoistion );
 
 			this.refreshCameraAndFocusRelative();
@@ -61,7 +65,7 @@ public class Camera : MonoBehaviour
 		// 镜头缩小
 		if (Input.GetAxis( "Mouse ScrollWheel" ) < 0)
 		{
-			Vector3 movePoistion = new Vector3( 0, 0, -speed * 5 );
+			Vector3 movePoistion = new Vector3( 0, 0, -m_speed * 5 );
 			transform.Translate( movePoistion );
 
 			this.refreshCameraAndFocusRelative();
@@ -137,9 +141,11 @@ public class Camera : MonoBehaviour
 	/// </summary>
 	private void refreshCameraAndFocusRelative()
 	{
-		relative_x = this.transform.position.x - focus_gameobject.transform.position.x;
-		relative_y = this.transform.position.y - focus_gameobject.transform.position.y;
-		relative_z = this.transform.position.z - focus_gameobject.transform.position.z;
+		m_relative_x = this.transform.position.x - m_focus_gameobject.transform.position.x;
+		m_relative_y = this.transform.position.y - m_focus_gameobject.transform.position.y;
+		m_relative_z = this.transform.position.z - m_focus_gameobject.transform.position.z;
+
+		m_relative_leng = (float)System.Math.Sqrt( System.Math.Pow( m_relative_x, 2 ) + System.Math.Pow( m_relative_y, 2 ) + System.Math.Pow( m_relative_z, 2 ) );
 	}
 
 
@@ -148,7 +154,7 @@ public class Camera : MonoBehaviour
 	/// </summary>
 	public void moveFocus(Vector3 position)
 	{
-		focus_gameobject.transform.Translate( position );
-		this.transform.position = new Vector3( focus_gameobject.transform.position.x + relative_x, focus_gameobject.transform.position.y + relative_y, focus_gameobject.transform.position.z + relative_z );
+		m_focus_gameobject.transform.Translate( position );
+		this.transform.position = new Vector3( m_focus_gameobject.transform.position.x + m_relative_x, m_focus_gameobject.transform.position.y + m_relative_y, m_focus_gameobject.transform.position.z + m_relative_z );
 	}
 }
