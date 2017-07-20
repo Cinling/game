@@ -105,14 +105,17 @@ public class Camera : MonoBehaviour
 		{
 			float mouse_x = Input.GetAxis( "Mouse X" ) * 1f;
 			float mouse_y = Input.GetAxis( "Mouse Y" ) * 1f;
-			float move_z = 0;
+			//float move_z = 0;
+			//
+			//
+			//this.transform.Rotate( new Vector3( mouse_y, -mouse_x, move_z ) );
+			//
+			//Quaternion rotation = this.transform.rotation;
+			//
+			Debug.Log( "(" + transform.rotation.x + ", " + transform.rotation.y + ", " + transform.rotation.z + "), (" + mouse_x + ", " + mouse_y + ")" );
 
-
-			this.transform.Rotate( new Vector3( mouse_y, -mouse_x, move_z ) );
-
-			Quaternion rotation = this.transform.rotation;
-
-			Debug.Log( "(" + rotation.x + ", " + rotation.y + ", " + rotation.z + "), (" + mouse_x + ", " + mouse_y + ")" );
+			transform.RotateAround(m_focus_gameobject.transform.position, Vector3.up, -mouse_x);
+			transform.RotateAround(m_focus_gameobject.transform.position, new Vector3(Mathf.Cos( transform.rotation.y ), 0, -Mathf.Sin(transform.rotation.y) ), mouse_y);
 		}
 
 
