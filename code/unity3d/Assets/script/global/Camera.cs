@@ -16,7 +16,7 @@ public class Camera : MonoBehaviour
 	void Start()
 	{
 		m_speed = 0.5f;
-		m_focus_gameobject = GameObject.Find( "Camera Helper" );
+		m_focus_gameobject = GameObject.Find( "Main Camera Helper" );
 
 		this.refreshCameraAndFocusRelative();
 	}
@@ -39,19 +39,19 @@ public class Camera : MonoBehaviour
 		// 方向键控制摄像头移动
 		if (Input.GetKey( "d" ))
 		{
-			this.moveFocus( new Vector3( m_speed, 0, 0 ) );
+			this.moveFocus( m_speed * Mathf.Cos(transform.rotation.y), -m_speed * Mathf.Sin( transform.rotation.y ) );
 		}
 		if (Input.GetKey( "a" ))
 		{
-			this.moveFocus( new Vector3( -m_speed, 0, 0 ) );
+			this.moveFocus( -m_speed * Mathf.Cos( transform.rotation.y ), m_speed * Mathf.Sin( transform.rotation.y ) );
 		}
 		if (Input.GetKey( "w" ))
 		{
-			this.moveFocus( new Vector3( 0, 0, m_speed ) );
+			this.moveFocus( m_speed * Mathf.Sin( transform.rotation.y ), m_speed * Mathf.Cos( transform.rotation.y ) );
 		}
 		if (Input.GetKey( "s" ))
 		{
-			this.moveFocus( new Vector3(0, 0, -m_speed) );
+			this.moveFocus( -m_speed * Mathf.Sin( transform.rotation.y ), -m_speed * Mathf.Cos( transform.rotation.y ) );
 		}
 
 		// 镜头放大
@@ -105,14 +105,6 @@ public class Camera : MonoBehaviour
 		{
 			float mouse_x = Input.GetAxis( "Mouse X" ) * 1f;
 			float mouse_y = Input.GetAxis( "Mouse Y" ) * 1f;
-			//float move_z = 0;
-			//
-			//
-			//this.transform.Rotate( new Vector3( mouse_y, -mouse_x, move_z ) );
-			//
-			//Quaternion rotation = this.transform.rotation;
-			//
-			Debug.Log( "(" + transform.rotation.x + ", " + transform.rotation.y + ", " + transform.rotation.z + "), (" + mouse_x + ", " + mouse_y + ")" );
 
 			transform.RotateAround(m_focus_gameobject.transform.position, Vector3.up, -mouse_x);
 			transform.RotateAround(m_focus_gameobject.transform.position, new Vector3(Mathf.Cos( transform.rotation.y ), 0, -Mathf.Sin(transform.rotation.y) ), mouse_y);
@@ -122,9 +114,6 @@ public class Camera : MonoBehaviour
 
 		if (Input.GetKey("n"))
 		{
-			//Object spherePreb = Resources.Load( "Animal/Persion/Guy", typeof( GameObject ) );
-			//GameObject sphere = Instantiate( spherePreb ) as GameObject;
-			//sphere.transform.position = new Vector3( 5, 1, 3 );
 			GameObject gameObject = Global.CreateBaseRole( "Animal/Persion/Guy", 5, 1, 3 );
 			Global.AddBaseRole( 0, gameObject );
 
@@ -144,6 +133,10 @@ public class Camera : MonoBehaviour
 	/// </summary>
 	private void refreshCameraAndFocusRelative()
 	{
+		//######################################
+		// 重新初始化焦点的方法要处理好
+		//m_focus_gameobject.transform.Translate( new Vector3( this.transform.position.x + 10f, 1, this.transform.position.z ) );
+
 		m_relative_x = this.transform.position.x - m_focus_gameobject.transform.position.x;
 		m_relative_y = this.transform.position.y - m_focus_gameobject.transform.position.y;
 		m_relative_z = this.transform.position.z - m_focus_gameobject.transform.position.z;
@@ -155,9 +148,9 @@ public class Camera : MonoBehaviour
 	/// <summary>
 	/// 
 	/// </summary>
-	public void moveFocus(Vector3 position)
+	public void moveFocus(float position_x, float position_z)
 	{
-		m_focus_gameobject.transform.Translate( position );
+		m_focus_gameobject.transform.Translate( new Vector3(position_x, 0, position_z) );
 		this.transform.position = new Vector3( m_focus_gameobject.transform.position.x + m_relative_x, m_focus_gameobject.transform.position.y + m_relative_y, m_focus_gameobject.transform.position.z + m_relative_z );
 	}
 }
