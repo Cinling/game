@@ -88,7 +88,11 @@ public class Camera : MonoBehaviour
 		}
 		if (Input.GetKeyDown("e"))
 		{
-			this.gameObject.transform.Rotate( new Vector3( 0, 0, -10f ) );
+			this.resetFoucusByCamera();
+
+			Vector3 position = m_focus_gameobject.transform.position;
+
+			Debug.Log( "x:" + position.x + ", y:" + position.y + ", z:" + position.z );
 		}
 		if (Input.GetKeyDown( "r" ))
 		{
@@ -107,7 +111,17 @@ public class Camera : MonoBehaviour
 			float mouse_y = Input.GetAxis( "Mouse Y" ) * 1f;
 
 			transform.RotateAround(m_focus_gameobject.transform.position, Vector3.up, -mouse_x);
-			transform.RotateAround(m_focus_gameobject.transform.position, new Vector3(Mathf.Cos( transform.rotation.y ), 0, -Mathf.Sin(transform.rotation.y) ), mouse_y);
+			Quaternion rotation = this.transform.rotation;
+			//transform.RotateAround(m_focus_gameobject.transform.position, new Vector3(Mathf.Cos( transform.rotation.y ), 0, -Mathf.Sin(transform.rotation.y) ), mouse_y);
+			float w = this.transform.rotation.w;
+			float x = this.transform.rotation.x;
+			float y = this.transform.rotation.y;
+			float z = this.transform.rotation.z;
+			float oula_x = Mathf.Atan( (2 * (w * x + y * z)) / (1 - 2 * (Mathf.Pow(x, 2) + Mathf.Pow(y, 2))) );
+			//float oula_y = Mathf.Asin( 2 * (w * y - z * x) );
+			float oula_z = Mathf.Atan( (2 * (w * z + x * y)) / (1 - 2 * (Mathf.Pow(y, 2) + Mathf.Pow(z, 2))) );
+
+			transform.RotateAround( m_focus_gameobject.transform.position, new Vector3( Mathf.Cos(oula_x), 0f, Mathf.Sin(oula_z) ), mouse_y );
 		}
 
 
@@ -124,6 +138,13 @@ public class Camera : MonoBehaviour
 		{
 			Global.Pause();
 		}
+
+
+		if (true)
+		{
+			Vector3 r = this.transform.rotation.eulerAngles;
+			Debug.Log("(" + r.x + "," + r.y + "," + r.z + ")");
+		}
 	}
 
 
@@ -133,24 +154,46 @@ public class Camera : MonoBehaviour
 	/// </summary>
 	private void refreshCameraAndFocusRelative()
 	{
-		//######################################
-		// 重新初始化焦点的方法要处理好
-		//m_focus_gameobject.transform.Translate( new Vector3( this.transform.position.x + 10f, 1, this.transform.position.z ) );
-
 		m_relative_x = this.transform.position.x - m_focus_gameobject.transform.position.x;
 		m_relative_y = this.transform.position.y - m_focus_gameobject.transform.position.y;
 		m_relative_z = this.transform.position.z - m_focus_gameobject.transform.position.z;
-
+		
 		m_relative_leng = (float)System.Math.Sqrt( System.Math.Pow( m_relative_x, 2 ) + System.Math.Pow( m_relative_y, 2 ) + System.Math.Pow( m_relative_z, 2 ) );
 	}
 
 
 	/// <summary>
-	/// 
+	/// 2017-07-25 08:27:59
+	/// 移动焦点和摄像机
 	/// </summary>
 	public void moveFocus(float position_x, float position_z)
 	{
 		m_focus_gameobject.transform.Translate( new Vector3(position_x, 0, position_z) );
 		this.transform.position = new Vector3( m_focus_gameobject.transform.position.x + m_relative_x, m_focus_gameobject.transform.position.y + m_relative_y, m_focus_gameobject.transform.position.z + m_relative_z );
+	}
+
+
+	/// <summary>
+	/// 通过摄像机，重置焦点 与 焦点和摄像机相关的参数
+	/// </summary>
+	private void resetFoucusByCamera()
+	{
+		//float camera_rotation_y = this.transform.rotation.y;
+		//m_focus_gameobject.transform.TransformPoint( new Vector3(Mathf.Cos(camera_rotation_y) * 30f, 0, /Mathf.Sin/(camera_rotation_y) * 30f) );
+		//
+		//m_relative_x = this.transform.position.x - m_focus_gameobject.transform.position.x;
+		//m_relative_y = this.transform.position.y - m_focus_gameobject.transform.position.y;
+		//m_relative_z = this.transform.position.z - m_focus_gameobject.transform.position.z;
+
+		Vector3 rotation = this.transform.rotation.eulerAngles;
+
+		// 平面上镜头和焦点的相对距离
+		float plat_focus_to_camera_len = Mathf.Tan( rotation.x * Mathf.PI / 180 ) *  this.transform.position.y;
+		float focus_z = this.transform.position.z + Mathf.Cos( rotation.y * Mathf.PI / 180 ) * plat_focus_to_camera_len;
+		float focus_x = this.transform.position.x + Mathf.Sin( rotation.y * Mathf.PI / 180 ) * plat_focus_to_camera_len;
+
+		m_focus_gameobject.transform.position = new Vector3( focus_x, 0f, focus_z );
+
+		refreshCameraAndFocusRelative();
 	}
 }
