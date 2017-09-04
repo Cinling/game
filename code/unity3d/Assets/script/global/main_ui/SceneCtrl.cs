@@ -42,7 +42,7 @@ public class SceneCtrl : MonoBehaviour
 		switch (btnName)
 		{
 			case "Canvas/btnStartGame":
-				UnityEngine.SceneManagement.SceneManager.LoadScene("World");
+				UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("World");
 				break;
 		}
 	}
