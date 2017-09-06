@@ -106,21 +106,6 @@ public class Camera : MonoBehaviour
 			RotationCamera(screen_x, screen_y );
 
 		}
-
-
-
-		if (Input.GetKey("n"))
-		{
-			GameObject gameObject = Global.CreateBaseRole( "Animal/Persion/Guy", 5, 1, 3 );
-			Global.AddBaseRole( 0, gameObject );
-
-			Global.Start();
-		}
-
-		if (Input.GetKey("m"))
-		{
-			Global.Pause();
-		}
 	}
 
 

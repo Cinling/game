@@ -16,7 +16,6 @@ public abstract class BaseRole : MonoBehaviour
 	public void Awake()
 	{
 		this.InitBaseRoleChild();
-		this.createTime = Global.gameRunTime;
 		InvokeRepeating( "Do", 0, runSecond );
 	}
 

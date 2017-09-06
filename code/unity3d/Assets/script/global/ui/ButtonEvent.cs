@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneCtrl : MonoBehaviour
+public class ButtonEvent : MonoBehaviour
 {
 	void Start()
 	{
