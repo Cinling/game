@@ -2,11 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonEvent : MonoBehaviour
+public class ButtonEvent
 {
-	void Start()
+	private static ButtonEvent share_instance = null;
+
+	public static ButtonEvent GetInstance()
 	{
-		AddOnClickListenerWithBtnName("Canvas/btnStartGame");
+		if (share_instance == null)
+		{
+			share_instance = new ButtonEvent();
+		}
+		return share_instance;
+	}
+
+	public void InitButtonEvent()
+	{
+		AddOnClickListenerWithBtnName("MainCanvas/BtnStartGame");
 	}
 
 	/// <summary>
@@ -17,16 +28,17 @@ public class ButtonEvent : MonoBehaviour
 	{
 		// 获取按钮 GameObject
 		GameObject btnGameObject = GameObject.Find(btnName);
+
 		if (btnGameObject == null)
 		{
-			Debug.Log("Error [SceneCtrl AddOnClickListenerWithBtnName] not find btn with name:[" + btnName + "]");
+			Debug.Log("Error [ButtonEvent AddOnClickListenerWithBtnName] not find button with name:[" + btnName + "]");
 			return;
 		}
 
 		// 获取按钮脚本组件
 		UnityEngine.UI.Button btnComponent = btnGameObject.GetComponent<UnityEngine.UI.Button>();
 		// 添加点击监听
-		btnComponent.onClick.AddListener(delegate() {
+		btnComponent.onClick.AddListener(delegate () {
 			OnClick(btnName);
 		});
 	}
@@ -41,8 +53,12 @@ public class ButtonEvent : MonoBehaviour
 	{
 		switch (btnName)
 		{
-			case "Canvas/btnStartGame":
+			case "MainCanvas/BtnStartGame":
 				UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("World");
+				break;
+
+			default:
+				Debug.Log("Unkonw button event.");
 				break;
 		}
 	}
