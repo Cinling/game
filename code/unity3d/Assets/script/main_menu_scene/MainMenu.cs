@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonEvent
+public class MainMenu
 {
-	private static ButtonEvent share_instance = null;
+	private static MainMenu share_instance = null;
 
-	public static ButtonEvent GetInstance()
+	public static MainMenu GetInstance()
 	{
 		if (share_instance == null)
 		{
-			share_instance = new ButtonEvent();
+			share_instance = new MainMenu();
 		}
 		return share_instance;
 	}
@@ -54,7 +54,7 @@ public class ButtonEvent
 		switch (btnName)
 		{
 			case "MainCanvas/BtnStartGame":
-				UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("World");
+				World.Init();
 				break;
 
 			default:
