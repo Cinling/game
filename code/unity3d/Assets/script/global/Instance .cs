@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Instance : MonoBehaviour
 {
-
-
 	[RuntimeInitializeOnLoadMethod]
 	static void Initialize()
 	{
