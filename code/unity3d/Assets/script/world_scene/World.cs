@@ -8,5 +8,12 @@ public class World
 	{
 		UnityEngine.SceneManagement.SceneManager.LoadScene("World");
 		Log.PrintLog("World", "Init", "InitScene", Log.LOG_LEVEL.INFO);
+
+		AddButton();
+	}
+
+	private static void AddButton()
+	{
+		//GUI.Button(new Rect(0, 0, 100, 50), "动态按钮");
 	}
 }

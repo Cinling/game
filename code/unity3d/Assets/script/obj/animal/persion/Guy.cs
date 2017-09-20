@@ -17,7 +17,7 @@ public class Guy : Animal
 		
 	}
 
-	protected override void InitAnimalChild()
+	protected override void InitAnimal()
 	{
 		
 	}

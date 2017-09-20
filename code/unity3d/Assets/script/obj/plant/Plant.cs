@@ -1,16 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Plant : MonoBehaviour {
+public abstract class Plant : BaseRole
+{
+	public override void Do()
+	{
+		
+	}
 
-	// Use this for initialization
-	void Start () {
-		
+	protected override void InitBaseRole()
+	{
+		InitPlant();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+
+	protected abstract void InitPlant();
 }

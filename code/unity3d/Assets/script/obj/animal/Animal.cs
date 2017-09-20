@@ -16,9 +16,9 @@ public abstract class Animal : BaseRole
 	/// 2017-07-03 23:16:25
 	/// 初始化方法
 	/// </summary>
-	protected override void InitBaseRoleChild()
+	protected override void InitBaseRole()
 	{
-		this.InitAnimalChild();
+		this.InitAnimal();
 	}
 
 
@@ -26,7 +26,7 @@ public abstract class Animal : BaseRole
 	/// 2017-07-03 23:16:22
 	/// 初始化 Animal 子类的方法
 	/// </summary>
-	protected abstract void InitAnimalChild();
+	protected abstract void InitAnimal();
 
 
 	/// <summary>

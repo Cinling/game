@@ -15,7 +15,7 @@ public abstract class BaseRole : MonoBehaviour
 
 	public void Awake()
 	{
-		this.InitBaseRoleChild();
+		this.InitBaseRole();
 		InvokeRepeating( "Do", 0, runSecond );
 	}
 
@@ -30,7 +30,7 @@ public abstract class BaseRole : MonoBehaviour
 	/// 2017-07-03 23:13:18
 	/// 初始化继承此类的对象
 	/// </summary>
-	protected abstract void InitBaseRoleChild();
+	protected abstract void InitBaseRole();
 
 	// 游戏开始方法
 	public void InvokeStart()

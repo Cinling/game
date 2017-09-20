@@ -31,7 +31,7 @@ public class MainMenu
 
 		if (btnGameObject == null)
 		{
-			Debug.Log("Error [ButtonEvent AddOnClickListenerWithBtnName] not find button with name:[" + btnName + "]");
+			Log.PrintLog("MainMenu", "AddOnClickListenerWithBtnName", "not find button with name:[" + btnName + "]", Log.LOG_LEVEL.ERROR);
 			return;
 		}
 

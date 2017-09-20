@@ -74,26 +74,33 @@ public class Camera : MonoBehaviour
 		}
 
 
+		// 测试方法
+		if (Input.GetKeyDown("t"))
+		{
+			
+		}
+
+
 		if (Input.GetKeyDown("q"))
 		{
-			Quaternion rotation = gameObject.transform.rotation;
-			rotation.eulerAngles = new Vector3( 0.0f, 10.0f, 0.0f );
-			gameObject.transform.rotation = rotation;
+			//Quaternion rotation = gameObject.transform.rotation;
+			//rotation.eulerAngles = new Vector3( 0.0f, 10.0f, 0.0f );
+			//gameObject.transform.rotation = rotation;
 			//gameObject.transform.SetPositionAndRotation(this.gameObject.transform.position, rotation);
 		}
 		if (Input.GetKeyDown("e"))
 		{
-			ResetFoucusByCamera();
+			//ResetFoucusByCamera();
 
-			Vector3 position = m_focus_go.transform.position;
+			//Vector3 position = m_focus_go.transform.position;
 		}
 		if (Input.GetKeyDown( "r" ))
 		{
-			gameObject.transform.Rotate( new Vector3( 10f, 0, 0 ) );
+			//gameObject.transform.Rotate( new Vector3( 10f, 0, 0 ) );
 		}
 		if (Input.GetKeyDown( "f" ))
 		{
-			gameObject.transform.Rotate( new Vector3( -10f, 0, 0 ) );
+			//gameObject.transform.Rotate( new Vector3( -10f, 0, 0 ) );
 		}
 
 
