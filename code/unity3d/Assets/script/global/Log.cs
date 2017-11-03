@@ -20,7 +20,7 @@ public class Log
 	/// <param name="log_level"></param>
 	public static void PrintLog(string cls_name, string func_name, string info, LOG_LEVEL log_level)
 	{
-		Debug.Log(string.Format("{0:s} {1:s} [[{2:s}.{3:s}] {4:s}]", System.DateTime.Now.ToString("R"), GetLogLevelStr(log_level), cls_name, func_name, info) );
+		Debug.Log(string.Format("{0:s} {1:s} [[{2:s}.{3:s}] {4:s}]", System.DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), GetLogLevelStr(log_level), cls_name, func_name, info) );
 	}
 
 	public static void WriteLog()
@@ -34,15 +34,15 @@ public class Log
 		switch (log_level)
 		{
 			case LOG_LEVEL.INFO:
-				return "info";
+				return "Info";
 
 			case LOG_LEVEL.DEBUG:
-				return "debug";
+				return "Debug";
 
 			case LOG_LEVEL.ERROR:
-				return "error";
+				return "Error";
 			default:
-				return "unknown";
+				return "Unknown";
 		}
 	}
 }
