@@ -12,10 +12,6 @@ public class Camera : MonoBehaviour
     private float m_speed;
     private GameObject m_focus_go;
 
-    private float m_relative_x;            // 相对焦点的 x 值
-    private float m_relative_y;            // 相对焦点的 y 值
-    private float m_relative_z;            // 相对焦点的 z 值
-
     // 主摄像机初始化方法
     void Start()
     {
@@ -99,7 +95,7 @@ public class Camera : MonoBehaviour
         }
         if (Input.GetKeyDown("n"))
         {
-            Guy.CreateGuy(10, 10, 0, 10000, 10, 10);
+            Guy.CreateGuy(10f, 0f, 0f, 1000, 10, 10);
         }
 
 

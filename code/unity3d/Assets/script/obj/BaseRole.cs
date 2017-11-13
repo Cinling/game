@@ -10,7 +10,8 @@ using UnityEngine;
 public abstract class BaseRole : MonoBehaviour 
 {
     public ulong createTime;                // 创建时的游戏帧数
-    public static float runSecond = 0.05f;  // 每个逻辑帧的秒数
+    private static float runSecond = 0.05f;  // 每个逻辑帧的秒数
+
 
 
     /// <summary>
@@ -32,14 +33,14 @@ public abstract class BaseRole : MonoBehaviour
 
     public void Awake()
     {
-        this.InitBaseRole();
-        InvokeRepeating( "Do", 0, runSecond );
+        InvokeChangeLps();
     }
 
 
     public void Start()
     {
-        
+        this.InitBaseRole();
+        InvokeRepeating("Do", 0, runSecond);
     }
 
 
@@ -48,6 +49,7 @@ public abstract class BaseRole : MonoBehaviour
     /// 初始化继承此类的对象
     /// </summary>
     protected abstract void InitBaseRole();
+    
 
     // 游戏开始方法
     public void InvokeStart()
@@ -62,12 +64,11 @@ public abstract class BaseRole : MonoBehaviour
         CancelInvoke();
     }
 
-    // 游戏变速
-    public void InvokeChangeRunSecond(float second)
+
+    // 刷新逻辑帧
+    public static void InvokeChangeLps()
     {
-        BaseRole.runSecond = second;
-        InvokeStop();
-        InvokeStart();
+        runSecond = 1f / MathComputer.lps;
     }
 
 
