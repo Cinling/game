@@ -2,8 +2,7 @@
 using UnityEngine;
 
 
-public class Camera : MonoBehaviour
-{
+public class Camera : MonoBehaviour {
     public const ushort C_MOVE_LEFT = 0;
     public const ushort C_MOVE_FOUNT = 1;
     public const ushort C_MOVE_RIGHT = 2;
@@ -13,16 +12,14 @@ public class Camera : MonoBehaviour
     private GameObject m_focus_go;
 
     // 主摄像机初始化方法
-    void Start()
-    {
+    void Start() {
         m_speed = 0.5f;
         m_focus_go = GameObject.Find( "Main Camera Helper" );
 
         ResetFoucusByCamera();
     }
     
-    void Update()
-    {
+    void Update() {
         ControlEvent();
     }
 
@@ -31,43 +28,35 @@ public class Camera : MonoBehaviour
     /// 2017年6月1日 22:50:59s
     /// 全局控制方法
     /// </summary>
-    private void ControlEvent()
-    {
+    private void ControlEvent() {
         // 方向键控制摄像头移动
-        if (Input.GetKey( "d" ))
-        {
+        if (Input.GetKey( "d" )) {
             MoveCamera(C_MOVE_RIGHT);
         }
-        if (Input.GetKey( "a" ))
-        {
+        if (Input.GetKey( "a" )) {
             MoveCamera(C_MOVE_LEFT);
         }
-        if (Input.GetKey( "w" ))
-        {
+        if (Input.GetKey( "w" )) {
             MoveCamera(C_MOVE_FOUNT);
         }
-        if (Input.GetKey( "s" ))
-        {
+        if (Input.GetKey( "s" )) {
             MoveCamera(C_MOVE_BACK);
         }
 
         // 镜头放大
-        if (Input.GetAxis( "Mouse ScrollWheel" ) > 0)
-        {
+        if (Input.GetAxis( "Mouse ScrollWheel" ) > 0) {
             Vector3 movePoistion = new Vector3( 0, 0, m_speed * 5 );
             transform.Translate( movePoistion );
         }
         // 镜头缩小
-        if (Input.GetAxis( "Mouse ScrollWheel" ) < 0)
-        {
+        if (Input.GetAxis( "Mouse ScrollWheel" ) < 0) {
             Vector3 movePoistion = new Vector3( 0, 0, -m_speed * 5 );
             transform.Translate( movePoistion );
         }
 
 
         // 测试方法
-        if (Input.GetKeyDown("t"))
-        {
+        if (Input.GetKeyDown("t")) {
             
         }
 
@@ -79,29 +68,25 @@ public class Camera : MonoBehaviour
             //gameObject.transform.rotation = rotation;
             //gameObject.transform.SetPositionAndRotation(this.gameObject.transform.position, rotation);
         }
-        if (Input.GetKeyDown("e"))
-        {
+        if (Input.GetKeyDown("e")) {
             //ResetFoucusByCamera();
 
             //Vector3 position = m_focus_go.transform.position;
         }
-        if (Input.GetKeyDown( "r" ))
-        {
+        if (Input.GetKeyDown( "r" )) {
             //gameObject.transform.Rotate( new Vector3( 10f, 0, 0 ) );
         }
-        if (Input.GetKeyDown( "f" ))
-        {
+        if (Input.GetKeyDown( "f" )) {
             //gameObject.transform.Rotate( new Vector3( -10f, 0, 0 ) );
         }
-        if (Input.GetKeyDown("n"))
-        {
-            Guy.CreateGuy(10f, 0f, 0f, 1000, 10, 10);
-        }
+        //if (Input.GetKeyDown("n"))
+        //{
+        //    Guy.CreateGuy(10f, 0f, 0f, 1000, 10, 10);
+        //}
 
 
         // 鼠标中键 控制镜头旋转的方法
-        if (Input.GetMouseButton(2))
-        {
+        if (Input.GetMouseButton(2)) {
             float screen_x = Input.GetAxis( "Mouse X" ) * 1f;
             float screen_y = Input.GetAxis( "Mouse Y" ) * 1f;
 
@@ -115,14 +100,11 @@ public class Camera : MonoBehaviour
     /// 2017-07-25 08:27:59
     /// 移动摄像机的方法，只支持前后左右移动
     /// </summary>
-    public void MoveCamera(ushort move_type)
-    {
+    public void MoveCamera(ushort move_type) {
         Vector3 camera_euler = transform.rotation.eulerAngles;
 
-        switch (move_type)
-        {
-            case C_MOVE_LEFT:
-                {
+        switch (move_type) {
+            case C_MOVE_LEFT: {
                     float move_x = m_speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + 3f / 2f * Mathf.PI);
                     float move_z = m_speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f);
 
@@ -133,8 +115,7 @@ public class Camera : MonoBehaviour
                 }
                 break;
 
-            case C_MOVE_FOUNT:
-                {
+            case C_MOVE_FOUNT: {
                     float move_x = m_speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f);
                     float move_z = m_speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + 1f / 2f * Mathf.PI);
 
@@ -145,8 +126,7 @@ public class Camera : MonoBehaviour
                 }
                 break;
 
-            case C_MOVE_RIGHT:
-                {
+            case C_MOVE_RIGHT: {
                     float move_x = m_speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + 1f / 2f * Mathf.PI);
                     float move_z = m_speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + Mathf.PI);
 
@@ -157,8 +137,7 @@ public class Camera : MonoBehaviour
                 }
                 break;
 
-            case C_MOVE_BACK:
-                {
+            case C_MOVE_BACK: {
                     float move_x = m_speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + Mathf.PI);
                     float move_z = m_speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + 3f / 2f * Mathf.PI);
 
@@ -180,8 +159,7 @@ public class Camera : MonoBehaviour
     /// 2017-08-21 00:45:11
     /// 通过摄像机，重置焦点 与 焦点和摄像机相关的参数
     /// </summary>
-    private void ResetFoucusByCamera()
-    {
+    private void ResetFoucusByCamera() {
         Vector3 eulerAngles = transform.rotation.eulerAngles;
 
         // 平面上镜头和焦点的相对距离
@@ -199,8 +177,7 @@ public class Camera : MonoBehaviour
     /// </summary>
     /// <param name="screen_x"></param>
     /// <param name="screen_y"></param>
-    private void RotationCamera(float screen_x, float screen_y)
-    {
+    private void RotationCamera(float screen_x, float screen_y) {
         Vector3 camera_euler = transform.rotation.eulerAngles;
 
         float move_x = screen_x * 4f;
