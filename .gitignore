@@ -23,3 +23,5 @@ Cartoon Cat
 FREE Food Pack
 /code/unity3d/Assets/FREE Food Pack.meta
 AssetsStore
+*.meta
+/code/unity3d/.vs/unity3d/v15/Server/sqlite3

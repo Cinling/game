@@ -8,9 +8,11 @@ using UnityEngine;
 /// 所有动态游戏对象的基类，具有公共的属性
 /// </summary>
 public abstract class BaseRole : MonoBehaviour {
+    protected bool is_move = false;
+    public Vector3 position;
+
     public ulong createTime;                // 创建时的游戏帧数
     private static float runSecond = 0.05f;  // 每个逻辑帧的秒数
-
 
 
     /// <summary>
@@ -29,14 +31,17 @@ public abstract class BaseRole : MonoBehaviour {
     }
 
 
-    public void Awake() {
+    protected void Awake() {
         InvokeChangeLps();
     }
 
 
-    public void Start() {
+    protected void Start() {
         this.InitBaseRole();
-        //InvokeRepeating("Do", 0, runSecond);
+    }
+
+    protected void Update() {
+
     }
 
 
@@ -65,7 +70,7 @@ public abstract class BaseRole : MonoBehaviour {
     }
 
 
-    // 每个逻辑帧执行的动作
+    // 每个逻辑帧执行的动作，这个方法不能包含Unity3D中的方法
     public abstract void Do();
 
 }

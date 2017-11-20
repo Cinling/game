@@ -92,6 +92,10 @@ public class MainUICtrl : MonoBehaviour {
                 baseRole_cls.Do();
             }
         }
+
+        //for (long i=200; i>0; --i) {
+        //    Debug.Log("lps:"+i);
+        //}
     }
 
 
@@ -109,6 +113,32 @@ public class MainUICtrl : MonoBehaviour {
         if (Input.GetKeyDown("n")) {
             GameObject gameObject = Guy.CreateGuy(10f, 0f, 0f, 100, 10, 10);
             baseRoleDict[BASE_ROLE_DICT_COMMON].Add(gameObject);
+        }
+
+        // 测试方法
+        if (Input.GetKeyDown("t")) {
+
+            ThreadCtrl.AddThead(100, () => {
+
+                if (baseRoleDict[BASE_ROLE_DICT_COMMON] != null) {
+
+                    foreach (GameObject baseRole in baseRoleDict[BASE_ROLE_DICT_COMMON]) {
+
+                        BaseRole baseRole_cls = baseRole.GetComponent<BaseRole>();
+                        baseRole_cls.Do();
+                    }
+                }
+                return 0;
+            });
+        }
+
+        // 游戏退出、结束的方法
+        if (Input.GetKeyDown("s")) {
+            ThreadCtrl.StopThread();
+        }
+
+        if (Input.GetKeyDown("r")) {
+            ThreadCtrl.ReStartThread();
         }
     }
 

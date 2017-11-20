@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class DebugHelper : MonoBehaviour {
     //private static int reflushNum;
-    
-    void Start () {
+
+    void Start() {
         //MathComputer.fps = 60;
         //reflushNum = 0;
         //InvokeRepeating("FpsReflush", 0, 1f);
     }
-    
-    void Update () {
+
+    void Update() {
         //++reflushNum;
     }
 
