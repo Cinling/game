@@ -55,36 +55,6 @@ public class Camera : MonoBehaviour {
         }
 
 
-        // 测试方法
-        if (Input.GetKeyDown("t")) {
-            
-        }
-
-
-        if (Input.GetKeyDown("q"))
-        {
-            //Quaternion rotation = gameObject.transform.rotation;
-            //rotation.eulerAngles = new Vector3( 0.0f, 10.0f, 0.0f );
-            //gameObject.transform.rotation = rotation;
-            //gameObject.transform.SetPositionAndRotation(this.gameObject.transform.position, rotation);
-        }
-        if (Input.GetKeyDown("e")) {
-            //ResetFoucusByCamera();
-
-            //Vector3 position = m_focus_go.transform.position;
-        }
-        if (Input.GetKeyDown( "r" )) {
-            //gameObject.transform.Rotate( new Vector3( 10f, 0, 0 ) );
-        }
-        if (Input.GetKeyDown( "f" )) {
-            //gameObject.transform.Rotate( new Vector3( -10f, 0, 0 ) );
-        }
-        //if (Input.GetKeyDown("n"))
-        //{
-        //    Guy.CreateGuy(10f, 0f, 0f, 1000, 10, 10);
-        //}
-
-
         // 鼠标中键 控制镜头旋转的方法
         if (Input.GetMouseButton(2)) {
             float screen_x = Input.GetAxis( "Mouse X" ) * 1f;

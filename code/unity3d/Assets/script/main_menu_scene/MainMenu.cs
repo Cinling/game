@@ -14,6 +14,7 @@ public class MainMenu {
 
     public void InitButtonEvent() {
         AddOnClickListenerWithBtnName("MainCanvas/BtnStartGame");
+        AddOnClickListenerWithBtnName("GameCanvas/MainMenu");
     }
 
     /// <summary>
@@ -45,8 +46,14 @@ public class MainMenu {
     /// <param name="btnName"></param>
     void OnClick(string btnName) {
         switch (btnName) {
+            // 进入主界面
             case "MainCanvas/BtnStartGame":
                 World.Init();
+                break;
+
+            // 测试菜单按钮
+            case "GameCanvas/MainMenu":
+                RoleCtrl.GetInstence().CreateCarrot();
                 break;
 
             default:

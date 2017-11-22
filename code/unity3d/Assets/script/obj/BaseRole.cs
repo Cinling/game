@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,11 +9,13 @@ using UnityEngine;
 /// 所有动态游戏对象的基类，具有公共的属性
 /// </summary>
 public abstract class BaseRole : MonoBehaviour {
-    protected bool is_move = false;
-    public Vector3 position;
+    protected bool isNeedMove;
+    private Vector3 vec3NowPosition;
+    private Vector3 vec3TargetPosition;
+    private Vector3 vec3PerFpsMove;
+    private short thisMaxNeedFps;
 
-    public ulong createTime;                // 创建时的游戏帧数
-    private static float runSecond = 0.05f;  // 每个逻辑帧的秒数
+    protected ulong createTime;                // 创建时的游戏帧数
 
 
     /// <summary>
@@ -32,45 +35,51 @@ public abstract class BaseRole : MonoBehaviour {
 
 
     protected void Awake() {
-        InvokeChangeLps();
+        
     }
 
 
     protected void Start() {
-        this.InitBaseRole();
+        isNeedMove = false;
+        vec3NowPosition = vec3TargetPosition = transform.position;
+        vec3PerFpsMove = new Vector3(0, 0, 0);
     }
 
     protected void Update() {
+        FpsMove();
+    }
+    
+    // 每个渲染帧执行
+    protected abstract void UpdatePerFps();
+    // 每个逻辑帧执行的动作，这个方法不能包含Unity3D的方法
+    public abstract void UpdatePerLps();
 
+
+    protected void Move(Vector3 vec3Move) {
+        vec3NowPosition = vec3TargetPosition;
+        vec3TargetPosition += vec3Move;
+        thisMaxNeedFps = MainUICtrl.NextLpsNeedFps;
+
+        if (thisMaxNeedFps > 0) {
+            vec3PerFpsMove = vec3Move / thisMaxNeedFps;
+        } else {
+            vec3PerFpsMove = vec3Move;
+        }
+        isNeedMove = true;
     }
 
 
-    /// <summary>
-    /// 2017-07-03 23:13:18
-    /// 初始化继承此类的对象
-    /// </summary>
-    protected abstract void InitBaseRole();
+    private void FpsMove() {
 
+        if (this.isNeedMove) {
 
-    // 游戏开始方法
-    public void InvokeStart() {
-        CancelInvoke();
-        InvokeRepeating("Do", 0, runSecond);
+            short nextLps = MainUICtrl.NextLpsNeedFps;
+            try {
+                this.transform.position = vec3NowPosition + vec3PerFpsMove * ( thisMaxNeedFps - nextLps );
+            } catch(System.Exception e) {
+                Debug.Log("[position:" + ( vec3NowPosition + vec3PerFpsMove * ( thisMaxNeedFps - nextLps ) ) + ", vec3PerFpsMove:" + vec3PerFpsMove + "]");
+            }
+
+        }
     }
-
-    // 游戏暂停方法
-    public void InvokeStop() {
-        CancelInvoke();
-    }
-
-
-    // 刷新逻辑帧
-    public static void InvokeChangeLps() {
-        runSecond = 1f / MathComputer.lps;
-    }
-
-
-    // 每个逻辑帧执行的动作，这个方法不能包含Unity3D中的方法
-    public abstract void Do();
-
 }
