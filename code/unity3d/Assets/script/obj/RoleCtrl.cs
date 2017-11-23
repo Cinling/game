@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class RoleCtrl {
 
+    private static ulong gameTime;
+    public static ulong GameTime {
+        get { return gameTime; }
+    }
+
     private static RoleCtrl roleCtrl = null;
     private RoleCtrl() {
         // 基本角色对象字典
         baseRoleDict = new Dictionary<int, List<BaseRole>>();
         baseRoleDict[BASE_ROLE_DICT_COMMON] = new List<BaseRole>();
+
+        // 初始化游戏时间
+        gameTime = 0;
     }
     public static RoleCtrl GetInstence() {
 
@@ -23,7 +31,9 @@ public class RoleCtrl {
     private const byte BASE_ROLE_DICT_KEY = 0;
     private const int BASE_ROLE_DICT_COMMON = BASE_ROLE_DICT_KEY + 1;
 
-   
+
+
+
 
 
     // 开启角色进程
@@ -43,6 +53,7 @@ public class RoleCtrl {
                     }
                 }
             }
+            ++gameTime;
             return 0;
         }, 1000 / lps + 1);
     }
@@ -54,20 +65,13 @@ public class RoleCtrl {
     // 创建测试的游戏对象
     public void CreateTestGuy() {
         GameObject gameObject = Guy.CreateGuy(10f, 0f, 0f, 100, 10, 10);
-        BaseRole baseRole = gameObject.GetComponent<BaseRole>();
-        baseRoleDict[BASE_ROLE_DICT_COMMON].Add(baseRole);
-    }
-
-    // 创建测试的游戏对象
-    public void CreateCarrot() {
-        GameObject gameObject = Carrot.CreateCarrot(10f, 0f, 0f);
-        BaseRole baseRole = gameObject.GetComponent<BaseRole>();
+        BaseRole baseRole = gameObject.GetComponent<Guy>();
         baseRoleDict[BASE_ROLE_DICT_COMMON].Add(baseRole);
     }
 
     public void CreatePumpkin() {
         GameObject gameObject = Pumpkin.CreatePumpkin(10f, 0f, 0f);
-        BaseRole baseRole = gameObject.GetComponent<BaseRole>();
+        BaseRole baseRole = gameObject.GetComponent<Pumpkin>();
         baseRoleDict[BASE_ROLE_DICT_COMMON].Add(baseRole);
     }
 }

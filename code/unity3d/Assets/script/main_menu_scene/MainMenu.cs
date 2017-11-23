@@ -53,7 +53,7 @@ public class MainMenu {
 
             // 测试菜单按钮
             case "GameCanvas/MainMenu":
-                RoleCtrl.GetInstence().CreateCarrot();
+                RoleCtrl.GetInstence().CreatePumpkin();
                 break;
 
             default:
