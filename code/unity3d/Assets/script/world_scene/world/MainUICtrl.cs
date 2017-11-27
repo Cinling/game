@@ -14,35 +14,37 @@ public class MainUICtrl : MonoBehaviour {
     //private const int BASE_ROLE_DICT_COMMON = BASE_ROLE_DICT_KEY + 1;
 
     // 渲染帧和逻辑帧相关的变量
-    private static short nextLpsNeedFps;    // 距离下一个逻辑帧需要的经过的渲染帧
+    private static short nextUpsNeedFps;    // 距离下一个逻辑帧需要的经过的渲染帧
     private static short reflushNum;        // 渲染帧刷新次数，用于计算渲染帧
-    private static short lps;   // 逻辑帧
+    private static short ups;   // 逻辑帧
     private static short fps;   // 渲染帧
 
     public static short Fps {
         get {return fps; }
     }
-    public static short NextLpsNeedFps {
+    public static short NextUpsNeedFps {
         get {
-            return nextLpsNeedFps;
+            return nextUpsNeedFps;
         }
     }
-    public static void ReSetNextLpsNeedFps() {
-        nextLpsNeedFps = (short)(fps / lps);
+
+    // UPS 需要调用
+    public static void ReSetNextUpsNeedFps() {
+        nextUpsNeedFps = (short)(fps / ups);
     }
 
     void Start() {
         InitData(); // 初始化数据
         StartFpsReflush();  // 刷新fps
-        RoleCtrl.GetInstence().StartRoleThread(lps);
+        RoleCtrl.GetInstence().StartRoleThread(ups);
     }
 
     void Update() {
         ++reflushNum;   // 刷新帧数，用于计算fps
 
         // 刷新相对距离下一个逻辑帧需要的渲染帧
-        if (nextLpsNeedFps > 0) {
-            --nextLpsNeedFps;
+        if (nextUpsNeedFps > 0) {
+            --nextUpsNeedFps;
         }
 
         FpsInputEvent();
@@ -60,7 +62,7 @@ public class MainUICtrl : MonoBehaviour {
         // 渲染帧和逻辑帧
         //nextLpsNeedFps = 0;
         reflushNum = 0;
-        lps = 6;
+        ups = 6;
         fps = 60;
     }
 

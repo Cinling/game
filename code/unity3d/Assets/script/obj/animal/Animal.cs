@@ -41,12 +41,12 @@ public abstract class Animal : BaseRole {
     }
 
     // 每个渲染帧执行的方法
-    protected override void UpdatePerFps() {
+    protected override void FPS() {
         FpsMove();
     }
 
     // 每个逻辑帧执行的方法
-    public override void UpdatePerLps() {
+    public override void UPS() {
         if (this.health > 0) {
             this.AI();
         } else {
@@ -73,7 +73,7 @@ public abstract class Animal : BaseRole {
     protected void Move(Vector3 vec3Move) {
         vec3BeforeMovePosition = vec3TargetPosition;
         vec3TargetPosition += vec3Move;
-        thisMaxNeedFps = MainUICtrl.NextLpsNeedFps;
+        thisMaxNeedFps = MainUICtrl.NextUpsNeedFps;
 
         if (thisMaxNeedFps > 0) {
             vec3PerFpsMove = vec3Move / thisMaxNeedFps;
@@ -87,7 +87,7 @@ public abstract class Animal : BaseRole {
     private void FpsMove() {
 
         if (this.isNeedMove) {
-            short nextLps = MainUICtrl.NextLpsNeedFps;
+            short nextLps = MainUICtrl.NextUpsNeedFps;
             this.transform.position = vec3BeforeMovePosition + vec3PerFpsMove * ( thisMaxNeedFps - nextLps );
         }
     }

@@ -7,9 +7,6 @@ using UnityEngine;
 /// <summary>
 /// 2017-11-09 23:55:24
 /// 植物抽象父类
-/// 
-/// 说明：
-///     生长周期：发芽 - 出芽 - 成熟 - 结果 - 死亡
 /// </summary>
 public abstract class Plant : BaseRole {
 
@@ -26,7 +23,7 @@ public abstract class Plant : BaseRole {
         GameObject gameObject = CreateBaseRole(x, y, z, prefab);
 
         Plant plantScript = gameObject.GetComponent<Plant>();
-        plantScript.createTime = RoleCtrl.GameTime;
+        plantScript.createTime = RoleCtrl.UpsSum;
 
 
 
@@ -36,11 +33,11 @@ public abstract class Plant : BaseRole {
     protected override void StartInit() {
     }
 
-    protected override void UpdatePerFps() {
+    protected override void FPS() {
 
     }
 
-    public override void UpdatePerLps() {
+    public override void UPS() {
 
         // 未成熟
         if (matureValue > 0) {

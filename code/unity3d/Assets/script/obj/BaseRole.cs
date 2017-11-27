@@ -39,14 +39,14 @@ public abstract class BaseRole : MonoBehaviour {
     }
 
     protected void Update() {
-        UpdatePerFps();
+        FPS();
     }
 
     // 初始化方法
     protected abstract void StartInit();
     // 每个渲染帧执行
-    protected abstract void UpdatePerFps();
+    protected abstract void FPS();
     // 每个逻辑帧执行的动作，这个方法不能包含Unity3D的方法
-    public abstract void UpdatePerLps();
+    public abstract void UPS();
 
 }
