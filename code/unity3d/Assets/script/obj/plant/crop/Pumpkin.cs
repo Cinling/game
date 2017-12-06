@@ -9,7 +9,12 @@ public class Pumpkin : Plant {
         return CreatePlant(x, y, z, preb);
     }
 
+    public override void DailyGrow() {
+        Log.PrintLog("Pumpkin", "DailyGrow", "grow", Log.LOG_LEVEL.DEBUG);
+    }
+
     protected override void Grow() {
         
     }
+
 }

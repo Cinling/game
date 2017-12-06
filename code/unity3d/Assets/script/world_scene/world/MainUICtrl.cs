@@ -7,11 +7,8 @@ using UnityEngine;
 /// 主要控制 界面UI 和 渲染帧、逻辑帧
 /// </summary>
 public class MainUICtrl : MonoBehaviour {
-
-    //// 游戏对象列表
-    //private static Dictionary<int, List<BaseRole>> baseRoleDict;
-    //private const byte BASE_ROLE_DICT_KEY = 0;
-    //private const int BASE_ROLE_DICT_COMMON = BASE_ROLE_DICT_KEY + 1;
+    
+    public const short CNF_REAL_UPS = 6;   // 正常速度下的ups
 
     // 渲染帧和逻辑帧相关的变量
     private static short nextUpsNeedFps;    // 距离下一个逻辑帧需要的经过的渲染帧
@@ -21,6 +18,9 @@ public class MainUICtrl : MonoBehaviour {
 
     public static short Fps {
         get {return fps; }
+    }
+    public static short Ups {
+        get { return ups; }
     }
     public static short NextUpsNeedFps {
         get {
@@ -71,6 +71,7 @@ public class MainUICtrl : MonoBehaviour {
 
         if (Input.GetKeyDown("n")) {
             RoleCtrl.GetInstence().CreateTestGuy();
+            RoleCtrl.GetInstence().CreatePumpkin();
         }
 
         // 测试方法

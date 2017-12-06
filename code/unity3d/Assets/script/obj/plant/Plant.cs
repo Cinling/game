@@ -22,10 +22,8 @@ public abstract class Plant : BaseRole {
     protected static GameObject CreatePlant(float x, float y, float z, string prefab) {
         GameObject gameObject = CreateBaseRole(x, y, z, prefab);
 
-        Plant plantScript = gameObject.GetComponent<Plant>();
-        plantScript.createTime = RoleCtrl.UpsSum;
-
-
+        //Plant plantScript = gameObject.GetComponent<Plant>();
+        //plantScript.createTime = RoleCtrl.UpsSum;
 
         return gameObject;
     }
@@ -55,6 +53,13 @@ public abstract class Plant : BaseRole {
 
     // 每个生长期所做的更变
     protected abstract void Grow();
+
+
+    /// <summary>
+    /// 每天调用的方法
+    /// </summary>
+    /// <returns></returns>
+    public abstract void DailyGrow();
 
 
 

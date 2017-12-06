@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RoleCtrl {
 
-    private static ulong upsSum; // 游戏总帧数
-    public static ulong UpsSum {
+    private ulong upsSum; // 游戏总帧数
+    public ulong UpsSum {
         get { return upsSum; }
     }
 
@@ -65,8 +65,22 @@ public class RoleCtrl {
                     // 遍历动物角色
                     if (baseRoleDict[ANIMAL_ROLE_DICT] != null) {
 
-                        foreach (BaseRole animal in baseRoleDict[ANIMAL_ROLE_DICT]) {
+                        foreach (Animal animal in baseRoleDict[ANIMAL_ROLE_DICT]) {
                             animal.UPS();
+                        }
+                    }
+
+                    // 更新时间
+                    TimeCtrl tcShareIns = TimeCtrl.GetInstance();
+                    tcShareIns.NextUps();
+                    if (tcShareIns.IdNextDay()) {
+
+                        // 如果进入下一天，则执行植物的方法
+                        if (baseRoleDict[PLANT_ROLE_DICT] != null) {
+
+                            foreach (Plant plant in baseRoleDict[PLANT_ROLE_DICT]) {
+                                plant.DailyGrow();
+                            }
                         }
                     }
                 }
@@ -93,6 +107,7 @@ public class RoleCtrl {
 
     public void CreatePumpkin() {
         GameObject gameObject = Pumpkin.CreatePumpkin(10f, 0f, 0f);
+        gameObject.AddComponent<Pumpkin>(); // 添加脚本组件
         BaseRole baseRole = gameObject.GetComponent<Pumpkin>();
         baseRoleDict[PLANT_ROLE_DICT].Add(baseRole);
     }
