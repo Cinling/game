@@ -2,13 +2,15 @@
 using UnityEngine;
 
 /// <summary>
-/// 2017-11-14 21:26:12
 /// 挂在到GameCanvas中的类
 /// 主要控制 界面UI 和 渲染帧、逻辑帧
 /// </summary>
 public class MainUICtrl : MonoBehaviour {
-    
-    public const short CNF_REAL_UPS = 6;   // 正常速度下的ups
+
+    /// <summary>
+    /// 正常速度下的ups
+    /// </summary>
+    public const short CNF_REAL_UPS = 3;
 
     // 渲染帧和逻辑帧相关的变量
     private static short nextUpsNeedFps;    // 距离下一个逻辑帧需要的经过的渲染帧
@@ -16,19 +18,30 @@ public class MainUICtrl : MonoBehaviour {
     private static short ups;   // 逻辑帧
     private static short fps;   // 渲染帧
 
+    /// <summary>
+    /// 游戏运行时，实际的fps（不太实时）
+    /// </summary>
     public static short Fps {
         get {return fps; }
     }
+    /// <summary>
+    /// 当前游戏的ups
+    /// </summary>
     public static short Ups {
         get { return ups; }
     }
+    /// <summary>
+    /// 距离下一个逻辑帧需要的经过的渲染帧
+    /// </summary>
     public static short NextUpsNeedFps {
         get {
             return nextUpsNeedFps;
         }
     }
 
-    // UPS 需要调用
+    /// <summary>
+    /// UPS 需要调用
+    /// </summary>
     public static void ReSetNextUpsNeedFps() {
         nextUpsNeedFps = (short)(fps / ups);
     }
@@ -47,6 +60,11 @@ public class MainUICtrl : MonoBehaviour {
             --nextUpsNeedFps;
         }
 
+        // 执行子线程中需要在主线程中执行的方法（UI修改）
+        while ( ThreadCtrl.GetInstance().MainThread_RunMainThreadLambda() ) {
+
+        }
+
         FpsInputEvent();
     }
 
@@ -62,7 +80,7 @@ public class MainUICtrl : MonoBehaviour {
         // 渲染帧和逻辑帧
         //nextLpsNeedFps = 0;
         reflushNum = 0;
-        ups = 6;
+        ups = CNF_REAL_UPS;
         fps = 60;
     }
 

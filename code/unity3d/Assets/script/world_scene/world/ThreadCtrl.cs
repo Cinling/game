@@ -4,17 +4,26 @@ using System.Collections.Generic;
 
 public class ThreadCtrl {
 
-    // 单例对象
     private static ThreadCtrl theadCtrl = null;
     public static ThreadCtrl GetInstance() {
 
         if (theadCtrl == null) {
             theadCtrl = new ThreadCtrl();
+            theadCtrl.InitData();
         }
         return theadCtrl;
     }
+    /// <summary>
+    /// 初始化数据
+    /// </summary>
+    private void InitData() {
+        threadCtrlDict = new Dictionary<short, THREAD_STATUS>();
+        runOnMainThreadLambdaQueue = new Queue<Func<short>>();
+    }
 
-    // 线程号
+    /// <summary>
+    /// 线程号
+    /// </summary>
     public static class THREAD_NUM{
         public const short LOGIC_ROLE = 101;  // 角色进程号
     }
@@ -24,7 +33,10 @@ public class ThreadCtrl {
     public enum THREAD_STATUS {
         START,STOP,END
     }
-    private Dictionary<short, THREAD_STATUS> threadCtrlDict = new Dictionary<short, THREAD_STATUS>();
+    /// <summary>
+    /// 进程控制字典
+    /// </summary>
+    private Dictionary<short, THREAD_STATUS> threadCtrlDict;
     private Dictionary<short, THREAD_STATUS> GetThreadCtrlDict() {
         return threadCtrlDict;
     }
@@ -86,6 +98,10 @@ public class ThreadCtrl {
     }
 
 
+    /// <summary>
+    /// 重启线程
+    /// </summary>
+    /// <returns></returns>
     public bool ReStartThread() {
 
         lock (threadCtrlDict) {
@@ -105,6 +121,10 @@ public class ThreadCtrl {
     }
 
 
+    /// <summary>
+    /// 停止线程
+    /// </summary>
+    /// <returns>bool</returns>
     public bool StopThread() {
 
         lock (threadCtrlDict) {
@@ -121,5 +141,33 @@ public class ThreadCtrl {
         }
 
         return true;
+    }
+
+
+    /// <summary>
+    /// 需要在主线程中运行的 lambda 队列
+    /// </summary>
+    private Queue<Func<Int16>> runOnMainThreadLambdaQueue;
+    /// <summary>
+    /// 添加一个需要在
+    /// </summary>
+    /// <param name="lambda">需要在主线程中运行的方法</param>
+    public void RunOnMainThread(Func<Int16> lambda) {
+        runOnMainThreadLambdaQueue.Enqueue(lambda);
+    }
+
+    /// <summary>
+    /// 在主线程上运行的原则：只能是界面上的修改，数据上的修改需要现在子线程中完成
+    /// 运行一个需要在主线程上运行的lambda方法
+    /// </summary>
+    /// <returns>是否还有未运行的lambda方法</returns>
+    public bool MainThread_RunMainThreadLambda() {
+
+        if (runOnMainThreadLambdaQueue.Count > 0) {
+            Func<Int16> lambad = runOnMainThreadLambdaQueue.Dequeue();
+            lambad();
+            return true;
+        }
+        return false;
     }
 }

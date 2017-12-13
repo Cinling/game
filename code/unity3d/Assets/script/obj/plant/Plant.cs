@@ -19,20 +19,23 @@ public abstract class Plant : BaseRole {
     protected int harvestValue; // 成熟后 或 收获后 所需多少时间可收获
     protected short harvestNum; // 收获次数
 
-    protected static GameObject CreatePlant(float x, float y, float z, string prefab) {
-        GameObject gameObject = CreateBaseRole(x, y, z, prefab);
-
-        //Plant plantScript = gameObject.GetComponent<Plant>();
-        //plantScript.createTime = RoleCtrl.UpsSum;
-
+    protected static GameObject CreatePlant(float x, float y, float z, string prebPlant, string prebFruit) {
+        GameObject gameObject = CreateBaseRole(x, y, z, prebPlant);
+       
         return gameObject;
     }
 
     protected override void StartInit() {
     }
 
+    bool tmpBool = false;
+    string tmpPreb = "";
     protected override void FPS() {
 
+        if (tmpBool) {
+            MainThread_ChangePreb();
+            tmpBool = false;
+        }
     }
 
     public override void UPS() {
@@ -84,5 +87,30 @@ public abstract class Plant : BaseRole {
     // 枯萎
     protected void Withered() {
 
+    }
+
+    public void ChangePreb(string prefab) {
+        tmpPreb = prefab;
+        tmpBool = true;
+    }
+
+    private void MainThread_ChangePreb() {
+        // 记录之前的位置
+        Vector3 currentPosition = transform.position;
+        // 记录之前的脚本
+        UnityEngine.Object plant = gameObject.GetComponent(this.GetType());
+
+        // 销毁当前 gameObject
+        Destroy(gameObject);
+
+        // 创建一个新的 GameObject, 并使用新的 资源
+        UnityEngine.Object spherePreb = Resources.Load(tmpPreb, typeof(GameObject));
+        GameObject newGameObject = Instantiate(spherePreb) as GameObject;
+        newGameObject.transform.position = currentPosition;
+
+        // 添加
+        newGameObject.AddComponent(this.GetType());
+        UnityEngine.Object currentPlant = newGameObject.GetComponent(this.GetType());
+        currentPlant = plant;
     }
 }
