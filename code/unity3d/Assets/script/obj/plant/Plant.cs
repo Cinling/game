@@ -28,14 +28,9 @@ public abstract class Plant : BaseRole {
     protected override void StartInit() {
     }
 
-    bool tmpBool = false;
-    string tmpPreb = "";
+
     protected override void FPS() {
 
-        if (tmpBool) {
-            MainThread_ChangePreb();
-            tmpBool = false;
-        }
     }
 
     public override void UPS() {
@@ -89,12 +84,19 @@ public abstract class Plant : BaseRole {
 
     }
 
+    /// <summary>
+    /// 修改 prefab 的方法
+    /// </summary>
+    /// <param name="prefab">prefab路径</param>
     public void ChangePreb(string prefab) {
-        tmpPreb = prefab;
-        tmpBool = true;
+
+        ThreadCtrl.GetInstance().RunOnMainThread(() => {
+            MainThread_ChangePreb(prefab);
+            return 1;
+        });
     }
 
-    private void MainThread_ChangePreb() {
+    private void MainThread_ChangePreb(string prefab) {
         // 记录之前的位置
         Vector3 currentPosition = transform.position;
         // 记录之前的脚本
@@ -104,7 +106,7 @@ public abstract class Plant : BaseRole {
         Destroy(gameObject);
 
         // 创建一个新的 GameObject, 并使用新的 资源
-        UnityEngine.Object spherePreb = Resources.Load(tmpPreb, typeof(GameObject));
+        UnityEngine.Object spherePreb = Resources.Load(prefab, typeof(GameObject));
         GameObject newGameObject = Instantiate(spherePreb) as GameObject;
         newGameObject.transform.position = currentPosition;
 
