@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainMenu {
-    private static MainMenu share_instance = null;
+public class MainMenuUI {
+    private static MainMenuUI share_instance = null;
 
-    public static MainMenu GetInstance() {
+    public static MainMenuUI GetInstance() {
         if (share_instance == null) {
-            share_instance = new MainMenu();
+            share_instance = new MainMenuUI();
         }
         return share_instance;
     }
 
-    public void InitButtonEvent() {
+    public void InitMainMenuButtonEvent() {
         AddOnClickListenerWithBtnName("MainCanvas/BtnStartGame");
-        AddOnClickListenerWithBtnName("GameCanvas/MainMenu");
     }
 
     /// <summary>
@@ -26,7 +25,7 @@ public class MainMenu {
         GameObject btnGameObject = GameObject.Find(btnName);
 
         if (btnGameObject == null) {
-            Log.PrintLog("MainMenu", "AddOnClickListenerWithBtnName", "not find button with name:[" + btnName + "]", Log.LOG_LEVEL.ERROR);
+            Log.PrintLog("MainMenuUI", "AddOnClickListenerWithBtnName", "not find button with name:[" + btnName + "]", Log.LOG_LEVEL.ERROR);
             return;
         }
 
@@ -48,12 +47,7 @@ public class MainMenu {
         switch (btnName) {
             // 进入主界面
             case "MainCanvas/BtnStartGame":
-                World.Init();
-                break;
-
-            // 测试菜单按钮
-            case "GameCanvas/MainMenu":
-                RoleCtrl.GetInstence().CreatePumpkin();
+                SceneCtrl.GetInstance().SwitchToWorld();
                 break;
 
             default:

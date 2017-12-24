@@ -99,13 +99,13 @@ public class RoleCtrl {
 
 
     // 创建测试的游戏对象
-    public void CreateTestGuy() {
+    public void Test_CreateGuy() {
         GameObject gameObject = Guy.CreateGuy(10f, 0f, 0f, 100, 10, 10);
         BaseRole baseRole = gameObject.GetComponent<Guy>();
         baseRoleDict[ANIMAL_ROLE_DICT].Add(baseRole);
     }
 
-    public void CreatePumpkin() {
+    public void Test_CreatePumpkin() {
         GameObject gameObject = Pumpkin.CreatePumpkin(10f, 0f, 0f);
         gameObject.AddComponent<Pumpkin>(); // 添加脚本组件
         BaseRole baseRole = gameObject.GetComponent<Pumpkin>();
