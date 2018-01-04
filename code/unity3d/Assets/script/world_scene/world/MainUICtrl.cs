@@ -88,8 +88,8 @@ public class MainUICtrl : MonoBehaviour {
     private void FpsInputEvent() {
 
         if (Input.GetKeyDown("n")) {
-            RoleCtrl.GetInstence().CreateTestGuy();
-            RoleCtrl.GetInstence().CreatePumpkin();
+            RoleCtrl.GetInstence().Test_CreateGuy();
+            RoleCtrl.GetInstence().Test_CreatePumpkin();
         }
 
         // 测试方法
@@ -122,7 +122,7 @@ public class MainUICtrl : MonoBehaviour {
         fps = reflushNum;
         reflushNum = 0;
 
-        UnityEngine.UI.Text text = GameObject.Find("Text_LeftTop").GetComponent<UnityEngine.UI.Text>();
+        UnityEngine.UI.Text text = GameObject.Find("TextLeftTop").GetComponent<UnityEngine.UI.Text>();
 
         if (text != null) {
             text.text = "FPS:" + Fps;

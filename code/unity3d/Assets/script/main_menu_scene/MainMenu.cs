@@ -14,7 +14,8 @@ public class MainMenu {
 
     public void InitButtonEvent() {
         AddOnClickListenerWithBtnName("MainCanvas/BtnStartGame");
-        AddOnClickListenerWithBtnName("GameCanvas/MainMenu");
+        AddOnClickListenerWithBtnName("CanvasGame/ButtonMenu");
+        AddOnClickListenerWithBtnName("CanvasGame/PanelMainMenu/ButtonClose");
     }
 
     /// <summary>
@@ -50,10 +51,15 @@ public class MainMenu {
             case "MainCanvas/BtnStartGame":
                 World.Init();
                 break;
+                
+            // 打开主菜单
+            case "CanvasGame/ButtonMenu":
+                MainMenuCtrl.Show();
+                break;
 
-            // 测试菜单按钮
-            case "GameCanvas/MainMenu":
-                RoleCtrl.GetInstence().CreatePumpkin();
+            // 关闭主菜单
+            case "CanvasGame/PanelMainMenu/ButtonClose":
+                MainMenuCtrl.Hide();
                 break;
 
             default:
