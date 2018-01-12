@@ -97,6 +97,10 @@ public class MainUICtrl : MonoBehaviour {
             //RoleCtrl.GetInstence().StartNewThread();            
         }
 
+        if (Input.GetKeyDown("i")) {
+            WorldUI.GetInstance().InitWorldButtonEvent();
+        }
+
         // 游戏退出、结束的方法
         if (Input.GetKeyDown("1")) {
             ThreadCtrl.GetInstance().StopThread();

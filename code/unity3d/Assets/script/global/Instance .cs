@@ -10,6 +10,6 @@ public class Instance : MonoBehaviour {
         });
 
         // 初始化主页面的按钮事件
-        MainMenu.GetInstance().InitButtonEvent();
+        MainMenuUI.GetInstance().InitMainMenuButtonEvent();
     }
 }
