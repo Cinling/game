@@ -84,9 +84,6 @@ public class WorldUI {
 
 
     public void Test1() {
-        DbHelper sqlite = new DbHelper("URI=file://t1");
-        string[] cols = { "name", "age" };
-        string[] colsType = { "varchar(20)", "integer" };
-        sqlite.CreateTable("t1", cols, colsType);
+        SqliteTool sqlite = new SqliteTool("save/myworld/sqlite.db");
     }
 }
