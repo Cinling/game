@@ -84,6 +84,6 @@ public class WorldUI {
 
 
     public void Test1() {
-        SqliteTool sqlite = new SqliteTool("save/myworld/sqlite.db");
+        SqliteTool sqlite = SqliteTool.GetInstance("save/myworld/sqlite.db");
     }
 }
