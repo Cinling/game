@@ -1,29 +1,10 @@
-*.mat
-*.prefab
 *.cache
-Library
-Temp
-Editor
-Models
-Materials
-Scenes
-Stylized city
-fbx
-/code/unity3d/unity3d.sln
-Area730
-/code/unity3d/Assets/Area730.meta
-/code/unity3d/Assets/Cartoon Cat.meta
-Cartoon Cat
-/.vs/game/v15/.suo
-/.vs/slnx.sqlite
-/.vs/VSWorkspaceState.json
 *.suo
 *.csproj
 *.userprefs
-FREE Food Pack
-/code/unity3d/Assets/FREE Food Pack.meta
-AssetsStore
-/code/unity3d/.vs/unity3d/v15/Server/sqlite3
-/code/unity3d/t1
 /package
+/code/unity3d/unity3d.sln
 /code/unity3d/save
+/code/unity3d/.vs
+/code/unity3d/Library
+/code/unity3d/Temp
