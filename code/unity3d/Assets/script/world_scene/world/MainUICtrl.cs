@@ -22,7 +22,7 @@ public class MainUICtrl : MonoBehaviour {
     /// 游戏运行时，实际的fps（不太实时）
     /// </summary>
     public static short Fps {
-        get {return fps; }
+        get { return fps; }
     }
     /// <summary>
     /// 当前游戏的ups
@@ -43,7 +43,7 @@ public class MainUICtrl : MonoBehaviour {
     /// UPS 需要调用
     /// </summary>
     public static void ReSetNextUpsNeedFps() {
-        nextUpsNeedFps = (short)(fps / ups);
+        nextUpsNeedFps = (short)( fps / ups );
     }
 
     void Start() {
@@ -61,7 +61,7 @@ public class MainUICtrl : MonoBehaviour {
         }
 
         // 执行子线程中需要在主线程中执行的方法（UI修改）
-        while ( ThreadCtrl.GetInstance().MainThread_RunMainThreadLambda() ) {
+        while (ThreadCtrl.GetInstance().MainThread_RunMainThreadLambda()) {
 
         }
 
@@ -89,12 +89,10 @@ public class MainUICtrl : MonoBehaviour {
 
         if (Input.GetKeyDown("n")) {
             RoleCtrl.GetInstence().Test_CreateGuy();
-            RoleCtrl.GetInstence().Test_CreatePumpkin();
         }
 
         // 测试方法
         if (Input.GetKeyDown("t")) {
-            //RoleCtrl.GetInstence().StartNewThread();            
         }
 
         if (Input.GetKeyDown("i")) {
