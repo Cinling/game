@@ -18,4 +18,8 @@ public class Guy : Animal {
     protected override void Death() {
 
     }
+
+    public void OnMouseDown() {
+        Debug.Log("OnMouseDown");
+    }
 }
