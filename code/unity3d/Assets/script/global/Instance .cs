@@ -9,7 +9,7 @@ public class Instance : MonoBehaviour {
             hideFlags = HideFlags.HideInHierarchy
         });
 
-        // 初始化主页面的按钮事件
-        MainMenu.GetInstance().InitButtonEvent();
+        // 跳轉到主場景
+        SceneCtrl.GetInstance().SwitchToMain();
     }
 }
