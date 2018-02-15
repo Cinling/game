@@ -90,7 +90,7 @@ public abstract class Plant : BaseRole {
     /// <param name="prefab">prefab路径</param>
     public void ChangePreb(string prefab) {
 
-        ThreadCtrl.GetInstance().RunOnMainThread(() => {
+        ThreadTool.GetInstance().RunOnWorldSceneMainThread(() => {
             MainThread_ChangePreb(prefab);
             return 1;
         });

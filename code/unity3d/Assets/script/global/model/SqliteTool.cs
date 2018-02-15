@@ -42,8 +42,6 @@ public class SqliteTool {
             }
         }
 
-        string absDir = System.IO.Directory.GetCurrentDirectory() + "/" + fileUrl;
-
         try {
             db = new SqliteConnection("URI=file://" + fileUrl);
             db.Open();
