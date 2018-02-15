@@ -2,32 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldUI {
-    private static WorldUI share_instance = null;
+public class WorldMenu {
+    private static WorldMenu share_instance = null;
 
-    public static WorldUI GetInstance() {
+    public static WorldMenu GetInstance() {
         if (share_instance == null) {
-            share_instance = new WorldUI();
+            share_instance = new WorldMenu();
         }
         return share_instance;
     }
 
-    private bool isWorldInit = false;
+    /// <summary>
+    /// 初始化世界場景所需的按鈕
+    /// </summary>
     public void InitWorldButtonEvent() {
-
-        if (!isWorldInit) {
-            AddOnClickListenerWithBtnName("CanvasGame/ButtonMenu");
-        }
+        AddOnClickListenerWithBtnName("CanvasGame/ButtonMenu");
     }
 
-    private bool isPannelInit = false;
     public void InitPannelButtonEvent() {
-
-        if (!isPannelInit) {
-            AddOnClickListenerWithBtnName("CanvasGame/PanelMainMenu/ButtonClose");
-            AddOnClickListenerWithBtnName("CanvasGame/PanelMainMenu/ButtonTest1");
-            isPannelInit = true;
-        }
+        AddOnClickListenerWithBtnName("CanvasGame/PanelMainMenu/ButtonClose");
+        AddOnClickListenerWithBtnName("CanvasGame/PanelMainMenu/ButtonTest1");
+        AddOnClickListenerWithBtnName("CanvasGame/PanelMainMenu/ButtonBackToMenu");
     }
 
     /// <summary>
@@ -76,6 +71,11 @@ public class WorldUI {
                 Test1();
                 break;
 
+            // 返回主菜單
+            case "CanvasGame/PanelMainMenu/ButtonBackToMenu":
+                SceneCtrl.GetInstance().SwitchToMain();
+                break;
+
             default:
                 Debug.Log("Unkonw button event.");
                 break;
@@ -84,6 +84,6 @@ public class WorldUI {
 
 
     public void Test1() {
-        SqliteTool sqlite = SqliteTool.GetInstance("save/myworld/sqlite.db");
+        //SqliteTool sqlite = SqliteTool.GetInstance("save/myworld/sqlite.db");
     }
 }

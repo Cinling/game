@@ -42,7 +42,7 @@ public class RoleCtrl {
 
     // 开启角色进程
     public void StartRoleThread(short ups) {
-        ThreadCtrl.GetInstance().AddThead(ThreadCtrl.THREAD_NUM.LOGIC_ROLE, () => {
+        ThreadTool.GetInstance().AddThead(ThreadTool.THREAD_NUM.LOGIC_ROLE, () => {
 
             try {
                 ++upsSum;

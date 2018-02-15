@@ -14,53 +14,57 @@ public class Camera : MonoBehaviour {
     // 主摄像机初始化方法
     void Start() {
         m_speed = 0.5f;
-        m_focus_go = GameObject.Find( "Main Camera Helper" );
+        m_focus_go = GameObject.Find("Main Camera Helper");
 
         ResetFoucusByCamera();
     }
-    
+
     void Update() {
+        // 执行子线程中需要在主线程中执行的方法（UI修改）
+        ThreadTool threadTool = ThreadTool.GetInstance();
+        while (threadTool.MainThread_RunOnWorldSceneLambda()) { }
+
         ControlEvent();
     }
 
 
     /// <summary>
     /// 2017年6月1日 22:50:59s
-    /// 全局控制方法
+    /// 攝像頭移動的方法
     /// </summary>
     private void ControlEvent() {
         // 方向键控制摄像头移动
-        if (Input.GetKey( "d" )) {
+        if (Input.GetKey("d")) {
             MoveCamera(C_MOVE_RIGHT);
         }
-        if (Input.GetKey( "a" )) {
+        if (Input.GetKey("a")) {
             MoveCamera(C_MOVE_LEFT);
         }
-        if (Input.GetKey( "w" )) {
+        if (Input.GetKey("w")) {
             MoveCamera(C_MOVE_FOUNT);
         }
-        if (Input.GetKey( "s" )) {
+        if (Input.GetKey("s")) {
             MoveCamera(C_MOVE_BACK);
         }
 
         // 镜头放大
-        if (Input.GetAxis( "Mouse ScrollWheel" ) > 0) {
-            Vector3 movePoistion = new Vector3( 0, 0, m_speed * 5 );
-            transform.Translate( movePoistion );
+        if (Input.GetAxis("Mouse ScrollWheel") > 0) {
+            Vector3 movePoistion = new Vector3(0, 0, m_speed * 5);
+            transform.Translate(movePoistion);
         }
         // 镜头缩小
-        if (Input.GetAxis( "Mouse ScrollWheel" ) < 0) {
-            Vector3 movePoistion = new Vector3( 0, 0, -m_speed * 5 );
-            transform.Translate( movePoistion );
+        if (Input.GetAxis("Mouse ScrollWheel") < 0) {
+            Vector3 movePoistion = new Vector3(0, 0, -m_speed * 5);
+            transform.Translate(movePoistion);
         }
 
 
         // 鼠标中键 控制镜头旋转的方法
         if (Input.GetMouseButton(2)) {
-            float screen_x = Input.GetAxis( "Mouse X" ) * 1f;
-            float screen_y = Input.GetAxis( "Mouse Y" ) * 1f;
+            float screen_x = Input.GetAxis("Mouse X") * 1f;
+            float screen_y = Input.GetAxis("Mouse Y") * 1f;
 
-            RotationCamera(screen_x, screen_y );
+            RotationCamera(screen_x, screen_y);
 
         }
     }
@@ -133,11 +137,11 @@ public class Camera : MonoBehaviour {
         Vector3 eulerAngles = transform.rotation.eulerAngles;
 
         // 平面上镜头和焦点的相对距离
-        float plat_focus_to_camera_len = Mathf.Tan( eulerAngles.x * Mathf.PI / 180 ) *  transform.position.y;
-        float focus_z = transform.position.z + Mathf.Cos( eulerAngles.y * Mathf.PI / 180 ) * plat_focus_to_camera_len;
-        float focus_x = transform.position.x + Mathf.Sin( eulerAngles.y * Mathf.PI / 180 ) * plat_focus_to_camera_len;
+        float plat_focus_to_camera_len = Mathf.Tan(eulerAngles.x * Mathf.PI / 180) * transform.position.y;
+        float focus_z = transform.position.z + Mathf.Cos(eulerAngles.y * Mathf.PI / 180) * plat_focus_to_camera_len;
+        float focus_x = transform.position.x + Mathf.Sin(eulerAngles.y * Mathf.PI / 180) * plat_focus_to_camera_len;
 
-        m_focus_go.transform.position = new Vector3( focus_x, 0f, focus_z );
+        m_focus_go.transform.position = new Vector3(focus_x, 0f, focus_z);
     }
 
 
@@ -153,11 +157,11 @@ public class Camera : MonoBehaviour {
         float move_x = screen_x * 4f;
 
         // 水平（绕Y轴）移动角度
-        transform.RotateAround( m_focus_go.transform.position, Vector3.up, move_x );                        // 旋转摄像机
-        m_focus_go.transform.RotateAround( m_focus_go.transform.position, Vector3.up, move_x );   // 旋转焦点
+        transform.RotateAround(m_focus_go.transform.position, Vector3.up, move_x);                        // 旋转摄像机
+        m_focus_go.transform.RotateAround(m_focus_go.transform.position, Vector3.up, move_x);   // 旋转焦点
 
         // 前倾后仰
-        Vector3 vec3 = new Vector3( Mathf.Cos( camera_euler.y * Mathf.PI / 180f ), 0f, Mathf.Sin( camera_euler.y * Mathf.PI / 180f + Mathf.PI ) );
-        transform.RotateAround( m_focus_go.transform.position, vec3, -screen_y );
+        Vector3 vec3 = new Vector3(Mathf.Cos(camera_euler.y * Mathf.PI / 180f), 0f, Mathf.Sin(camera_euler.y * Mathf.PI / 180f + Mathf.PI));
+        transform.RotateAround(m_focus_go.transform.position, vec3, -screen_y);
     }
 }

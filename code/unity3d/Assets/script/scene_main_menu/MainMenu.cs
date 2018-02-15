@@ -12,9 +12,11 @@ public class MainMenu {
         return share_instance;
     }
 
+    /// <summary>
+    /// 初始化 主場景的按鈕事件
+    /// </summary>
     public void InitButtonEvent() {
         AddOnClickListenerWithBtnName("MainCanvas/BtnStartGame");
-        AddOnClickListenerWithBtnName("GameCanvas/MainMenu");
     }
 
     /// <summary>
@@ -48,12 +50,7 @@ public class MainMenu {
         switch (btnName) {
             // 进入主界面
             case "MainCanvas/BtnStartGame":
-                World.Init();
-                break;
-
-            // 测试菜单按钮
-            case "GameCanvas/MainMenu":
-                RoleCtrl.GetInstence().Test_CreatePumpkin();
+                SceneCtrl.GetInstance().SwitchToWorld();
                 break;
 
             default:

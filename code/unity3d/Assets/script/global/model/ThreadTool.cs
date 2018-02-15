@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Threading;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class ThreadCtrl {
+public class ThreadTool {
 
-    private static ThreadCtrl theadCtrl = null;
-    public static ThreadCtrl GetInstance() {
+    private static ThreadTool theadCtrl = null;
+    public static ThreadTool GetInstance() {
 
         if (theadCtrl == null) {
-            theadCtrl = new ThreadCtrl();
+            theadCtrl = new ThreadTool();
             theadCtrl.InitData();
         }
         return theadCtrl;
@@ -17,26 +18,24 @@ public class ThreadCtrl {
     /// 初始化数据
     /// </summary>
     private void InitData() {
-        threadCtrlDict = new Dictionary<short, THREAD_STATUS>();
-        runOnMainThreadLambdaQueue = new Queue<Func<short>>();
     }
 
     /// <summary>
     /// 线程号
     /// </summary>
-    public static class THREAD_NUM{
+    public static class THREAD_NUM {
         public const short LOGIC_ROLE = 101;  // 角色进程号
     }
 
 
     // 线程状态
     public enum THREAD_STATUS {
-        START,STOP,END
+        START, STOP, END
     }
     /// <summary>
     /// 进程控制字典
     /// </summary>
-    private Dictionary<short, THREAD_STATUS> threadCtrlDict;
+    private Dictionary<short, THREAD_STATUS> threadCtrlDict = new Dictionary<short, THREAD_STATUS>();
     private Dictionary<short, THREAD_STATUS> GetThreadCtrlDict() {
         return threadCtrlDict;
     }
@@ -51,19 +50,21 @@ public class ThreadCtrl {
     /// <param name="repeatTimeMS">重复时间间隔（如果执行超过这个时间，则时间间隔变大）</param>
     /// <returns></returns>
     public bool AddThead(short tag, Func<short> lambda, int repeatTimeMS) {
-        
+
         lock (threadCtrlDict) {
 
             // 当前线程号已经存在
             if (threadCtrlDict.ContainsKey(tag)) {
-                Log.PrintLog("ThreadCtrl", "AddThead", "this thread is exists[tag:" + tag + "]", Log.LOG_LEVEL.ERROR);
-                return false;
+                if (threadCtrlDict[tag] == THREAD_STATUS.START) {
+                    Debug.LogError("This thread is already running, [tag:" + tag + "]");
+                    return false;
+                }
             }
             threadCtrlDict[tag] = THREAD_STATUS.START;
         }
 
         new Thread((object objTag) => {
-            ThreadCtrl t_threadCtrl = ThreadCtrl.GetInstance();
+            ThreadTool t_threadCtrl = GetInstance();
             short t_tag = short.Parse(objTag.ToString());
 
             while (true) {
@@ -74,10 +75,10 @@ public class ThreadCtrl {
                     Dictionary<short, THREAD_STATUS> t_threadCtrlDict = t_threadCtrl.GetThreadCtrlDict();
                     status = t_threadCtrlDict[t_tag];
                 }
-                
+
                 if (status == THREAD_STATUS.START) {
                     lambda();
-                    int sleepMS = repeatTimeMS - (int)(DateTime.Now.Millisecond - startMS);
+                    int sleepMS = repeatTimeMS - (int)( DateTime.Now.Millisecond - startMS );
                     if (sleepMS > 0) {
                         Thread.Sleep(sleepMS);
                     }
@@ -92,7 +93,7 @@ public class ThreadCtrl {
                 Log.PrintLog("ThreadCtrl", "StartThead", "unknow value: THREAD_STATUS", Log.LOG_LEVEL.ERROR);
                 break;
             }
-        }).Start(""+tag);   // 把参数传入线程
+        }).Start("" + tag);   // 把参数传入线程
 
         return true;
     }
@@ -145,26 +146,49 @@ public class ThreadCtrl {
 
 
     /// <summary>
-    /// 需要在主线程中运行的 lambda 队列
+    /// 需要在 世界場景 主線程 中運行的 lambda 隊列
     /// </summary>
-    private Queue<Func<Int16>> runOnMainThreadLambdaQueue;
+    private Queue<Func<Int16>> runOnWorldSceneMainThreadLambdaQueue = new Queue<Func<short>>();
     /// <summary>
-    /// 添加一个需要在
+    /// 添加一個需要在 世界場景 主線程 中運行的 lambda
     /// </summary>
-    /// <param name="lambda">需要在主线程中运行的方法</param>
-    public void RunOnMainThread(Func<Int16> lambda) {
-        runOnMainThreadLambdaQueue.Enqueue(lambda);
+    /// <param name="lambda">需要在 世界場景 主線程 中運行的 lambda</param>
+    public void RunOnWorldSceneMainThread(Func<Int16> lambda) {
+        runOnWorldSceneMainThreadLambdaQueue.Enqueue(lambda);
+    }
+    /// <summary>
+    /// 運行設置好的lambda
+    /// </summary>
+    /// <returns>true：運行了一個lambda， false：沒有需要執行的隊列</returns>
+    public bool MainThread_RunOnWorldSceneLambda() {
+
+        if (runOnWorldSceneMainThreadLambdaQueue.Count > 0) {
+            Func<Int16> lambad = runOnWorldSceneMainThreadLambdaQueue.Dequeue();
+            lambad();
+            return true;
+        }
+        return false;
     }
 
     /// <summary>
-    /// 在主线程上运行的原则：只能是界面上的修改，数据上的修改需要现在子线程中完成
-    /// 运行一个需要在主线程上运行的lambda方法
+    /// 需要在 主場景 主線程 中運行的 lambda 隊列
     /// </summary>
-    /// <returns>是否还有未运行的lambda方法</returns>
-    public bool MainThread_RunMainThreadLambda() {
+    private Queue<Func<Int16>> runOnMainSceneMainThreadLambadQueue = new Queue<Func<short>>();
+    /// <summary>
+    /// 添加一個需要在 主場景 主線程 中運行的 lambda
+    /// </summary>
+    /// <param name="lambda">需要在 世界場景 主線程 中運行的 lambda</param>
+    public void RunOnMainSceneMainThread(Func<Int16> lambda) {
+        runOnMainSceneMainThreadLambadQueue.Enqueue(lambda);
+    }
+    /// <summary>
+    /// 運行設置好的lambda
+    /// </summary>
+    /// <returns>true：運行了一個lambda， false：沒有需要執行的隊列</returns>
+    public bool MainThread_RunOnMainSceneLambda() {
 
-        if (runOnMainThreadLambdaQueue.Count > 0) {
-            Func<Int16> lambad = runOnMainThreadLambdaQueue.Dequeue();
+        if (runOnMainSceneMainThreadLambadQueue.Count > 0) {
+            Func<Int16> lambad = runOnMainSceneMainThreadLambadQueue.Dequeue();
             lambad();
             return true;
         }

@@ -11,58 +11,41 @@ public class MainUICtrl : MonoBehaviour {
     /// 正常速度下的ups
     /// </summary>
     public const short CNF_REAL_UPS = 3;
-
-    // 渲染帧和逻辑帧相关的变量
-    private static short nextUpsNeedFps;    // 距离下一个逻辑帧需要的经过的渲染帧
     private static short reflushNum;        // 渲染帧刷新次数，用于计算渲染帧
-    private static short ups;   // 逻辑帧
-    private static short fps;   // 渲染帧
 
     /// <summary>
     /// 游戏运行时，实际的fps（不太实时）
     /// </summary>
-    public static short Fps {
-        get { return fps; }
-    }
+    public static short Fps { get; private set; }
     /// <summary>
     /// 当前游戏的ups
     /// </summary>
-    public static short Ups {
-        get { return ups; }
-    }
+    public static short Ups { get; private set; }
     /// <summary>
     /// 距离下一个逻辑帧需要的经过的渲染帧
     /// </summary>
     public static short NextUpsNeedFps {
-        get {
-            return nextUpsNeedFps;
-        }
-    }
+        get; private set; }
 
     /// <summary>
     /// UPS 需要调用
     /// </summary>
     public static void ReSetNextUpsNeedFps() {
-        nextUpsNeedFps = (short)( fps / ups );
+        NextUpsNeedFps = (short)( Fps / Ups );
     }
 
     void Start() {
         InitData(); // 初始化数据
         StartFpsReflush();  // 刷新fps
-        RoleCtrl.GetInstence().StartRoleThread(ups);
+        RoleCtrl.GetInstence().StartRoleThread(Ups);
     }
 
     void Update() {
         ++reflushNum;   // 刷新帧数，用于计算fps
 
         // 刷新相对距离下一个逻辑帧需要的渲染帧
-        if (nextUpsNeedFps > 0) {
-            --nextUpsNeedFps;
-        }
-
-        // 执行子线程中需要在主线程中执行的方法（UI修改）
-        while (ThreadCtrl.GetInstance().MainThread_RunMainThreadLambda()) {
-
+        if (NextUpsNeedFps > 0) {
+            --NextUpsNeedFps;
         }
 
         FpsInputEvent();
@@ -80,8 +63,8 @@ public class MainUICtrl : MonoBehaviour {
         // 渲染帧和逻辑帧
         //nextLpsNeedFps = 0;
         reflushNum = 0;
-        ups = CNF_REAL_UPS;
-        fps = 60;
+        Ups = CNF_REAL_UPS;
+        Fps = 60;
     }
 
     // 渲染帧输入事件
@@ -96,16 +79,16 @@ public class MainUICtrl : MonoBehaviour {
         }
 
         if (Input.GetKeyDown("i")) {
-            WorldUI.GetInstance().InitWorldButtonEvent();
+            WorldMenu.GetInstance().InitWorldButtonEvent();
         }
 
         // 游戏退出、结束的方法
         if (Input.GetKeyDown("1")) {
-            ThreadCtrl.GetInstance().StopThread();
+            ThreadTool.GetInstance().StopThread();
         }
 
         if (Input.GetKeyDown("2")) {
-            ThreadCtrl.GetInstance().ReStartThread();
+            ThreadTool.GetInstance().ReStartThread();
         }
     }
 
@@ -121,7 +104,7 @@ public class MainUICtrl : MonoBehaviour {
 
     // 每秒刷新一次当前帧数
     private void ReflushFpsInSecond() {
-        fps = reflushNum;
+        Fps = reflushNum;
         reflushNum = 0;
 
         UnityEngine.UI.Text text = GameObject.Find("TextLeftTop").GetComponent<UnityEngine.UI.Text>();
