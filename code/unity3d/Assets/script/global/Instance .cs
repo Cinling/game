@@ -9,6 +9,9 @@ public class Instance : MonoBehaviour {
             hideFlags = HideFlags.HideInHierarchy
         });
 
+        // 初始化幀數
+        Application.targetFrameRate = 60;
+
         // 跳轉到主場景
         SceneCtrl.GetInstance().SwitchToMain();
     }
