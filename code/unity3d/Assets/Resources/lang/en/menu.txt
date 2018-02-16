@@ -1,0 +1,4 @@
+menu=menu
+back_to_menu=back to menu
+exit=exit
+close=close

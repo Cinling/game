@@ -84,6 +84,6 @@ public class WorldMenu {
 
 
     public void Test1() {
-        //SqliteTool sqlite = SqliteTool.GetInstance("save/myworld/sqlite.db");
+        LangTool.GetInstance().Get("menu.menu");
     }
 }
