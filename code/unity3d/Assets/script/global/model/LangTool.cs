@@ -48,12 +48,13 @@ public class LangTool {
     /// 設置語言
     /// </summary>
     /// <param name="lang"></param>
-    public void SetLanguage(LANG lang) {
-        settingLang = GetLangStringByLangEnum(lang);
+    public static void SetLanguage(LANG lang) {
+        LangTool self = GetInstance();
+        self.settingLang = self.GetLangStringByLangEnum(lang);
 
         // 重置語言
-        langFileDict = null;
-        langFileDict = new Dictionary<string, Dictionary<string, string>>();
+        self.langFileDict = null;
+        self.langFileDict = new Dictionary<string, Dictionary<string, string>>();
     }
 
     /// <summary>
@@ -92,7 +93,8 @@ public class LangTool {
     /// </summary>
     /// <param name="langConfig">menu.item,  獲取menu中item對應的值</param>
     /// <returns>對應的語言字符</returns>
-    public string Get(string langConfig) {
+    public static string Get(string langConfig) {
+        LangTool self = GetInstance();
         int lastIndex = langConfig.LastIndexOf(".");
 
         if (lastIndex == 0) {
@@ -102,19 +104,19 @@ public class LangTool {
         string filePath = langConfig.Substring(0, lastIndex).Replace(".", "/");
         string langKey = langConfig.Substring(lastIndex + 1);
 
-        if (!langFileDict.ContainsKey(filePath)) {
-            langFileDict[filePath] = LoadByFile(settingLang, filePath);
+        if (!self.langFileDict.ContainsKey(filePath)) {
+            self.langFileDict[filePath] = self.LoadByFile(self.settingLang, filePath);
         }
 
-        if (!langFileDict[filePath].ContainsKey(langKey)) {
-            LoadAddByDefaultLang(langFileDict[filePath], filePath);
+        if (!self.langFileDict[filePath].ContainsKey(langKey)) {
+            self.LoadAddByDefaultLang(self.langFileDict[filePath], filePath);
         }
 
-        if (!langFileDict[filePath].ContainsKey(langKey)) {
-            langFileDict[filePath][langKey] = "NULL";
+        if (!self.langFileDict[filePath].ContainsKey(langKey)) {
+            self.langFileDict[filePath][langKey] = "NULL";
             Debug.LogError("Unknow filePath:[" + filePath + "] langKey:[" + langKey + "]");
         }
-        return langFileDict[filePath][langKey];
+        return self.langFileDict[filePath][langKey];
     }
 
     /// <summary>

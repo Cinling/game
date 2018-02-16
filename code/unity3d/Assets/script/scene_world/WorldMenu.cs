@@ -84,6 +84,6 @@ public class WorldMenu {
 
 
     public void Test1() {
-        LangTool.GetInstance().Get("menu.menu");
+        LangTool.Get("menu.menu");
     }
 }
