@@ -1,0 +1,4 @@
+menu=菜單
+back_to_menu=返回菜單
+exit=退出
+close=關閉

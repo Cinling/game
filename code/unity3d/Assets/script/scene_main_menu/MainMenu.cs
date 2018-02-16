@@ -13,9 +13,12 @@ public class MainMenu {
     }
 
     /// <summary>
-    /// 初始化 主場景的按鈕事件
+    /// 初始化 主場景的按鈕事件 以及設置按鈕的語言
     /// </summary>
     public void InitButtonEvent() {
+        GameObject.Find("MainCanvas/BtnStartGame/Text").GetComponent<UnityEngine.UI.Text>().text = Lang.Get("main.menu.start_game");
+        GameObject.Find("MainCanvas/BtnHowToPlay/Text").GetComponent<UnityEngine.UI.Text>().text = Lang.Get("main.menu.how_to_play");
+        GameObject.Find("MainCanvas/BtnAboutGame/Text").GetComponent<UnityEngine.UI.Text>().text = Lang.Get("main.menu.about_game");
         AddOnClickListenerWithBtnName("MainCanvas/BtnStartGame");
     }
 

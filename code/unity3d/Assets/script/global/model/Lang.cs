@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LangTool {
+public class Lang {
     /// <summary>
     /// 單例對象
     /// </summary>
-    private static LangTool shareInstance = null;
+    private static Lang shareInstance = null;
 
     /// <summary>
     /// 獲取單例對象
     /// </summary>
     /// <returns></returns>
-    public static LangTool GetInstance() {
+    public static Lang GetInstance() {
         if (shareInstance == null) {
-            shareInstance = new LangTool();
+            shareInstance = new Lang();
         }
 
         return shareInstance;
@@ -28,7 +28,7 @@ public class LangTool {
     /// <summary>
     /// 構造函數
     /// </summary>
-    private LangTool() {
+    private Lang() {
         settingLang = GetLangStringByLangEnum(DEFAULT_LANG);
     }
 
@@ -49,7 +49,7 @@ public class LangTool {
     /// </summary>
     /// <param name="lang"></param>
     public static void SetLanguage(LANG lang) {
-        LangTool self = GetInstance();
+        Lang self = GetInstance();
         self.settingLang = self.GetLangStringByLangEnum(lang);
 
         // 重置語言
@@ -94,7 +94,7 @@ public class LangTool {
     /// <param name="langConfig">menu.item,  獲取menu中item對應的值</param>
     /// <returns>對應的語言字符</returns>
     public static string Get(string langConfig) {
-        LangTool self = GetInstance();
+        Lang self = GetInstance();
         int lastIndex = langConfig.LastIndexOf(".");
 
         if (lastIndex == 0) {

@@ -1,0 +1,3 @@
+start_game=開始遊戲
+how_to_play=遊戲教程
+about_game=關於遊戲

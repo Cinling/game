@@ -13,13 +13,20 @@ public class WorldMenu {
     }
 
     /// <summary>
-    /// 初始化世界場景所需的按鈕
+    /// 初始化世界場景所需的按鈕事件 以及設置語言
     /// </summary>
     public void InitWorldButtonEvent() {
+        GameObject.Find("CanvasGame/ButtonMenu/Text").GetComponent<UnityEngine.UI.Text>().text = Lang.Get("world.menu.menu");
         AddOnClickListenerWithBtnName("CanvasGame/ButtonMenu");
     }
 
+    /// <summary>
+    /// 初始化面板的按鈕事件 以及設置語言
+    /// </summary>
     public void InitPannelButtonEvent() {
+        GameObject.Find("CanvasGame/PanelMainMenu/ButtonBackToMenu/Text").GetComponent<UnityEngine.UI.Text>().text = Lang.Get("world.menu.back_to_menu");
+        GameObject.Find("CanvasGame/PanelMainMenu/ButtonExit/Text").GetComponent<UnityEngine.UI.Text>().text = Lang.Get("world.menu.exit");
+        GameObject.Find("CanvasGame/PanelMainMenu/ButtonClose/Text").GetComponent<UnityEngine.UI.Text>().text = Lang.Get("world.menu.close");
         AddOnClickListenerWithBtnName("CanvasGame/PanelMainMenu/ButtonClose");
         AddOnClickListenerWithBtnName("CanvasGame/PanelMainMenu/ButtonTest1");
         AddOnClickListenerWithBtnName("CanvasGame/PanelMainMenu/ButtonBackToMenu");
@@ -84,6 +91,6 @@ public class WorldMenu {
 
 
     public void Test1() {
-        LangTool.Get("menu.menu");
+        Lang.Get("menu.menu");
     }
 }
