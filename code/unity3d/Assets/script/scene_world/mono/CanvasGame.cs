@@ -5,7 +5,7 @@ using UnityEngine;
 /// 挂在到GameCanvas中的类
 /// 主要控制 界面UI 和 渲染帧、逻辑帧
 /// </summary>
-public class MainUICtrl : MonoBehaviour {
+public class CanvasGame : MonoBehaviour {
 
     /// <summary>
     /// 正常速度下的ups

@@ -73,7 +73,7 @@ public abstract class Animal : BaseRole {
     protected void Move(Vector3 vec3Move) {
         vec3BeforeMovePosition = vec3TargetPosition;
         vec3TargetPosition += vec3Move;
-        thisMaxNeedFps = MainUICtrl.NextUpsNeedFps;
+        thisMaxNeedFps = CanvasGame.NextUpsNeedFps;
 
         if (thisMaxNeedFps > 0) {
             vec3PerFpsMove = vec3Move / thisMaxNeedFps;
@@ -87,7 +87,7 @@ public abstract class Animal : BaseRole {
     private void FpsMove() {
 
         if (this.isNeedMove) {
-            short nextLps = MainUICtrl.NextUpsNeedFps;
+            short nextLps = CanvasGame.NextUpsNeedFps;
             this.transform.position = vec3BeforeMovePosition + vec3PerFpsMove * ( thisMaxNeedFps - nextLps );
         }
     }

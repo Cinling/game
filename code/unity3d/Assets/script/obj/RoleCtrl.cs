@@ -48,7 +48,7 @@ public class RoleCtrl {
                 ++upsSum;
 
                 // 计算下一次逻辑帧需要经过多少个渲染帧（每个逻辑帧都要调用，只有在MainUICtrl中使用到）
-                MainUICtrl.ReSetNextUpsNeedFps();
+                CanvasGame.ReSetNextUpsNeedFps();
 
                 // 遍历角色进行相关逻辑运算
                 lock (baseRoleDict) {
@@ -71,7 +71,7 @@ public class RoleCtrl {
                     }
 
                     // 更新时间
-                    TimeCtrl tcShareIns = TimeCtrl.GetInstance();
+                    GameTime tcShareIns = GameTime.GetInstance();
                     tcShareIns.NextUps();
                     if (tcShareIns.IdNextDay()) {
 

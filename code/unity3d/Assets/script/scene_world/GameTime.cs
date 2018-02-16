@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeCtrl {
+public class GameTime {
 
-    public static TimeCtrl share_instance = null;
-    private TimeCtrl() {
+    public static GameTime share_instance = null;
+    private GameTime() {
         InitTime();
         this.nextDayNeedUps = CNF_DAYS_UPS;
     }
-    public static TimeCtrl GetInstance() {
+    public static GameTime GetInstance() {
 
         if (share_instance == null) {
-            share_instance = new TimeCtrl();
+            share_instance = new GameTime();
         }
 
         return share_instance;
@@ -68,7 +68,7 @@ public class TimeCtrl {
             LoadDefaultConfig();
 
         } else {
-            CNF_DAYS_UPS = daysSceond * MainUICtrl.CNF_REAL_UPS;
+            CNF_DAYS_UPS = daysSceond * CanvasGame.CNF_REAL_UPS;
             CNF_SPRING_DAYS = springDays;
             CNF_SUMMER_DAYS = summerDays;
             CNF_AUTUMN_DAYS = autumnDays;
@@ -78,7 +78,7 @@ public class TimeCtrl {
     }
 
     private void LoadDefaultConfig() {
-        CNF_DAYS_UPS = 5 * MainUICtrl.CNF_REAL_UPS;
+        CNF_DAYS_UPS = 5 * CanvasGame.CNF_REAL_UPS;
         CNF_SPRING_DAYS = 10;
         CNF_SUMMER_DAYS = 10;
         CNF_AUTUMN_DAYS = 10;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainMenuCtrl : MonoBehaviour {
+public class CanvasGame_Menu : MonoBehaviour {
 
     private static GameObject panelGameObject = null;
 

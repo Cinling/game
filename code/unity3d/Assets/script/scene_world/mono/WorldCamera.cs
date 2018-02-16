@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class Camera : MonoBehaviour {
+public class WorldCamera : MonoBehaviour {
     public const ushort C_MOVE_LEFT = 0;
     public const ushort C_MOVE_FOUNT = 1;
     public const ushort C_MOVE_RIGHT = 2;

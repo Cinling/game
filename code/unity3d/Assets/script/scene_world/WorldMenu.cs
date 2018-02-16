@@ -56,14 +56,14 @@ public class WorldMenu {
         switch (btnName) {
             // 打开主菜单
             case "CanvasGame/ButtonMenu":
-                MainMenuCtrl.Show();
+                CanvasGame_Menu.Show();
                 GetInstance().InitPannelButtonEvent();
                 break;
 
             // 关闭主菜单
             case "CanvasGame/PanelMainMenu/ButtonClose":
                 Log.PrintLog("MainMenu", "OnClick", "MainMenuHide", Log.LOG_LEVEL.DEBUG);
-                MainMenuCtrl.Hide();
+                CanvasGame_Menu.Hide();
                 break;
 
             // 测试按钮一
