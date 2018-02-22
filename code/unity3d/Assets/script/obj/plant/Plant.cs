@@ -115,4 +115,11 @@ public abstract class Plant : BaseRole {
         UnityEngine.Object currentPlant = newGameObject.GetComponent(this.GetType());
         currentPlant = plant;
     }
+
+    /// <summary>
+    /// 被鼠標點擊需要執行噶方法
+    /// </summary>
+    override protected void OnClick() {
+
+    }
 }

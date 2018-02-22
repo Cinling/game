@@ -3,24 +3,62 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 所有动物的基类
+/// 動物噶基本類
 /// </summary>
 public abstract class Animal : BaseRole {
-    // lps 和 fps 显示同步所需变量
-    private bool isNeedMove; // 是否需要移动
-    private Vector3 vec3BeforeMovePosition; // 移动前的位置
-    private Vector3 vec3TargetPosition; // 移动的目标位置
-    private Vector3 vec3PerFpsMove; // fps移动的相对距离
-    private short thisMaxNeedFps; // 距离下一个 lps 需要的 fps 最大数目
+    // START lps 和 fps 显示同步所需变量
+    /// <summary>
+    /// 是否需要移动
+    /// </summary>
+    private bool isNeedMove;
+    /// <summary>
+    /// 移动前的位置
+    /// </summary>
+    private Vector3 vec3BeforeMovePosition;
+    /// <summary>
+    /// 移动的目标位置
+    /// </summary>
+    private Vector3 vec3TargetPosition;
+    /// <summary>
+    /// fps移动的相对距离
+    /// </summary>
+    private Vector3 vec3PerFpsMove;
+    /// <summary>
+    /// 距离下一个 lps 需要的 fps 最大数目
+    /// </summary>
+    private short thisMaxNeedFps;
+    // END lps 和 fps 显示同步所需变量
 
-    // 基本属性
-    protected uint speed; // 速度
-    protected uint health; // 当前
-    protected uint maxHealth; // 最大生命值
-    
-    protected float angle;  // 角度值(0-360)
+    // START 動物基本屬性
+    /// <summary>
+    /// 速度
+    /// </summary>
+    protected uint speed;
+    /// <summary>
+    /// 當前生命值
+    /// </summary>
+    protected uint health;
+    /// <summary>
+    /// 最大生命值
+    /// </summary>
+    protected uint maxHealth;
+    /// <summary>
+    /// 角度
+    /// </summary>
+    protected float angle;
+    // END 動物基本屬性
 
-
+    /// <summary>
+    /// 創建一個動物對象，并添加一滴基本屬性
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="z"></param>
+    /// <param name="prefab">prefab 文件相對 Resources 資料夾噶位置</param>
+    /// <param name="speed">移動速度</param>
+    /// <param name="health">當前生命值</param>
+    /// <param name="max_health">最大生命值</param>
+    /// <returns></returns>
     protected static GameObject CreateAnimal(float x, float y, float z, string prefab, uint speed, uint health, uint max_health) {
         GameObject gameObject = CreateBaseRole(x, y, z, prefab);
         Animal animalScript = gameObject.GetComponent<Animal>();
@@ -33,19 +71,25 @@ public abstract class Animal : BaseRole {
         return gameObject;
     }
 
-    // Start 的初始化方法
+    /// <summary>
+    /// 父類中 Start 中執行噶方法
+    /// </summary>
     protected override void StartInit() {
         isNeedMove = false;
         vec3BeforeMovePosition = vec3TargetPosition = transform.position;
         vec3PerFpsMove = new Vector3(0, 0, 0);
     }
 
-    // 每个渲染帧执行的方法
+    /// <summary>
+    /// 每個渲染幀執行噶方法
+    /// </summary>
     protected override void FPS() {
         FpsMove();
     }
 
-    // 每个逻辑帧执行的方法
+    /// <summary>
+    /// 沒噶邏輯幀執行咖方法
+    /// </summary>
     public override void UPS() {
         if (this.health > 0) {
             this.AI();
@@ -65,11 +109,10 @@ public abstract class Animal : BaseRole {
     /// </summary>
     protected abstract void Death();
 
-
-
-
-
-
+    /// <summary>
+    /// 提供俾所有動物使用咖方法
+    /// </summary>
+    /// <param name="vec3Move"></param>
     protected void Move(Vector3 vec3Move) {
         vec3BeforeMovePosition = vec3TargetPosition;
         vec3TargetPosition += vec3Move;
@@ -83,13 +126,22 @@ public abstract class Animal : BaseRole {
         isNeedMove = true;
     }
 
-
+    /// <summary>
+    /// 每個 FPS 移動執行咖方法
+    /// </summary>
     private void FpsMove() {
 
         if (this.isNeedMove) {
             short nextLps = CanvasGame.NextUpsNeedFps;
             this.transform.position = vec3BeforeMovePosition + vec3PerFpsMove * ( thisMaxNeedFps - nextLps );
         }
+    }
+
+    /// <summary>
+    /// 被鼠標點擊需要執行噶方法
+    /// </summary>
+    override protected void OnClick() {
+
     }
 
 }
