@@ -34,7 +34,7 @@ public class SceneCtrl {
         threadTool.StopThread();
 
         threadTool.RunOnMainSceneMainThread(() => {
-            MainMenu.GetInstance().InitButtonEvent();
+            //MainMenu.GetInstance().InitButtonEvent();
             return 0;
         });
 

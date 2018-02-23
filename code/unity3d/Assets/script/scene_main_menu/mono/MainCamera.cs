@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainCamera : MonoBehaviour {
 
     void Start() {
-
+        MainMenu mainMenu = MainMenu.GetInstance();
     }
 
     void Update() {
