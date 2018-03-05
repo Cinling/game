@@ -22,7 +22,7 @@ public class MainMenu {
     /// 
     /// </summary>
     public void CreateMenu() {
-        Canvas.Instantiate(Resources.Load<Canvas>("UI/Canvas"));
-        //canvas.transform.position = new Vector3(10, 10, 10);
+        canvas = Canvas.Instantiate(Resources.Load<Canvas>("ui/Canvas"));
+        //canvas.
     }
 }
