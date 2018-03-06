@@ -1,9 +1,7 @@
 *.cache
 *.suo
-*.csproj
 *.userprefs
 /package
-/code/unity3d/unity3d.sln
 /code/unity3d/save
 /code/unity3d/.vs
 /code/unity3d/Library
