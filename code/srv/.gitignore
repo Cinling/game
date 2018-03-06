@@ -1,2 +1,7 @@
 /.vs
+/.vs/slnx.sqlite
 /Debug
+x64
+*.obj
+*.log
+*.tlog

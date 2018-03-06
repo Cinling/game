@@ -1,6 +1,12 @@
-﻿using System.Collections;
+﻿
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 using UnityEngine;
+using System.Threading;
+using System.IO;
 
 public class WorldMenu {
     private static WorldMenu share_instance = null;
@@ -91,6 +97,38 @@ public class WorldMenu {
 
 
     public void Test1() {
-        Lang.Get("menu.menu");
+        SocketClient.Program.Run();
+    }
+}
+
+
+namespace SocketClient {
+    class Program {
+        public static void Run() {
+            TcpClient tcpClient;
+            tcpClient = new TcpClient();  //创建一个TcpClient对象，自动分配主机IP地址和端口号  
+            tcpClient.Connect("127.0.0.1", 6000);   //连接服务器，其IP和端口号为127.0.0.1和51888  
+            if (tcpClient != null) {
+                Debug.Log("连接服务器成功");
+                NetworkStream networkStream = tcpClient.GetStream();
+                BinaryReader br = new BinaryReader(networkStream);
+                BinaryWriter bw = new BinaryWriter(networkStream);
+                bw.Write(System.Text.Encoding.UTF8.GetBytes("你好服务器，我是客户端"));  //向服务器发送字符串  
+                while (true) {
+                    try {
+                        //string brString = br.ReadString();     //接收服务器发送的数据  
+                        string brString = System.Text.Encoding.Default.GetString(br.ReadBytes(100));
+                        if (brString != null) {
+                            Debug.Log("接收到服务器发送的数据：" + brString);
+                            break;
+                        }
+                    } catch (Exception e) {
+                        Debug.Log(e.StackTrace);
+                        break;        //接收过程中如果出现异常，将推出循环  
+                    }
+                }
+            }
+            Debug.Log("连接服务器失败");
+        }
     }
 }
