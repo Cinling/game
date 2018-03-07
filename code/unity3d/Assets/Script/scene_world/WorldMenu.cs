@@ -113,13 +113,13 @@ namespace SocketClient {
                 NetworkStream networkStream = tcpClient.GetStream();
                 BinaryReader br = new BinaryReader(networkStream);
                 BinaryWriter bw = new BinaryWriter(networkStream);
-                bw.Write(System.Text.Encoding.UTF8.GetBytes("你好服务器，我是客户端"));  //向服务器发送字符串  
+                bw.Write(System.Text.Encoding.UTF8.GetBytes("Client = 中文"));  //向服务器发送字符串  
                 while (true) {
                     try {
                         //string brString = br.ReadString();     //接收服务器发送的数据  
-                        string brString = System.Text.Encoding.Default.GetString(br.ReadBytes(100));
+                        string brString = System.Text.Encoding.UTF8.GetString(br.ReadBytes(100));
                         if (brString != null) {
-                            Debug.Log("接收到服务器发送的数据：" + brString);
+                            Debug.Log(brString);
                             break;
                         }
                     } catch (Exception e) {
@@ -128,7 +128,6 @@ namespace SocketClient {
                     }
                 }
             }
-            Debug.Log("连接服务器失败");
         }
     }
 }

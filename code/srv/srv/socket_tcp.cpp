@@ -28,7 +28,7 @@ void SocketTcp::StartSocket() {
         if (this->isPause) {
             break;
         }
-// debug模式
+        // debug模式
 #define DEBUG
 
 #ifdef DEBUG
@@ -49,12 +49,12 @@ void SocketTcp::StartSocket() {
         if (ret > 0) {
             recvData[ret] = 0x00;
 #ifdef DEBUG
-            cout << recvData << endl;
+            cout << this->UTF8ToGB2312(recvData) << endl;
 #endif
         }
 
         // 发送数据
-        const char *sendData = "hello client";
+        const char *sendData = this->GB2312ToUTF8("服务端发送的数据");
         send(socketClient, sendData, strlen(sendData), 0);
         closesocket(socketClient);
     }
@@ -108,7 +108,7 @@ string SocketTcp::GetIp(sockaddr_in sin) {
     char ip[15];
 
     sin.sin_addr.S_un.S_un_b.s_b1;
-    
+
     sprintf_s(ip, 15, "%d.%d.%d.%d", sin.sin_addr.S_un.S_un_b.s_b1, sin.sin_addr.S_un.S_un_b.s_b2, sin.sin_addr.S_un.S_un_b.s_b3, sin.sin_addr.S_un.S_un_b.s_b4);
 
     return string(ip);
