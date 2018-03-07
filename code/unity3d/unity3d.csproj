@@ -288,25 +288,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\script\global\Instance .cs" />
-    <Compile Include="Assets\script\global\model\Lang.cs" />
-    <Compile Include="Assets\script\global\model\Log.cs" />
-    <Compile Include="Assets\script\global\model\SqliteTool.cs" />
-    <Compile Include="Assets\script\global\model\ThreadTool.cs" />
-    <Compile Include="Assets\script\global\SceneCtrl.cs" />
-    <Compile Include="Assets\script\obj\animal\Animal.cs" />
-    <Compile Include="Assets\script\obj\animal\persion\Guy.cs" />
-    <Compile Include="Assets\script\obj\BaseRole.cs" />
-    <Compile Include="Assets\script\obj\plant\crop\Pumpkin.cs" />
-    <Compile Include="Assets\script\obj\plant\Plant.cs" />
-    <Compile Include="Assets\script\obj\RoleCtrl.cs" />
-    <Compile Include="Assets\script\scene_main_menu\MainMenu.cs" />
-    <Compile Include="Assets\script\scene_main_menu\mono\MainCamera.cs" />
-    <Compile Include="Assets\script\scene_world\GameTime.cs" />
-    <Compile Include="Assets\script\scene_world\mono\CanvasGame.cs" />
-    <Compile Include="Assets\script\scene_world\mono\CanvasGame_Menu.cs" />
-    <Compile Include="Assets\script\scene_world\mono\WorldCamera.cs" />
-    <Compile Include="Assets\script\scene_world\WorldMenu.cs" />
+    <Compile Include="Assets\Script\global\Instance .cs" />
+    <Compile Include="Assets\Script\global\model\Lang.cs" />
+    <Compile Include="Assets\Script\global\model\Log.cs" />
+    <Compile Include="Assets\Script\global\model\SqliteTool.cs" />
+    <Compile Include="Assets\Script\global\model\ThreadTool.cs" />
+    <Compile Include="Assets\Script\global\SceneCtrl.cs" />
+    <Compile Include="Assets\Script\obj\animal\Animal.cs" />
+    <Compile Include="Assets\Script\obj\animal\persion\Guy.cs" />
+    <Compile Include="Assets\Script\obj\BaseRole.cs" />
+    <Compile Include="Assets\Script\obj\plant\crop\Pumpkin.cs" />
+    <Compile Include="Assets\Script\obj\plant\Plant.cs" />
+    <Compile Include="Assets\Script\obj\RoleCtrl.cs" />
+    <Compile Include="Assets\Script\scene_main_menu\MainMenu.cs" />
+    <Compile Include="Assets\Script\scene_main_menu\mono\MainCamera.cs" />
+    <Compile Include="Assets\Script\scene_world\GameTime.cs" />
+    <Compile Include="Assets\Script\scene_world\mono\CanvasGame.cs" />
+    <Compile Include="Assets\Script\scene_world\mono\CanvasGame_Menu.cs" />
+    <Compile Include="Assets\Script\scene_world\mono\WorldCamera.cs" />
+    <Compile Include="Assets\Script\scene_world\WorldMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AssetsStore\Cartoon_Farm_Crops\README.txt" />
