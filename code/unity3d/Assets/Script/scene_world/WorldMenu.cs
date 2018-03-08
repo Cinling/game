@@ -97,37 +97,9 @@ public class WorldMenu {
 
 
     public void Test1() {
-        SocketClient.Program.Run();
-    }
-}
-
-
-namespace SocketClient {
-    class Program {
-        public static void Run() {
-            TcpClient tcpClient;
-            tcpClient = new TcpClient();  //创建一个TcpClient对象，自动分配主机IP地址和端口号  
-            tcpClient.Connect("127.0.0.1", 6000);   //连接服务器，其IP和端口号为127.0.0.1和51888  
-            if (tcpClient != null) {
-                Debug.Log("连接服务器成功");
-                NetworkStream networkStream = tcpClient.GetStream();
-                BinaryReader br = new BinaryReader(networkStream);
-                BinaryWriter bw = new BinaryWriter(networkStream);
-                bw.Write(System.Text.Encoding.UTF8.GetBytes("Client = 中文"));  //向服务器发送字符串  
-                while (true) {
-                    try {
-                        //string brString = br.ReadString();     //接收服务器发送的数据  
-                        string brString = System.Text.Encoding.UTF8.GetString(br.ReadBytes(100));
-                        if (brString != null) {
-                            Debug.Log(brString);
-                            break;
-                        }
-                    } catch (Exception e) {
-                        Debug.Log(e.StackTrace);
-                        break;        //接收过程中如果出现异常，将推出循环  
-                    }
-                }
-            }
-        }
+        new Thread(() => {
+            string recv = TcpTool.Send("send");
+            Debug.Log("server info:" + recv);
+        }).Start();
     }
 }

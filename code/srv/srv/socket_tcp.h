@@ -1,11 +1,11 @@
 #pragma once
 
 #include <winsock2.h>
+#include <thread>
 #include <iostream>
 
 #pragma comment(lib, "ws2_32.lib")
 
-using namespace std;
 
 // tcp 通信类
 class SocketTcp {
@@ -29,12 +29,15 @@ public:
     // 关闭socket
     void DestroySocket();
 
+    // 用于客户端连接时，穿件新线程使用
+    friend void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr);
+
 private:
     // 初始化服务端套接字
     void InitServerSocket(unsigned short port);
 
     // 将 int32 的IP数据转为可读形式的ip
-    string GetIp(sockaddr_in socketAddrIn);
+    std::string GetIp(sockaddr_in socketAddrIn);
 
     //UTF-8到GB2312的转换  
     char* UTF8ToGB2312(const char* utf8) {
@@ -63,3 +66,7 @@ private:
         return str;
     }
 };
+
+
+// 用于客户端连接时，穿件新线程使用
+void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr);

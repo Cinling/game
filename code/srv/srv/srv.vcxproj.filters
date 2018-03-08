@@ -19,6 +19,18 @@
     <Filter Include="头文件\socket">
       <UniqueIdentifier>{7ae15490-4fd5-43f2-a134-8859e27a2deb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\game">
+      <UniqueIdentifier>{8bf0cde0-bbe5-46d6-9145-8808fe215a86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\game">
+      <UniqueIdentifier>{9b4f47ea-f220-4334-9879-da9bbf54314c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\game\object">
+      <UniqueIdentifier>{1df372ea-acde-4a00-884c-98d3cd89b6e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\game\object">
+      <UniqueIdentifier>{81126808-a5dd-464c-ba26-1d7182fcc454}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
