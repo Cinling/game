@@ -118,12 +118,14 @@
     <ClCompile Include="..\lib\sqlite3.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="socket_tcp.cpp" />
+    <ClCompile Include="sqlite_tool.cpp" />
     <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\sqlite3.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="socket_tcp.h" />
+    <ClInclude Include="sqlite_tool.h" />
     <ClInclude Include="world.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,12 +1,8 @@
 #include "main.h"
 
-#include "world.h"
-
 int main(void) {
-
-
-    World w;
-    w.SqliteTest();
+    World *w = World::GetInstance();
+    w->SqliteTest();
 
 
     SocketTcp socketTcp(6000);

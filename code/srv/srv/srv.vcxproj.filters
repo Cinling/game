@@ -25,17 +25,17 @@
     <Filter Include="头文件\game">
       <UniqueIdentifier>{9b4f47ea-f220-4334-9879-da9bbf54314c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\lib">
-      <UniqueIdentifier>{edb1c4cd-f257-4ab2-a49b-b4323e8f1173}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\lib">
-      <UniqueIdentifier>{0d7dffe6-d566-492e-9501-9df496d1148b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\model">
       <UniqueIdentifier>{0b785311-dd7a-4162-9194-02f86dd1c37e}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\model">
       <UniqueIdentifier>{b4b84bd6-4a40-4d11-8b96-db203f54be2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\model\sqlite">
+      <UniqueIdentifier>{5c233c27-3fea-4866-b1a0-6765d2904813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\model\sqlite">
+      <UniqueIdentifier>{4ee57479-32c0-40cb-ba20-91046fdf86cf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,11 +45,14 @@
     <ClCompile Include="socket_tcp.cpp">
       <Filter>源文件\socket</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\sqlite3.c">
-      <Filter>源文件\lib</Filter>
-    </ClCompile>
     <ClCompile Include="world.cpp">
       <Filter>源文件\game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\sqlite3.c">
+      <Filter>源文件\model\sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite_tool.cpp">
+      <Filter>源文件\model\sqlite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,11 +62,14 @@
     <ClInclude Include="socket_tcp.h">
       <Filter>头文件\socket</Filter>
     </ClInclude>
-    <ClInclude Include="..\lib\sqlite3.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
     <ClInclude Include="world.h">
       <Filter>头文件\game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\sqlite3.h">
+      <Filter>头文件\model\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite_tool.h">
+      <Filter>头文件\model\sqlite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
