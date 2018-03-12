@@ -64,7 +64,7 @@ unsigned int DBManager::GetNextDBVersion() {
         } else {
             std::map<std::string, std::string> rowMap = *(res.begin());
             std::string versionString = rowMap[DBManager::FIELD_VERSION];
-            nextVersion = std::atoi(versionString.c_str()) + 1;
+            nextVersion = std::stoi(versionString.c_str()) + 1;
         }
     }
     return nextVersion;

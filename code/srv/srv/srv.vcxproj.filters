@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="源文件\socket">
-      <UniqueIdentifier>{88915d5a-47b0-4aac-b04a-2ed0462c4aee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\socket">
-      <UniqueIdentifier>{7ae15490-4fd5-43f2-a134-8859e27a2deb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\game">
       <UniqueIdentifier>{8bf0cde0-bbe5-46d6-9145-8808fe215a86}</UniqueIdentifier>
     </Filter>
@@ -46,6 +40,12 @@
     <Filter Include="头文件\model\rapidjson">
       <UniqueIdentifier>{f7231883-746a-42d5-a6d8-a05eaedf8d52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\model\socket">
+      <UniqueIdentifier>{7ae15490-4fd5-43f2-a134-8859e27a2deb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\model\socket">
+      <UniqueIdentifier>{88915d5a-47b0-4aac-b04a-2ed0462c4aee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -58,7 +58,7 @@
       <Filter>源文件\model</Filter>
     </ClCompile>
     <ClCompile Include="socket_tcp.cpp">
-      <Filter>源文件\socket</Filter>
+      <Filter>源文件\model\socket</Filter>
     </ClCompile>
     <ClCompile Include="world.cpp">
       <Filter>源文件\game</Filter>
@@ -72,13 +72,16 @@
     <ClCompile Include="..\lib\sqlite3\sqlite3.c">
       <Filter>源文件\model\sqlite</Filter>
     </ClCompile>
+    <ClCompile Include="socket_num_manager.cpp">
+      <Filter>源文件\model\socket</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="socket_tcp.h">
-      <Filter>头文件\socket</Filter>
+      <Filter>头文件\model\socket</Filter>
     </ClInclude>
     <ClInclude Include="world.h">
       <Filter>头文件\game</Filter>
@@ -205,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="..\lib\rapidjson\error\error.h">
       <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="socket_num_manager.h">
+      <Filter>头文件\model\socket</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,12 @@
 #pragma once
 
+#include "socket_num_manager.h"
+#include "tool.h";
+
 #include <winsock2.h>
 #include <thread>
 #include <iostream>
+#include <string>
 
 #pragma comment(lib, "ws2_32.lib")
 
@@ -39,6 +43,13 @@ private:
     // 将 int32 的IP数据转为可读形式的ip
     std::string GetIp(sockaddr_in socketAddrIn);
 
+private:
+    // 根据客户端返回的数据，执行相应的处理
+    // clientData 客户端发送过来的数据
+    // return 返回给客户端的数据
+    std::string DoBySocketAction(std::string clientData);
+
+private:
     //UTF-8到GB2312的转换  
     char* UTF8ToGB2312(const char* utf8) {
         int len = MultiByteToWideChar(CP_UTF8, 0, utf8, -1, NULL, 0);

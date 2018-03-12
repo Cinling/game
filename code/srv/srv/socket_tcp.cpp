@@ -102,22 +102,48 @@ std::string SocketTcp::GetIp(sockaddr_in sin) {
     return std::string(ip);
 }
 
+std::string SocketTcp::DoBySocketAction(std::string clientData) {
+
+    int cutIndex = clientData.find("|");
+    int tcpNum = std::stoi(clientData.substr(0, cutIndex));
+    std::string data = clientData.substr(cutIndex + 1);
+
+    std::string retData = "";
+
+    switch (tcpNum) {
+        case 10001:
+            retData = SocketNumManager::_10001(data);
+            break;
+    }
+
+    return retData;
+}
+
 void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr) {
     std::string ip = socketTcp->GetIp(remoteAddr);
     std::cout << "receive a connect [" << ip.c_str() << "]" << std::endl;
 
     // 接收客户端发送过来的数据
-    char recvData[256];
-    int ret = recv(client, recvData, 256, 0);
+    char recvData[1024];
+    int ret = recv(client, recvData, 1024, 0);
+
+    std::string retData = "没有收到客户端的数据";
+
     if (ret > 0) {
         recvData[ret] = 0x00;
 
-        std::cout << socketTcp->UTF8ToGB2312(recvData) << std::endl;
+        retData = socketTcp->DoBySocketAction(std::string(socketTcp->UTF8ToGB2312(recvData)));
+
+#ifdef DEBUG
+        int time = Tool::GetTimeSecond();
+        std::cout << "[recv " << time << "]" << socketTcp->UTF8ToGB2312(recvData) << std::endl;
+        std::cout << "[send " << time << "]" << retData << std::endl;
+#endif
 
     }
 
     // 发送数据
-    const char *sendData = socketTcp->GB2312ToUTF8("服务端发送的数据\n");
+    const char *sendData = socketTcp->GB2312ToUTF8(retData.c_str());
     send(client, sendData, strlen(sendData), 0);
 
     closesocket(client);

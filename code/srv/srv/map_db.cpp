@@ -38,7 +38,7 @@ int MapDB::GetLastInsertId() {
     int lastInsertId = 0;
 
     if (res.size() != 0) {
-        lastInsertId = std::atoi((*res.begin())[MapDB::FIELD_ID].c_str());
+        lastInsertId = std::stoi((*res.begin())[MapDB::FIELD_ID].c_str());
     }
 
     return lastInsertId;
