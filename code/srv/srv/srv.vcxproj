@@ -123,7 +123,7 @@
     <ClCompile Include="sqlite_tool.cpp" />
     <ClCompile Include="tool.cpp" />
     <ClCompile Include="world.cpp" />
-    <ClCompile Include="world_db.cpp" />
+    <ClCompile Include="map_db.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\sqlite3.h" />
@@ -134,7 +134,7 @@
     <ClInclude Include="sqlite_tool.h" />
     <ClInclude Include="tool.h" />
     <ClInclude Include="world.h" />
-    <ClInclude Include="world_db.h" />
+    <ClInclude Include="map_db.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="srv.rc" />

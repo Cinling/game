@@ -1,7 +1,6 @@
 #pragma once
 
 #include "sqlite_tool.h"
-#include "world_db.h"
 #include "db_manager.h";
 
 class World {

@@ -31,7 +31,7 @@ public:
     std::list<std::map<std::string, std::string>> Query(const char * sql);
 
     // 【执行sql语句，判断是否顺利执行】
-    // return 是否运行成功
+    // return [true 执行成功] [false 执行失败]
     bool ExecSql(const char * sql);
 
     // 【查询表是否存在】
