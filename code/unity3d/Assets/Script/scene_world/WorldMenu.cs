@@ -98,8 +98,7 @@ public class WorldMenu {
 
     public void Test1() {
         new Thread(() => {
-            string recv = TcpTool.Send("send");
-            Debug.Log("server info:" + recv);
+            TcpTool._10001_InitMap(700, 700);
         }).Start();
     }
 }

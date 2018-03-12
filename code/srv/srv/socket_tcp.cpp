@@ -136,8 +136,8 @@ void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr) {
 
 #ifdef DEBUG
         int time = Tool::GetTimeSecond();
-        std::cout << "[recv " << time << "]" << socketTcp->UTF8ToGB2312(recvData) << std::endl;
-        std::cout << "[send " << time << "]" << retData << std::endl;
+        std::cout << "[recv " << time << "]:" << socketTcp->UTF8ToGB2312(recvData) << std::endl;
+        std::cout << "[send " << time << "]:" << retData << std::endl;
 #endif
 
     }

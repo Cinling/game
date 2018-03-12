@@ -24,9 +24,9 @@ std::string SocketNumManager::_10001(std::string data) {
 
 int SocketNumManager::GetInt(rapidjson::Document &document, std::string key, int defaultValue) {
     int retInt = defaultValue;
-    rapidjson::Value::ConstMemberIterator itr = document.FindMember(key.c_str());
-    if (itr != document.MemberEnd()) {
-        retInt = document.GetInt();
+    rapidjson::Value::MemberIterator mt = document.FindMember(key.c_str());
+    if (mt->value.IsInt()) {
+        retInt = mt->value.GetInt();
     }
 
     return retInt;
