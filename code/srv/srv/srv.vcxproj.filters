@@ -43,22 +43,19 @@
     <Filter Include="源文件\model\db">
       <UniqueIdentifier>{2d6103ac-f5d4-425c-bb7a-49672116d93f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\model\rapidjson">
+      <UniqueIdentifier>{f7231883-746a-42d5-a6d8-a05eaedf8d52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\sqlite3.c">
-      <Filter>源文件\model\sqlite</Filter>
     </ClCompile>
     <ClCompile Include="sqlite_tool.cpp">
       <Filter>源文件\model\sqlite</Filter>
     </ClCompile>
     <ClCompile Include="tool.cpp">
       <Filter>源文件\model</Filter>
-    </ClCompile>
-    <ClCompile Include="db_manager.cpp">
-      <Filter>源文件\model\db</Filter>
     </ClCompile>
     <ClCompile Include="socket_tcp.cpp">
       <Filter>源文件\socket</Filter>
@@ -68,6 +65,12 @@
     </ClCompile>
     <ClCompile Include="map_db.cpp">
       <Filter>源文件\model\db</Filter>
+    </ClCompile>
+    <ClCompile Include="db_manager.cpp">
+      <Filter>源文件\model\sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\sqlite3\sqlite3.c">
+      <Filter>源文件\model\sqlite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,23 +83,128 @@
     <ClInclude Include="world.h">
       <Filter>头文件\game</Filter>
     </ClInclude>
-    <ClInclude Include="..\lib\sqlite3.h">
-      <Filter>头文件\model\sqlite</Filter>
-    </ClInclude>
     <ClInclude Include="sqlite_tool.h">
       <Filter>头文件\model\sqlite</Filter>
-    </ClInclude>
-    <ClInclude Include="db_interface.h">
-      <Filter>头文件\model\db</Filter>
     </ClInclude>
     <ClInclude Include="tool.h">
       <Filter>头文件\model</Filter>
     </ClInclude>
-    <ClInclude Include="db_manager.h">
-      <Filter>头文件\model\db</Filter>
-    </ClInclude>
     <ClInclude Include="map_db.h">
       <Filter>头文件\model\db</Filter>
+    </ClInclude>
+    <ClInclude Include="db_manager.h">
+      <Filter>头文件\model\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\sqlite3\sqlite3.h">
+      <Filter>头文件\model\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\allocators.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\cursorstreamwrapper.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\document.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\encodedstream.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\encodings.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\filereadstream.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\filewritestream.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\fwd.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\istreamwrapper.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\memorybuffer.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\memorystream.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\ostreamwrapper.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\pointer.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\prettywriter.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\rapidjson.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\reader.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\schema.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\stream.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\stringbuffer.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\writer.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\msinttypes\inttypes.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\msinttypes\stdint.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\internal\biginteger.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\internal\diyfp.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\internal\dtoa.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\internal\ieee754.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\internal\itoa.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\internal\meta.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\internal\pow10.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\internal\regex.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\internal\stack.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\internal\strfunc.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\internal\strtod.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\internal\swap.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\error\en.h">
+      <Filter>头文件\model\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\rapidjson\error\error.h">
+      <Filter>头文件\model\rapidjson</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -22,9 +22,10 @@ World::~World() {
     }
 }
 
-void World::Init(float width, float height) {
+void World::Init(int width, int length) {
     this->worldWidth = width;
-    this->worldLength = height;
+    this->worldLength = length;
+    this->id = this->CreateMap(this->worldWidth, this->worldLength);
 }
 
 void World::Start() {
@@ -64,9 +65,17 @@ void World::SqliteTest() {
 
     DBManager * dbManager = DBManager::GetInstance();
     SqliteTool::UseDB("test");
-    dbManager->DBUpdate();
+    //dbManager->DBUpdate();
+
+    
 }
 
 void World::SaveWorld() {
 
+}
+
+int World::CreateMap(int width, int length) {
+    MapDB *mapDB = MapDB::GetInstance();
+    mapDB->Insert(this->worldWidth, this->worldLength);
+    return mapDB->GetLastInsertId();
 }

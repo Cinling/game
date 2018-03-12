@@ -1,8 +1,15 @@
 #pragma once
 
-#include "db_interface.h"
+#include "sqlite_tool.h"
+#include "../lib/rapidjson/document.h"
+#include "../lib/rapidjson/prettywriter.h"
 
-class MapDB : public DBInterface {
+#include <iostream>
+#include <string>
+#include <list>
+#include <map>
+
+class MapDB {
 private:
     static MapDB * shareInstance;
     MapDB();
@@ -21,11 +28,15 @@ public:
     static const std::string FIELD_CONFIG;
 
 public:
+    // 插入世界的数据
+    // return [true 操作成功] [false 操作失败]
+    bool Insert(int worldWidth, int worldHeight);
+    // 获取上次插入的id
+    int GetLastInsertId();
 
-    // 存储数据
-    virtual std::list<std::map<std::string, std::string>> Save(std::list<std::map<std::string, std::string>>) override;
-    // 读取数据
-    virtual std::list<std::map<std::string, std::string>> Load(std::list<std::map<std::string, std::string>>) override;
+private:
+    // 把配置数据转为json字符串
+    std::string GetConfigJsonStr(int worldWidth, int worldHeight);
 };
 
 

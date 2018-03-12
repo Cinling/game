@@ -8,17 +8,19 @@ private:
     static World *shareInstance;
     World();
 
+    // 当前地图id
+    int id;
     // 世界宽度
-    float worldWidth;
+    int worldWidth;
     // 世界长度
-    float worldLength;
+    int worldLength;
 
 public:
     static World * GetInstance();
     ~World();
 
     // 初始化世界（首次进入游戏，创建世界）
-    void Init(float width, float height);
+    void Init(int width, int length);
 
     // 开始游戏
     void Start();
@@ -44,4 +46,10 @@ public:
 private:
     // 保存世界数据
     void SaveWorld();
+
+    // 创建地图
+    // width 地图宽度
+    // length 地图长度
+    // return 当天地图的id
+    int CreateMap(int width, int length);
 };

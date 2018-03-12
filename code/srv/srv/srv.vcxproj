@@ -116,7 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\lib\sqlite3.c" />
+    <ClCompile Include="..\lib\sqlite3\sqlite3.c" />
     <ClCompile Include="db_manager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="socket_tcp.cpp" />
@@ -126,8 +126,43 @@
     <ClCompile Include="map_db.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\lib\sqlite3.h" />
-    <ClInclude Include="db_interface.h" />
+    <ClInclude Include="..\lib\rapidjson\allocators.h" />
+    <ClInclude Include="..\lib\rapidjson\cursorstreamwrapper.h" />
+    <ClInclude Include="..\lib\rapidjson\document.h" />
+    <ClInclude Include="..\lib\rapidjson\encodedstream.h" />
+    <ClInclude Include="..\lib\rapidjson\encodings.h" />
+    <ClInclude Include="..\lib\rapidjson\error\en.h" />
+    <ClInclude Include="..\lib\rapidjson\error\error.h" />
+    <ClInclude Include="..\lib\rapidjson\filereadstream.h" />
+    <ClInclude Include="..\lib\rapidjson\filewritestream.h" />
+    <ClInclude Include="..\lib\rapidjson\fwd.h" />
+    <ClInclude Include="..\lib\rapidjson\internal\biginteger.h" />
+    <ClInclude Include="..\lib\rapidjson\internal\diyfp.h" />
+    <ClInclude Include="..\lib\rapidjson\internal\dtoa.h" />
+    <ClInclude Include="..\lib\rapidjson\internal\ieee754.h" />
+    <ClInclude Include="..\lib\rapidjson\internal\itoa.h" />
+    <ClInclude Include="..\lib\rapidjson\internal\meta.h" />
+    <ClInclude Include="..\lib\rapidjson\internal\pow10.h" />
+    <ClInclude Include="..\lib\rapidjson\internal\regex.h" />
+    <ClInclude Include="..\lib\rapidjson\internal\stack.h" />
+    <ClInclude Include="..\lib\rapidjson\internal\strfunc.h" />
+    <ClInclude Include="..\lib\rapidjson\internal\strtod.h" />
+    <ClInclude Include="..\lib\rapidjson\internal\swap.h" />
+    <ClInclude Include="..\lib\rapidjson\istreamwrapper.h" />
+    <ClInclude Include="..\lib\rapidjson\memorybuffer.h" />
+    <ClInclude Include="..\lib\rapidjson\memorystream.h" />
+    <ClInclude Include="..\lib\rapidjson\msinttypes\inttypes.h" />
+    <ClInclude Include="..\lib\rapidjson\msinttypes\stdint.h" />
+    <ClInclude Include="..\lib\rapidjson\ostreamwrapper.h" />
+    <ClInclude Include="..\lib\rapidjson\pointer.h" />
+    <ClInclude Include="..\lib\rapidjson\prettywriter.h" />
+    <ClInclude Include="..\lib\rapidjson\rapidjson.h" />
+    <ClInclude Include="..\lib\rapidjson\reader.h" />
+    <ClInclude Include="..\lib\rapidjson\schema.h" />
+    <ClInclude Include="..\lib\rapidjson\stream.h" />
+    <ClInclude Include="..\lib\rapidjson\stringbuffer.h" />
+    <ClInclude Include="..\lib\rapidjson\writer.h" />
+    <ClInclude Include="..\lib\sqlite3\sqlite3.h" />
     <ClInclude Include="db_manager.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="socket_tcp.h" />
