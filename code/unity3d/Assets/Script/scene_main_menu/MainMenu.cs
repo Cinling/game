@@ -15,15 +15,17 @@ public class MainMenu {
     GameObject canvas = null;
 
     private MainMenu() {
-        // 创建 Canvas
-        canvas = GameObject.Instantiate(Resources.Load<GameObject>("ui/Canvas"));
+       
     }
 
     /// <summary>
     /// 初始化菜单
     /// </summary>
     public void Init() {
-        CreateMenu();
+        if (GameObject.Find("Canvas(Clone)") == null) {
+            canvas = GameObject.Instantiate(Resources.Load<GameObject>("ui/Canvas"));
+        }
+        ChangeToMenuPannel();
     }
 
     /// <summary>
@@ -36,28 +38,12 @@ public class MainMenu {
         }
     }
 
-    /// <summary>
-    /// 添加一个按钮
-    /// </summary>
-    /// <param name="parent"></param>
-    /// <param name="perfab"></param>
-    /// <param name="text"></param>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="call"></param>
-    private void AddButton(GameObject parent, string perfab, string text, float x, float y, UnityEngine.Events.UnityAction call) {
-        GameObject gameObject = GameObject.Instantiate(Resources.Load<GameObject>(perfab));
-        gameObject.transform.SetParent(parent.transform);
-        gameObject.GetComponentInChildren<UnityEngine.UI.Text>().text = text;
-        UnityEngine.UI.Button button = gameObject.GetComponent<UnityEngine.UI.Button>();
-        button.transform.position = new Vector3(x, y, 0);
-        button.onClick.AddListener(call);
-    }
+
 
     /// <summary>
     /// 创建菜单
     /// </summary>
-    private void CreateMenu() {
+    private void ChangeToMenuPannel() {
         DeleteRootPannel();
 
         Rect rectCanvas = canvas.GetComponent<RectTransform>().rect;
@@ -67,16 +53,17 @@ public class MainMenu {
         // 创建 Pannel
         GameObject goPannel = GameObject.Instantiate(Resources.Load<GameObject>("ui/Panel"));
         goPannel.transform.SetParent(canvas.transform);
+        goPannel.transform.position = canvas.transform.position;
         UnityEngine.UI.Image pannel = goPannel.GetComponent<UnityEngine.UI.Image>();
-        pannel.rectTransform.sizeDelta = new Vector2(width, height);
+        UIHelper.Pannel.SetSize(pannel, width, height);
 
-        this.AddButton(goPannel, "ui/Button", Lang.Get("main.menu.start_game"), width - 200, height - 200, OnStartGameClick);
+        UIHelper.Button.AddButton(goPannel, "ui/Button", Lang.Get("main.menu.start_game"), width - 200, height - 200, ChangeToStartGameMenuPannel);
     }
 
     /// <summary>
     /// 初始化 【新建游戏】或【载入游戏】的界面
     /// </summary>
-    private void CreateStartGameMenu() {
+    private void ChangeToStartGameMenuPannel() {
         DeleteRootPannel();
 
         Rect rectCanvas = canvas.GetComponent<RectTransform>().rect;
@@ -86,45 +73,81 @@ public class MainMenu {
         // 创建 Pannel
         GameObject goPannel = GameObject.Instantiate(Resources.Load<GameObject>("ui/Panel"));
         goPannel.transform.SetParent(canvas.transform);
+        goPannel.transform.position = canvas.transform.position;
         UnityEngine.UI.Image pannel = goPannel.GetComponent<UnityEngine.UI.Image>();
-        pannel.rectTransform.sizeDelta = new Vector2(width, height);
+        UIHelper.Pannel.SetSize(pannel, width, height);
 
-        // 创建新游戏的按钮
-        this.AddButton(goPannel, "ui/Button", Lang.Get("main.menu.new_game"), width - 200, height - 200, OnNewGameClick);
+        // 新游戏的按钮
+        UIHelper.Button.AddButton(goPannel, "ui/Button", Lang.Get("main.menu.new_game"), width - 200, height - 200, CreateNewGame);
 
-        // 创建载入游戏的按钮
-        this.AddButton(goPannel, "ui/Button", Lang.Get("main.menu.load_game"), width - 200, height - 250, OnLoadGameClick);
+        // 载入游戏的按钮
+        UIHelper.Button.AddButton(goPannel, "ui/Button", Lang.Get("main.menu.load_game"), width - 200, height - 250, OpenLoadGamePannel);
 
-        // 创建返回的按钮
-        this.AddButton(goPannel, "ui/Button", Lang.Get("main.menu.back"), width - 200, height - 300, OnBackClick);
+        // 返回的按钮
+        UIHelper.Button.AddButton(goPannel, "ui/Button", Lang.Get("main.menu.back"), width - 200, height - 300, ChangeToMenuPannel);
     }
 
     /// <summary>
-    /// 开始游戏按钮 事件
+    /// 打开载入游戏存档的面板
     /// </summary>
-    private void OnStartGameClick() {
-        //SceneCtrl.GetInstance().SwitchToWorld();
-        this.CreateStartGameMenu();
+    private void OpenLoadGamePannel() {
+
+        // 防止多次打开载入存档的面板
+        if (GameObject.Find("Canvas(Clone)/Panel(Clone)/Panel(Clone)") != null) {
+            return;
+        }
+
+        // 获取父级元素
+        GameObject goPannel = GameObject.Find("Canvas(Clone)/Panel(Clone)");
+        if (goPannel == null) {
+            return;
+        }
+
+        // 创建 Pannel
+        GameObject goLoadGamePannel = GameObject.Instantiate(Resources.Load<GameObject>("ui/Panel"));
+        goLoadGamePannel.transform.SetParent(goPannel.transform);
+        goLoadGamePannel.transform.position = goPannel.transform.position;
+        UnityEngine.UI.Image pannel = goLoadGamePannel.GetComponent<UnityEngine.UI.Image>();
+        UIHelper.Pannel.SetSize(pannel, 400, 500);
+
+
+        float btnX = goLoadGamePannel.transform.position.x;
+        float btnY = goLoadGamePannel.transform.position.y;
+
+        // 载入按钮
+        UIHelper.Button.AddButton(goLoadGamePannel, "ui/Button", Lang.Get("main.menu.ok"), btnX, btnY - 180, CloseLoadGamePannel);
+
+        // 关闭按钮
+        UIHelper.Button.AddButton(goLoadGamePannel, "ui/Button", Lang.Get("main.menu.close"), btnX, btnY - 220, CloseLoadGamePannel);
     }
 
     /// <summary>
-    /// 新游戏按钮 事件
+    /// 创建新游戏
     /// </summary>
-    private void OnNewGameClick() {
-        
+    private void CreateNewGame() {
+        string ret = TcpTool._10001_InitMap(500, 500);
+        if (ret == "true") {
+            SceneCtrl.GetInstance().SwitchToWorld();
+        }
     }
 
     /// <summary>
-    /// 载入游戏
+    /// 载入存档
     /// </summary>
-    private void OnLoadGameClick() {
-        
+    private void LoadGame() {
+
     }
 
     /// <summary>
-    /// 返回按钮
+    /// 关闭载入游戏存档的面板
     /// </summary>
-    private void OnBackClick() {
-        CreateMenu();
+    private void CloseLoadGamePannel() {
+        GameObject goLoadGamePannel = GameObject.Find("Canvas(Clone)/Panel(Clone)/Panel(Clone)");
+        if (goLoadGamePannel != null) {
+            GameObject.Destroy(goLoadGamePannel);
+        }
     }
 }
+
+
+

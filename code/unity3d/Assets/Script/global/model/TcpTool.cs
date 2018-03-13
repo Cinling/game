@@ -93,10 +93,8 @@ public class TcpTool {
 
         string data = JsonUtility.ToJson(new JSONStruct.Map(worldWidth, worldLength));
         string sendStr = "10001|" + data;
-
-
-        TcpTool.Send(sendStr);
-        return "";
+        
+        return TcpTool.Send(sendStr);
     }
 }
 

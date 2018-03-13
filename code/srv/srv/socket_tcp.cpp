@@ -120,8 +120,8 @@ std::string SocketTcp::DoBySocketAction(std::string clientData) {
 }
 
 void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr) {
-    std::string ip = socketTcp->GetIp(remoteAddr);
-    std::cout << "receive a connect [" << ip.c_str() << "]" << std::endl;
+    //std::string ip = socketTcp->GetIp(remoteAddr);
+    //std::cout << "receive a connect [" << ip.c_str() << "]" << std::endl;
 
     // 接收客户端发送过来的数据
     char recvData[1024];

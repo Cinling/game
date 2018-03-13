@@ -4,3 +4,5 @@ about_game=about game
 new_game=new game
 load_game=load game
 back=back
+close=close
+ok=OK

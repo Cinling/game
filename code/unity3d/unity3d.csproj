@@ -294,6 +294,7 @@
     <Compile Include="Assets\Script\global\model\SqliteTool.cs" />
     <Compile Include="Assets\Script\global\model\TcpTool.cs" />
     <Compile Include="Assets\Script\global\model\ThreadTool.cs" />
+    <Compile Include="Assets\Script\global\model\UIHelper.cs" />
     <Compile Include="Assets\Script\global\SceneCtrl.cs" />
     <Compile Include="Assets\Script\obj\animal\Animal.cs" />
     <Compile Include="Assets\Script\obj\animal\persion\Guy.cs" />

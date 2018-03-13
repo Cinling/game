@@ -22,7 +22,6 @@ MapDB::~MapDB() {
 
 bool MapDB::Insert(int worldWidth, int worldHeight) {
     std::string config = this->GetConfigJsonStr(worldWidth, worldHeight);
-    std::cout << config << std::endl;
 
     SqliteTool *sqliteTool = SqliteTool::GetInstance();
     std::string sql = "INSERT INTO `" + MapDB::TABLE_NAME + "` (`" + MapDB::FIELD_INFO + "`, `" + MapDB::FIELD_CONFIG + "`) VALUES ('', '" + config + "')";
