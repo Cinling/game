@@ -1,3 +1,6 @@
 start_game=start game
 how_to_play=how to play
 about_game=about game
+new_game=new game
+load_game=load game
+back=back
