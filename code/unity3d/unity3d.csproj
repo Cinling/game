@@ -14,6 +14,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.3.1f1</UnityVersion>
@@ -306,7 +307,6 @@
     <Compile Include="Assets\Script\scene_main_menu\mono\MainCamera.cs" />
     <Compile Include="Assets\Script\scene_world\GameTime.cs" />
     <Compile Include="Assets\Script\scene_world\mono\CanvasGame.cs" />
-    <Compile Include="Assets\Script\scene_world\mono\CanvasGame_Menu.cs" />
     <Compile Include="Assets\Script\scene_world\mono\WorldCamera.cs" />
     <Compile Include="Assets\Script\scene_world\WorldMenu.cs" />
   </ItemGroup>

@@ -51,13 +51,6 @@ public class CanvasGame : MonoBehaviour {
         FpsInputEvent();
     }
 
-
-
-
-
-
-
-
     // 初始化数据
     private void InitData() {
         // 渲染帧和逻辑帧
@@ -91,11 +84,6 @@ public class CanvasGame : MonoBehaviour {
             ThreadTool.GetInstance().ReStartThread();
         }
     }
-
-
-
-
-
 
     // 显示fps
     private void StartFpsReflush() {

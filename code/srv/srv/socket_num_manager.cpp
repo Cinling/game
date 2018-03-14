@@ -17,7 +17,6 @@ std::string SocketNumManager::_10001(std::string data) {
     int worldWidth = SocketNumManager::GetInt(document, "worldWidth", 0);
     int worldLength = SocketNumManager::GetInt(document, "worldLength", 0);
 
-    World::GetInstance()->Init(worldWidth, worldLength);
     return "true";
 }
 

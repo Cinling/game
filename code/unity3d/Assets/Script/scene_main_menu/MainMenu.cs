@@ -57,7 +57,7 @@ public class MainMenu {
         UnityEngine.UI.Image pannel = goPannel.GetComponent<UnityEngine.UI.Image>();
         UIHelper.Pannel.SetSize(pannel, width, height);
 
-        UIHelper.Button.AddButton(goPannel, "ui/Button", Lang.Get("main.menu.start_game"), width - 200, height - 200, ChangeToStartGameMenuPannel);
+        UIHelper.Button.CreateButton(goPannel, "ui/Button", Lang.Get("main.menu.start_game"), width - 200, height - 200, ChangeToStartGameMenuPannel);
     }
 
     /// <summary>
@@ -78,13 +78,13 @@ public class MainMenu {
         UIHelper.Pannel.SetSize(pannel, width, height);
 
         // 新游戏的按钮
-        UIHelper.Button.AddButton(goPannel, "ui/Button", Lang.Get("main.menu.new_game"), width - 200, height - 200, CreateNewGame);
+        UIHelper.Button.CreateButton(goPannel, "ui/Button", Lang.Get("main.menu.new_game"), width - 200, height - 200, CreateNewGame);
 
         // 载入游戏的按钮
-        UIHelper.Button.AddButton(goPannel, "ui/Button", Lang.Get("main.menu.load_game"), width - 200, height - 250, OpenLoadGamePannel);
+        UIHelper.Button.CreateButton(goPannel, "ui/Button", Lang.Get("main.menu.load_game"), width - 200, height - 250, OpenLoadGamePannel);
 
         // 返回的按钮
-        UIHelper.Button.AddButton(goPannel, "ui/Button", Lang.Get("main.menu.back"), width - 200, height - 300, ChangeToMenuPannel);
+        UIHelper.Button.CreateButton(goPannel, "ui/Button", Lang.Get("main.menu.back"), width - 200, height - 300, ChangeToMenuPannel);
     }
 
     /// <summary>
@@ -115,10 +115,10 @@ public class MainMenu {
         float btnY = goLoadGamePannel.transform.position.y;
 
         // 载入按钮
-        UIHelper.Button.AddButton(goLoadGamePannel, "ui/Button", Lang.Get("main.menu.ok"), btnX, btnY - 180, CloseLoadGamePannel);
+        UIHelper.Button.CreateButton(goLoadGamePannel, "ui/Button", Lang.Get("main.menu.ok"), btnX, btnY - 180, CloseLoadGamePannel);
 
         // 关闭按钮
-        UIHelper.Button.AddButton(goLoadGamePannel, "ui/Button", Lang.Get("main.menu.close"), btnX, btnY - 220, CloseLoadGamePannel);
+        UIHelper.Button.CreateButton(goLoadGamePannel, "ui/Button", Lang.Get("main.menu.close"), btnX, btnY - 220, CloseLoadGamePannel);
     }
 
     /// <summary>

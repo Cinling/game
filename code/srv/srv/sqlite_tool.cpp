@@ -11,7 +11,7 @@ SqliteTool::SqliteTool(const char * db) {
     strcpy_s(this->db, len, db);
 
     char * dbName = new char[len + 8];
-    strcpy_s(dbName, len + 8, std::string(std::string(this->db) + ".sqlite").c_str());
+    strcpy_s(dbName, len + 8, std::string("save/"+std::string(this->db) + ".sqlite").c_str());
     sqlite3_open(dbName, &this->sqlite);
     delete dbName;
 }
@@ -22,8 +22,8 @@ SqliteTool * SqliteTool::GetInstance() {
     if (shareInstance == nullptr) {
 
         if (SqliteTool::db == nullptr) {
-            SqliteTool::db = new char[5];
-            strcpy_s(SqliteTool::db, 5, "auto");
+            SqliteTool::db = new char[9];
+            strcpy_s(SqliteTool::db, 9, "autosave");
         }
 
         shareInstance = new SqliteTool(SqliteTool::db);
