@@ -40,4 +40,11 @@ public class SceneCtrl {
         });
 
     }
+
+    /// <summary>
+    /// 切换到UI编辑的界面
+    /// </summary>
+    public void SwitchToUIMakeScene() {
+        SceneManager.LoadScene("UIMakeScene");
+    }
 }

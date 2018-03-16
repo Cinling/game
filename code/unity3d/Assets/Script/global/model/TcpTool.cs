@@ -93,13 +93,23 @@ public class TcpTool {
 
         string data = JsonUtility.ToJson(new JSONStruct.Map(worldWidth, worldLength));
         string sendStr = "10001|" + data;
-        
+
+        return TcpTool.Send(sendStr);
+    }
+
+    /// <summary>
+    /// 保存存档
+    /// </summary>
+    /// <param name="savesName">存档名称</param>
+    /// <returns></returns>
+    public static string _10002_Save(string savesName) {
+        string sendStr = "10002|" + savesName;
         return TcpTool.Send(sendStr);
     }
 }
 
-namespace JSONStruct{
-    class Map{
+namespace JSONStruct {
+    class Map {
         public int worldWidth;
         public int worldLength;
 

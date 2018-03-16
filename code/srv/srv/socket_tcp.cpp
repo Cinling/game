@@ -112,7 +112,7 @@ std::string SocketTcp::DoBySocketAction(std::string clientData) {
 
     switch (tcpNum) {
         case 10001:
-            retData = SocketNumManager::_10001(data);
+            retData = SocketNumManager::_10001_InitMap(data);
             break;
     }
 

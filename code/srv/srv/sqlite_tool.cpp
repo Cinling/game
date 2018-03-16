@@ -11,7 +11,7 @@ SqliteTool::SqliteTool(const char * db) {
     strcpy_s(this->db, len, db);
 
     char * dbName = new char[len + 8];
-    strcpy_s(dbName, len + 8, std::string("save/"+std::string(this->db) + ".sqlite").c_str());
+    strcpy_s(dbName, len + 8, std::string(std::string(this->db) + ".sqlite").c_str());
     sqlite3_open(dbName, &this->sqlite);
     delete dbName;
 }

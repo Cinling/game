@@ -75,6 +75,9 @@
     <ClCompile Include="socket_num_manager.cpp">
       <Filter>源文件\model\socket</Filter>
     </ClCompile>
+    <ClCompile Include="saves_manager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -211,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="socket_num_manager.h">
       <Filter>头文件\model\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="saves_manager.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

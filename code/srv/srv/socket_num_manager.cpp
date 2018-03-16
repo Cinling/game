@@ -1,6 +1,6 @@
 #include "socket_num_manager.h"
 
-std::string SocketNumManager::_10001(std::string data) {
+std::string SocketNumManager::_10001_InitMap(std::string data) {
     rapidjson::Document document;
     document.Parse(data.c_str());
 
@@ -18,6 +18,13 @@ std::string SocketNumManager::_10001(std::string data) {
     int worldLength = SocketNumManager::GetInt(document, "worldLength", 0);
 
     return "true";
+}
+
+std::string SocketNumManager::_10002_Save(std::string data) {
+    std::string savesName = data;
+
+    
+    return std::string();
 }
 
 int SocketNumManager::GetInt(rapidjson::Document &document, std::string key, int defaultValue) {

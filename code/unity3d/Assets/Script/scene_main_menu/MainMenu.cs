@@ -22,19 +22,20 @@ public class MainMenu {
     /// 初始化菜单
     /// </summary>
     public void Init() {
-        if (GameObject.Find("Canvas(Clone)") == null) {
+        if (GameObject.Find("Canvas") == null) {
             canvas = GameObject.Instantiate(Resources.Load<GameObject>("ui/Canvas"));
+            canvas.name = "Canvas";
         }
-        ChangeToMenuPannel();
+        ChangeToMenuPanel();
     }
 
     /// <summary>
     /// 删除最上层的Canvas
     /// </summary>
-    private void DeleteRootPannel() {
-        GameObject goPannel = GameObject.Find("Canvas(Clone)/Panel(Clone)");
-        if (goPannel != null) {
-            GameObject.Destroy(goPannel);
+    private void DeleteRootPanel() {
+        GameObject goPanel = GameObject.Find("Canvas/Panel");
+        if (goPanel != null) {
+            GameObject.Destroy(goPanel);
         }
     }
 
@@ -43,82 +44,106 @@ public class MainMenu {
     /// <summary>
     /// 创建菜单
     /// </summary>
-    private void ChangeToMenuPannel() {
-        DeleteRootPannel();
+    private void ChangeToMenuPanel() {
+        DeleteRootPanel();
 
         Rect rectCanvas = canvas.GetComponent<RectTransform>().rect;
         float width = rectCanvas.width;
         float height = rectCanvas.height;
 
-        // 创建 Pannel
-        GameObject goPannel = GameObject.Instantiate(Resources.Load<GameObject>("ui/Panel"));
-        goPannel.transform.SetParent(canvas.transform);
-        goPannel.transform.position = canvas.transform.position;
-        UnityEngine.UI.Image pannel = goPannel.GetComponent<UnityEngine.UI.Image>();
-        UIHelper.Pannel.SetSize(pannel, width, height);
+        GameObject goPanel = UIHelper.Panel.CreatePanel(canvas, "ui/Panel");
+        goPanel.name = "Panel";
 
-        UIHelper.Button.CreateButton(goPannel, "ui/Button", Lang.Get("main.menu.start_game"), width - 200, height - 200, ChangeToStartGameMenuPannel);
+        // 开始游戏的按钮
+        UIHelper.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.start_game"), width - 200, height - 200, ChangeToStartGameMenuPanel);
+
+        // 切换到UI调试界面的按钮
+        UIHelper.Button.CreateButton(goPanel, "ui/Button", "UI Testing Page", width - 200, height - 160, ChangeToUIMakeScene);
     }
 
     /// <summary>
     /// 初始化 【新建游戏】或【载入游戏】的界面
     /// </summary>
-    private void ChangeToStartGameMenuPannel() {
-        DeleteRootPannel();
+    private void ChangeToStartGameMenuPanel() {
+        DeleteRootPanel();
 
         Rect rectCanvas = canvas.GetComponent<RectTransform>().rect;
         float width = rectCanvas.width;
         float height = rectCanvas.height;
 
-        // 创建 Pannel
-        GameObject goPannel = GameObject.Instantiate(Resources.Load<GameObject>("ui/Panel"));
-        goPannel.transform.SetParent(canvas.transform);
-        goPannel.transform.position = canvas.transform.position;
-        UnityEngine.UI.Image pannel = goPannel.GetComponent<UnityEngine.UI.Image>();
-        UIHelper.Pannel.SetSize(pannel, width, height);
+        // 创建 Panel
+        GameObject goPanel = UIHelper.Panel.CreatePanel(canvas, "ui/Panel");
+        goPanel.name = "Panel";
 
         // 新游戏的按钮
-        UIHelper.Button.CreateButton(goPannel, "ui/Button", Lang.Get("main.menu.new_game"), width - 200, height - 200, CreateNewGame);
+        UIHelper.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.new_game"), width - 200, height - 200, CreateNewGame);
 
         // 载入游戏的按钮
-        UIHelper.Button.CreateButton(goPannel, "ui/Button", Lang.Get("main.menu.load_game"), width - 200, height - 250, OpenLoadGamePannel);
+        UIHelper.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.load_game"), width - 200, height - 250, OpenLoadGamePanel);
 
         // 返回的按钮
-        UIHelper.Button.CreateButton(goPannel, "ui/Button", Lang.Get("main.menu.back"), width - 200, height - 300, ChangeToMenuPannel);
+        UIHelper.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.back"), width - 200, height - 300, ChangeToMenuPanel);
+    }
+
+    /// <summary>
+    /// 切换到UI编辑的界面
+    /// </summary>
+    private void ChangeToUIMakeScene() {
+        SceneCtrl.GetInstance().SwitchToUIMakeScene();
     }
 
     /// <summary>
     /// 打开载入游戏存档的面板
     /// </summary>
-    private void OpenLoadGamePannel() {
+    private void OpenLoadGamePanel() {
 
-        // 防止多次打开载入存档的面板
-        if (GameObject.Find("Canvas(Clone)/Panel(Clone)/Panel(Clone)") != null) {
-            return;
-        }
+        //// 防止多次打开载入存档的面板
+        //if (GameObject.Find("Canvas/Panel/PanelLoadGame") != null) {
+        //    return;
+        //}
+
+        //// 获取父级元素
+        //GameObject goPanel = GameObject.Find("Canvas/Panel");
+        //if (goPanel == null) {
+        //    return;
+        //}
+
+        //// 创建 Panel
+        //GameObject goLoadGamePanel = UIHelper.Panel.CreatePanel(goPanel, "ui/Panel");
+        //goLoadGamePanel.name = "PanelLoadGame";
+        //UIHelper.Panel.SetSize(goLoadGamePanel, 400, 500);
+
+        //float panelX = goLoadGamePanel.transform.position.x;
+        //float panelY = goLoadGamePanel.transform.position.y;
+
+        //// 创建ScrollView
+        //GameObject goScrollView = UIHelper.ScrollView.CreateScrollView(goPanel, "ui/ScrollView", panelX, panelY + 25, 400, 450);
+        //goScrollView.name = "ScrollViewLoadGame";
+
+        //// 载入按钮
+        //UIHelper.Button.CreateButton(goLoadGamePanel, "ui/Button", Lang.Get("main.menu.ok"), panelX - 90, panelY - 220, LoadGame);
+
+        //// 关闭按钮
+        //UIHelper.Button.CreateButton(goLoadGamePanel, "ui/Button", Lang.Get("main.menu.close"), panelX + 90, panelY - 220, CloseLoadGamePanel);
+
+
+
+
 
         // 获取父级元素
-        GameObject goPannel = GameObject.Find("Canvas(Clone)/Panel(Clone)");
-        if (goPannel == null) {
+        GameObject goPanel = GameObject.Find("Canvas/Panel");
+        if (goPanel == null) {
             return;
         }
 
-        // 创建 Pannel
-        GameObject goLoadGamePannel = GameObject.Instantiate(Resources.Load<GameObject>("ui/Panel"));
-        goLoadGamePannel.transform.SetParent(goPannel.transform);
-        goLoadGamePannel.transform.position = goPannel.transform.position;
-        UnityEngine.UI.Image pannel = goLoadGamePannel.GetComponent<UnityEngine.UI.Image>();
-        UIHelper.Pannel.SetSize(pannel, 400, 500);
+        float panelX = goPanel.transform.position.x;
+        float panelY = goPanel.transform.position.y;
 
-
-        float btnX = goLoadGamePannel.transform.position.x;
-        float btnY = goLoadGamePannel.transform.position.y;
-
-        // 载入按钮
-        UIHelper.Button.CreateButton(goLoadGamePannel, "ui/Button", Lang.Get("main.menu.ok"), btnX, btnY - 180, CloseLoadGamePannel);
-
-        // 关闭按钮
-        UIHelper.Button.CreateButton(goLoadGamePannel, "ui/Button", Lang.Get("main.menu.close"), btnX, btnY - 220, CloseLoadGamePannel);
+        // 创建 ScrollView
+        UISelfCreate.ScrollView scrollView = new UISelfCreate.ScrollView("LoadSaveScrollView");
+        scrollView.transform.SetParent(goPanel.transform);
+        scrollView.SetPosition(panelX, panelY);
+        scrollView.SetSize(400, 200);
     }
 
     /// <summary>
@@ -141,10 +166,15 @@ public class MainMenu {
     /// <summary>
     /// 关闭载入游戏存档的面板
     /// </summary>
-    private void CloseLoadGamePannel() {
-        GameObject goLoadGamePannel = GameObject.Find("Canvas(Clone)/Panel(Clone)/Panel(Clone)");
-        if (goLoadGamePannel != null) {
-            GameObject.Destroy(goLoadGamePannel);
+    private void CloseLoadGamePanel() {
+        GameObject goLoadGamePanel = GameObject.Find("Canvas/Panel/PanelLoadGame");
+        if (goLoadGamePanel != null) {
+            GameObject.Destroy(goLoadGamePanel);
+        }
+
+        GameObject goLoadGameScrollView = GameObject.Find("Canvas/Panel/ScrollViewLoadGame");
+        if (goLoadGameScrollView != null) {
+            GameObject.Destroy(goLoadGameScrollView);
         }
     }
 }
