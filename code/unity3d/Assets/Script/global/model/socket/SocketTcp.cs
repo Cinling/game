@@ -5,8 +5,10 @@ using UnityEngine;
 using System.Threading;
 using System.IO;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
-public class TcpTool {
+public class SocketTcp {
 
     private static string host = "";
     private static int port = 0;
@@ -17,8 +19,8 @@ public class TcpTool {
     /// <param name="host"></param>
     /// <param name="port"></param>
     public static void Init(string host, int port) {
-        TcpTool.host = host;
-        TcpTool.port = port;
+        SocketTcp.host = host;
+        SocketTcp.port = port;
     }
 
     /// <summary>
@@ -82,40 +84,7 @@ public class TcpTool {
         tcpClient.Close();
         Debug.Log("END");
     }
-
-    /// <summary>
-    /// 初始化地图
-    /// </summary>
-    /// <param name="worldWidth">地图宽度</param>
-    /// <param name="worldLength">地图长度</param>
-    /// <returns></returns>
-    public static string _10001_InitMap(int worldWidth, int worldLength) {
-
-        string data = JsonUtility.ToJson(new JSONStruct.Map(worldWidth, worldLength));
-        string sendStr = "10001|" + data;
-
-        return TcpTool.Send(sendStr);
-    }
-
-    /// <summary>
-    /// 保存存档
-    /// </summary>
-    /// <param name="savesName">存档名称</param>
-    /// <returns></returns>
-    public static string _10002_Save(string savesName) {
-        string sendStr = "10002|" + savesName;
-        return TcpTool.Send(sendStr);
-    }
 }
 
-namespace JSONStruct {
-    class Map {
-        public int worldWidth;
-        public int worldLength;
 
-        public Map(int width, int height) {
-            this.worldWidth = width;
-            this.worldLength = height;
-        }
-    }
-}
+

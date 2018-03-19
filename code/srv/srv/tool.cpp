@@ -13,4 +13,6 @@ long long Tool::GetTimeSecond() {
     return time;
 }
 
-
+bool Tool::File::Rename(std::string oldDir, std::string newDir) {
+    return false;
+}

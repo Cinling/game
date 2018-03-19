@@ -34,7 +34,7 @@ public class SceneCtrl {
         threadTool.StopThread();
 
         threadTool.RunOnMainSceneMainThread(() => {
-            TcpTool.Init("127.0.0.1", 6000);
+            SocketTcp.Init("127.0.0.1", 6000);
             MainMenu.GetInstance().Init();
             return 0;
         });

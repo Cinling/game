@@ -1,7 +1,7 @@
 #pragma once
 
 #include "socket_num_manager.h"
-#include "tool.h";
+#include "tool.h"
 
 #include <winsock2.h>
 #include <thread>

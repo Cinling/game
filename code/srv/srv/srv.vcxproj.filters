@@ -78,6 +78,9 @@
     <ClCompile Include="saves_manager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="json.cpp">
+      <Filter>源文件\model\socket</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -217,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="saves_manager.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json.h">
+      <Filter>头文件\model\socket</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

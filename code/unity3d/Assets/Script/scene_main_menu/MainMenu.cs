@@ -15,7 +15,7 @@ public class MainMenu {
     GameObject canvas = null;
 
     private MainMenu() {
-       
+
     }
 
     /// <summary>
@@ -127,9 +127,6 @@ public class MainMenu {
         //UIHelper.Button.CreateButton(goLoadGamePanel, "ui/Button", Lang.Get("main.menu.close"), panelX + 90, panelY - 220, CloseLoadGamePanel);
 
 
-
-
-
         // 获取父级元素
         GameObject goPanel = GameObject.Find("Canvas/Panel");
         if (goPanel == null) {
@@ -144,13 +141,17 @@ public class MainMenu {
         scrollView.transform.SetParent(goPanel.transform);
         scrollView.SetPosition(panelX, panelY);
         scrollView.SetSize(400, 200);
+
+        // 获取存档列表
+        List<Json.Saves> savesList = SocketNum._10003_GetSavesList();
+
     }
 
     /// <summary>
     /// 创建新游戏
     /// </summary>
     private void CreateNewGame() {
-        string ret = TcpTool._10001_InitMap(500, 500);
+        string ret = SocketNum._10001_InitMap(500, 500);
         if (ret == "true") {
             SceneCtrl.GetInstance().SwitchToWorld();
         }

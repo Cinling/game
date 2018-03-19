@@ -1,7 +1,7 @@
 #pragma once
 
 #include "sqlite_tool.h"
-#include "db_manager.h";
+#include "db_manager.h"
 
 class World {
 private:

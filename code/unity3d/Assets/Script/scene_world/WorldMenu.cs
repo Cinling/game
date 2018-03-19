@@ -106,7 +106,7 @@ public class WorldMenu {
             return;
         }
 
-        string res = TcpTool._10002_Save(savesName);
+        string res = SocketNum._10002_Save(savesName);
     }
 
     /// <summary>

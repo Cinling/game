@@ -104,15 +104,26 @@ std::string SocketTcp::GetIp(sockaddr_in sin) {
 
 std::string SocketTcp::DoBySocketAction(std::string clientData) {
 
-    int cutIndex = clientData.find("|");
+    size_t cutIndex = clientData.find("|");
     int tcpNum = std::stoi(clientData.substr(0, cutIndex));
     std::string data = clientData.substr(cutIndex + 1);
 
     std::string retData = "";
 
+    SocketNumManager * socketNumManager = SocketNumManager::GetInstance();
+
     switch (tcpNum) {
         case 10001:
-            retData = SocketNumManager::_10001_InitMap(data);
+            retData = socketNumManager->_10001_InitMap(data);
+            break;
+        case 10002:
+            retData = socketNumManager->_10002_Save(data);
+            break;
+        case 10003:
+            retData = socketNumManager->_10003_GetSavesList(data);
+            break;
+        case 10004:
+            retData = socketNumManager->_10004_LoadGame(data);
             break;
     }
 
@@ -135,7 +146,7 @@ void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr) {
         retData = socketTcp->DoBySocketAction(std::string(socketTcp->UTF8ToGB2312(recvData)));
 
 #ifdef DEBUG
-        int time = Tool::GetTimeSecond();
+        long long time = Tool::GetTimeSecond();
         std::cout << "[recv " << time << "]:" << socketTcp->UTF8ToGB2312(recvData) << std::endl;
         std::cout << "[send " << time << "]:" << retData << std::endl;
 #endif
@@ -144,7 +155,8 @@ void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr) {
 
     // ·¢ËÍÊý¾Ý
     const char *sendData = socketTcp->GB2312ToUTF8(retData.c_str());
-    send(client, sendData, strlen(sendData), 0);
+    int sendLen = static_cast<int>(strlen(sendData));
+    send(client, sendData, sendLen, 0);
 
     closesocket(client);
 }
