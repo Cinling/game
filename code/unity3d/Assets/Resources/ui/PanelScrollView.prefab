@@ -140,7 +140,6 @@ GameObject:
   - component: {fileID: 224247891376455556}
   - component: {fileID: 222321858708495232}
   - component: {fileID: 114833607067792818}
-  - component: {fileID: 114412838534953450}
   m_Layer: 5
   m_Name: PanelScrollView
   m_TagString: Untagged
@@ -262,17 +261,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114412838534953450
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1873387576645296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ca0bba677019e048806b9d7707ef452, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114428777249741558
 MonoBehaviour:
   m_ObjectHideFlags: 1

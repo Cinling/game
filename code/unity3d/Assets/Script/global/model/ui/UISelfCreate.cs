@@ -28,12 +28,13 @@ namespace UISelfCreate {
         /// 子项目列表
         /// </summary>
         private List<ScrollView_Item> items;
+        private ScrollView_Item selectItem;
 
         /// <summary>
         /// 初始化 ScrollView
         /// </summary>
         public ScrollView() {
-            this.InitProp();
+            this.Init();
         }
 
         /// <summary>
@@ -41,16 +42,30 @@ namespace UISelfCreate {
         /// </summary>
         /// <param name="name">场景中控件的名字，用于GameObject.Find()时查找</param>
         public ScrollView(string name) {
-            this.InitProp();
+            this.Init();
             this.gameObject.name = name;
         }
 
         /// <summary>
         /// 初始化成员变量
         /// </summary>
-        private void InitProp() {
+        private void Init() {
+            // 初始化参数
             this.items = new List<ScrollView_Item>();
-            this.gameObject = GameObject.Instantiate(Resources.Load<GameObject>("ui/PanelScrollView"));
+            this.selectItem = null;
+            this.gameObject = Object.Instantiate(Resources.Load<GameObject>("ui/PanelScrollView"));
+
+            // 设置关闭按钮的事件
+            GameObject goCloseButton = GameObject.Find(this.gameObject.name + "/ButtonClose");
+            UnityEngine.UI.Button btn = goCloseButton.GetComponent<UnityEngine.UI.Button>();
+            btn.onClick.AddListener(ClosePanel);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ClosePanel() {
+            GameObject.Destroy(this.gameObject);
         }
 
         /// <summary>
@@ -108,7 +123,7 @@ namespace UISelfCreate {
         public bool AddItem(string text) {
             // 设置父级 GameObject
             GameObject goContent = this.GetContentGameObject();
-            ScrollView_Item item = new ScrollView_Item(text);
+            ScrollView_Item item = new ScrollView_Item(this, text);
             item.transform.SetParent(goContent.transform);
 
             // 设置大小
@@ -130,11 +145,23 @@ namespace UISelfCreate {
         }
 
         /// <summary>
+        /// 设置选中一个项目
+        /// </summary>
+        /// <param name="item"></param>
+        public void SelectItem(ScrollView_Item item) {
+            if (this.selectItem != null) {
+                this.selectItem.Unchecked();
+            }
+            this.selectItem = item;
+            this.selectItem.Checked();
+        }
+
+        /// <summary>
         /// 获取当前被选中的项目
         /// </summary>
         /// <returns></returns>
         public ScrollView_Item GetSelectItem() {
-            return null;
+            return this.selectItem;
         }
 
         /// <summary>
@@ -149,13 +176,40 @@ namespace UISelfCreate {
 
     public class ScrollView_Item : Base {
 
+        private ScrollView parentScrollView;
+
         /// <summary>
-        /// 需要显示的内容
+        /// 
         /// </summary>
+        /// <param name="parentScrollView"></param>
         /// <param name="text"></param>
-        public ScrollView_Item(string text) {
-            this.gameObject = GameObject.Instantiate(Resources.Load<GameObject>("ui/PanelScrollView_Item"));
+        public ScrollView_Item(ScrollView parentScrollView, string text) {
+            InitAction(parentScrollView);
             this.SetText(text);
+        }
+
+        /// <summary>
+        /// 初始化的一些操作（每个构造函数都必须执行该方法）
+        /// </summary>
+        private void InitAction(ScrollView parentScrollView) {
+            this.parentScrollView = parentScrollView;
+            InitProp();
+            this.SetOnClickAction(this.OnClick);
+        }
+
+        /// <summary>
+        /// 初始化成员不许初始化的成员变量
+        /// </summary>
+        private void InitProp() {
+            this.gameObject = GameObject.Instantiate(Resources.Load<GameObject>("ui/PanelScrollView_Item"));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SetOnClickAction(UnityEngine.Events.UnityAction call) {
+            UnityEngine.UI.Button button = this.gameObject.GetComponent<UnityEngine.UI.Button>();
+            button.onClick.AddListener(call);
         }
 
         /// <summary>
@@ -186,7 +240,30 @@ namespace UISelfCreate {
         /// <param name="text"></param>
         public void SetText(string text) {
             UnityEngine.UI.Text uiText = this.gameObject.GetComponentInChildren<UnityEngine.UI.Text>();
-            uiText.text = text;
+            if (uiText != null) {
+                uiText.text = text;
+            }
+        }
+
+        /// <summary>
+        /// 被点击时执行的方法
+        /// </summary>
+        private void OnClick() {
+            this.parentScrollView.SelectItem(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Checked() {
+            Debug.Log("选中：" + this.gameObject.GetComponentInChildren<UnityEngine.UI.Text>().text);
+        }
+
+        /// <summary>
+        /// 被取消选中的动作
+        /// </summary>
+        public void Unchecked() {
+            Debug.Log("取消：" + this.gameObject.GetComponentInChildren<UnityEngine.UI.Text>().text);
         }
     }
 }
