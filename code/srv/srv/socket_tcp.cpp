@@ -26,7 +26,6 @@ void SocketTcp::StartSocket() {
     SOCKET socketClient;
     sockaddr_in remoteAddr;
     int remoteAddrlen = sizeof(remoteAddr);
-    //char recvData[256];
     while (true) {
         if (this->isPause) {
             break;
@@ -145,18 +144,20 @@ void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr) {
 
         retData = socketTcp->DoBySocketAction(std::string(socketTcp->UTF8ToGB2312(recvData)));
 
-#ifdef DEBUG
-        long long time = Tool::GetTimeSecond();
-        std::cout << "[recv " << time << "]:" << socketTcp->UTF8ToGB2312(recvData) << std::endl;
-        std::cout << "[send " << time << "]:" << retData << std::endl;
-#endif
-
     }
 
     // ·¢ËÍÊý¾Ý
     const char *sendData = socketTcp->GB2312ToUTF8(retData.c_str());
     int sendLen = static_cast<int>(strlen(sendData));
+
+    send(client, std::to_string(sendLen).c_str(), 6, 0);
     send(client, sendData, sendLen, 0);
+
+#ifdef DEBUG
+    long long time = Tool::GetTimeSecond();
+    std::cout << "[recv " << time << "]:" << std::string(recvData) << std::endl;
+    std::cout << "[send " << time << "]:" << std::to_string(sendLen) + std::string(sendData) << std::endl;
+#endif
 
     closesocket(client);
 }

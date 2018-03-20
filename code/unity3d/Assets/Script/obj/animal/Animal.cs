@@ -141,7 +141,7 @@ public abstract class Animal : BaseRole {
     /// 被鼠標點擊需要執行噶方法
     /// </summary>
     override protected void OnClick() {
-
+        
     }
 
 }

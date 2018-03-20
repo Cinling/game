@@ -97,34 +97,10 @@ public class MainMenu {
     /// </summary>
     private void OpenLoadGamePanel() {
 
-        //// 防止多次打开载入存档的面板
-        //if (GameObject.Find("Canvas/Panel/PanelLoadGame") != null) {
-        //    return;
-        //}
-
-        //// 获取父级元素
-        //GameObject goPanel = GameObject.Find("Canvas/Panel");
-        //if (goPanel == null) {
-        //    return;
-        //}
-
-        //// 创建 Panel
-        //GameObject goLoadGamePanel = UIHelper.Panel.CreatePanel(goPanel, "ui/Panel");
-        //goLoadGamePanel.name = "PanelLoadGame";
-        //UIHelper.Panel.SetSize(goLoadGamePanel, 400, 500);
-
-        //float panelX = goLoadGamePanel.transform.position.x;
-        //float panelY = goLoadGamePanel.transform.position.y;
-
-        //// 创建ScrollView
-        //GameObject goScrollView = UIHelper.ScrollView.CreateScrollView(goPanel, "ui/ScrollView", panelX, panelY + 25, 400, 450);
-        //goScrollView.name = "ScrollViewLoadGame";
-
-        //// 载入按钮
-        //UIHelper.Button.CreateButton(goLoadGamePanel, "ui/Button", Lang.Get("main.menu.ok"), panelX - 90, panelY - 220, LoadGame);
-
-        //// 关闭按钮
-        //UIHelper.Button.CreateButton(goLoadGamePanel, "ui/Button", Lang.Get("main.menu.close"), panelX + 90, panelY - 220, CloseLoadGamePanel);
+        // 防止多次打开载入存档的面板
+        if (GameObject.Find("Canvas/Panel/LoadSaveScrollView") != null) {
+            return;
+        }
 
 
         // 获取父级元素
@@ -145,6 +121,9 @@ public class MainMenu {
         // 获取存档列表
         List<Json.Saves> savesList = SocketNum._10003_GetSavesList();
 
+        foreach (Json.Saves saves in savesList) {
+            scrollView.AddItem(saves.savesName);
+        }
     }
 
     /// <summary>

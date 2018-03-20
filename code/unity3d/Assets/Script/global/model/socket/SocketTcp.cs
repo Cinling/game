@@ -42,7 +42,8 @@ public class SocketTcp {
 
             try {
                 bw.Write(System.Text.Encoding.UTF8.GetBytes(send));
-                recv = System.Text.Encoding.UTF8.GetString(br.ReadBytes(100));
+                int len = int.Parse(System.Text.Encoding.UTF8.GetString(br.ReadBytes(6)));
+                recv = System.Text.Encoding.UTF8.GetString(br.ReadBytes(len));
             } catch (Exception e) {
                 Debug.LogError(e.StackTrace);
                 recv = "";

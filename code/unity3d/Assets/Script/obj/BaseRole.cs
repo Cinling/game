@@ -54,7 +54,7 @@ public abstract class BaseRole : MonoBehaviour {
     /// <summary>
     /// 當對象被鼠標點擊時觸發噶方法
     /// </summary>
-    private void OnMouseEnter() {
+    private void OnMouseUpAsButton() {
         OnClick();
     }
 

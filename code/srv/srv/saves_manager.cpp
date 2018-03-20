@@ -44,8 +44,16 @@ std::list<std::string> SavesManager::GetSavesList() {
 
     std::list<std::string> tmpData;
 
-    tmpData.push_back("aaa");
-    tmpData.push_back("bbb");
+    tmpData.push_back("1");
+    tmpData.push_back("2");
+    tmpData.push_back("3");
+    tmpData.push_back("4");
+    tmpData.push_back("5");
+    tmpData.push_back("6");
+    tmpData.push_back("7");
+    tmpData.push_back("8");
+    tmpData.push_back("9");
+    tmpData.push_back("10");
 
     return tmpData;
 }

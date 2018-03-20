@@ -135,17 +135,34 @@ namespace UIHelper {
 /// 自定义控件
 /// </summary>
 namespace UISelfCreate {
-    class ScrollView {
+    public class Base {
+        /// <summary>
+        /// gameObject 对象
+        /// </summary>
         public GameObject gameObject;
+        /// <summary>
+        /// gameObject 的 transform 对象
+        /// </summary>
         public Transform transform {
             get { return this.gameObject.transform; }
         }
+    }
+
+    /// <summary>
+    /// 滚动窗口
+    /// </summary>
+    public class ScrollView : Base {
+
+        /// <summary>
+        /// 子项目列表
+        /// </summary>
+        private List<ScrollView_Item> items;
 
         /// <summary>
         /// 初始化 ScrollView
         /// </summary>
         public ScrollView() {
-            this.gameObject = GameObject.Instantiate(Resources.Load<GameObject>("ui/PanelScrollView"));
+            this.InitProp();
         }
 
         /// <summary>
@@ -153,8 +170,16 @@ namespace UISelfCreate {
         /// </summary>
         /// <param name="name">场景中控件的名字，用于GameObject.Find()时查找</param>
         public ScrollView(string name) {
-            this.gameObject = GameObject.Instantiate(Resources.Load<GameObject>("ui/PanelScrollView"));
+            this.InitProp();
             this.gameObject.name = name;
+        }
+
+        /// <summary>
+        /// 初始化成员变量
+        /// </summary>
+        private void InitProp() {
+            this.items = new List<ScrollView_Item>();
+            this.gameObject = GameObject.Instantiate(Resources.Load<GameObject>("ui/PanelScrollView"));
         }
 
         /// <summary>
@@ -186,6 +211,111 @@ namespace UISelfCreate {
         /// <param name="y"></param>
         public void SetPosition(float x, float y) {
             this.transform.position = new Vector3(x, y, 0);
+        }
+
+        /// <summary>
+        /// 获取存放子项的 GameObject
+        /// </summary>
+        /// <returns></returns>
+        private GameObject GetContentGameObject() {
+            return GameObject.Find(gameObject.name + "/ScrollView/Viewport/Content");
+        }
+
+        /// <summary>
+        /// 自动设置 Content 的高度
+        /// </summary>
+        private void AutoSetContentHeight() {
+            float height = this.items.Count * 40 + 5;
+            RectTransform rectTransformContent = this.GetContentGameObject().GetComponent<RectTransform>();
+            rectTransformContent.sizeDelta = new Vector2(rectTransformContent.rect.width, height); ;
+        }
+
+        /// <summary>
+        /// 添加一条项目
+        /// </summary>
+        /// <param name="item"></param>
+        public bool AddItem(string text) {
+            // 设置父级 GameObject
+            GameObject goContent = this.GetContentGameObject();
+            ScrollView_Item item = new ScrollView_Item(text);
+            item.transform.SetParent(goContent.transform);
+
+            // 设置大小
+            Rect rectContent = goContent.GetComponent<RectTransform>().rect;
+            float contentWidth = rectContent.width;
+            item.SetSize(contentWidth - 5, 39);
+
+            // 设置位置
+            float positionY = -20 - this.items.Count * 40;
+            item.SetPosition(0, positionY);
+
+            // 添加到列表中
+            this.items.Add(item);
+
+            // 自动设置 Content 的高度
+            this.AutoSetContentHeight();
+
+            return true;
+        }
+
+        /// <summary>
+        /// 获取当前被选中的项目
+        /// </summary>
+        /// <returns></returns>
+        public ScrollView_Item GetSelectItem() {
+            return null;
+        }
+
+        /// <summary>
+        /// 删除一个项目
+        /// </summary>
+        /// <returns></returns>
+        public bool DeleteItem(ScrollView_Item item) {
+            return false;
+        }
+    }
+
+
+    public class ScrollView_Item : Base {
+
+        /// <summary>
+        /// 需要显示的内容
+        /// </summary>
+        /// <param name="text"></param>
+        public ScrollView_Item(string text) {
+            this.gameObject = GameObject.Instantiate(Resources.Load<GameObject>("ui/PanelScrollView_Item"));
+            this.SetText(text);
+        }
+
+        /// <summary>
+        /// 设置大小
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public void SetSize(float width, float height) {
+            // 设置大小
+            RectTransform rectTransformItem = this.gameObject.GetComponent<RectTransform>();
+            rectTransformItem.sizeDelta = new Vector2(width, height);
+        }
+
+        /// <summary>
+        /// 设置位置
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void SetPosition(float x, float y) {
+            Vector3 position = this.transform.position;
+            RectTransform rectTransform = this.gameObject.GetComponent<RectTransform>();
+            rectTransform.anchoredPosition = new Vector2(x, y);
+        }
+
+        /// <summary>
+        /// 设置 Text 显示内容
+        /// </summary>
+        /// <param name="text"></param>
+        public void SetText(string text) {
+            UnityEngine.UI.Text uiText = this.gameObject.GetComponentInChildren<UnityEngine.UI.Text>();
+            uiText.text = text;
         }
     }
 }
