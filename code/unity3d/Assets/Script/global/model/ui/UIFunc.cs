@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 纯方法帮助空间
 /// </summary>
-namespace UIHelper {
+namespace UIFunc {
     class Panel {
         /// <summary>
         /// 创建一个pannel GameObject

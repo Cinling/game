@@ -51,14 +51,14 @@ public class MainMenu {
         float width = rectCanvas.width;
         float height = rectCanvas.height;
 
-        GameObject goPanel = UIHelper.Panel.CreatePanel(canvas, "ui/Panel");
+        GameObject goPanel = UIFunc.Panel.CreatePanel(canvas, "ui/Panel");
         goPanel.name = "Panel";
 
         // 开始游戏的按钮
-        UIHelper.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.start_game"), width - 200, height - 200, ChangeToStartGameMenuPanel);
+        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.start_game"), width - 200, height - 200, ChangeToStartGameMenuPanel);
 
         // 切换到UI调试界面的按钮
-        UIHelper.Button.CreateButton(goPanel, "ui/Button", "UI Testing Page", width - 200, height - 160, ChangeToUIMakeScene);
+        UIFunc.Button.CreateButton(goPanel, "ui/Button", "UI Testing Page", width - 200, height - 160, ChangeToUIMakeScene);
     }
 
     /// <summary>
@@ -72,17 +72,17 @@ public class MainMenu {
         float height = rectCanvas.height;
 
         // 创建 Panel
-        GameObject goPanel = UIHelper.Panel.CreatePanel(canvas, "ui/Panel");
+        GameObject goPanel = UIFunc.Panel.CreatePanel(canvas, "ui/Panel");
         goPanel.name = "Panel";
 
         // 新游戏的按钮
-        UIHelper.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.new_game"), width - 200, height - 200, CreateNewGame);
+        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.new_game"), width - 200, height - 200, CreateNewGame);
 
         // 载入游戏的按钮
-        UIHelper.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.load_game"), width - 200, height - 250, OpenLoadGamePanel);
+        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.load_game"), width - 200, height - 250, OpenLoadGamePanel);
 
         // 返回的按钮
-        UIHelper.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.back"), width - 200, height - 300, ChangeToMenuPanel);
+        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.back"), width - 200, height - 300, ChangeToMenuPanel);
     }
 
     /// <summary>
@@ -113,7 +113,7 @@ public class MainMenu {
         float panelY = goPanel.transform.position.y;
 
         // 创建 ScrollView
-        UISelfCreate.ScrollView scrollView = new UISelfCreate.ScrollView("LoadSaveScrollView");
+        UIClass.ScrollView scrollView = new UIClass.ScrollView("LoadSaveScrollView");
         scrollView.transform.SetParent(goPanel.transform);
         scrollView.SetPosition(panelX, panelY);
         scrollView.SetSize(400, 200);
@@ -124,6 +124,25 @@ public class MainMenu {
         foreach (Json.Saves saves in savesList) {
             scrollView.AddItem(saves.savesName);
         }
+
+        // 添加功能性按钮
+        scrollView.AddButton("load", this.OpenLoadGamePanel_LoadButtonEvent);
+        scrollView.AddButton("delete", this.OpenLoadGamePanel_LoadButtonEvent);
+        scrollView.AddButton("close", this.OpenLoadGamePanel_LoadButtonEvent);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="scrollView"></param>
+    /// <returns></returns>
+    private bool OpenLoadGamePanel_LoadButtonEvent(UIClass.ScrollView scrollView) {
+        UIClass.ScrollView_Item item = scrollView.GetSelectItem();
+        if (item != null) {
+            string saves = item.GetText();
+            Debug.Log(saves);
+        }
+        return true;
     }
 
     /// <summary>

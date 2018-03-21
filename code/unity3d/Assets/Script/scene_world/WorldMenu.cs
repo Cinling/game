@@ -30,7 +30,7 @@ public class WorldMenu {
     public void InitWorldButtonEvent() {
         canvas = GameObject.Find("CanvasGame");
 
-        GameObject goBtnMenu = UIHelper.Button.CreateButton(canvas, "ui/Button", Lang.Get("world.menu.menu"), 90, 25, ShowMenuPannel);
+        GameObject goBtnMenu = UIFunc.Button.CreateButton(canvas, "ui/Button", Lang.Get("world.menu.menu"), 90, 25, ShowMenuPannel);
         goBtnMenu.name = "BtnMenu";
     }
 
@@ -43,17 +43,17 @@ public class WorldMenu {
             return;
         }
 
-        goPanel = UIHelper.Panel.CreatePanel(canvas, "ui/Panel");
+        goPanel = UIFunc.Panel.CreatePanel(canvas, "ui/Panel");
         goPanel.name = "PanelMenu";
-        UIHelper.Panel.SetSize(goPanel, 400, 600);
+        UIFunc.Panel.SetSize(goPanel, 400, 600);
         float pannelX = goPanel.transform.position.x;
         float pannelY = goPanel.transform.position.y;
 
-        UIHelper.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.save"), pannelX, pannelY + 200, OpenSavePannel);
+        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.save"), pannelX, pannelY + 200, OpenSavePannel);
 
-        UIHelper.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.back_to_menu"), pannelX, pannelY - 100, BackTuMenu);
-        UIHelper.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.exit"), pannelX, pannelY - 140, ExitGame);
-        UIHelper.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.close"), pannelX, pannelY - 200, CloseMenuPannel);
+        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.back_to_menu"), pannelX, pannelY - 100, BackTuMenu);
+        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.exit"), pannelX, pannelY - 140, ExitGame);
+        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.close"), pannelX, pannelY - 200, CloseMenuPannel);
     }
 
     /// <summary>
@@ -66,22 +66,22 @@ public class WorldMenu {
         }
 
         // 创建 Pannel
-        GameObject goLoadGamePannel = UIHelper.Panel.CreatePanel(canvas, "ui/Panel");
+        GameObject goLoadGamePannel = UIFunc.Panel.CreatePanel(canvas, "ui/Panel");
         goLoadGamePannel.name = "PanelSaveGame";
-        UIHelper.Panel.SetSize(goLoadGamePannel, 400, 500);
+        UIFunc.Panel.SetSize(goLoadGamePannel, 400, 500);
 
         float panelX = goLoadGamePannel.transform.position.x;
         float panelY = goLoadGamePannel.transform.position.y;
 
         // 输入框
-        GameObject goInputField =  UIHelper.InputField.CreateInputField(goLoadGamePannel, "ui/InputField", panelX, panelY - 180, 338);
+        GameObject goInputField =  UIFunc.InputField.CreateInputField(goLoadGamePannel, "ui/InputField", panelX, panelY - 180, 338);
         goInputField.name = "InputFieldSavesName";
 
         // 保存按钮
-        UIHelper.Button.CreateButton(goLoadGamePannel, "ui/Button", Lang.Get("world.menu.save"), panelX - 90, panelY - 220, Save);
+        UIFunc.Button.CreateButton(goLoadGamePannel, "ui/Button", Lang.Get("world.menu.save"), panelX - 90, panelY - 220, Save);
 
         // 关闭按钮
-        UIHelper.Button.CreateButton(goLoadGamePannel, "ui/Button", Lang.Get("world.menu.close"), panelX + 90, panelY - 220, CloseSaveGamePanel);
+        UIFunc.Button.CreateButton(goLoadGamePannel, "ui/Button", Lang.Get("world.menu.close"), panelX + 90, panelY - 220, CloseSaveGamePanel);
     }
 
     /// <summary>
@@ -99,7 +99,7 @@ public class WorldMenu {
     /// </summary>
     private void Save() {
         GameObject goInputField = GameObject.Find("CanvasGame/PanelSaveGame/InputFieldSavesName");
-        string savesName = UIHelper.InputField.GetValue(goInputField);
+        string savesName = UIFunc.InputField.GetValue(goInputField);
 
         if (savesName == "") {
             Debug.LogError("存档名不能为空");
