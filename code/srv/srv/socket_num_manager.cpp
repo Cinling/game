@@ -67,6 +67,7 @@ std::string SocketNumManager::_10003_GetSavesList(std::string data) {
 }
 
 std::string SocketNumManager::_10004_LoadGame(std::string data) {
-    return std::string();
+    std::string send = "true";
+    return send;
 }
 

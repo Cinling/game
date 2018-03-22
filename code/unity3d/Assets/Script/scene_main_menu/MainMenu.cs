@@ -126,23 +126,24 @@ public class MainMenu {
         }
 
         // 添加功能性按钮
-        scrollView.AddButton("load", this.OpenLoadGamePanel_LoadButtonEvent);
-        scrollView.AddButton("delete", this.OpenLoadGamePanel_LoadButtonEvent);
-        scrollView.AddButton("close", this.OpenLoadGamePanel_LoadButtonEvent);
+        scrollView.AddButton("load", this.LoadGame);
     }
 
     /// <summary>
-    /// 
+    /// 载入存档
     /// </summary>
     /// <param name="scrollView"></param>
     /// <returns></returns>
-    private bool OpenLoadGamePanel_LoadButtonEvent(UIClass.ScrollView scrollView) {
+    private bool LoadGame(UIClass.ScrollView scrollView) {
         UIClass.ScrollView_Item item = scrollView.GetSelectItem();
         if (item != null) {
-            string saves = item.GetText();
-            Debug.Log(saves);
+            string savesName = item.GetText();
+            if (SocketNum._10004_LoadGame(savesName)) {
+                SceneCtrl.GetInstance().SwitchToWorld();
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     /// <summary>
@@ -153,13 +154,6 @@ public class MainMenu {
         if (ret == "true") {
             SceneCtrl.GetInstance().SwitchToWorld();
         }
-    }
-
-    /// <summary>
-    /// 载入存档
-    /// </summary>
-    private void LoadGame() {
-
     }
 
     /// <summary>

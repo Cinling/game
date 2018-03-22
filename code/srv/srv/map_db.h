@@ -30,13 +30,13 @@ public:
 public:
     // 插入世界的数据
     // return [true 操作成功] [false 操作失败]
-    bool Insert(int worldWidth, int worldHeight);
+    bool Insert(int id, int worldWidth, int worldLength);
     // 获取上次插入的id
-    int GetLastInsertId();
+    int GetMaxId();
 
 private:
     // 把配置数据转为json字符串
-    std::string GetConfigJsonStr(int worldWidth, int worldHeight);
+    std::string GetConfigJsonStr(int worldWidth, int worldLength);
 };
 
 

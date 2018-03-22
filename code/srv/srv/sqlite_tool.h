@@ -1,5 +1,6 @@
 #pragma once
 
+#include "tool.h"
 #include "../lib/sqlite3/sqlite3.h"
 
 #include <list>
@@ -11,6 +12,7 @@ private:
     // 单例对象
     static SqliteTool * shareInstance;
     static char * db;
+    // db 数据库路径，如：saves/abc
     SqliteTool(const char * db);
 
     sqlite3 * sqlite;
@@ -21,6 +23,7 @@ public:
     db 数据库文件名
     */
     static SqliteTool * GetInstance();
+    // 切换数据库
     static void UseDB(const char * dbName);
     ~SqliteTool();
 
@@ -38,4 +41,9 @@ public:
     // tableName 表明
     // return 是否存在（true 存在）
     bool IsTableExists(const char * tableName);
+
+private:
+    // 【根据db名称创建对应的文件夹】
+    // dbName 数据库名称
+    bool CreateDirWithDBName(const char * dbName);
 };

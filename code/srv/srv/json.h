@@ -1,11 +1,10 @@
 #pragma once
 
+#include "tool.h"
+
 #include "../lib/rapidjson/document.h"
 #include "../lib/rapidjson/prettywriter.h"
 #include <string>
-
-// 把变量名转为字符串
-#define NameToStr(x) #x
 
 namespace Json {
     // 所有需要json包装的数据类型的基类

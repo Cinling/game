@@ -42,7 +42,8 @@ void World::Exit() {
 }
 
 void World::Save() {
-    
+    MapDB * mapDB = MapDB::GetInstance();
+    mapDB->Insert(id, worldWidth, worldLength);
 }
 
 void World::Load() {
@@ -67,7 +68,7 @@ void World::SqliteTest() {
     SqliteTool::UseDB("test");
     //dbManager->DBUpdate();
 
-    
+
 }
 
 void World::SaveWorld() {
@@ -76,6 +77,7 @@ void World::SaveWorld() {
 
 int World::CreateMap(int width, int length) {
     MapDB *mapDB = MapDB::GetInstance();
-    mapDB->Insert(this->worldWidth, this->worldLength);
-    return mapDB->GetLastInsertId();
+    int maxId = mapDB->GetMaxId();
+    mapDB->Insert(maxId, this->worldWidth, this->worldLength);
+    return maxId;
 }

@@ -232,15 +232,15 @@ namespace UIClass {
             float scrollViewHeight = scrollViewRectTransform.rect.height;
 
             int buttonNum = this.funcButtonList.Count;
-            float buttonWidth = scrollViewWidth / buttonNum - 5;
+            float buttonWidth = scrollViewWidth / buttonNum;
 
-            float zoreX = 0 - scrollViewWidth / 2 + 5;
+            float zoreX = 0 - scrollViewWidth / 2;
             float y = 0 - scrollViewHeight / 2 + 20;
 
             for (int i = 0; i < buttonNum; ++i) {
                 ScrollView_FuncButton button = this.funcButtonList[i];
                 button.SetPosition(zoreX + buttonWidth * i + buttonWidth / 2, y);
-                button.SetSize(buttonWidth, 30);
+                button.SetSize(buttonWidth - 5, 30);
             }
         }
 

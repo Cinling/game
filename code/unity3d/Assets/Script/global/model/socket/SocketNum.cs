@@ -33,18 +33,35 @@ public class SocketNum {
     /// </summary>
     /// <returns></returns>
     public static List<Json.Saves> _10003_GetSavesList() {
-        string sendStr = "10003|";
-        string jsonData = SocketTcp.Send(sendStr);
+        string send = "10003|";
+        string recv = SocketTcp.Send(send);
 
-        string[] savesJsonStrArray = jsonData.Split('|');
+        string[] savesJsonArray = recv.Split('|');
         List<Json.Saves> savesList = new List<Json.Saves>();
 
-        for (int i = 0; i < savesJsonStrArray.Length; ++i) {
-            Json.Saves saves = JsonUtility.FromJson<Json.Saves>(savesJsonStrArray[i]);
+        for (int i = 0; i < savesJsonArray.Length; ++i) {
+            Json.Saves saves = JsonUtility.FromJson<Json.Saves>(savesJsonArray[i]);
             savesList.Add(saves);
         }
 
         return savesList;
 
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="savesName"></param>
+    /// <returns></returns>
+    public static bool _10004_LoadGame(string savesName) {
+        string send = "10004|" + savesName;
+        string recv = SocketTcp.Send(send);
+        string[] retStrArr = recv.Split('|');
+
+        if (retStrArr[0] == "true") {
+            return true;
+        }
+        Debug.LogError("载入存档[savesName:" + savesName + "]错误，返回数据：" + recv);
+        return false;
     }
 }

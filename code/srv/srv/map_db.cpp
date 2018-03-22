@@ -20,17 +20,19 @@ MapDB * MapDB::GetInstance() {
 MapDB::~MapDB() {
 }
 
-bool MapDB::Insert(int worldWidth, int worldHeight) {
-    std::string config = this->GetConfigJsonStr(worldWidth, worldHeight);
+bool MapDB::Insert(int id, int worldWidth, int worldLength) {
+    std::string config = this->GetConfigJsonStr(worldWidth, worldLength);
 
     SqliteTool *sqliteTool = SqliteTool::GetInstance();
-    std::string sql = "INSERT INTO `" + MapDB::TABLE_NAME + "` (`" + MapDB::FIELD_INFO + "`, `" + MapDB::FIELD_CONFIG + "`) VALUES ('', '" + config + "')";
+    std::string sql = "INSERT INTO `" + MapDB::TABLE_NAME
+        + "` (`" + MapDB::FIELD_ID + "`, `" + MapDB::FIELD_INFO + "`, `" + MapDB::FIELD_CONFIG + "`)"
+        + "VALUES (" + std::to_string(id) + ", '', '" + config + "')";
     return sqliteTool->ExecSql(sql.c_str());
 }
 
-int MapDB::GetLastInsertId() {
+int MapDB::GetMaxId() {
     SqliteTool *sqliteTool = SqliteTool::GetInstance();
-    std::string sql = "SELECT `" + MapDB::FIELD_ID + "` FROM `" + MapDB::TABLE_NAME + "` ORDER BY `"+MapDB::FIELD_ID+"` DESC LIMIT 0,1";
+    std::string sql = "SELECT `" + MapDB::FIELD_ID + "` FROM `" + MapDB::TABLE_NAME + "` ORDER BY `" + MapDB::FIELD_ID + "` DESC LIMIT 0,1";
 
     std::list<std::map<std::string, std::string>> res = sqliteTool->Query(sql.c_str());
 
@@ -45,13 +47,13 @@ int MapDB::GetLastInsertId() {
 
 
 
-std::string MapDB::GetConfigJsonStr(int worldWidth, int worldHeight) {
+std::string MapDB::GetConfigJsonStr(int worldWidth, int worldLength) {
     // 创建JSON对象
     rapidjson::Document document;
     rapidjson::Value configValue;
     configValue.SetObject();
     configValue.AddMember("worldWidth", worldWidth, document.GetAllocator());
-    configValue.AddMember("worldHeight", worldHeight, document.GetAllocator());
+    configValue.AddMember("worldHeight", worldLength, document.GetAllocator());
 
     // 把JSON对象转为json串
     rapidjson::StringBuffer sb;

@@ -6,33 +6,55 @@ char * SqliteTool::db = nullptr;
 
 
 SqliteTool::SqliteTool(const char * db) {
-    size_t len = strlen(db) + 1;
-    this->db = new char[len];
-    strcpy_s(this->db, len, db);
+    if (Tool::File::IsDirExists(db)) {
+        this->CreateDirWithDBName(db);
+    }
 
-    char * dbName = new char[len + 8];
-    strcpy_s(dbName, len + 8, std::string(std::string(this->db) + ".sqlite").c_str());
+    // 设置内部使用的数据库名称
+    size_t tmpLen = strlen(db) + 1;
+    SqliteTool::db = new char[tmpLen];
+    strcpy_s(SqliteTool::db, tmpLen, db);
+
+    std::string tmpStr = std::string(SqliteTool::db) + std::string(".sqlite");
+    const char * dbPath = tmpStr.c_str();
+    size_t len = strlen(dbPath) + 1;
+
+    char * dbName = new char[len];
+    strcpy_s(dbName, len, dbPath);
     sqlite3_open(dbName, &this->sqlite);
+
     delete dbName;
+
 }
 
 
 SqliteTool * SqliteTool::GetInstance() {
 
-    if (shareInstance == nullptr) {
+    if (SqliteTool::shareInstance == nullptr) {
 
         if (SqliteTool::db == nullptr) {
             SqliteTool::db = new char[9];
             strcpy_s(SqliteTool::db, 9, "autosave");
         }
 
-        shareInstance = new SqliteTool(SqliteTool::db);
+        SqliteTool::shareInstance = new SqliteTool(SqliteTool::db);
     }
 
     return shareInstance;
 }
 
 void SqliteTool::UseDB(const char * dbName) {
+
+    if (SqliteTool::db != nullptr) {
+        delete SqliteTool::db;
+        SqliteTool::db = nullptr;
+    }
+
+    if (SqliteTool::shareInstance != nullptr) {
+        delete SqliteTool::shareInstance;
+        SqliteTool::shareInstance = nullptr;
+    }
+
     size_t len = strlen(dbName) + 1;
     SqliteTool::db = new char[len];
     strcpy_s(SqliteTool::db, len, dbName);
@@ -50,7 +72,7 @@ SqliteTool::~SqliteTool() {
         delete SqliteTool::db;
         SqliteTool::db = nullptr;
     }
-   
+
 
 }
 
@@ -100,6 +122,14 @@ bool SqliteTool::IsTableExists(const char * tableName) {
     if (res.size() == 0) {
         return false;
     }
+    return true;
+}
+
+bool SqliteTool::CreateDirWithDBName(const char * dbName) {
+    std::string dbStr = std::string(dbName);
+    int lastIndex = dbStr.find_last_of("/");
+    std::string dir = dbStr.substr(0, lastIndex);
+    Tool::File::CreateDir(dir);
     return true;
 }
 

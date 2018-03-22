@@ -5,7 +5,7 @@
 SavesManager * SavesManager::shareInstance = nullptr;
 
 
-const std::string SavesManager::SAVES_PATH = "saves";
+const std::string SavesManager::SAVES_PATH = "saves/";
 const std::string SavesManager::TEMPORARY_SAVES = "tmp_save";
 
 
@@ -24,11 +24,11 @@ SavesManager::~SavesManager() {
 }
 
 bool SavesManager::Save(std::string savesName) {
-    SqliteTool * sqlite = SqliteTool::GetInstance();
-    sqlite->UseDB((SavesManager::SAVES_PATH + "/" + savesName).c_str());
+
+    SqliteTool::UseDB((SavesManager::SAVES_PATH + savesName).c_str());
 
     DBManager * db = DBManager::GetInstance();
-    if (db->DBUpdate()) {
+    if (!db->DBUpdate()) {
         return false;
     }
 
@@ -37,7 +37,7 @@ bool SavesManager::Save(std::string savesName) {
         return false;
     }
 
-    return false;
+    return true;
 }
 
 std::list<std::string> SavesManager::GetSavesList() {
@@ -64,12 +64,13 @@ bool SavesManager::Load(std::string savesName) {
 
 bool SavesManager::SaveWorld() {
     World * world = World::GetInstance();
-    return false;
+    world->Save();
+    return true;
 }
 
 bool SavesManager::BackupTemporarySaves(std::string savesName) {
-    std::string oldPath = SavesManager::SAVES_PATH + "/" + savesName;
-    std::string newPath = SavesManager::SAVES_PATH + "/" + SavesManager::TEMPORARY_SAVES;
+    std::string oldPath = SavesManager::SAVES_PATH + savesName;
+    std::string newPath = SavesManager::SAVES_PATH + SavesManager::TEMPORARY_SAVES;
 
     return Tool::File::Rename(oldPath, newPath);
 }
