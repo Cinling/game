@@ -51,11 +51,11 @@ std::string SocketNumManager::_10002_Save(std::string data) {
 
 std::string SocketNumManager::_10003_GetSavesList(std::string data) {
     SavesManager *savesManager = SavesManager::GetInstance();
-    std::list<std::string> savesList = savesManager->GetSavesList();
+    std::vector<std::string> savesList = savesManager->GetSavesList();
 
     std::string retStr = "";
 
-    for (std::list<std::string>::iterator it = savesList.begin(); it != savesList.end(); ++it) {
+    for (std::vector<std::string>::iterator it = savesList.begin(); it != savesList.end(); ++it) {
         if (retStr != "") {
             retStr += "|";
         }

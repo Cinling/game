@@ -40,22 +40,17 @@ bool SavesManager::Save(std::string savesName) {
     return true;
 }
 
-std::list<std::string> SavesManager::GetSavesList() {
+std::vector<std::string> SavesManager::GetSavesList() {
 
-    std::list<std::string> tmpData;
+    std::vector<std::string> filesNameVec = Tool::File::GetChildFiles(SavesManager::SAVES_PATH);
+    std::vector<std::string> retVec;
 
-    tmpData.push_back("1");
-    tmpData.push_back("2");
-    tmpData.push_back("3");
-    tmpData.push_back("4");
-    tmpData.push_back("5");
-    tmpData.push_back("6");
-    tmpData.push_back("7");
-    tmpData.push_back("8");
-    tmpData.push_back("9");
-    tmpData.push_back("10");
+    for (std::vector<std::string>::iterator it = filesNameVec.begin(); it != filesNameVec.end(); ++it) {
+        size_t lastIndex = it->find_last_of(".");
+        retVec.push_back(it->substr(0, lastIndex));
+    }
 
-    return tmpData;
+    return retVec;
 }
 
 bool SavesManager::Load(std::string savesName) {
@@ -80,5 +75,11 @@ bool SavesManager::DeleteTemporarySaves() {
 }
 
 bool SavesManager::RecoveryTemporarySaves(std::string savesName) {
+    return false;
+}
+
+bool SavesManager::IsSavesExists(std::string savesName) {
+    std::vector<std::string> savesNameVec = SavesManager::GetSavesList();
+
     return false;
 }

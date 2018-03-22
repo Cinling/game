@@ -2,6 +2,7 @@
 
 #include "db_manager.h"
 #include "world.h"
+#include "tool.h"
 
 class SavesManager {
 private:
@@ -25,7 +26,7 @@ public:
     // 获取存档名字列表
     // 获取存档列表
     // 存档名称的列表
-    std::list<std::string> GetSavesList();
+    std::vector<std::string> GetSavesList();
 
     // 载入游戏
     // savesName 存档名称
@@ -41,15 +42,16 @@ private:
     // savesName 存档名称
     // return true [备份成功]，false [备份失败] 
     bool BackupTemporarySaves(std::string savesName);
-
     // 【删除临时存档】
     // return true [删除成功]，false [删除失败] 
     bool DeleteTemporarySaves();
-
     // 【恢复存档，存档失败时调用】
     // 实际上是把名字改回原来的名字
     // savesName 存档名称
     // return true [恢复成功]，false [恢复失败] 
     bool RecoveryTemporarySaves(std::string savesName);
+
+    // 判断存档是否存在
+    bool IsSavesExists(std::string savesName);
 };
 

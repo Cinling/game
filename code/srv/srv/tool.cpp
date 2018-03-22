@@ -45,3 +45,33 @@ bool Tool::File::IsDirExists(std::string folder) {
     }
     return true;
 }
+
+std::vector<std::string> Tool::File::GetChildFiles(std::string folder) {
+    std::vector<std::string> childFiles;
+
+    // 文件句柄
+    long long hFile = 0;
+    struct _finddata_t fileInfo;
+    std::string pathName;
+
+    // 判断文件是否
+    hFile = _findfirst(pathName.assign(folder).append("*").c_str(), &fileInfo);
+    if (hFile == -1) {
+        return std::vector<std::string>();
+    }
+
+    // 遍历每个文件
+    do {
+        std::string fileName = fileInfo.name;
+        if (fileName == "." || fileName == "..") {
+            continue;
+        }
+        childFiles.push_back(fileName);
+    } while (_findnext(hFile, &fileInfo) == 0);
+
+    return childFiles;
+}
+
+bool Tool::File::DeleteFile(std::string fileName) {
+    return false;
+}
