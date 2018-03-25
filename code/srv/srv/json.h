@@ -47,7 +47,19 @@ namespace Json {
         std::string GetSavesName();
     };
 
-    
+    class Map : public Json::Base {
+    private:
+        float width;
+        float length;
+    public:
+        Map(float width, float length);
+
+    public:
+        // 通过 Base 继承
+        virtual std::string ToJsonStr() override;
+    };
+
+
     /*##############################################################
         json解析，json格式化，获取json对象中的值相关的方法
     ##############################################################*/

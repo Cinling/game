@@ -42,7 +42,6 @@ public class ThreadTool {
 
 
     /// <summary>
-    /// 2017-11-20 10:45:11
     /// 开启一个线程
     /// </summary>
     /// <param name="tag">线程号</param>
@@ -97,8 +96,6 @@ public class ThreadTool {
 
         return true;
     }
-
-
     /// <summary>
     /// 重启线程
     /// </summary>
@@ -120,8 +117,6 @@ public class ThreadTool {
 
         return true;
     }
-
-
     /// <summary>
     /// 停止线程
     /// </summary>
@@ -146,31 +141,6 @@ public class ThreadTool {
 
 
     /// <summary>
-    /// 需要在 世界場景 主線程 中運行的 lambda 隊列
-    /// </summary>
-    private Queue<Func<Int16>> runOnWorldSceneMainThreadLambdaQueue = new Queue<Func<short>>();
-    /// <summary>
-    /// 添加一個需要在 世界場景 主線程 中運行的 lambda
-    /// </summary>
-    /// <param name="lambda">需要在 世界場景 主線程 中運行的 lambda</param>
-    public void RunOnWorldSceneMainThread(Func<Int16> lambda) {
-        runOnWorldSceneMainThreadLambdaQueue.Enqueue(lambda);
-    }
-    /// <summary>
-    /// 運行設置好的lambda
-    /// </summary>
-    /// <returns>true：運行了一個lambda， false：沒有需要執行的隊列</returns>
-    public bool MainThread_RunOnWorldSceneLambda() {
-
-        if (runOnWorldSceneMainThreadLambdaQueue.Count > 0) {
-            Func<Int16> lambad = runOnWorldSceneMainThreadLambdaQueue.Dequeue();
-            lambad();
-            return true;
-        }
-        return false;
-    }
-
-    /// <summary>
     /// 需要在 主場景 主線程 中運行的 lambda 隊列
     /// </summary>
     private Queue<Func<Int16>> runOnMainSceneMainThreadLambadQueue = new Queue<Func<short>>();
@@ -189,6 +159,31 @@ public class ThreadTool {
 
         if (runOnMainSceneMainThreadLambadQueue.Count > 0) {
             Func<Int16> lambad = runOnMainSceneMainThreadLambadQueue.Dequeue();
+            lambad();
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// 需要在 世界場景 主線程 中運行的 lambda 隊列
+    /// </summary>
+    private Queue<Func<Int16>> runOnWorldSceneMainThreadLambdaQueue = new Queue<Func<short>>();
+    /// <summary>
+    /// 添加一個需要在 世界場景 主線程 中運行的 lambda
+    /// </summary>
+    /// <param name="lambda">需要在 世界場景 主線程 中運行的 lambda</param>
+    public void RunOnWorldSceneMainThread(Func<Int16> lambda) {
+        runOnWorldSceneMainThreadLambdaQueue.Enqueue(lambda);
+    }
+    /// <summary>
+    /// 運行設置好的lambda
+    /// </summary>
+    /// <returns>true：運行了一個lambda， false：沒有需要執行的隊列</returns>
+    public bool MainThread_RunOnWorldSceneLambda() {
+
+        if (runOnWorldSceneMainThreadLambdaQueue.Count > 0) {
+            Func<Int16> lambad = runOnWorldSceneMainThreadLambdaQueue.Dequeue();
             lambad();
             return true;
         }

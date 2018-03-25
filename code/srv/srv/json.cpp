@@ -78,3 +78,21 @@ std::string Json::GetStdString(rapidjson::Document & document, std::string key, 
 
     return retString;
 }
+
+Json::Map::Map(float width, float height) {
+    this->width = width;
+    this->length = height;
+}
+
+std::string Json::Map::ToJsonStr() {
+    using namespace rapidjson;
+
+    Document document;
+    Document::AllocatorType& allocator = document.GetAllocator();
+    document.SetObject();
+
+    document.AddMember(Value(NameToStr(width), allocator), Value(this->width), allocator);
+    document.AddMember(Value(NameToStr(length), allocator), Value(this->length), allocator);
+
+    return Json::Encode(document);
+}

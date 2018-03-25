@@ -7,12 +7,12 @@ namespace Json {
     /// 地图结构化
     /// </summary>
     public class Map {
-        public int worldWidth;
-        public int worldLength;
+        public int width;
+        public int length;
 
         public Map(int width, int height) {
-            this.worldWidth = width;
-            this.worldLength = height;
+            this.width = width;
+            this.length = height;
         }
     }
 

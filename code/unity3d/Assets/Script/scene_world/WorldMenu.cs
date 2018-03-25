@@ -33,7 +33,6 @@ public class WorldMenu {
         GameObject goBtnMenu = UIFunc.Button.CreateButton(canvas, "ui/Button", Lang.Get("world.menu.menu"), 90, 25, ShowMenuPannel);
         goBtnMenu.name = "BtnMenu";
     }
-
     /// <summary>
     /// 打开菜单面板
     /// </summary>
@@ -55,7 +54,6 @@ public class WorldMenu {
         UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.exit"), pannelX, pannelY - 140, ExitGame);
         UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.close"), pannelX, pannelY - 200, CloseMenuPannel);
     }
-
     /// <summary>
     /// 打开保存存档的面板
     /// </summary>
@@ -83,7 +81,6 @@ public class WorldMenu {
         // 关闭按钮
         UIFunc.Button.CreateButton(goLoadGamePannel, "ui/Button", Lang.Get("world.menu.close"), panelX + 90, panelY - 220, CloseSaveGamePanel);
     }
-
     /// <summary>
     /// 关闭保存的面板
     /// </summary>
@@ -93,7 +90,6 @@ public class WorldMenu {
             GameObject.Destroy(goSaveGamePanel);
         }
     }
-
     /// <summary>
     /// 保存游戏（存档）
     /// </summary>
@@ -108,7 +104,6 @@ public class WorldMenu {
 
         string res = SocketNum._10002_Save(savesName);
     }
-
     /// <summary>
     /// 关闭菜单面板
     /// </summary>
@@ -118,18 +113,24 @@ public class WorldMenu {
             GameObject.Destroy(goPanel);
         }
     }
-
     /// <summary>
     /// 返回到主页面(切换场景)
     /// </summary>
     private void BackTuMenu() {
         SceneCtrl.GetInstance().SwitchToMain();
     }
-
     /// <summary>
     /// 关闭游戏
     /// </summary>
     private void ExitGame() {
+
+    }
+
+
+    /// <summary>
+    /// 获取地图数据，初始化地图
+    /// </summary>
+    public void InitMap() {
 
     }
 }

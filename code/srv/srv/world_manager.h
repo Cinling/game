@@ -2,6 +2,7 @@
 
 #include "sqlite_tool.h"
 #include "db_manager.h"
+#include "json.h"
 
 class World {
 private:
@@ -11,34 +12,37 @@ private:
     // 当前地图id
     int id;
     // 世界宽度
-    int worldWidth;
+    int width;
     // 世界长度
-    int worldLength;
+    int length;
 
 public:
     static World * GetInstance();
     ~World();
 
     // 初始化世界（首次进入游戏，创建世界）
-    void Init(int width, int length);
+    bool InitMap(int width, int length);
 
     // 开始游戏
-    void Start();
+    bool Start();
 
     // 暂停游戏
-    void Pause();
+    bool Pause();
 
     // 继续被暂停的游戏
-    void Resume();
+    bool Resume();
 
     // 退出游戏（关闭服务端）
-    void Exit();
+    bool Exit();
 
     // 保存游戏数据
-    void Save();
+    bool Save();
 
     // 加载游戏数据
-    void Load();
+    bool Load();
+
+    // 获取地图数据
+    Json::Map GetMapInfo();
 
     // sqlite 测试方法
     void SqliteTest();

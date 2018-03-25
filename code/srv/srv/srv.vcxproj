@@ -117,15 +117,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\lib\sqlite3\sqlite3.c" />
+    <ClCompile Include="base_role.cpp" />
     <ClCompile Include="db_manager.cpp" />
     <ClCompile Include="json.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="role_ctrl.cpp" />
     <ClCompile Include="saves_manager.cpp" />
     <ClCompile Include="socket_num_manager.cpp" />
     <ClCompile Include="socket_tcp.cpp" />
     <ClCompile Include="sqlite_tool.cpp" />
     <ClCompile Include="tool.cpp" />
-    <ClCompile Include="world.cpp" />
+    <ClCompile Include="world_manager.cpp" />
     <ClCompile Include="map_db.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -166,15 +168,17 @@
     <ClInclude Include="..\lib\rapidjson\stringbuffer.h" />
     <ClInclude Include="..\lib\rapidjson\writer.h" />
     <ClInclude Include="..\lib\sqlite3\sqlite3.h" />
+    <ClInclude Include="base_role.h" />
     <ClInclude Include="db_manager.h" />
     <ClInclude Include="json.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="role_ctrl.h" />
     <ClInclude Include="saves_manager.h" />
     <ClInclude Include="socket_num_manager.h" />
     <ClInclude Include="socket_tcp.h" />
     <ClInclude Include="sqlite_tool.h" />
     <ClInclude Include="tool.h" />
-    <ClInclude Include="world.h" />
+    <ClInclude Include="world_manager.h" />
     <ClInclude Include="map_db.h" />
   </ItemGroup>
   <ItemGroup>

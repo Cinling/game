@@ -7,12 +7,12 @@ public class SocketNum {
     /// <summary>
     /// 初始化地图
     /// </summary>
-    /// <param name="worldWidth">地图宽度</param>
-    /// <param name="worldLength">地图长度</param>
+    /// <param name="width">地图宽度</param>
+    /// <param name="length">地图长度</param>
     /// <returns></returns>
-    public static string _10001_InitMap(int worldWidth, int worldLength) {
+    public static string _10001_InitMap(int width, int length) {
 
-        string data = JsonUtility.ToJson(new Json.Map(worldWidth, worldLength));
+        string data = JsonUtility.ToJson(new Json.Map(width, length));
         string sendStr = "10001|" + data;
 
         return SocketTcp.Send(sendStr);

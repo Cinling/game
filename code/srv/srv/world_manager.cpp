@@ -22,31 +22,41 @@ World::~World() {
     }
 }
 
-void World::Init(int width, int length) {
-    this->worldWidth = width;
-    this->worldLength = length;
-    this->id = this->CreateMap(this->worldWidth, this->worldLength);
+bool World::InitMap(int width, int length) {
+    this->width = width;
+    this->length = length;
+    return true;
 }
 
-void World::Start() {
+bool World::Start() {
     this->Load();
+    return false;
 }
 
-void World::Pause() {
+bool World::Pause() {
+    return false;
 }
 
-void World::Resume() {
+bool World::Resume() {
+    return false;
 }
 
-void World::Exit() {
+bool World::Exit() {
+    return false;
 }
 
-void World::Save() {
+bool World::Save() {
     MapDB * mapDB = MapDB::GetInstance();
-    mapDB->Insert(id, worldWidth, worldLength);
+    mapDB->Insert(id, width, length);
+    return false;
 }
 
-void World::Load() {
+bool World::Load() {
+    return false;
+}
+
+Json::Map World::GetMapInfo() {
+    return Json::Map(this->width, this->length);
 }
 
 void World::SqliteTest() {
@@ -78,6 +88,6 @@ void World::SaveWorld() {
 int World::CreateMap(int width, int length) {
     MapDB *mapDB = MapDB::GetInstance();
     int maxId = mapDB->GetMaxId();
-    mapDB->Insert(maxId, this->worldWidth, this->worldLength);
+    mapDB->Insert(maxId, this->width, this->length);
     return maxId;
 }
