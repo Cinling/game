@@ -69,6 +69,16 @@ int Json::GetInt(rapidjson::Document & document, std::string key, int defaultVal
     return retInt;
 }
 
+float Json::GetFloat(rapidjson::Document & document, std::string key, float defaultValue) {
+    float retFloat = defaultValue;
+    rapidjson::Value::MemberIterator mt = document.FindMember(key.c_str());
+    if (mt->value.IsInt()) {
+        retFloat = mt->value.GetFloat();
+    }
+
+    return retFloat;
+}
+
 std::string Json::GetStdString(rapidjson::Document & document, std::string key, std::string defaultValue) {
     std::string retString = defaultValue;
     rapidjson::Value::MemberIterator mt = document.FindMember(key.c_str());

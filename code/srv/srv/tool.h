@@ -41,4 +41,15 @@ namespace Tool {
         // return [true 文件存在] [false 文件不存在]
         std::vector<std::string> GetChildFiles(std::string folder);
     }
+
+    namespace Struct {
+        class Vector3 {
+        public:
+            float x;
+            float y;
+            float z;
+            
+            Vector3(float x, float y, float z);
+        };
+    }
 }

@@ -75,3 +75,9 @@ std::vector<std::string> Tool::File::GetChildFiles(std::string folder) {
 bool Tool::File::DeleteFile(std::string fileName) {
     return false;
 }
+
+Tool::Struct::Vector3::Vector3(float x, float y, float z) {
+    this->x = x;
+    this->y = y;
+    this->z = z;
+}

@@ -81,6 +81,9 @@
     <ClCompile Include="role_ctrl.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="animal.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="role_ctrl.h">
       <Filter>头文件\game</Filter>
+    </ClInclude>
+    <ClInclude Include="animal.h">
+      <Filter>头文件\game\role\animal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

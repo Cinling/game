@@ -1,4 +1,4 @@
-#include "world.h"
+#include "world_manager.h"
 
 
 
@@ -22,9 +22,13 @@ World::~World() {
     }
 }
 
-bool World::InitMap(int width, int length) {
+bool World::InitMap(float width, float length) {
     this->width = width;
     this->length = length;
+    RoleCtrl * roleCtrl = RoleCtrl::GetInstance();
+    Tool::Struct::Vector3 * position = new Tool::Struct::Vector3(1, 2, 3);
+    Animal * role = roleCtrl->CreateRole<Animal>(position);
+    
     return true;
 }
 
@@ -47,7 +51,7 @@ bool World::Exit() {
 
 bool World::Save() {
     MapDB * mapDB = MapDB::GetInstance();
-    mapDB->Insert(id, width, length);
+    mapDB->Insert(id, (int)width, (int)length);
     return false;
 }
 
@@ -88,6 +92,6 @@ void World::SaveWorld() {
 int World::CreateMap(int width, int length) {
     MapDB *mapDB = MapDB::GetInstance();
     int maxId = mapDB->GetMaxId();
-    mapDB->Insert(maxId, this->width, this->length);
+    mapDB->Insert(maxId, (int)this->width, (int)this->length);
     return maxId;
 }

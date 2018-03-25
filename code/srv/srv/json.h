@@ -73,6 +73,8 @@ namespace Json {
 
     // 获取对象中的int值
     int GetInt(rapidjson::Document &document, std::string key, int defaultValue);
+    // 获取对象中的float值
+    float GetFloat(rapidjson::Document &document, std::string key, float defaultValue);
     // 获取对象中的string值
     std::string GetStdString(rapidjson::Document &document, std::string key, std::string defaultValue);
 }

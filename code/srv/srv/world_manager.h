@@ -2,6 +2,7 @@
 
 #include "sqlite_tool.h"
 #include "db_manager.h"
+#include "role_ctrl.h"
 #include "json.h"
 
 class World {
@@ -12,16 +13,16 @@ private:
     // 当前地图id
     int id;
     // 世界宽度
-    int width;
+    float width;
     // 世界长度
-    int length;
+    float length;
 
 public:
     static World * GetInstance();
     ~World();
 
     // 初始化世界（首次进入游戏，创建世界）
-    bool InitMap(int width, int length);
+    bool InitMap(float width, float length);
 
     // 开始游戏
     bool Start();

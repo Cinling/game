@@ -30,8 +30,8 @@ std::string SocketNumManager::_10001_InitMap(std::string data) {
         return "false";
     }
 
-    float width = Json::GetInt(document, "width", 0);
-    float length = Json::GetInt(document, "length", 0);
+    float width = Json::GetFloat(document, "width", 0);
+    float length = Json::GetFloat(document, "length", 0);
 
     // 初始化游戏世界的数据
     World * world = World::GetInstance();
