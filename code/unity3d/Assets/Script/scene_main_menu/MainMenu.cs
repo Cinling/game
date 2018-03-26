@@ -150,7 +150,7 @@ public class MainMenu {
     /// 创建新游戏
     /// </summary>
     private void CreateNewGame() {
-        string ret = SocketNum._10001_InitMap(500, 500);
+        string ret = SocketNum._10001_InitMap(500f, 500f, 100f);
         if (ret == "true") {
             SceneCtrl.GetInstance().SwitchToWorld();
         }

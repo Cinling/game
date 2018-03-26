@@ -10,9 +10,9 @@ public class SocketNum {
     /// <param name="width">地图宽度</param>
     /// <param name="length">地图长度</param>
     /// <returns></returns>
-    public static string _10001_InitMap(int width, int length) {
+    public static string _10001_InitMap(float width, float length, float height) {
 
-        string data = JsonUtility.ToJson(new Json.Map(width, length));
+        string data = JsonUtility.ToJson(new Json.Map(width, length, height));
         string sendStr = "10001|" + data;
 
         return SocketTcp.Send(sendStr);
@@ -49,7 +49,7 @@ public class SocketNum {
     }
 
     /// <summary>
-    /// 
+    /// 载入游戏
     /// </summary>
     /// <param name="savesName"></param>
     /// <returns></returns>
@@ -63,5 +63,16 @@ public class SocketNum {
         }
         Debug.LogError("载入存档[savesName:" + savesName + "]错误，返回数据：" + recv);
         return false;
+    }
+
+    /// <summary>
+    /// 获取地图的数据
+    /// </summary>
+    /// <returns></returns>
+    public static Json.Map _20001_GetMapData() {
+        string sendData = "20001|";
+        string recvData = SocketTcp.Send(sendData);
+        Json.Map map = JsonUtility.FromJson<Json.Map>(recvData);
+        return map;
     }
 }

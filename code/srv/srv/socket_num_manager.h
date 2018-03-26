@@ -27,6 +27,6 @@ public:
 
     /*客户端请求服务端数据*/
     // 获取游戏的地图的数据
-    std::string _20001_GetMapData();
+    std::string _20001_GetMapData(std::string data);
 };
 

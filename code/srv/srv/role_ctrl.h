@@ -19,7 +19,7 @@ public:
     T * CreateRole(Tool::Struct::Vector3 * vector3);
 };
 
-template<typename T>
+template<typename T, typename std::enable_if < std::is_base_of<BaseRole, T>{}, int > ::type = 0 >
 inline T * RoleCtrl::CreateRole(Tool::Struct::Vector3 * vector3) {
     T  * role = new T(vector3);
     this->roleList.push_back(role);

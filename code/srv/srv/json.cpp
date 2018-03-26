@@ -89,9 +89,10 @@ std::string Json::GetStdString(rapidjson::Document & document, std::string key, 
     return retString;
 }
 
-Json::Map::Map(float width, float height) {
+Json::Map::Map(float width, float length, float height) {
     this->width = width;
-    this->length = height;
+    this->length = length;
+    this->height = height;
 }
 
 std::string Json::Map::ToJsonStr() {

@@ -131,6 +131,7 @@ public class WorldMenu {
     /// 获取地图数据，初始化地图
     /// </summary>
     public void InitMap() {
-
+        Json.Map map = SocketNum._20001_GetMapData();
+        
     }
 }

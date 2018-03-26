@@ -25,7 +25,7 @@ namespace Json {
 
     // 存档数据封装
     class Saves : public Json::Base {
-    private:
+    public:
         // 存档名称
         std::string savesName;
 
@@ -48,11 +48,12 @@ namespace Json {
     };
 
     class Map : public Json::Base {
-    private:
+    public:
         float width;
         float length;
+        float height;
     public:
-        Map(float width, float length);
+        Map(float width, float length, float height);
 
     public:
         // 通过 Base 继承

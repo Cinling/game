@@ -2,34 +2,40 @@
 
 
 
-World * World::shareInstance = NULL;
+World * World::shareInstance = nullptr;
 
 World * World::GetInstance() {
-    if (shareInstance == NULL) {
+    if (shareInstance == nullptr) {
         shareInstance = new World();
     }
     return shareInstance;
 }
 
 World::World() {
+    this->map = nullptr;
 }
 
 
 World::~World() {
-    if (shareInstance != NULL) {
+    if (shareInstance != nullptr) {
         delete shareInstance;
-        shareInstance = NULL;
+        shareInstance = nullptr;
+    }
+
+    if (this->map != nullptr) {
+        delete this->map;
+        this->map = nullptr;
     }
 }
 
-bool World::InitMap(float width, float length) {
-    this->width = width;
-    this->length = length;
-    RoleCtrl * roleCtrl = RoleCtrl::GetInstance();
-    Tool::Struct::Vector3 * position = new Tool::Struct::Vector3(1, 2, 3);
-    Animal * role = roleCtrl->CreateRole<Animal>(position);
-    
+bool World::InitMap(float width, float length, float height) {
+    this->map = new Json::Map(width, length, height);
     return true;
+}
+
+bool World::InitMap(Json::Map * map) {
+    this->map = map;
+    return false;
 }
 
 bool World::Start() {
@@ -51,7 +57,7 @@ bool World::Exit() {
 
 bool World::Save() {
     MapDB * mapDB = MapDB::GetInstance();
-    mapDB->Insert(id, (int)width, (int)length);
+    //mapDB->Insert(id, (int)width, (int)length);
     return false;
 }
 
@@ -60,7 +66,7 @@ bool World::Load() {
 }
 
 Json::Map World::GetMapInfo() {
-    return Json::Map(this->width, this->length);
+    return (*this->map);
 }
 
 void World::SqliteTest() {
@@ -89,9 +95,9 @@ void World::SaveWorld() {
 
 }
 
-int World::CreateMap(int width, int length) {
-    MapDB *mapDB = MapDB::GetInstance();
-    int maxId = mapDB->GetMaxId();
-    mapDB->Insert(maxId, (int)this->width, (int)this->length);
-    return maxId;
-}
+//int World::CreateMap(int width, int length) {
+//    MapDB *mapDB = MapDB::GetInstance();
+//    int maxId = mapDB->GetMaxId();
+//    mapDB->Insert(maxId, (int)this->width, (int)this->length);
+//    return maxId;
+//}

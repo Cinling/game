@@ -316,6 +316,7 @@
   <ItemGroup>
     <None Include="Assets\AssetsStore\Cartoon_Farm_Crops\README.txt" />
     <None Include="Assets\AssetsStore\SimplePeople\Changelog.txt" />
+    <None Include="Assets\AssetsStore\VertexColorFarmAnimals\Shaders\VertexColorUnlit.shader" />
     <None Include="Assets\Resources\lang\cht\main\menu.txt" />
     <None Include="Assets\Resources\lang\cht\world\menu.txt" />
     <None Include="Assets\Resources\lang\en\main\menu.txt" />

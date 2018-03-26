@@ -10,19 +10,15 @@ private:
     static World *shareInstance;
     World();
 
-    // 当前地图id
-    int id;
-    // 世界宽度
-    float width;
-    // 世界长度
-    float length;
+    Json::Map * map;
 
 public:
     static World * GetInstance();
     ~World();
 
     // 初始化世界（首次进入游戏，创建世界）
-    bool InitMap(float width, float length);
+    bool InitMap(float width, float length, float height);
+    bool InitMap(Json::Map * map);
 
     // 开始游戏
     bool Start();
@@ -56,5 +52,5 @@ private:
     // width 地图宽度
     // length 地图长度
     // return 当天地图的id
-    int CreateMap(int width, int length);
+    //int CreateMap(int width, int length);
 };
