@@ -9,7 +9,7 @@ public class WorldCamera : MonoBehaviour {
     public const ushort MOVE_BACK = 3;
 
     /// <summary>
-    /// 镜头允许的最低点
+    /// 镜头和焦点最近的距离许可（再减10f，为允许的最小距离）
     /// </summary>
     private float CAMERA_FOCUS_LENGTH = 20f;
     /// <summary>
@@ -61,14 +61,16 @@ public class WorldCamera : MonoBehaviour {
 
         // 镜头拉近
         if (Input.GetAxis("Mouse ScrollWheel") > 0) {
-            
-            if (transform.rotation.eulerAngles.x > 10 ) {
+
+            if (transform.rotation.eulerAngles.x > 10) {
                 Vector3 tmpVec3 = focus.transform.position - transform.position;
                 float cameraFocusLength = tmpVec3.magnitude;
 
                 if (cameraFocusLength > CAMERA_FOCUS_LENGTH) {
                     Vector3 movePoistion = new Vector3(0, 0, 10f);
                     transform.Translate(movePoistion);
+
+                    ReSetSpeed();
                 }
             }
         }
@@ -77,6 +79,8 @@ public class WorldCamera : MonoBehaviour {
             if (this.transform.position.y < CAMERA_MAX_HEIGHT) {
                 Vector3 movePoistion = new Vector3(0, 0, -10f);
                 transform.Translate(movePoistion);
+
+                ReSetSpeed();
             }
         }
 
@@ -85,59 +89,44 @@ public class WorldCamera : MonoBehaviour {
         if (Input.GetMouseButton(2)) {
             float screen_x = Input.GetAxis("Mouse X") * 1f;
             float screen_y = Input.GetAxis("Mouse Y") * 1f;
-
             RotationCamera(screen_x, screen_y);
+
+            ReSetSpeed();
         }
     }
     /// <summary>
     /// 2017-07-25 08:27:59
     /// 移动摄像机的方法，只支持前后左右移动
     /// </summary>
-    public void MoveCamera(ushort move_type) {
+    private void MoveCamera(ushort move_type) {
         Vector3 camera_euler = transform.rotation.eulerAngles;
 
         switch (move_type) {
             case MOVE_LEFT: {
-                    float move_x = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + 3f / 2f * Mathf.PI);
-                    float move_z = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f);
-
-                    // 移动摄像头
-                    transform.position = new Vector3(transform.position.x + move_x, transform.position.y, transform.position.z + move_z);
-                    // 移动焦点
-                    focus.transform.position = new Vector3(focus.transform.position.x + move_x, focus.transform.position.y, focus.transform.position.z + move_z);
+                    float moveX = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + 3f / 2f * Mathf.PI);
+                    float moveZ = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f);
+                    this.MoveCameraAndFocus(moveX, moveZ);
                 }
                 break;
 
             case MOVE_FOUNT: {
-                    float move_x = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f);
-                    float move_z = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + 1f / 2f * Mathf.PI);
-
-                    // 移动摄像头
-                    transform.position = new Vector3(transform.position.x + move_x, transform.position.y, transform.position.z + move_z);
-                    // 移动焦点
-                    focus.transform.position = new Vector3(focus.transform.position.x + move_x, focus.transform.position.y, focus.transform.position.z + move_z);
+                    float moveX = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f);
+                    float moveZ = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + 1f / 2f * Mathf.PI);
+                    this.MoveCameraAndFocus(moveX, moveZ);
                 }
                 break;
 
             case MOVE_RIGHT: {
-                    float move_x = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + 1f / 2f * Mathf.PI);
-                    float move_z = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + Mathf.PI);
-
-                    // 移动摄像头
-                    transform.position = new Vector3(transform.position.x + move_x, transform.position.y, transform.position.z + move_z);
-                    // 移动焦点
-                    focus.transform.position = new Vector3(focus.transform.position.x + move_x, focus.transform.position.y, focus.transform.position.z + move_z);
+                    float moveX = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + 1f / 2f * Mathf.PI);
+                    float moveZ = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + Mathf.PI);
+                    this.MoveCameraAndFocus(moveX, moveZ);
                 }
                 break;
 
             case MOVE_BACK: {
-                    float move_x = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + Mathf.PI);
-                    float move_z = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + 3f / 2f * Mathf.PI);
-
-                    // 移动摄像头
-                    transform.position = new Vector3(transform.position.x + move_x, transform.position.y, transform.position.z + move_z);
-                    // 移动焦点
-                    focus.transform.position = new Vector3(focus.transform.position.x + move_x, focus.transform.position.y, focus.transform.position.z + move_z);
+                    float moveX = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + Mathf.PI);
+                    float moveZ = speed * Mathf.Sin(camera_euler.y * Mathf.PI / 180f + 3f / 2f * Mathf.PI);
+                    this.MoveCameraAndFocus(moveX, moveZ);
                 }
                 break;
 
@@ -146,8 +135,40 @@ public class WorldCamera : MonoBehaviour {
                 break;
         }
     }
+    /// <summary>
+    /// 移动焦点和摄像头，可限制焦点的移动范围
+    /// </summary>
+    /// <param name="moveX"></param>
+    /// <param name="moveZ"></param>
+    private void MoveCameraAndFocus(float moveX, float moveZ) {
 
+        if (limitWidth != -1 && limitLength != -1) {
+            float focusX = focus.transform.position.x;
+            float focusZ = focus.transform.position.z;
 
+            float afterX = focusX + moveX;
+            if (afterX < 0) {
+                // 移动后位置等于0
+                moveX = 0 - focusX;
+            } else if (afterX > limitLength) {
+                // 移动后位置等于限制的最大值
+                moveX = limitLength - focusX;
+            }
+
+            float afterZ = focusZ + moveZ;
+            if (afterZ < 0) {
+                // 移动后位置等于0
+                moveZ = 0 - focusZ;
+            } else if (afterZ > limitWidth) {
+                moveZ = limitWidth - focusZ;
+            }
+        }
+
+        // 移动摄像头
+        transform.position = new Vector3(transform.position.x + moveX, transform.position.y, transform.position.z + moveZ);
+        // 移动焦点
+        focus.transform.position = new Vector3(focus.transform.position.x + moveX, focus.transform.position.y, focus.transform.position.z + moveZ);
+    }
     /// <summary>
     /// 2017-08-21 00:45:11
     /// 通过摄像机，重置焦点 与 焦点和摄像机相关的参数
@@ -170,7 +191,7 @@ public class WorldCamera : MonoBehaviour {
     /// <param name="screen_y"></param>
     private void RotationCamera(float screen_x, float screen_y) {
 
-        if (transform.rotation.eulerAngles.x - screen_y < 10 && screen_y >0) {
+        if (transform.rotation.eulerAngles.x - screen_y < 10 && screen_y > 0) {
             screen_y = 0;
         }
 
@@ -186,13 +207,25 @@ public class WorldCamera : MonoBehaviour {
         Vector3 vec3 = new Vector3(Mathf.Cos(camera_euler.y * Mathf.PI / 180f), 0f, Mathf.Sin(camera_euler.y * Mathf.PI / 180f + Mathf.PI));
         transform.RotateAround(focus.transform.position, vec3, -screen_y);
     }
+    /// <summary>
+    /// 根据镜头和焦点的距离，设置speed的速度值
+    /// </summary>
+    private void ReSetSpeed() {
+        Vector3 tmpVec3 = focus.transform.position - transform.position;
+        float cameraFocusLength = tmpVec3.magnitude;
+        this.speed = cameraFocusLength * 0.02f;
+    }
 
+
+    private static float limitWidth = -1;
+    private static float limitLength = -1;
     /// <summary>
     /// 限制 foucus 的移动范围
     /// </summary>
     /// <param name="width"></param>
     /// <param name="length"></param>
-    public void LimitFoucusArrea(float width, float length) {
-
+    public static void LimitFoucusArrea(float width, float length) {
+        limitWidth = width;
+        limitLength = length;
     }
 }

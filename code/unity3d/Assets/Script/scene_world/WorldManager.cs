@@ -26,6 +26,10 @@ public class WorldManager {
     public bool InitMap() {
         Json.Map map = SocketNum._20001_GetMapData();
         this.map = new Map(map);
+
+        // 设置镜头移动的限制区域
+        WorldCamera.LimitFoucusArrea(this.map.width, this.map.length);
+
         return true;
     }
 }
