@@ -310,8 +310,10 @@
     <Compile Include="Assets\Script\scene_main_menu\MainMenu.cs" />
     <Compile Include="Assets\Script\scene_main_menu\mono\MainCamera.cs" />
     <Compile Include="Assets\Script\scene_world\GameTime.cs" />
+    <Compile Include="Assets\Script\scene_world\Map.cs" />
     <Compile Include="Assets\Script\scene_world\mono\CanvasGame.cs" />
     <Compile Include="Assets\Script\scene_world\mono\WorldCamera.cs" />
+    <Compile Include="Assets\Script\scene_world\WorldManager.cs" />
     <Compile Include="Assets\Script\scene_world\WorldMenu.cs" />
   </ItemGroup>
   <ItemGroup>

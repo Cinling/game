@@ -72,7 +72,7 @@ int Json::GetInt(rapidjson::Document & document, std::string key, int defaultVal
 float Json::GetFloat(rapidjson::Document & document, std::string key, float defaultValue) {
     float retFloat = defaultValue;
     rapidjson::Value::MemberIterator mt = document.FindMember(key.c_str());
-    if (mt->value.IsInt()) {
+    if (mt->value.IsFloat()) {
         retFloat = mt->value.GetFloat();
     }
 
@@ -104,6 +104,7 @@ std::string Json::Map::ToJsonStr() {
 
     document.AddMember(Value(NameToStr(width), allocator), Value(this->width), allocator);
     document.AddMember(Value(NameToStr(length), allocator), Value(this->length), allocator);
+    document.AddMember(Value(NameToStr(height), allocator), Value(this->height), allocator);
 
     return Json::Encode(document);
 }
