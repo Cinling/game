@@ -30,7 +30,7 @@ public class WorldMenu {
     public void InitWorldButtonEvent() {
         canvas = GameObject.Find("CanvasGame");
 
-        GameObject goBtnMenu = UIFunc.Button.CreateButton(canvas, "ui/Button", Lang.Get("world.menu.menu"), 90, 25, ShowMenuPannel);
+        GameObject goBtnMenu = UIFunc.Button.CreateButton(canvas, PrefabPath._2D.Button, Lang.Get("world.menu.menu"), 90, 25, ShowMenuPannel);
         goBtnMenu.name = "BtnMenu";
     }
     /// <summary>
@@ -42,17 +42,17 @@ public class WorldMenu {
             return;
         }
 
-        goPanel = UIFunc.Panel.CreatePanel(canvas, "ui/Panel");
+        goPanel = UIFunc.Panel.CreatePanel(canvas, PrefabPath._2D.Panel);
         goPanel.name = "PanelMenu";
         UIFunc.Panel.SetSize(goPanel, 400, 600);
         float pannelX = goPanel.transform.position.x;
         float pannelY = goPanel.transform.position.y;
 
-        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.save"), pannelX, pannelY + 200, OpenSavePannel);
+        UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, Lang.Get("world.menu.save"), pannelX, pannelY + 200, OpenSavePannel);
 
-        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.back_to_menu"), pannelX, pannelY - 100, BackTuMenu);
-        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.exit"), pannelX, pannelY - 140, ExitGame);
-        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("world.menu.close"), pannelX, pannelY - 200, CloseMenuPannel);
+        UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, Lang.Get("world.menu.back_to_menu"), pannelX, pannelY - 100, BackTuMenu);
+        UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, Lang.Get("world.menu.exit"), pannelX, pannelY - 140, ExitGame);
+        UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, Lang.Get("world.menu.close"), pannelX, pannelY - 200, CloseMenuPannel);
     }
     /// <summary>
     /// 打开保存存档的面板
@@ -64,7 +64,7 @@ public class WorldMenu {
         }
 
         // 创建 Pannel
-        GameObject goLoadGamePannel = UIFunc.Panel.CreatePanel(canvas, "ui/Panel");
+        GameObject goLoadGamePannel = UIFunc.Panel.CreatePanel(canvas, PrefabPath._2D.Panel);
         goLoadGamePannel.name = "PanelSaveGame";
         UIFunc.Panel.SetSize(goLoadGamePannel, 400, 500);
 
@@ -72,14 +72,14 @@ public class WorldMenu {
         float panelY = goLoadGamePannel.transform.position.y;
 
         // 输入框
-        GameObject goInputField =  UIFunc.InputField.CreateInputField(goLoadGamePannel, "ui/InputField", panelX, panelY - 180, 338);
+        GameObject goInputField =  UIFunc.InputField.CreateInputField(goLoadGamePannel, PrefabPath._2D.InputField, panelX, panelY - 180, 338);
         goInputField.name = "InputFieldSavesName";
 
         // 保存按钮
-        UIFunc.Button.CreateButton(goLoadGamePannel, "ui/Button", Lang.Get("world.menu.save"), panelX - 90, panelY - 220, Save);
+        UIFunc.Button.CreateButton(goLoadGamePannel, PrefabPath._2D.Button, Lang.Get("world.menu.save"), panelX - 90, panelY - 220, Save);
 
         // 关闭按钮
-        UIFunc.Button.CreateButton(goLoadGamePannel, "ui/Button", Lang.Get("world.menu.close"), panelX + 90, panelY - 220, CloseSaveGamePanel);
+        UIFunc.Button.CreateButton(goLoadGamePannel, PrefabPath._2D.Button, Lang.Get("world.menu.close"), panelX + 90, panelY - 220, CloseSaveGamePanel);
     }
     /// <summary>
     /// 关闭保存的面板
@@ -87,7 +87,7 @@ public class WorldMenu {
     private void CloseSaveGamePanel() {
         GameObject goSaveGamePanel = GameObject.Find("CanvasGame/PanelSaveGame");
         if (goSaveGamePanel != null) {
-            GameObject.Destroy(goSaveGamePanel);
+            UnityEngine.Object.Destroy(goSaveGamePanel);
         }
     }
     /// <summary>
@@ -110,7 +110,7 @@ public class WorldMenu {
     private void CloseMenuPannel() {
         GameObject goPanel = GameObject.Find("CanvasGame/PanelMenu");
         if (goPanel != null) {
-            GameObject.Destroy(goPanel);
+            UnityEngine.Object.Destroy(goPanel);
         }
     }
     /// <summary>

@@ -44,7 +44,7 @@ namespace UIClass {
         private void Init() {
             this.itemList = new List<ScrollView_Item>();
             this.selectItem = null;
-            this.gameObject = Object.Instantiate(Resources.Load<GameObject>("ui/PanelScrollView"));
+            this.gameObject = Object.Instantiate(Resources.Load<GameObject>(PrefabPath._2D.PanelScrollView));
 
             // 设置关闭按钮的事件
             GameObject goCloseButton = GameObject.Find(this.gameObject.name + "/ButtonClose");
@@ -277,7 +277,7 @@ namespace UIClass {
         /// 初始化的一些操作（每个构造函数都必须执行该方法）
         /// </summary>
         private void Init(ScrollView parentScrollView) {
-            this.gameObject = Object.Instantiate(Resources.Load<GameObject>("ui/PanelScrollView_Item"));
+            this.gameObject = Object.Instantiate(Resources.Load<GameObject>(PrefabPath._2D.PanelScrollView_Item));
             this.parentScrollView = parentScrollView;
             this.SetOnClickAction(this.OnClick);
         }
@@ -368,7 +368,7 @@ namespace UIClass {
         /// 初始化方法
         /// </summary>
         private void Init(string name) {
-            this.gameObject = Object.Instantiate(Resources.Load<GameObject>("ui/Button"));
+            this.gameObject = Object.Instantiate(Resources.Load<GameObject>(PrefabPath._2D.Button));
             this.gameObject.GetComponentInChildren<UnityEngine.UI.Text>().text = name;
         }
 

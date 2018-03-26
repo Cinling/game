@@ -23,7 +23,7 @@ public class MainMenu {
     /// </summary>
     public void Init() {
         if (GameObject.Find("Canvas") == null) {
-            canvas = GameObject.Instantiate(Resources.Load<GameObject>("ui/Canvas"));
+            canvas = Object.Instantiate(Resources.Load<GameObject>(PrefabPath._2D.Canvas));
             canvas.name = "Canvas";
         }
         ChangeToMenuPanel();
@@ -35,7 +35,7 @@ public class MainMenu {
     private void DeleteRootPanel() {
         GameObject goPanel = GameObject.Find("Canvas/Panel");
         if (goPanel != null) {
-            GameObject.Destroy(goPanel);
+            Object.Destroy(goPanel);
         }
     }
 
@@ -51,14 +51,14 @@ public class MainMenu {
         float width = rectCanvas.width;
         float height = rectCanvas.height;
 
-        GameObject goPanel = UIFunc.Panel.CreatePanel(canvas, "ui/Panel");
+        GameObject goPanel = UIFunc.Panel.CreatePanel(canvas, PrefabPath._2D.Panel);
         goPanel.name = "Panel";
 
         // 开始游戏的按钮
-        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.start_game"), width - 200, height - 200, ChangeToStartGameMenuPanel);
+        UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, Lang.Get("main.menu.start_game"), width - 200, height - 200, ChangeToStartGameMenuPanel);
 
         // 切换到UI调试界面的按钮
-        UIFunc.Button.CreateButton(goPanel, "ui/Button", "UI Testing Page", width - 200, height - 160, ChangeToUIMakeScene);
+        UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, "UI Testing Page", width - 200, height - 160, ChangeToUIMakeScene);
     }
 
     /// <summary>
@@ -72,17 +72,17 @@ public class MainMenu {
         float height = rectCanvas.height;
 
         // 创建 Panel
-        GameObject goPanel = UIFunc.Panel.CreatePanel(canvas, "ui/Panel");
+        GameObject goPanel = UIFunc.Panel.CreatePanel(canvas, PrefabPath._2D.Panel);
         goPanel.name = "Panel";
 
         // 新游戏的按钮
-        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.new_game"), width - 200, height - 200, CreateNewGame);
+        UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, Lang.Get("main.menu.new_game"), width - 200, height - 200, CreateNewGame);
 
         // 载入游戏的按钮
-        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.load_game"), width - 200, height - 250, OpenLoadGamePanel);
+        UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, Lang.Get("main.menu.load_game"), width - 200, height - 250, OpenLoadGamePanel);
 
         // 返回的按钮
-        UIFunc.Button.CreateButton(goPanel, "ui/Button", Lang.Get("main.menu.back"), width - 200, height - 300, ChangeToMenuPanel);
+        UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, Lang.Get("main.menu.back"), width - 200, height - 300, ChangeToMenuPanel);
     }
 
     /// <summary>
@@ -154,6 +154,7 @@ public class MainMenu {
         if (ret == "true") {
             SceneCtrl.GetInstance().SwitchToWorld();
         }
+
     }
 
     /// <summary>
@@ -162,12 +163,12 @@ public class MainMenu {
     private void CloseLoadGamePanel() {
         GameObject goLoadGamePanel = GameObject.Find("Canvas/Panel/PanelLoadGame");
         if (goLoadGamePanel != null) {
-            GameObject.Destroy(goLoadGamePanel);
+            Object.Destroy(goLoadGamePanel);
         }
 
         GameObject goLoadGameScrollView = GameObject.Find("Canvas/Panel/ScrollViewLoadGame");
         if (goLoadGameScrollView != null) {
-            GameObject.Destroy(goLoadGameScrollView);
+            Object.Destroy(goLoadGameScrollView);
         }
     }
 }

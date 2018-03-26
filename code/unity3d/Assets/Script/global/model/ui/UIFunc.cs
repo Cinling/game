@@ -18,7 +18,7 @@ namespace UIFunc {
             float width = rectCanvas.width;
             float height = rectCanvas.height;
 
-            GameObject goPanel = GameObject.Instantiate(Resources.Load<GameObject>(prefab));
+            GameObject goPanel = Object.Instantiate(Resources.Load<GameObject>(prefab));
             goPanel.transform.SetParent(parent.transform);
             goPanel.transform.position = parent.transform.position;
             UnityEngine.UI.Image pannel = goPanel.GetComponent<UnityEngine.UI.Image>();
@@ -63,7 +63,7 @@ namespace UIFunc {
         /// <param name="y"></param>
         /// <param name="call"></param>
         public static GameObject CreateButton(GameObject parent, string perfab, string text, float x, float y, UnityEngine.Events.UnityAction call) {
-            GameObject goButton = GameObject.Instantiate(Resources.Load<GameObject>(perfab));
+            GameObject goButton = Object.Instantiate(Resources.Load<GameObject>(perfab));
             goButton.transform.SetParent(parent.transform);
             goButton.GetComponentInChildren<UnityEngine.UI.Text>().text = text;
             UnityEngine.UI.Button button = goButton.GetComponent<UnityEngine.UI.Button>();
@@ -85,7 +85,7 @@ namespace UIFunc {
         /// <param name="width"></param>
         /// <returns></returns>
         public static GameObject CreateInputField(GameObject parent, string perfab, float x, float y, float width) {
-            GameObject goInputField = GameObject.Instantiate(Resources.Load<GameObject>(perfab));
+            GameObject goInputField = Object.Instantiate(Resources.Load<GameObject>(perfab));
             goInputField.transform.SetParent(parent.transform);
             goInputField.transform.position = new Vector3(x, y, 0);
 

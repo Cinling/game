@@ -299,6 +299,7 @@
     <Compile Include="Assets\Script\global\model\ThreadTool.cs" />
     <Compile Include="Assets\Script\global\model\ui\UIClass.cs" />
     <Compile Include="Assets\Script\global\model\ui\UIFunc.cs" />
+    <Compile Include="Assets\Script\global\PrefabPath.cs" />
     <Compile Include="Assets\Script\global\SceneCtrl.cs" />
     <Compile Include="Assets\Script\obj\animal\Animal.cs" />
     <Compile Include="Assets\Script\obj\animal\persion\Guy.cs" />
