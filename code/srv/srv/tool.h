@@ -14,6 +14,9 @@
 #define NameToStr(x) #x
 #define PATH_DELIMITER '\\' 
 
+// 调试模式
+#define DEBUG
+
 namespace Tool {
     // 获取系统时间戳（秒）
     long long GetTimeSecond();
@@ -43,6 +46,7 @@ namespace Tool {
         std::vector<std::string> GetChildFiles(std::string folder);
     }
 
+    // 简单类 类型，用于封装部分数据结构，减少变量的数量
     namespace Struct {
         class Vector3 {
         public:
@@ -52,5 +56,11 @@ namespace Tool {
             
             Vector3(float x, float y, float z);
         };
+    }
+
+    // 常用的数学方法
+    namespace Math {
+        // 获取随机数
+        int Random(int min, int max);
     }
 }

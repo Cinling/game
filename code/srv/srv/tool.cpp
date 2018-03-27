@@ -81,3 +81,7 @@ Tool::Struct::Vector3::Vector3(float x, float y, float z) {
     this->y = y;
     this->z = z;
 }
+
+int Tool::Math::Random(int min, int max) {
+    return (rand() % (max - min + 1) + min);
+}

@@ -65,7 +65,7 @@ namespace Json {
     class BaseRole : public Base {
     public:
         int id;
-        std::string type;
+        int type;
         float x;
         float y;
         float z;

@@ -127,7 +127,7 @@ bool SqliteTool::IsTableExists(const char * tableName) {
 
 bool SqliteTool::CreateDirWithDBName(const char * dbName) {
     std::string dbStr = std::string(dbName);
-    int lastIndex = dbStr.find_last_of("/");
+    size_t lastIndex = dbStr.find_last_of("/");
     std::string dir = dbStr.substr(0, lastIndex);
     Tool::File::CreateDir(dir);
     return true;

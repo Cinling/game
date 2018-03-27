@@ -17,8 +17,6 @@ SocketTcp::~SocketTcp() {
 }
 
 void SocketTcp::StartSocket() {
-    // debugģʽ
-#define DEBUG
 
     this->isPause = false;
 

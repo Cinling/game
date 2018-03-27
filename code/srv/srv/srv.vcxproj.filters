@@ -46,6 +46,9 @@
     <Filter Include="头文件\game\role\plant\tree">
       <UniqueIdentifier>{4930cd2e-6cbb-45a7-84fd-b69a51d0d5be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\game\other">
+      <UniqueIdentifier>{bb0b178f-0176-4809-b44a-6bd98db0751b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -88,6 +91,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="animal.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="plant.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="map_manager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tree.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -236,11 +248,23 @@
     <ClInclude Include="base_role.h">
       <Filter>头文件\game\role</Filter>
     </ClInclude>
-    <ClInclude Include="role_ctrl.h">
-      <Filter>头文件\game</Filter>
-    </ClInclude>
     <ClInclude Include="animal.h">
       <Filter>头文件\game\role\animal</Filter>
+    </ClInclude>
+    <ClInclude Include="map_manager.h">
+      <Filter>头文件\game\other</Filter>
+    </ClInclude>
+    <ClInclude Include="role_type.h">
+      <Filter>头文件\game\other</Filter>
+    </ClInclude>
+    <ClInclude Include="tree.h">
+      <Filter>头文件\game\role\plant\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="plant.h">
+      <Filter>头文件\game\role\plant</Filter>
+    </ClInclude>
+    <ClInclude Include="role_ctrl.h">
+      <Filter>头文件\game\role</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

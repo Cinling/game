@@ -42,8 +42,9 @@ public:
     Json::Map GetMapInfo();
 
 private:
-    // 创建树木
-    bool CreateTree();
+    // 随机创建树
+    // num 创建树的数量
+    bool RandomCreateTree(int num);
 
 private:
     // 保存世界数据

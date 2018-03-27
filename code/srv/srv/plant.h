@@ -1,17 +1,13 @@
 #pragma once
-
 #include "base_role.h"
-#include "role_ctrl.h"
 
-class Animal : public BaseRole {
+class Plant : public BaseRole {
 public:
-    Animal(Tool::Struct::Vector3 * vector3);
-    ~Animal();
+    Plant(Tool::Struct::Vector3 * vector3);
+    ~Plant();
 
     // 通过 BaseRole 继承
     virtual void UPSDo(void * voidRoleCtrl) override;
-
-    // 通过 BaseRole 继承
     virtual const std::map<std::string, std::string> GetInfo() override;
 };
 
