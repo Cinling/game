@@ -5,7 +5,7 @@ RoleCtrl * RoleCtrl::shareInstance = nullptr;
 
 
 RoleCtrl::RoleCtrl() {
-    this->roleList = std::list<BaseRole *>();
+    this->roleList = std::map<int, BaseRole *>();
 }
 
 RoleCtrl * RoleCtrl::GetInstance() {

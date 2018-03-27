@@ -10,6 +10,7 @@ private:
     static World *shareInstance;
     World();
 
+    // 当前地图
     Json::Map * map;
 
 public:
@@ -17,7 +18,6 @@ public:
     ~World();
 
     // 初始化世界（首次进入游戏，创建世界）
-    bool InitMap(float width, float length, float height);
     bool InitMap(Json::Map * map);
 
     // 开始游戏
@@ -41,8 +41,9 @@ public:
     // 获取地图数据
     Json::Map GetMapInfo();
 
-    // sqlite 测试方法
-    void SqliteTest();
+private:
+    // 创建树木
+    bool CreateTree();
 
 private:
     // 保存世界数据

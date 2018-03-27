@@ -7,3 +7,7 @@ Animal::Animal(Tool::Struct::Vector3 * vector3) : BaseRole(vector3) {
 
 Animal::~Animal() {
 }
+
+void Animal::UPSDo(void * voidRoleCtrl) {
+   
+}

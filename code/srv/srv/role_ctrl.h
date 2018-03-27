@@ -1,15 +1,15 @@
 #pragma once
 
+#include "tool.h"
 #include "base_role.h"
 #include "animal.h"
-#include "tool.h"
 
 class RoleCtrl {
 private:
     static RoleCtrl * shareInstance;
     RoleCtrl();
 
-    std::list<BaseRole *> roleList;
+    std::map<int, BaseRole *> roleList;
 
 public:
     static RoleCtrl * GetInstance();

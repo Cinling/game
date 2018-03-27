@@ -7,12 +7,6 @@
 #include <string>
 
 namespace Json {
-    // 所有需要json包装的数据类型的基类
-    class Base {
-    public:
-        virtual std::string ToJsonStr() = 0;
-    };
-
     // 抛出的异常类
     class Exception {
     private:
@@ -21,6 +15,12 @@ namespace Json {
     public:
         Exception(std::string exceptionMsg);
         std::string GetExceptionMsg();
+    };
+
+    // 所有需要json包装的数据类型的基类
+    class Base {
+    public:
+        virtual std::string ToJsonStr() = 0;
     };
 
     // 存档数据封装
@@ -47,6 +47,7 @@ namespace Json {
         std::string GetSavesName();
     };
 
+    // 地图数据
     class Map : public Json::Base {
     public:
         float width;
@@ -59,6 +60,20 @@ namespace Json {
         // 通过 Base 继承
         virtual std::string ToJsonStr() override;
     };
+
+    // 所有角色通用的传输数据
+    class BaseRole : public Base {
+    public:
+        int id;
+        std::string type;
+        float x;
+        float y;
+        float z;
+
+        // 通过 Base 继承
+        virtual std::string ToJsonStr() override;
+    };
+
 
 
     /*##############################################################

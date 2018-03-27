@@ -36,7 +36,8 @@ std::string SocketNumManager::_10001_InitMap(std::string data) {
 
     // 初始化游戏世界的数据
     World * world = World::GetInstance();
-    if (!world->InitMap(width, length, height)) {
+    Json::Map *map = new Json::Map(width, length, height);
+    if (!world->InitMap(map)) {
         return "false";
     }
 

@@ -108,3 +108,7 @@ std::string Json::Map::ToJsonStr() {
 
     return Json::Encode(document);
 }
+
+std::string Json::BaseRole::ToJsonStr() {
+    return std::string();
+}

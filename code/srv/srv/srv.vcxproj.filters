@@ -40,6 +40,12 @@
     <Filter Include="头文件\game\role\animal\persion">
       <UniqueIdentifier>{f9e09857-e6f6-4669-bde7-d20a025015e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\game\role\plant">
+      <UniqueIdentifier>{300bcca0-8d2c-4d01-9093-ddddf1b62e28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\game\role\plant\tree">
+      <UniqueIdentifier>{4930cd2e-6cbb-45a7-84fd-b69a51d0d5be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

@@ -14,6 +14,9 @@ public class WorldManager {
         return shareInstance;
     }
 
+    /// <summary>
+    /// 地图
+    /// </summary>
     private Map map;
 
     /// <summary>
