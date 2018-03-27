@@ -14,5 +14,7 @@ namespace PrefabPath {
 
     class _3D {
         public static string Cube = "prefab/3d/Cube";
+        public static string EmptyGamObject = "prefab/other/EmptyGamObject";
+        public static string Tree = "prefab/3d/plant/tree/Tree";
     }
 }

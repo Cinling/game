@@ -80,9 +80,9 @@ bool World::RandomCreateTree(int num) {
         roleCtrl->CreateRole<Plant>(new Tool::Struct::Vector3((x / 100.0f), 0, (z / 100.0f)));
     }
 
-#ifdef DEBUG
-    roleCtrl->PrintRoleMap();
-#endif
+//#ifdef DEBUG
+//    roleCtrl->PrintRoleMap();
+//#endif
 
 
     return true;

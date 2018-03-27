@@ -19,7 +19,7 @@ public class SceneCtrl {
 
         ThreadTool.GetInstance().RunOnWorldSceneMainThread(() => {
             WorldMenu.GetInstance().InitWorldButtonEvent();
-            WorldManager.GetInstance().InitMap();
+            WorldManager.GetInstance().Init();
             return 0;
         });
     }

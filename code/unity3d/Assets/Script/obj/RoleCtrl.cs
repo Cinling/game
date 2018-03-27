@@ -2,113 +2,79 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 角色控制器
+/// </summary>
 public class RoleCtrl {
 
-    private ulong upsSum; // 游戏总帧数
-    public ulong UpsSum {
-        get { return upsSum; }
-    }
-
-    private static RoleCtrl roleCtrl = null;
+    /// <summary>
+    /// 单例对象
+    /// </summary>
+    private static RoleCtrl shareInstance = null;
     private RoleCtrl() {
-        // 基本角色对象字典
-        baseRoleDict = new Dictionary<int, List<BaseRole>>();
-        baseRoleDict[BASE_ROLE_DICT_COMMON] = new List<BaseRole>();
-        baseRoleDict[ANIMAL_ROLE_DICT] = new List<BaseRole>();
-        baseRoleDict[PLANT_ROLE_DICT] = new List<BaseRole>();
-
-        // 初始化游戏时间
-        upsSum = 0;
+        roleParent = Object.Instantiate(Resources.Load<GameObject>(PrefabPath._3D.EmptyGamObject));
+        roleParent.name = "roleContainer";
     }
     public static RoleCtrl GetInstence() {
 
-        if (roleCtrl == null) {
-            roleCtrl = new RoleCtrl();
+        if (shareInstance == null) {
+            shareInstance = new RoleCtrl();
         }
-        return roleCtrl;
+        return shareInstance;
     }
 
-    // 游戏对象列表
-    private Dictionary<int, List<BaseRole>> baseRoleDict;
-    private const byte BASE_ROLE_DICT_KEY = 0;
-    private const int BASE_ROLE_DICT_COMMON = 1; // 普通对象（UPS执行一次）
-    private const int ANIMAL_ROLE_DICT = 2; // 动物对象（UPS执行一次）
-    private const int PLANT_ROLE_DICT = 3; // 植物对象（每天执行一次，另外有其他的地方会执行到）
+    private GameObject roleParent = null;
 
-
-
-
-
+    /// <summary>
+    /// 位置经过变化的对象列表
+    /// </summary>
+    private List<BaseRole> changeRoleDict = new List<BaseRole>();
 
     // 开启角色进程
     public void StartRoleThread(short ups) {
         ThreadTool.GetInstance().AddThead(ThreadTool.THREAD_NUM.LOGIC_ROLE, () => {
 
             try {
-                ++upsSum;
-
-                // 计算下一次逻辑帧需要经过多少个渲染帧（每个逻辑帧都要调用，只有在MainUICtrl中使用到）
                 CanvasGame.ReSetNextUpsNeedFps();
-
-                // 遍历角色进行相关逻辑运算
-                lock (baseRoleDict) {
-
-                    // 遍历普通角色
-                    if (baseRoleDict[BASE_ROLE_DICT_COMMON] != null) {
-
-                        foreach (BaseRole baseRole in baseRoleDict[BASE_ROLE_DICT_COMMON]) {
-                            baseRole.UPS();
-                        
-                        }
-                    }
-
-                    // 遍历动物角色
-                    if (baseRoleDict[ANIMAL_ROLE_DICT] != null) {
-
-                        foreach (Animal animal in baseRoleDict[ANIMAL_ROLE_DICT]) {
-                            animal.UPS();
-                        }
-                    }
-
-                    // 更新时间
-                    GameTime tcShareIns = GameTime.GetInstance();
-                    tcShareIns.NextUps();
-                    if (tcShareIns.IdNextDay()) {
-
-                        // 如果进入下一天，则执行植物的方法
-                        if (baseRoleDict[PLANT_ROLE_DICT] != null) {
-
-                            foreach (Plant plant in baseRoleDict[PLANT_ROLE_DICT]) {
-                                plant.DailyGrow();
-                            }
-                        }
-                    }
-                }
 
             } catch (System.Exception e) {  // 防止线程死掉
                 Log.PrintLog("RoleCtrl", "StartRoleThread", e.Message, Log.LOG_LEVEL.ERROR);
                 return -1;
             }
-            
             return 0;
         }, 1000 / ups + 1);
     }
 
+    /// <summary>
+    /// 往世界场景中添加一个角色
+    /// </summary>
+    /// <param name="baseRole"></param>
+    /// <returns></returns>
+    public GameObject AddRole(Json.BaseRole baseRole) {
+        string prefab = PrefabPath._3D.Tree;
+        GameObject gameObject = Object.Instantiate(Resources.Load<GameObject>(prefab));
 
+        // 设置上层 GameObject
+        gameObject.transform.SetParent(roleParent.transform);
 
+        // 添加 MonoBehaviour 控制脚本
+        gameObject.AddComponent<BaseRole>();
 
+        // 设置位置
+        gameObject.transform.position = new Vector3(baseRole.x, baseRole.y, baseRole.z);
 
-    // 创建测试的游戏对象
-    public void Test_CreateGuy() {
-        GameObject gameObject = Guy.CreateGuy(10f, 0f, 0f, 100, 10, 10);
-        BaseRole baseRole = gameObject.GetComponent<Guy>();
-        baseRoleDict[ANIMAL_ROLE_DICT].Add(baseRole);
+        // 添加 GameObject 的 Tag ，用于搜索对象
+        gameObject.name = baseRole.id.ToString();
+
+        return gameObject;
     }
 
-    public void Test_CreatePumpkin() {
-        GameObject gameObject = Pumpkin.CreatePumpkin(10f, 0f, 0f);
-        gameObject.AddComponent<Pumpkin>(); // 添加脚本组件
-        BaseRole baseRole = gameObject.GetComponent<Pumpkin>();
-        baseRoleDict[PLANT_ROLE_DICT].Add(baseRole);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public GameObject GetObjectById(int id) {
+        return GameObject.Find(this.roleParent.name + "/" + id);
     }
 }

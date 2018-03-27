@@ -37,12 +37,10 @@ namespace Json {
 
         ~Saves();
 
-    public:
         // 通过 Base 继承
         // return json串
         virtual std::string ToJsonStr() override;
 
-    public:
         // return 存档名字
         std::string GetSavesName();
     };
@@ -53,10 +51,9 @@ namespace Json {
         float width;
         float length;
         float height;
-    public:
+
         Map(float width, float length, float height);
 
-    public:
         // 通过 Base 继承
         virtual std::string ToJsonStr() override;
     };
@@ -69,6 +66,8 @@ namespace Json {
         float x;
         float y;
         float z;
+
+        BaseRole(int id, int type, float x, float y, float z);
 
         // 通过 Base 继承
         virtual std::string ToJsonStr() override;

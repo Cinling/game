@@ -14,6 +14,9 @@ public:
     BaseRole(Tool::Struct::Vector3 * vector3);
     ~BaseRole();
 
+    // 获取角色类型
+    int GetType();
+    // 获取角色的位置信息
     Tool::Struct::Vector3 GetPosition();
 
 public:

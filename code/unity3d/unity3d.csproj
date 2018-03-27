@@ -301,12 +301,9 @@
     <Compile Include="Assets\Script\global\model\ui\UIFunc.cs" />
     <Compile Include="Assets\Script\global\PrefabPath.cs" />
     <Compile Include="Assets\Script\global\SceneCtrl.cs" />
-    <Compile Include="Assets\Script\obj\animal\Animal.cs" />
-    <Compile Include="Assets\Script\obj\animal\persion\Guy.cs" />
-    <Compile Include="Assets\Script\obj\BaseRole.cs" />
-    <Compile Include="Assets\Script\obj\plant\crop\Pumpkin.cs" />
-    <Compile Include="Assets\Script\obj\plant\Plant.cs" />
+    <Compile Include="Assets\Script\obj\mono\BaseRole.cs" />
     <Compile Include="Assets\Script\obj\RoleCtrl.cs" />
+    <Compile Include="Assets\Script\obj\RoleType.cs" />
     <Compile Include="Assets\Script\scene_main_menu\MainMenu.cs" />
     <Compile Include="Assets\Script\scene_main_menu\mono\MainCamera.cs" />
     <Compile Include="Assets\Script\scene_world\GameTime.cs" />

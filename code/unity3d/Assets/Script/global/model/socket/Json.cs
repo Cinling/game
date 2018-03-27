@@ -28,4 +28,20 @@ namespace Json {
             this.savesName = savesName;
         }
     }
+
+    public class BaseRole {
+        public int id;
+        public int type;
+        public float x;
+        public float y;
+        public float z;
+
+        public BaseRole(int id, int type, float x, float y, float z) {
+            this.id = id;
+            this.type = type;
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+    }
 }

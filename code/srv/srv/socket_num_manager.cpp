@@ -85,3 +85,24 @@ std::string SocketNumManager::_20001_GetMapData(std::string data) {
     return retStr;
 }
 
+std::string SocketNumManager::_20002_GetStartGameObjectData(std::string data) {
+    std::string retStr = "";
+
+    RoleCtrl * roleCtrl = RoleCtrl::GetInstance();
+    std::map<int, BaseRole *> * roleMap = roleCtrl->GetRoleMap();
+
+    for (std::map<int, BaseRole *>::iterator it = roleMap->begin(); it != roleMap->end(); ++it) {
+        if (retStr != "") {
+            retStr += "|";
+        }
+
+        int id = it->first;
+        int type = it->second->GetType();
+        Tool::Struct::Vector3 position = it->second->GetPosition();
+
+        retStr += Json::BaseRole(id, type, position.x, position.y, position.z).ToJsonStr();
+    }
+
+    return retStr;
+}
+

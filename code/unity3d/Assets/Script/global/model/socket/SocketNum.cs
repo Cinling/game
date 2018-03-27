@@ -75,4 +75,22 @@ public class SocketNum {
         Json.Map map = JsonUtility.FromJson<Json.Map>(recvData);
         return map;
     }
+
+    /// <summary>
+    /// 获取地图上所有的角色对象
+    /// </summary>
+    /// <returns></returns>
+    public static List<Json.BaseRole> _20002_GetStartGameObjectData() {
+        string sendData = "20002|";
+        string recvData = SocketTcp.Send(sendData);
+
+        string[] baseRoleJsonArray = recvData.Split('|');
+        List<Json.BaseRole> baseRoleList = new List<Json.BaseRole>();
+
+        for (int i=0; i< baseRoleJsonArray.Length; ++i) {
+            Json.BaseRole baseRole = JsonUtility.FromJson<Json.BaseRole>(baseRoleJsonArray[i]);
+            baseRoleList.Add(baseRole);
+        }
+        return baseRoleList;
+    }
 }

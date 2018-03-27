@@ -109,6 +109,26 @@ std::string Json::Map::ToJsonStr() {
     return Json::Encode(document);
 }
 
+Json::BaseRole::BaseRole(int id, int type, float x, float y, float z) {
+    this->id = id;
+    this->type = type;
+    this->x = x;
+    this->y = y;
+    this->z = z;
+}
+
 std::string Json::BaseRole::ToJsonStr() {
-    return std::string();
+    using namespace rapidjson;
+
+    Document document;
+    Document::AllocatorType& allocator = document.GetAllocator();
+    document.SetObject();
+
+    document.AddMember(Value(NameToStr(id), allocator), Value(this->id), allocator);
+    document.AddMember(Value(NameToStr(type), allocator), Value(this->type), allocator);
+    document.AddMember(Value(NameToStr(x), allocator), Value(this->x), allocator);
+    document.AddMember(Value(NameToStr(y), allocator), Value(this->y), allocator);
+    document.AddMember(Value(NameToStr(z), allocator), Value(this->z), allocator);
+
+    return Json::Encode(document);
 }

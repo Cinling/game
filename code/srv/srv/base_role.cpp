@@ -12,6 +12,10 @@ BaseRole::~BaseRole() {
     }
 }
 
+int BaseRole::GetType() {
+    return this->type;
+}
+
 Tool::Struct::Vector3 BaseRole::GetPosition() {
     return (*this->position);
 }
