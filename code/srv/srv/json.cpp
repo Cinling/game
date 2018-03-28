@@ -109,12 +109,13 @@ std::string Json::Map::ToJsonStr() {
     return Json::Encode(document);
 }
 
-Json::BaseRole::BaseRole(int id, int type, float x, float y, float z) {
+Json::BaseRole::BaseRole(int id, int type, float x, float y, float z, std::string specialShow) {
     this->id = id;
     this->type = type;
     this->x = x;
     this->y = y;
     this->z = z;
+    this->specialShow = specialShow;
 }
 
 std::string Json::BaseRole::ToJsonStr() {
@@ -129,6 +130,7 @@ std::string Json::BaseRole::ToJsonStr() {
     document.AddMember(Value(NameToStr(x), allocator), Value(this->x), allocator);
     document.AddMember(Value(NameToStr(y), allocator), Value(this->y), allocator);
     document.AddMember(Value(NameToStr(z), allocator), Value(this->z), allocator);
+    document.AddMember(Value(NameToStr(specialShow), allocator), Value(this->specialShow.c_str(), allocator), allocator);
 
     return Json::Encode(document);
 }

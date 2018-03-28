@@ -16,3 +16,7 @@ void Plant::UPSDo(void * voidRoleCtrl) {
 const std::map<std::string, std::string> Plant::GetInfo() {
     return std::map<std::string, std::string>();
 }
+
+const std::string Plant::GetSpecialShowData() {
+    return std::string();
+}

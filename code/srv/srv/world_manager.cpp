@@ -30,7 +30,7 @@ World::~World() {
 
 bool World::InitMap(Json::Map * map) {
     this->map = map;
-    this->RandomCreateTree(100);
+    this->RandomCreateTree(500);
     return true;
 }
 
@@ -68,21 +68,22 @@ Json::Map World::GetMapInfo() {
 bool World::RandomCreateTree(int num) {
     int minX = 0;
     int minZ = 0;
-    int maxX = (int)(this->map->width * 100);
-    int maxZ = (int)(this->map->length * 100);
+    int maxX = (int) this->map->width;
+    int maxZ = (int) this->map->length;
 
     RoleCtrl * roleCtrl = RoleCtrl::GetInstance();
+    MapManager * mapManager = MapManager::GetInstance();
 
     for (int i = 0; i < num; ++i) {
         int x = Tool::Math::Random(minX, maxX);
         int z = Tool::Math::Random(minZ, maxZ);
 
-        roleCtrl->CreateRole<Plant>(new Tool::Struct::Vector3((x / 100.0f), 0, (z / 100.0f)));
+        roleCtrl->CreateRole<Tree>(new Tool::Struct::Vector3(x, 0, z));
     }
 
-//#ifdef DEBUG
-//    roleCtrl->PrintRoleMap();
-//#endif
+    //#ifdef DEBUG
+    //    roleCtrl->PrintRoleMap();
+    //#endif
 
 
     return true;

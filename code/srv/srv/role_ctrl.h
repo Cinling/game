@@ -4,6 +4,7 @@
 #include "base_role.h"
 #include "animal.h"
 #include "plant.h"
+#include "tree.h"
 
 class RoleCtrl {
 private:

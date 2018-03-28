@@ -51,7 +51,7 @@ public class RoleCtrl {
     /// <param name="baseRole"></param>
     /// <returns></returns>
     public GameObject AddRole(Json.BaseRole baseRole) {
-        string prefab = PrefabPath._3D.Tree;
+        string prefab = RoleType.GetPrebPathByRoleType(baseRole.type);
         GameObject gameObject = Object.Instantiate(Resources.Load<GameObject>(prefab));
 
         // 设置上层 GameObject

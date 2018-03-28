@@ -9,5 +9,6 @@ public:
     // Í¨¹ý BaseRole ¼Ì³Ð
     virtual void UPSDo(void * voidRoleCtrl) override;
     virtual const std::map<std::string, std::string> GetInfo() override;
+    virtual const std::string GetSpecialShowData() override;
 };
 

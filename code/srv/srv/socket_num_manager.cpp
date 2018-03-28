@@ -99,8 +99,9 @@ std::string SocketNumManager::_20002_GetStartGameObjectData(std::string data) {
         int id = it->first;
         int type = it->second->GetType();
         Tool::Struct::Vector3 position = it->second->GetPosition();
+        std::string specialShow = it->second->GetSpecialShowData();
 
-        retStr += Json::BaseRole(id, type, position.x, position.y, position.z).ToJsonStr();
+        retStr += Json::BaseRole(id, type, position.x, position.y, position.z, specialShow).ToJsonStr();
     }
 
     return retStr;

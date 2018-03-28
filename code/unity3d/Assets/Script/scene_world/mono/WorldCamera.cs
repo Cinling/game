@@ -150,17 +150,17 @@ public class WorldCamera : MonoBehaviour {
             if (afterX < 0) {
                 // 移动后位置等于0
                 moveX = 0 - focusX;
-            } else if (afterX > limitLength) {
+            } else if (afterX > limitWidth) {
                 // 移动后位置等于限制的最大值
-                moveX = limitLength - focusX;
+                moveX = limitWidth - focusX;
             }
 
             float afterZ = focusZ + moveZ;
             if (afterZ < 0) {
                 // 移动后位置等于0
                 moveZ = 0 - focusZ;
-            } else if (afterZ > limitWidth) {
-                moveZ = limitWidth - focusZ;
+            } else if (afterZ > limitLength) {
+                moveZ = limitLength - focusZ;
             }
         }
 

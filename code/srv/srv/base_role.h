@@ -24,6 +24,8 @@ public:
     virtual void UPSDo(void * voidRoleCtrl) = 0;
     // 获取角色的详细数据，用于客户端展示
     virtual const std::map<std::string, std::string> GetInfo() = 0;
+    // 获取显示特殊的数据，如：动作、状态等，具体由不同的类型格式会不同
+    virtual const std::string GetSpecialShowData() = 0;
 };
 
 

@@ -153,7 +153,7 @@ void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr) {
     const char *sendData = socketTcp->GB2312ToUTF8(retData.c_str());
     int sendLen = static_cast<int>(strlen(sendData));
 
-    send(client, std::to_string(sendLen).c_str(), 6, 0);
+    send(client, std::to_string(sendLen).c_str(), 7, 0);
     send(client, sendData, sendLen, 0);
 
 #ifdef DEBUG

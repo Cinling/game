@@ -66,8 +66,10 @@ namespace Json {
         float x;
         float y;
         float z;
+        // 扩展json数据，用于根据不同类型的物体进行的特殊显示处理
+        std::string specialShow;
 
-        BaseRole(int id, int type, float x, float y, float z);
+        BaseRole(int id, int type, float x, float y, float z, std::string specialShow);
 
         // 通过 Base 继承
         virtual std::string ToJsonStr() override;

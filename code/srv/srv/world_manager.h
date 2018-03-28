@@ -1,5 +1,6 @@
 #pragma once
 
+#include "map_manager.h"
 #include "sqlite_tool.h"
 #include "db_manager.h"
 #include "role_ctrl.h"

@@ -64,9 +64,8 @@ public class CanvasGame : MonoBehaviour {
     private void FpsInputEvent() {
 
         if (Input.GetKeyDown("n")) {
-            //RoleCtrl.GetInstence().Test_CreateGuy();
             RoleCtrl roleCtrl = RoleCtrl.GetInstence();
-            roleCtrl.AddRole(new Json.BaseRole(1, 21000, 1, 0, 1));
+            roleCtrl.AddRole(new Json.BaseRole(1, 21000, 1, 0, 1, ""));
 
             int i = 1;
         }

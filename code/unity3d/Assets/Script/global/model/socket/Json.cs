@@ -35,13 +35,15 @@ namespace Json {
         public float x;
         public float y;
         public float z;
+        public string specialShow;
 
-        public BaseRole(int id, int type, float x, float y, float z) {
+        public BaseRole(int id, int type, float x, float y, float z, string specialShow) {
             this.id = id;
             this.type = type;
             this.x = x;
             this.y = y;
             this.z = z;
+            this.specialShow = specialShow;
         }
     }
 }
