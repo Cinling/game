@@ -52,9 +52,13 @@ bool World::Exit() {
 }
 
 bool World::Save() {
+    bool retBool = false;
+
     MapDB * mapDB = MapDB::GetInstance();
-    //mapDB->Insert(id, (int)width, (int)length);
-    return false;
+    int mapId = mapDB->GetMaxId();
+    retBool = mapDB->Insert(mapId, this->map->height, this->map->length);
+
+    return retBool;
 }
 
 bool World::Load() {

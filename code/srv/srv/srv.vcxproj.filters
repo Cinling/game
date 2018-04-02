@@ -102,6 +102,9 @@
     <ClCompile Include="tree.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="role_db.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -265,6 +268,12 @@
     </ClInclude>
     <ClInclude Include="role_ctrl.h">
       <Filter>头文件\game\role</Filter>
+    </ClInclude>
+    <ClInclude Include="role_db.h">
+      <Filter>头文件\model\db</Filter>
+    </ClInclude>
+    <ClInclude Include="db_interface.h">
+      <Filter>头文件\model\db</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

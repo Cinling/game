@@ -1,5 +1,6 @@
 /.vs
 /Debug
+/srv/saves
 x64
 *.obj
 *.log

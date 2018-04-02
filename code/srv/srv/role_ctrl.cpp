@@ -38,6 +38,28 @@ std::map<int, BaseRole *> * RoleCtrl::GetRoleMap() {
     return this->roleMap;
 }
 
+bool RoleCtrl::Save() {
+    bool retBool = true;
+
+    if (this->roleMap != nullptr) {
+
+        RoleDB * roleDB = RoleDB::GetInstance();
+
+        for (std::map<int, BaseRole *>::iterator it = this->roleMap->begin(); it != this->roleMap->end(); ++it) {
+            int roleId = it->first;
+            BaseRole * baseRole = it->second;
+            std::string info = Tool::MapToJsonStr(baseRole->GetInfo());
+
+            if (!roleDB->InsertOnce(roleId, baseRole->GetType(), baseRole->GetPosition(), baseRole->GetRotation(), info)) {
+                retBool = false;
+                break;
+            }
+        }
+    }
+
+    return retBool;
+}
+
 void RoleCtrl::PrintRoleMap() {
     for (std::map<int, BaseRole *>::iterator it = this->roleMap->begin(); it != roleMap->end(); ++it) {
         BaseRole * role = it->second;

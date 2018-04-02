@@ -1,6 +1,6 @@
 #pragma once
 
-#include "sqlite_tool.h"
+#include "db_interface.h"
 #include "../lib/rapidjson/document.h"
 #include "../lib/rapidjson/prettywriter.h"
 
@@ -9,7 +9,7 @@
 #include <list>
 #include <map>
 
-class MapDB {
+class MapDB : public DBInterface {
 private:
     static MapDB * shareInstance;
     MapDB();
@@ -17,6 +17,9 @@ private:
 public:
     static MapDB * GetInstance();
     ~MapDB();
+
+    // 通过 DBInterface 继承
+    virtual bool CreateTable() override;
 public:
     // 数据表名
     static const std::string TABLE_NAME;
@@ -31,7 +34,7 @@ public:
     // 插入世界的数据
     // return [true 操作成功] [false 操作失败]
     bool Insert(int id, int worldWidth, int worldLength);
-    // 获取上次插入的id
+    // 获取数据库中最大的Id值
     int GetMaxId();
 
 private:

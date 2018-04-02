@@ -14,10 +14,25 @@ MapDB::MapDB() {
 
 
 MapDB * MapDB::GetInstance() {
-    return nullptr;
+
+    if (shareInstance == nullptr) {
+        shareInstance = new MapDB();
+    }
+    return shareInstance;
 }
 
 MapDB::~MapDB() {
+}
+
+bool MapDB::CreateTable() {
+    SqliteTool * sqliteTool = SqliteTool::GetInstance();
+    std::string sql = "CREATE TABLE IF NOT EXISTS `" + MapDB::TABLE_NAME + "` ("
+        + "`" + MapDB::FIELD_ID + "` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+        + "`" + MapDB::FIELD_INFO + "` TEXT NOT NULL,"
+        + "`" + MapDB::FIELD_CONFIG + "` TEXT NOT NULL"
+        + ");";
+
+    return sqliteTool->ExecSql(sql.c_str());
 }
 
 bool MapDB::Insert(int id, int worldWidth, int worldLength) {

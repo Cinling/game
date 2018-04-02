@@ -24,20 +24,25 @@ SavesManager::~SavesManager() {
 }
 
 bool SavesManager::Save(std::string savesName) {
+    bool retBool = true;
 
     SqliteTool::UseDB((SavesManager::SAVES_PATH + savesName).c_str());
-
     DBManager * db = DBManager::GetInstance();
-    if (!db->DBUpdate()) {
-        return false;
+    if (!db->CreateDBTable()) {
+        retBool = false;
     }
 
     // 保存世界
     if (!this->SaveWorld()) {
-        return false;
+        retBool = false;
     }
 
-    return true;
+    // 保存角色
+    if (!this->SaveRole()) {
+        retBool = false;
+    }
+
+    return retBool;
 }
 
 std::vector<std::string> SavesManager::GetSavesList() {
@@ -59,8 +64,12 @@ bool SavesManager::Load(std::string savesName) {
 
 bool SavesManager::SaveWorld() {
     World * world = World::GetInstance();
-    world->Save();
-    return true;
+    return world->Save();
+}
+
+bool SavesManager::SaveRole() {
+    RoleCtrl * roleCtrl = RoleCtrl::GetInstance();
+    return roleCtrl->Save();
 }
 
 bool SavesManager::BackupTemporarySaves(std::string savesName) {

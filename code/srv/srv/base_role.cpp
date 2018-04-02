@@ -2,6 +2,7 @@
 
 BaseRole::BaseRole(Tool::Struct::Vector3 * vector3) {
     this->position = vector3;
+    this->rotation = 0.0f;
     this->type = RoleType::BaseRole;
 }
 
@@ -18,4 +19,8 @@ int BaseRole::GetType() {
 
 Tool::Struct::Vector3 BaseRole::GetPosition() {
     return (*this->position);
+}
+
+float BaseRole::GetRotation() {
+    return this->rotation;
 }

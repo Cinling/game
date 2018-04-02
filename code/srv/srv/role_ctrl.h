@@ -1,6 +1,8 @@
 #pragma once
 
 #include "tool.h"
+#include "role_db.h"
+
 #include "base_role.h"
 #include "animal.h"
 #include "plant.h"
@@ -25,6 +27,9 @@ public:
 
     // 获取所有角色列表的map
     std::map<int, BaseRole *> * GetRoleMap();
+
+    // 保存所有角色的数据
+    bool Save();
 
 public: //调试的方法
     void PrintRoleMap();

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "json.h"
+
 #include <io.h>  
 #include <direct.h>  
 
@@ -20,6 +22,11 @@
 namespace Tool {
     // 获取系统时间戳（秒）
     long long GetTimeSecond();
+
+    // 把 std::map<std::string, std::string> 转为 std::string 的json字符串
+    std::string MapToJsonStr(std::map<std::string, std::string> jsonMap);
+    // 把 std::string 的json字符串 转为 std::map<std::string, std::string>
+    //std::map<std::string, std::string> JaonStrToMap(std::string jsonStr);
 
     // 文件工具
     namespace File {

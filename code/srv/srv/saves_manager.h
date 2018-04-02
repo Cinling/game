@@ -36,6 +36,7 @@ public:
 private:
     /*存档具体的细节处理*/
     bool SaveWorld();
+    bool SaveRole();
     
     // 【备份临时存档】
     // 实际上的更名

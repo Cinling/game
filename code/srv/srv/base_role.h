@@ -8,7 +8,10 @@ protected:
     // 角色类型
     int type;
 protected:
+    // 角色的位置
     Tool::Struct::Vector3 * position;
+    // 角色的面向方向(360°)
+    float rotation;
 public:
     // 所有子类必须实现的构造函数，用于初始化一个角色对象
     BaseRole(Tool::Struct::Vector3 * vector3);
@@ -18,6 +21,8 @@ public:
     int GetType();
     // 获取角色的位置信息
     Tool::Struct::Vector3 GetPosition();
+    // 获取角色的面向方向
+    float GetRotation();
 
 public:
     // 每个逻辑帧需要刷新的数据

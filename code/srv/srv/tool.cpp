@@ -13,6 +13,24 @@ long long Tool::GetTimeSecond() {
     return time;
 }
 
+std::string Tool::MapToJsonStr(std::map<std::string, std::string> jsonMap) {
+    using namespace rapidjson;
+
+    Document document;
+    Document::AllocatorType& allocator = document.GetAllocator();
+    document.SetObject();
+
+    for (std::map<std::string, std::string>::iterator it = jsonMap.begin(); it != jsonMap.end(); ++it) {
+        document.AddMember(Value(it->first.c_str(), allocator), Value(it->second.c_str(), allocator), allocator);
+    }
+
+    return Json::Encode(document);
+}
+
+//std::map<std::string, std::string> Tool::JaonStrToMap(std::string) {
+//    return std::map<std::string, std::string>();
+//}
+
 bool Tool::File::Rename(std::string oldDir, std::string newDir) {
     return false;
 }
