@@ -39,5 +39,8 @@ public:
     // rotation 角色方向
     // info 特异性的信息
     bool InsertOnce(int id, int type, Tool::Struct::Vector3 position, float rotation, std::string info);
+
+    // 查询所有数据
+    std::list<std::map<std::string, std::string>> SelectAll();
 };
 

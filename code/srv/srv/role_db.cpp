@@ -57,3 +57,10 @@ bool RoleDB::InsertOnce(int id, int type, Tool::Struct::Vector3 position, float 
     SqliteTool * sqlite = SqliteTool::GetInstance();
     return sqlite->ExecSql(sql.c_str());
 }
+
+std::list<std::map<std::string, std::string>> RoleDB::SelectAll() {
+    SqliteTool * sqliteTool = SqliteTool::GetInstance();
+
+    std::string sql = "SELECT * FROM `" + RoleDB::TABLE_NAME + "`";
+    return sqliteTool->Query(sql.c_str());
+}

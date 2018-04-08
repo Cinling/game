@@ -6,17 +6,17 @@
 #include "role_ctrl.h"
 #include "json.h"
 
-class World {
+class WorldManager {
 private:
-    static World *shareInstance;
-    World();
+    static WorldManager *shareInstance;
+    WorldManager();
 
     // 当前地图
     Json::Map * map;
 
 public:
-    static World * GetInstance();
-    ~World();
+    static WorldManager * GetInstance();
+    ~WorldManager();
 
     // 初始化世界（首次进入游戏，创建世界）
     bool InitMap(Json::Map * map);
@@ -37,6 +37,7 @@ public:
     bool Save();
 
     // 加载游戏数据
+    // savesName 存档名字
     bool Load();
 
     // 获取地图数据

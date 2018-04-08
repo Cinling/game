@@ -30,6 +30,8 @@ public:
 
     // 保存所有角色的数据
     bool Save();
+    // 载入所有角色
+    bool Load();
 
 public: //调试的方法
     void PrintRoleMap();

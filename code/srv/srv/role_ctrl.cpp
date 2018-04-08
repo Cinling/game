@@ -60,6 +60,23 @@ bool RoleCtrl::Save() {
     return retBool;
 }
 
+bool RoleCtrl::Load() {
+    bool retBool = true;
+
+    RoleDB * roleDB = RoleDB::GetInstance();
+    std::list<std::map<std::string, std::string>> roleInfoList = roleDB->SelectAll();
+    if (this->roleMap != nullptr) {
+        delete this->roleMap;
+        this->roleMap = nullptr;
+    }
+    this->roleMap = new std::map<int, BaseRole *>();
+    for (std::list<std::map<std::string, std::string>>::iterator it = roleInfoList.begin(); it != roleInfoList.end(); ++it) {
+        //###################
+    }
+
+    return retBool;
+}
+
 void RoleCtrl::PrintRoleMap() {
     for (std::map<int, BaseRole *>::iterator it = this->roleMap->begin(); it != roleMap->end(); ++it) {
         BaseRole * role = it->second;

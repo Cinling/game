@@ -53,6 +53,8 @@ namespace Json {
         float height;
 
         Map(float width, float length, float height);
+        // 通过特定的json初始化
+        Map(std::string json);
 
         // 通过 Base 继承
         virtual std::string ToJsonStr() override;

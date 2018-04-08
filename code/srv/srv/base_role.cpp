@@ -13,12 +13,18 @@ BaseRole::~BaseRole() {
     }
 }
 
+void BaseRole::SetType(int type) {
+}
+
 int BaseRole::GetType() {
     return this->type;
 }
 
 Tool::Struct::Vector3 BaseRole::GetPosition() {
     return (*this->position);
+}
+
+void BaseRole::SetRotation(float rotation) {
 }
 
 float BaseRole::GetRotation() {

@@ -2,21 +2,21 @@
 
 
 
-World * World::shareInstance = nullptr;
+WorldManager * WorldManager::shareInstance = nullptr;
 
-World * World::GetInstance() {
+WorldManager * WorldManager::GetInstance() {
     if (shareInstance == nullptr) {
-        shareInstance = new World();
+        shareInstance = new WorldManager();
     }
     return shareInstance;
 }
 
-World::World() {
+WorldManager::WorldManager() {
     this->map = nullptr;
 }
 
 
-World::~World() {
+WorldManager::~WorldManager() {
     if (shareInstance != nullptr) {
         delete shareInstance;
         shareInstance = nullptr;
@@ -28,48 +28,64 @@ World::~World() {
     }
 }
 
-bool World::InitMap(Json::Map * map) {
+bool WorldManager::InitMap(Json::Map * map) {
     this->map = map;
     this->RandomCreateTree(500);
     return true;
 }
 
-bool World::Start() {
-    this->Load();
+bool WorldManager::Start() {
     return false;
 }
 
-bool World::Pause() {
+bool WorldManager::Pause() {
     return false;
 }
 
-bool World::Resume() {
+bool WorldManager::Resume() {
     return false;
 }
 
-bool World::Exit() {
+bool WorldManager::Exit() {
     return false;
 }
 
-bool World::Save() {
+bool WorldManager::Save() {
     bool retBool = false;
 
     MapDB * mapDB = MapDB::GetInstance();
-    int mapId = mapDB->GetMaxId();
-    retBool = mapDB->Insert(mapId, this->map->height, this->map->length);
+
+    int mapId = 1;
+
+    std::string config = this->map->ToJsonStr();
+
+    retBool = mapDB->Insert(mapId, config, std::string());
 
     return retBool;
 }
 
-bool World::Load() {
-    return false;
+bool WorldManager::Load() {
+    bool retBool = false;
+
+    // 载入地图数据
+    MapDB * mapDB = MapDB::GetInstance();
+    std::list<std::map<std::string, std::string>> mapInfoList = mapDB->SelectAll();
+    std::list<std::map<std::string, std::string>>::iterator it = mapInfoList.begin();
+    if (it != mapInfoList.end()) {
+        std::map<std::string, std::string> mapInfo = *it;
+        std::string config = mapInfo[MapDB::FIELD_CONFIG];
+        this->map = new Json::Map(config);
+        retBool = true;
+    }
+
+    return retBool;
 }
 
-Json::Map World::GetMapInfo() {
+Json::Map WorldManager::GetMapInfo() {
     return (*this->map);
 }
 
-bool World::RandomCreateTree(int num) {
+bool WorldManager::RandomCreateTree(int num) {
     int minX = 0;
     int minZ = 0;
     int maxX = (int) this->map->width;
@@ -94,7 +110,7 @@ bool World::RandomCreateTree(int num) {
 }
 
 
-void World::SaveWorld() {
+void WorldManager::SaveWorld() {
 
 }
 

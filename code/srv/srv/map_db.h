@@ -31,11 +31,14 @@ public:
     static const std::string FIELD_CONFIG;
 
 public:
-    // 插入世界的数据
+    // [不推荐使用]插入世界的数据
     // return [true 操作成功] [false 操作失败]
     bool Insert(int id, int worldWidth, int worldLength);
+    bool Insert(int id, std::string config, std::string info);
     // 获取数据库中最大的Id值
     int GetMaxId();
+    // 获取所有数据
+    std::list<std::map<std::string, std::string>> SelectAll();
 
 private:
     // 把配置数据转为json字符串

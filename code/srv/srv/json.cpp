@@ -95,6 +95,17 @@ Json::Map::Map(float width, float length, float height) {
     this->height = height;
 }
 
+Json::Map::Map(std::string json) {
+    using namespace rapidjson;
+
+    Document document;
+    document.Parse(json.c_str());
+
+    this->width = Json::GetFloat(document, NameToStr(width), 0);
+    this->length = Json::GetFloat(document, NameToStr(length), 0);
+    this->height = Json::GetFloat(document, NameToStr(height), 0);
+}
+
 std::string Json::Map::ToJsonStr() {
     using namespace rapidjson;
 

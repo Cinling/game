@@ -59,17 +59,29 @@ std::vector<std::string> SavesManager::GetSavesList() {
 }
 
 bool SavesManager::Load(std::string savesName) {
+    SqliteTool::UseDB((SavesManager::SAVES_PATH + savesName).c_str());
+
     return false;
 }
 
 bool SavesManager::SaveWorld() {
-    World * world = World::GetInstance();
-    return world->Save();
+    WorldManager * worldManager = WorldManager::GetInstance();
+    return worldManager->Save();
+}
+
+bool SavesManager::LoadWorld() {
+    WorldManager * worldManager = WorldManager::GetInstance();
+    return worldManager->Load();
 }
 
 bool SavesManager::SaveRole() {
     RoleCtrl * roleCtrl = RoleCtrl::GetInstance();
     return roleCtrl->Save();
+}
+
+bool SavesManager::LoadRole() {
+    RoleCtrl * roleCtrl = RoleCtrl::GetInstance();
+    return roleCtrl->Load();
 }
 
 bool SavesManager::BackupTemporarySaves(std::string savesName) {

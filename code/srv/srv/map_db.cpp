@@ -45,6 +45,14 @@ bool MapDB::Insert(int id, int worldWidth, int worldLength) {
     return sqliteTool->ExecSql(sql.c_str());
 }
 
+bool MapDB::Insert(int id, std::string config, std::string info) {
+    SqliteTool *sqliteTool = SqliteTool::GetInstance();
+    std::string sql = "INSERT INTO `" + MapDB::TABLE_NAME
+        + "` (`" + MapDB::FIELD_ID + "`, `" + MapDB::FIELD_INFO + "`, `" + MapDB::FIELD_CONFIG + "`)"
+        + "VALUES (" + std::to_string(id) + ", '" + config + "', '" + config + "')";
+    return sqliteTool->ExecSql(sql.c_str());
+}
+
 int MapDB::GetMaxId() {
     SqliteTool *sqliteTool = SqliteTool::GetInstance();
     std::string sql = "SELECT `" + MapDB::FIELD_ID + "` FROM `" + MapDB::TABLE_NAME + "` ORDER BY `" + MapDB::FIELD_ID + "` DESC LIMIT 0,1";
@@ -58,6 +66,12 @@ int MapDB::GetMaxId() {
     }
 
     return lastInsertId;
+}
+
+std::list<std::map<std::string, std::string>> MapDB::SelectAll() {
+    SqliteTool * sqliteTool = SqliteTool::GetInstance();
+    std::string sql = "SELECT `" + MapDB::FIELD_ID + "`, `" + MapDB::FIELD_CONFIG + "`, `" + MapDB::FIELD_INFO + "` FROM `" + MapDB::TABLE_NAME + "`";
+    return sqliteTool->Query(sql.c_str());
 }
 
 

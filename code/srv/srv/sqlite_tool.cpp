@@ -61,7 +61,11 @@ void SqliteTool::UseDB(const char * dbName) {
 }
 
 SqliteTool::~SqliteTool() {
-    sqlite3_close(this->sqlite);
+    if (this->sqlite != nullptr) {
+        sqlite3_close(this->sqlite);
+        delete this->sqlite;
+        this->sqlite = nullptr;
+    }
 
     if (shareInstance != nullptr) {
         delete shareInstance;

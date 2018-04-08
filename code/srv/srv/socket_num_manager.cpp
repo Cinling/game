@@ -35,7 +35,7 @@ std::string SocketNumManager::_10001_InitMap(std::string data) {
     float height = Json::GetFloat(document, "height", 0);
 
     // 初始化游戏世界的数据
-    World * world = World::GetInstance();
+    WorldManager * world = WorldManager::GetInstance();
     Json::Map *map = new Json::Map(width, length, height);
     if (!world->InitMap(map)) {
         return "false";
@@ -75,12 +75,17 @@ std::string SocketNumManager::_10003_GetSavesList(std::string data) {
 }
 
 std::string SocketNumManager::_10004_LoadGame(std::string data) {
-    std::string send = "true";
+    
+    SavesManager * savesManager = SavesManager::GetInstance();
+    std::string send = "false";
+    if (savesManager->Load(data)) {
+        send = "true";
+    }
     return send;
 }
 
 std::string SocketNumManager::_20001_GetMapData(std::string data) {
-    World * world = World::GetInstance();
+    WorldManager * world = WorldManager::GetInstance();
     std::string retStr = world->GetMapInfo().ToJsonStr();
     return retStr;
 }
