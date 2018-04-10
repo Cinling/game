@@ -26,7 +26,7 @@ namespace Tool {
     // 把 std::map<std::string, std::string> 转为 std::string 的json字符串
     std::string MapToJsonStr(std::map<std::string, std::string> jsonMap);
     // 把 std::string 的json字符串 转为 std::map<std::string, std::string>
-    //std::map<std::string, std::string> JaonStrToMap(std::string jsonStr);
+    std::map<std::string, std::string> JaonStrToMap(std::string jsonStr);
 
     // 文件工具
     namespace File {
@@ -60,8 +60,10 @@ namespace Tool {
             float x;
             float y;
             float z;
-            
+
+            Vector3();
             Vector3(float x, float y, float z);
+            ~Vector3();
         };
     }
 

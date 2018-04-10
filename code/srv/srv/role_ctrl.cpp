@@ -70,11 +70,48 @@ bool RoleCtrl::Load() {
         this->roleMap = nullptr;
     }
     this->roleMap = new std::map<int, BaseRole *>();
+
     for (std::list<std::map<std::string, std::string>>::iterator it = roleInfoList.begin(); it != roleInfoList.end(); ++it) {
-        //###################
+        std::map<std::string, std::string> roleRowData = *it;
+
+        int id = std::stoi(roleRowData[RoleDB::FIELD_ID]);
+        int roleType = std::stoi(roleRowData[RoleDB::FIELD_TYPE]);
+        float x = std::stof(roleRowData[RoleDB::FIELD_X]);
+        float y = std::stof(roleRowData[RoleDB::FIELD_Y]);
+        float z = std::stof(roleRowData[RoleDB::FIELD_Z]);
+        float rotation = std::stof(roleRowData[RoleDB::FIELD_ROTATION]);
+        std::string infoStr = roleRowData[RoleDB::FIELD_INFO];
+
+        Tool::Struct::Vector3 * position = new Tool::Struct::Vector3(x, y, z);
+        std::map<std::string, std::string> info = Tool::JaonStrToMap(infoStr);
+
+        if (!this->AddRoleByType(id, roleType, position, rotation, info)) {
+            retBool = false;
+        }
     }
 
     return retBool;
+}
+
+bool RoleCtrl::AddRoleByType(int id, int roleType, Tool::Struct::Vector3 * position, float rotation, std::map<std::string, std::string> &info) {
+    BaseRole * baseRole = nullptr;
+
+    switch (roleType) {
+        case RoleType::Animal:
+            baseRole = this->AddRoleWithLoad<Animal>(id, roleType, position, rotation, info);
+            break;
+        case RoleType::Plant:
+            baseRole = this->AddRoleWithLoad<Plant>(id, roleType, position, rotation, info);
+            break;
+        case RoleType::Tree:
+            baseRole = this->AddRoleWithLoad<Tree>(id, roleType, position, rotation, info);
+            break;
+    }
+
+    if (baseRole != nullptr) {
+        return true;
+    }
+    return false;
 }
 
 void RoleCtrl::PrintRoleMap() {

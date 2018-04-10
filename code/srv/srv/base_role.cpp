@@ -1,7 +1,7 @@
 #include "base_role.h"
 
-BaseRole::BaseRole(Tool::Struct::Vector3 * vector3) {
-    this->position = vector3;
+BaseRole::BaseRole(Tool::Struct::Vector3 * position) {
+    this->position = position;
     this->rotation = 0.0f;
     this->type = RoleType::BaseRole;
 }
@@ -9,8 +9,8 @@ BaseRole::BaseRole(Tool::Struct::Vector3 * vector3) {
 BaseRole::~BaseRole() {
     if (this->position != nullptr) {
         delete this->position;
-        this->position = nullptr;
     }
+    return;
 }
 
 void BaseRole::SetType(int type) {
@@ -20,7 +20,11 @@ int BaseRole::GetType() {
     return this->type;
 }
 
-Tool::Struct::Vector3 BaseRole::GetPosition() {
+void BaseRole::SetPosition(Tool::Struct::Vector3 * position) {
+    this->position = position;
+}
+
+Tool::Struct::Vector3 & BaseRole::GetPosition() {
     return (*this->position);
 }
 

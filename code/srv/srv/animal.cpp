@@ -16,3 +16,10 @@ void Animal::UPSDo(void * voidRoleCtrl) {
 const std::map<std::string, std::string> Animal::GetInfo() {
     return std::map<std::string, std::string>();
 }
+
+void Animal::SetInfo(std::map<std::string, std::string>& info) {
+}
+
+const std::string Animal::GetSpecialShowData() {
+    return std::string();
+}

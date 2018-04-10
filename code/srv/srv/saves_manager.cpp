@@ -59,9 +59,19 @@ std::vector<std::string> SavesManager::GetSavesList() {
 }
 
 bool SavesManager::Load(std::string savesName) {
+    bool retBool = true;
+
     SqliteTool::UseDB((SavesManager::SAVES_PATH + savesName).c_str());
 
-    return false;
+    if (!this->LoadWorld()) {
+        retBool = false;
+    }
+
+    if (!this->LoadRole()) {
+        retBool = false;
+    }
+
+    return retBool;
 }
 
 bool SavesManager::SaveWorld() {

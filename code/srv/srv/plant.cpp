@@ -21,5 +21,5 @@ const std::string Plant::GetSpecialShowData() {
     return std::string();
 }
 
-void Plant::SetInfo(std::map<std::string, std::string>) {
+void Plant::SetInfo(std::map<std::string, std::string>& info) {
 }

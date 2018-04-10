@@ -27,9 +27,19 @@ std::string Tool::MapToJsonStr(std::map<std::string, std::string> jsonMap) {
     return Json::Encode(document);
 }
 
-//std::map<std::string, std::string> Tool::JaonStrToMap(std::string) {
-//    return std::map<std::string, std::string>();
-//}
+std::map<std::string, std::string> Tool::JaonStrToMap(std::string jsonStr) {
+    using namespace rapidjson;
+
+    Document document;
+    document.Parse(jsonStr.c_str());
+    std::map<std::string, std::string> map = std::map<std::string, std::string>();
+
+    for (Value::ConstMemberIterator itr = document.MemberBegin(); itr != document.MemberEnd(); ++itr) {
+        map[std::string(itr->name.GetString())] = std::string(itr->value.GetString());
+    }
+
+    return map;
+}
 
 bool Tool::File::Rename(std::string oldDir, std::string newDir) {
     return false;
@@ -94,10 +104,19 @@ bool Tool::File::DeleteFile(std::string fileName) {
     return false;
 }
 
+Tool::Struct::Vector3::Vector3() {
+    this->x = 0;
+    this->y = 0;
+    this->z = 0;
+}
+
 Tool::Struct::Vector3::Vector3(float x, float y, float z) {
     this->x = x;
     this->y = y;
     this->z = z;
+}
+
+Tool::Struct::Vector3::~Vector3() {
 }
 
 int Tool::Math::Random(int min, int max) {

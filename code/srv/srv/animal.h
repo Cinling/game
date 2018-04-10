@@ -5,7 +5,7 @@
 
 class Animal : public BaseRole {
 public:
-    Animal(Tool::Struct::Vector3 * vector3);
+    Animal(Tool::Struct::Vector3 * position);
     ~Animal();
 
     // 通过 BaseRole 继承
@@ -13,5 +13,9 @@ public:
 
     // 通过 BaseRole 继承
     virtual const std::map<std::string, std::string> GetInfo() override;
+
+    // 通过 BaseRole 继承
+    virtual void SetInfo(std::map<std::string, std::string> & info) override;
+    virtual const std::string GetSpecialShowData() override;
 };
 

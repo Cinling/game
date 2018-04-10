@@ -12,6 +12,6 @@ public:
     virtual const std::string GetSpecialShowData() override;
 
     // Í¨¹ý BaseRole ¼Ì³Ð
-    virtual void SetInfo(std::map<std::string, std::string>) override;
+    virtual void SetInfo(std::map<std::string, std::string>& info) override;
 };
 
