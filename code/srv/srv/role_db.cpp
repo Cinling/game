@@ -44,7 +44,7 @@ bool RoleDB::CreateTable() {
 
 bool RoleDB::InsertOnce(int id, int type, Tool::Struct::Vector3 position, float rotation, std::string info) {
     std::string str_id = std::to_string(id);
-    std::string str_type = std::to_string(id);
+    std::string str_type = std::to_string(type);
     std::string str_x = std::to_string(position.x);
     std::string str_y = std::to_string(position.y);
     std::string str_z = std::to_string(position.z);
