@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "db_interface.h"
 #include "../lib/rapidjson/document.h"
@@ -18,30 +18,30 @@ public:
     static MapDB * GetInstance();
     ~MapDB();
 
-    // Í¨¹ı DBInterface ¼Ì³Ğ
+    // é€šè¿‡ DBInterface ç»§æ‰¿
     virtual bool CreateTable() override;
 public:
-    // Êı¾İ±íÃû
+    // æ•°æ®è¡¨å
     static const std::string TABLE_NAME;
-    // INTEGER Ö÷¼ü
+    // INTEGER ä¸»é”®
     static const std::string FIELD_ID;
-    // TEXT µØÍ¼ĞÅÏ¢£¨¾²Ì¬µÄÎï¼ş£©
+    // TEXT åœ°å›¾ä¿¡æ¯ï¼ˆé™æ€çš„ç‰©ä»¶ï¼‰
     static const std::string FIELD_INFO;
-    // TEXT ÅäÖÃ£¬ÈçµØÍ¼´óĞ¡¡¢»·¾³¡¢ÖÖ×ÓµÈ£¬²»¿ÉĞŞ¸ÄµÄĞÅÏ¢
+    // TEXT é…ç½®ï¼Œå¦‚åœ°å›¾å¤§å°ã€ç¯å¢ƒã€ç§å­ç­‰ï¼Œä¸å¯ä¿®æ”¹çš„ä¿¡æ¯
     static const std::string FIELD_CONFIG;
 
 public:
-    // [²»ÍÆ¼öÊ¹ÓÃ]²åÈëÊÀ½çµÄÊı¾İ
-    // return [true ²Ù×÷³É¹¦] [false ²Ù×÷Ê§°Ü]
+    // [ä¸æ¨èä½¿ç”¨]æ’å…¥ä¸–ç•Œçš„æ•°æ®
+    // return [true æ“ä½œæˆåŠŸ] [false æ“ä½œå¤±è´¥]
     bool Insert(int id, int worldWidth, int worldLength);
     bool Insert(int id, std::string config, std::string info);
-    // »ñÈ¡Êı¾İ¿âÖĞ×î´óµÄIdÖµ
+    // è·å–æ•°æ®åº“ä¸­æœ€å¤§çš„Idå€¼
     int GetMaxId();
-    // »ñÈ¡ËùÓĞÊı¾İ
+    // è·å–æ‰€æœ‰æ•°æ®
     std::list<std::map<std::string, std::string>> SelectAll();
 
 private:
-    // °ÑÅäÖÃÊı¾İ×ªÎªjson×Ö·û´®
+    // æŠŠé…ç½®æ•°æ®è½¬ä¸ºjsonå­—ç¬¦ä¸²
     std::string GetConfigJsonStr(int worldWidth, int worldLength);
 };
 

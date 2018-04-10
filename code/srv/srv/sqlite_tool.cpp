@@ -1,4 +1,4 @@
-#include "sqlite_tool.h"
+ï»¿#include "sqlite_tool.h"
 
 
 SqliteTool * SqliteTool::shareInstance = nullptr;
@@ -10,7 +10,7 @@ SqliteTool::SqliteTool(const char * db) {
         this->CreateDirWithDBName(db);
     }
 
-    // ÉèÖÃÄÚ²¿Ê¹ÓÃµÄÊı¾İ¿âÃû³Æ
+    // è®¾ç½®å†…éƒ¨ä½¿ç”¨çš„æ•°æ®åº“åç§°
     size_t tmpLen = strlen(db) + 1;
     SqliteTool::db = new char[tmpLen];
     strcpy_s(SqliteTool::db, tmpLen, db);
@@ -67,7 +67,7 @@ SqliteTool::~SqliteTool() {
     }
 }
 
-// Ö´ĞĞsql²éÑ¯Ê±´¥·¢µÄ·½·¨
+// æ‰§è¡ŒsqlæŸ¥è¯¢æ—¶è§¦å‘çš„æ–¹æ³•
 static int QueryCallback(void *data, int argc, char **argv, char **azColName) {
     std::map<std::string, std::string> map;
 

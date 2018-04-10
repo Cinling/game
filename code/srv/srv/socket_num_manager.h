@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "world_manager.h"
 #include "saves_manager.h"
@@ -15,20 +15,20 @@ private:
 public:
     static SocketNumManager * GetInstance();
 
-    /*¿Í»§¶Ë²Ù×÷·şÎñ¶Ë£¬·şÎñ¶Ë×ö³öÏàÓ¦µÄ´¦Àí*/
-    // ³õÊ¼»¯ÓÎÏ·ÊÀ½çµÄ´¦Àí
+    /*å®¢æˆ·ç«¯æ“ä½œæœåŠ¡ç«¯ï¼ŒæœåŠ¡ç«¯åšå‡ºç›¸åº”çš„å¤„ç†*/
+    // åˆå§‹åŒ–æ¸¸æˆä¸–ç•Œçš„å¤„ç†
     std::string _10001_InitMap(std::string data);
-    // ±£´æÓÎÏ·
+    // ä¿å­˜æ¸¸æˆ
     std::string _10002_Save(std::string data);
-    // »ñÈ¡ÓÎÏ·´æµµÁĞ±í
+    // è·å–æ¸¸æˆå­˜æ¡£åˆ—è¡¨
     std::string _10003_GetSavesList(std::string data);
-    // ÔØÈëÓÎÏ·´æµµ
+    // è½½å…¥æ¸¸æˆå­˜æ¡£
     std::string _10004_LoadGame(std::string data);
 
-    /*¿Í»§¶ËÇëÇó·şÎñ¶ËÊı¾İ*/
-    // »ñÈ¡ÓÎÏ·µÄµØÍ¼µÄÊı¾İ
+    /*å®¢æˆ·ç«¯è¯·æ±‚æœåŠ¡ç«¯æ•°æ®*/
+    // è·å–æ¸¸æˆçš„åœ°å›¾çš„æ•°æ®
     std::string _20001_GetMapData(std::string data);
-    // ¸Õ¸Õ½øÈëÓÎÏ·Ê±£¬»ñÈ¡³¡¾°ËùÓĞ¶ÔÏóÊı¾İ
+    // åˆšåˆšè¿›å…¥æ¸¸æˆæ—¶ï¼Œè·å–åœºæ™¯æ‰€æœ‰å¯¹è±¡æ•°æ®
     std::string _20002_GetStartGameObjectData(std::string data);
 };
 

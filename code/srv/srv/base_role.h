@@ -1,48 +1,48 @@
-#pragma once
+ï»¿#pragma once
 
 #include "role_type.h"
 #include "tool.h"
 
 class BaseRole {
 protected:
-    // ½ÇÉ«ÀàĞÍ
+    // è§’è‰²ç±»å‹
     int type;
 protected:
-    // ½ÇÉ«µÄÎ»ÖÃ
+    // è§’è‰²çš„ä½ç½®
     Tool::Struct::Vector3 * position;
-    // ½ÇÉ«µÄÃæÏò·½Ïò(360¡ã)
+    // è§’è‰²çš„é¢å‘æ–¹å‘(360Â°)
     float rotation;
 public:
-    // ËùÓĞ×ÓÀà±ØĞëÊµÏÖµÄ¹¹Ôìº¯Êı£¬ÓÃÓÚ³õÊ¼»¯Ò»¸ö½ÇÉ«¶ÔÏó
+    // æ‰€æœ‰å­ç±»å¿…é¡»å®ç°çš„æ„é€ å‡½æ•°ï¼Œç”¨äºåˆå§‹åŒ–ä¸€ä¸ªè§’è‰²å¯¹è±¡
     BaseRole(Tool::Struct::Vector3 * position);
     ~BaseRole();
 
-    // ÉèÖÃ½ÇÉ«ÀàĞÍ
+    // è®¾ç½®è§’è‰²ç±»å‹
     void SetType(int type);
-    // »ñÈ¡½ÇÉ«ÀàĞÍ
+    // è·å–è§’è‰²ç±»å‹
     int GetType();
 
-    // ÉèÖÃ½ÇÉ«Î»ÖÃ
+    // è®¾ç½®è§’è‰²ä½ç½®
     void SetPosition(Tool::Struct::Vector3 * position);
-    // »ñÈ¡½ÇÉ«µÄÎ»ÖÃĞÅÏ¢
+    // è·å–è§’è‰²çš„ä½ç½®ä¿¡æ¯
     Tool::Struct::Vector3 & GetPosition();
 
-    // ÉèÖÃ½ÇÉ«·½Ïò
+    // è®¾ç½®è§’è‰²æ–¹å‘
     void SetRotation(float rotation);
-    // »ñÈ¡½ÇÉ«µÄÃæÏò·½Ïò
+    // è·å–è§’è‰²çš„é¢å‘æ–¹å‘
     float GetRotation();
 
 
-    // ÉèÖÃÏêÏ¸Êı¾İ£¨ÓÃÓÚ´ÓÊı¾İ¿âÖĞ¶ÁÈ¡Êı¾İ£©
+    // è®¾ç½®è¯¦ç»†æ•°æ®ï¼ˆç”¨äºä»æ•°æ®åº“ä¸­è¯»å–æ•°æ®ï¼‰
     virtual void SetInfo(std::map<std::string, std::string> &info) = 0;
-    // »ñÈ¡½ÇÉ«µÄÏêÏ¸Êı¾İ£¬ÓÃÓÚ¿Í»§¶ËÕ¹Ê¾
+    // è·å–è§’è‰²çš„è¯¦ç»†æ•°æ®ï¼Œç”¨äºå®¢æˆ·ç«¯å±•ç¤º
     virtual const std::map<std::string, std::string> GetInfo() = 0;
 
 public:
-    // Ã¿¸öÂß¼­Ö¡ĞèÒªË¢ĞÂµÄÊı¾İ
+    // æ¯ä¸ªé€»è¾‘å¸§éœ€è¦åˆ·æ–°çš„æ•°æ®
     virtual void UPSDo(void * voidRoleCtrl) = 0;
 
-    // »ñÈ¡ÏÔÊ¾ÌØÊâµÄÊı¾İ£¬Èç£º¶¯×÷¡¢×´Ì¬µÈ£¬¾ßÌåÓÉ²»Í¬µÄÀàĞÍ¸ñÊ½»á²»Í¬
+    // è·å–æ˜¾ç¤ºç‰¹æ®Šçš„æ•°æ®ï¼Œå¦‚ï¼šåŠ¨ä½œã€çŠ¶æ€ç­‰ï¼Œå…·ä½“ç”±ä¸åŒçš„ç±»å‹æ ¼å¼ä¼šä¸åŒ
     virtual const std::string GetSpecialShowData() = 0;
 };
 

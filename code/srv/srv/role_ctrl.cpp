@@ -1,4 +1,4 @@
-#include "role_ctrl.h"
+О╩©#include "role_ctrl.h"
 
 
 RoleCtrl * RoleCtrl::shareInstance = nullptr;
@@ -13,7 +13,7 @@ RoleCtrl::~RoleCtrl() {
     if (this->roleMap != nullptr) {
 
         if (this->roleMap->size() > 0) {
-            // йм╥екЫсп╫ги╚
+            // И┤┼Ф■╬Ф┴─Ф°┴Х╖▓Х┴╡
             for (std::map<int, BaseRole *>::iterator it = this->roleMap->begin(); it != roleMap->end(); ++it) {
                 BaseRole * role = it->second;
                 delete role;

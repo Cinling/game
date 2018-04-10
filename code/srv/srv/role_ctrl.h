@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "tool.h"
 #include "role_db.h"
@@ -20,28 +20,28 @@ private:
 public:
     static RoleCtrl * GetInstance();
 
-    // ´´½¨Ò»¸ö¶ÔÏó£¬Õâ¸ö¶ÔÏó±ØĞë¼Ì³Ğ BaseRole
+    // åˆ›å»ºä¸€ä¸ªå¯¹è±¡ï¼Œè¿™ä¸ªå¯¹è±¡å¿…é¡»ç»§æ‰¿ BaseRole
     template<class T,
         typename std::enable_if < std::is_base_of<BaseRole, T>{}, int > ::type = 0 >
         T * CreateRole(Tool::Struct::Vector3 * position);
 
-    // ¼ÓÔØ½ÇÉ«Êı¾İ
+    // åŠ è½½è§’è‰²æ•°æ®
     template<class T,
         typename std::enable_if < std::is_base_of<BaseRole, T>{}, int > ::type = 0 >
         T * AddRoleWithLoad(int id, int roleType, Tool::Struct::Vector3 * position, float rotation, std::map<std::string, std::string> &info);
 
-    // »ñÈ¡ËùÓĞ½ÇÉ«ÁĞ±íµÄmap
+    // è·å–æ‰€æœ‰è§’è‰²åˆ—è¡¨çš„map
     std::map<int, BaseRole *> * GetRoleMap();
 
-    // ±£´æËùÓĞ½ÇÉ«µÄÊı¾İ
+    // ä¿å­˜æ‰€æœ‰è§’è‰²çš„æ•°æ®
     bool Save();
-    // ÔØÈëËùÓĞ½ÇÉ«
+    // è½½å…¥æ‰€æœ‰è§’è‰²
     bool Load();
 
 private:
     bool AddRoleByType(int id, int roleType, Tool::Struct::Vector3 * position, float rotation, std::map<std::string, std::string> &info);
 
-public: //µ÷ÊÔµÄ·½·¨
+public: //è°ƒè¯•çš„æ–¹æ³•
     void PrintRoleMap();
 };
 

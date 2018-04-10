@@ -1,4 +1,4 @@
-#include "saves_manager.h"
+ï»¿#include "saves_manager.h"
 
 
 
@@ -32,12 +32,12 @@ bool SavesManager::Save(std::string savesName) {
         retBool = false;
     }
 
-    // ±£´æÊÀ½ç
+    // ä¿å­˜ä¸–ç•Œ
     if (!this->SaveWorld()) {
         retBool = false;
     }
 
-    // ±£´æ½ÇÉ«
+    // ä¿å­˜è§’è‰²
     if (!this->SaveRole()) {
         retBool = false;
     }

@@ -1,4 +1,4 @@
-#include "world_manager.h"
+ï»¿#include "world_manager.h"
 
 
 
@@ -67,7 +67,7 @@ bool WorldManager::Save() {
 bool WorldManager::Load() {
     bool retBool = false;
 
-    // ÔØÈëµØÍ¼Êı¾İ
+    // è½½å…¥åœ°å›¾æ•°æ®
     MapDB * mapDB = MapDB::GetInstance();
     std::list<std::map<std::string, std::string>> mapInfoList = mapDB->SelectAll();
     std::list<std::map<std::string, std::string>>::iterator it = mapInfoList.begin();

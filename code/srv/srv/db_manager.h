@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "map_db.h"
 #include "role_db.h"
@@ -29,23 +29,23 @@
 ======`-.____`-.___\_____/___.-`____.-'======
                    `=---='
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-         ·ğ×æ±£ÓÓ       ÓÀÎŞBUG
+         ä½›ç¥–ä¿ä½‘       æ°¸æ— BUG
 */
 
 class DBManager {
 private:
-    // µ¥Àı¶ÔÏó
+    // å•ä¾‹å¯¹è±¡
     static DBManager * shareInstance;
     DBManager();
 public:
-    // »ñÈ¡µ¥Àı¶ÔÏó
+    // è·å–å•ä¾‹å¯¹è±¡
     static DBManager * GetInstance();
     ~DBManager();
 
 public:
 
-    // ¡¾¸üĞÂÊı¾İ¿â¡¿
-    // dbName Êı¾İ¿âÃû
-    // return true [¸üĞÂ³É¹¦]£¬false [¸üĞÂÊ§°Ü] 
+    // ã€æ›´æ–°æ•°æ®åº“ã€‘
+    // dbName æ•°æ®åº“å
+    // return true [æ›´æ–°æˆåŠŸ]ï¼Œfalse [æ›´æ–°å¤±è´¥] 
     bool CreateDBTable();
 };

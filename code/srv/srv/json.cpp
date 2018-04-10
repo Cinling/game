@@ -1,4 +1,4 @@
-#include "json.h"
+ï»¿#include "json.h"
 
 
 
@@ -20,7 +20,7 @@ Json::Saves::Saves(const char * jsonStr) {
     this->savesName = Json::GetStdString(document, NameToStr(savesName), "");
 
     if (this->savesName == "") {
-        throw Json::Exception("´«ÈëµÄjson·ÇËùĞè¸ñÊ½£¬»òÊı¾İÎª¿Õ£¬[´«Èëjson:" + std::string(jsonStr) + "]");
+        throw Json::Exception("ä¼ å…¥çš„jsonéæ‰€éœ€æ ¼å¼ï¼Œæˆ–æ•°æ®ä¸ºç©ºï¼Œ[ä¼ å…¥json:" + std::string(jsonStr) + "]");
     }
 }
 

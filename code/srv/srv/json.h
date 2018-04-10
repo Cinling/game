@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "tool.h"
 
@@ -7,7 +7,7 @@
 #include <string>
 
 namespace Json {
-    // Å×³öµÄÒì³£Àà
+    // æŠ›å‡ºçš„å¼‚å¸¸ç±»
     class Exception {
     private:
         std::string exceptionMsg;
@@ -17,35 +17,35 @@ namespace Json {
         std::string GetExceptionMsg();
     };
 
-    // ËùÓĞĞèÒªjson°ü×°µÄÊı¾İÀàĞÍµÄ»ùÀà
+    // æ‰€æœ‰éœ€è¦jsonåŒ…è£…çš„æ•°æ®ç±»å‹çš„åŸºç±»
     class Base {
     public:
         virtual std::string ToJsonStr() = 0;
     };
 
-    // ´æµµÊı¾İ·â×°
+    // å­˜æ¡£æ•°æ®å°è£…
     class Saves : public Json::Base {
     public:
-        // ´æµµÃû³Æ
+        // å­˜æ¡£åç§°
         std::string savesName;
 
     public:
-        // Ê¹ÓÃ´æµµÃû×Ö´´½¨¶ÔÏó
+        // ä½¿ç”¨å­˜æ¡£åå­—åˆ›å»ºå¯¹è±¡
         Saves(std::string savesName);
-        // Ê¹ÓÃjson´®³õÊ¼»¯¶ÔÏó
+        // ä½¿ç”¨jsonä¸²åˆå§‹åŒ–å¯¹è±¡
         Saves(const char * jsonStr);
 
         ~Saves();
 
-        // Í¨¹ı Base ¼Ì³Ğ
-        // return json´®
+        // é€šè¿‡ Base ç»§æ‰¿
+        // return jsonä¸²
         virtual std::string ToJsonStr() override;
 
-        // return ´æµµÃû×Ö
+        // return å­˜æ¡£åå­—
         std::string GetSavesName();
     };
 
-    // µØÍ¼Êı¾İ
+    // åœ°å›¾æ•°æ®
     class Map : public Json::Base {
     public:
         float width;
@@ -53,14 +53,14 @@ namespace Json {
         float height;
 
         Map(float width, float length, float height);
-        // Í¨¹ıÌØ¶¨µÄjson³õÊ¼»¯
+        // é€šè¿‡ç‰¹å®šçš„jsonåˆå§‹åŒ–
         Map(std::string json);
 
-        // Í¨¹ı Base ¼Ì³Ğ
+        // é€šè¿‡ Base ç»§æ‰¿
         virtual std::string ToJsonStr() override;
     };
 
-    // ËùÓĞ½ÇÉ«Í¨ÓÃµÄ´«ÊäÊı¾İ
+    // æ‰€æœ‰è§’è‰²é€šç”¨çš„ä¼ è¾“æ•°æ®
     class BaseRole : public Base {
     public:
         int id;
@@ -68,32 +68,32 @@ namespace Json {
         float x;
         float y;
         float z;
-        // À©Õ¹jsonÊı¾İ£¬ÓÃÓÚ¸ù¾İ²»Í¬ÀàĞÍµÄÎïÌå½øĞĞµÄÌØÊâÏÔÊ¾´¦Àí
+        // æ‰©å±•jsonæ•°æ®ï¼Œç”¨äºæ ¹æ®ä¸åŒç±»å‹çš„ç‰©ä½“è¿›è¡Œçš„ç‰¹æ®Šæ˜¾ç¤ºå¤„ç†
         std::string specialShow;
 
         BaseRole(int id, int type, float x, float y, float z, std::string specialShow);
 
-        // Í¨¹ı Base ¼Ì³Ğ
+        // é€šè¿‡ Base ç»§æ‰¿
         virtual std::string ToJsonStr() override;
     };
 
 
 
     /*##############################################################
-        json½âÎö£¬json¸ñÊ½»¯£¬»ñÈ¡json¶ÔÏóÖĞµÄÖµÏà¹ØµÄ·½·¨
+        jsonè§£æï¼Œjsonæ ¼å¼åŒ–ï¼Œè·å–jsonå¯¹è±¡ä¸­çš„å€¼ç›¸å…³çš„æ–¹æ³•
     ##############################################################*/
 
-    // °Ñ rapidjson::Document ×ªÎªjson´®
-    // return json´®
+    // æŠŠ rapidjson::Document è½¬ä¸ºjsonä¸²
+    // return jsonä¸²
     std::string Encode(rapidjson::Document & document);
-    // °Ñ rapidjson::Value ×ªÎªjson´®
-    // return json´®
+    // æŠŠ rapidjson::Value è½¬ä¸ºjsonä¸²
+    // return jsonä¸²
     std::string Encode(rapidjson::Value & value);
 
-    // »ñÈ¡¶ÔÏóÖĞµÄintÖµ
+    // è·å–å¯¹è±¡ä¸­çš„intå€¼
     int GetInt(rapidjson::Document &document, std::string key, int defaultValue);
-    // »ñÈ¡¶ÔÏóÖĞµÄfloatÖµ
+    // è·å–å¯¹è±¡ä¸­çš„floatå€¼
     float GetFloat(rapidjson::Document &document, std::string key, float defaultValue);
-    // »ñÈ¡¶ÔÏóÖĞµÄstringÖµ
+    // è·å–å¯¹è±¡ä¸­çš„stringå€¼
     std::string GetStdString(rapidjson::Document &document, std::string key, std::string defaultValue);
 }

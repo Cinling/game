@@ -1,4 +1,4 @@
-#include "db_manager.h"
+ï»¿#include "db_manager.h"
 
 DBManager * DBManager::shareInstance = nullptr;
 
@@ -22,12 +22,12 @@ bool DBManager::CreateDBTable() {
     SqliteTool * sqliteTool = SqliteTool::GetInstance();
     bool retBool = true;
 
-    // ´´½¨µØÍ¼µÄÊı¾İ±í
+    // åˆ›å»ºåœ°å›¾çš„æ•°æ®è¡¨
     if (!MapDB::GetInstance()->CreateTable()) {
         retBool = false;
     }
 
-    // ´´½¨½ÇÉ«µÄÊı¾İ±í
+    // åˆ›å»ºè§’è‰²çš„æ•°æ®è¡¨
     if (!RoleDB::GetInstance()->CreateTable()) {
         retBool = false;
     }

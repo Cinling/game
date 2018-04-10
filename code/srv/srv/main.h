@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 
 #include "socket_tcp.h"
 #include "world_manager.h"
 
-// ·şÎñ¶Ë³ÌĞòÈë¿Ú
+// æœåŠ¡ç«¯ç¨‹åºå…¥å£
 int main(void);

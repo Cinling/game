@@ -1,4 +1,4 @@
-#include "socket_num_manager.h"
+ï»¿#include "socket_num_manager.h"
 
 SocketNumManager * SocketNumManager::shareInstance = nullptr;
 
@@ -20,12 +20,12 @@ std::string SocketNumManager::_10001_InitMap(std::string data) {
     rapidjson::Document document;
     document.Parse(data.c_str());
 
-    // ½âÎö´íÎó
+    // è§£æžé”™è¯¯
     if (document.HasParseError()) {
         return "false";
     }
 
-    // Êý¾Ý´íÎó
+    // æ•°æ®é”™è¯¯
     if (!document.IsObject()) {
         return "false";
     }
@@ -34,7 +34,7 @@ std::string SocketNumManager::_10001_InitMap(std::string data) {
     float length = Json::GetFloat(document, "length", 0);
     float height = Json::GetFloat(document, "height", 0);
 
-    // ³õÊ¼»¯ÓÎÏ·ÊÀ½çµÄÊý¾Ý
+    // åˆå§‹åŒ–æ¸¸æˆä¸–ç•Œçš„æ•°æ®
     WorldManager * world = WorldManager::GetInstance();
     Json::Map *map = new Json::Map(width, length, height);
     if (!world->InitMap(map)) {

@@ -1,4 +1,4 @@
-#include "socket_tcp.h"
+ï»¿#include "socket_tcp.h"
 
 #define CONNECT_NUM_MAX 10
 
@@ -20,7 +20,7 @@ void SocketTcp::StartSocket() {
 
     this->isPause = false;
 
-    // Ñ­»·½ÓÊÕÊý¾Ý
+    // å¾ªçŽ¯æŽ¥æ”¶æ•°æ®
     SOCKET socketClient;
     sockaddr_in remoteAddr;
     int remoteAddrlen = sizeof(remoteAddr);
@@ -57,7 +57,7 @@ void SocketTcp::DestroySocket() {
 }
 
 void SocketTcp::InitServerSocket(unsigned short port) {
-    // ³õÊ¼»¯ WSA
+    // åˆå§‹åŒ– WSA
     WORD sockVersion = MAKEWORD(2, 2);
     WSADATA wsaData;
     if (WSAStartup(sockVersion, &wsaData) != 0) {
@@ -65,14 +65,14 @@ void SocketTcp::InitServerSocket(unsigned short port) {
         return;
     }
 
-    // ´´½¨Ì×½Ó×Ö
+    // åˆ›å»ºå¥—æŽ¥å­—
     this->socketServer = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (this->socketServer == INVALID_SOCKET) {
         std::cout << "create socket error!" << std::endl;
         return;
     }
 
-    // °ó¶¨IPºÍ¶Ë¿Ú
+    // ç»‘å®šIPå’Œç«¯å£
     sockaddr_in sin;
     sin.sin_family = AF_INET;
     sin.sin_port = htons(port);
@@ -82,7 +82,7 @@ void SocketTcp::InitServerSocket(unsigned short port) {
         return;
     }
 
-    // ¼àÌý
+    // ç›‘å¬
     if (listen(this->socketServer, 5) == SOCKET_ERROR) {
         std::cout << "listen error" << std::endl;
         return;
@@ -136,11 +136,11 @@ void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr) {
     //std::string ip = socketTcp->GetIp(remoteAddr);
     //std::cout << "receive a connect [" << ip.c_str() << "]" << std::endl;
 
-    // ½ÓÊÕ¿Í»§¶Ë·¢ËÍ¹ýÀ´µÄÊý¾Ý
+    // æŽ¥æ”¶å®¢æˆ·ç«¯å‘é€è¿‡æ¥çš„æ•°æ®
     char recvData[1024];
     int ret = recv(client, recvData, 1024, 0);
 
-    std::string retData = "Ã»ÓÐÊÕµ½¿Í»§¶ËµÄÊý¾Ý";
+    std::string retData = "æ²¡æœ‰æ”¶åˆ°å®¢æˆ·ç«¯çš„æ•°æ®";
 
     if (ret > 0) {
         recvData[ret] = 0x00;
@@ -149,7 +149,7 @@ void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr) {
 
     }
 
-    // ·¢ËÍÊý¾Ý
+    // å‘é€æ•°æ®
     const char *sendData = socketTcp->GB2312ToUTF8(retData.c_str());
     int sendLen = static_cast<int>(strlen(sendData));
 

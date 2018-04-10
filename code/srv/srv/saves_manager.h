@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "db_manager.h"
 #include "world_manager.h"
@@ -9,52 +9,52 @@ private:
     static SavesManager * shareInstance;
     SavesManager();
 
-    // ´æµµÂ·¾¶
+    // å­˜æ¡£è·¯å¾„
     static const std::string SAVES_PATH;
-    // ÁÙÊ±´æµµÃû³Æ
+    // ä¸´æ—¶å­˜æ¡£åç§°
     static const std::string TEMPORARY_SAVES;
 public:
     static SavesManager * GetInstance();
     ~SavesManager();
 
 public:
-    // ±£´æÓÎÏ·
-    // savesName ´æµµÃû³Æ
-    // return ÊÇ·ñ´¦Àí³É¹¦
+    // ä¿å­˜æ¸¸æˆ
+    // savesName å­˜æ¡£åç§°
+    // return æ˜¯å¦å¤„ç†æˆåŠŸ
     bool Save(std::string savesName);
 
-    // »ñÈ¡´æµµÃû×ÖÁĞ±í
-    // »ñÈ¡´æµµÁĞ±í
-    // ´æµµÃû³ÆµÄÁĞ±í
+    // è·å–å­˜æ¡£åå­—åˆ—è¡¨
+    // è·å–å­˜æ¡£åˆ—è¡¨
+    // å­˜æ¡£åç§°çš„åˆ—è¡¨
     std::vector<std::string> GetSavesList();
 
-    // ÔØÈëÓÎÏ·
-    // savesName ´æµµÃû³Æ
-    // return ÊÇ·ñ´¦Àí³É¹¦
+    // è½½å…¥æ¸¸æˆ
+    // savesName å­˜æ¡£åç§°
+    // return æ˜¯å¦å¤„ç†æˆåŠŸ
     bool Load(std::string savesName);
 
 private:
-    /*´æµµ¾ßÌåµÄÏ¸½Ú´¦Àí*/
+    /*å­˜æ¡£å…·ä½“çš„ç»†èŠ‚å¤„ç†*/
     bool SaveWorld();
     bool LoadWorld();
     bool SaveRole();
     bool LoadRole();
     
-    // ¡¾±¸·İÁÙÊ±´æµµ¡¿
-    // Êµ¼ÊÉÏµÄ¸üÃû
-    // savesName ´æµµÃû³Æ
-    // return true [±¸·İ³É¹¦]£¬false [±¸·İÊ§°Ü] 
+    // ã€å¤‡ä»½ä¸´æ—¶å­˜æ¡£ã€‘
+    // å®é™…ä¸Šçš„æ›´å
+    // savesName å­˜æ¡£åç§°
+    // return true [å¤‡ä»½æˆåŠŸ]ï¼Œfalse [å¤‡ä»½å¤±è´¥] 
     bool BackupTemporarySaves(std::string savesName);
-    // ¡¾É¾³ıÁÙÊ±´æµµ¡¿
-    // return true [É¾³ı³É¹¦]£¬false [É¾³ıÊ§°Ü] 
+    // ã€åˆ é™¤ä¸´æ—¶å­˜æ¡£ã€‘
+    // return true [åˆ é™¤æˆåŠŸ]ï¼Œfalse [åˆ é™¤å¤±è´¥] 
     bool DeleteTemporarySaves();
-    // ¡¾»Ö¸´´æµµ£¬´æµµÊ§°ÜÊ±µ÷ÓÃ¡¿
-    // Êµ¼ÊÉÏÊÇ°ÑÃû×Ö¸Ä»ØÔ­À´µÄÃû×Ö
-    // savesName ´æµµÃû³Æ
-    // return true [»Ö¸´³É¹¦]£¬false [»Ö¸´Ê§°Ü] 
+    // ã€æ¢å¤å­˜æ¡£ï¼Œå­˜æ¡£å¤±è´¥æ—¶è°ƒç”¨ã€‘
+    // å®é™…ä¸Šæ˜¯æŠŠåå­—æ”¹å›åŸæ¥çš„åå­—
+    // savesName å­˜æ¡£åç§°
+    // return true [æ¢å¤æˆåŠŸ]ï¼Œfalse [æ¢å¤å¤±è´¥] 
     bool RecoveryTemporarySaves(std::string savesName);
 
-    // ÅĞ¶Ï´æµµÊÇ·ñ´æÔÚ
+    // åˆ¤æ–­å­˜æ¡£æ˜¯å¦å­˜åœ¨
     bool IsSavesExists(std::string savesName);
 };
 

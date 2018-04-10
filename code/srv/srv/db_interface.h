@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
 #include "sqlite_tool.h"
 
 class DBInterface {
 public:
-    // ´´½¨Õâ¸öÊı¾İ¹ÜÀíÀàËùĞèµÄÊı¾İ±í
+    // åˆ›å»ºè¿™ä¸ªæ•°æ®ç®¡ç†ç±»æ‰€éœ€çš„æ•°æ®è¡¨
     virtual bool CreateTable() = 0;
     virtual ~DBInterface() {}
 };

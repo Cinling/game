@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "base_role.h"
 #include "role_ctrl.h"
@@ -8,13 +8,13 @@ public:
     Animal(Tool::Struct::Vector3 * position);
     ~Animal();
 
-    // Í¨¹ý BaseRole ¼Ì³Ð
+    // é€šè¿‡ BaseRole ç»§æ‰¿
     virtual void UPSDo(void * voidRoleCtrl) override;
 
-    // Í¨¹ý BaseRole ¼Ì³Ð
+    // é€šè¿‡ BaseRole ç»§æ‰¿
     virtual const std::map<std::string, std::string> GetInfo() override;
 
-    // Í¨¹ý BaseRole ¼Ì³Ð
+    // é€šè¿‡ BaseRole ç»§æ‰¿
     virtual void SetInfo(std::map<std::string, std::string> & info) override;
     virtual const std::string GetSpecialShowData() override;
 };

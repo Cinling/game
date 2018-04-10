@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "map_manager.h"
 #include "sqlite_tool.h"
@@ -11,50 +11,50 @@ private:
     static WorldManager *shareInstance;
     WorldManager();
 
-    // µ±Ç°µØÍ¼
+    // å½“å‰åœ°å›¾
     Json::Map * map;
-
+    
 public:
     static WorldManager * GetInstance();
     ~WorldManager();
-
-    // ³õÊ¼»¯ÊÀ½ç£¨Ê×´Î½øÈëÓÎÏ·£¬´´½¨ÊÀ½ç£©
+    
+    // åˆå§‹åŒ–ä¸–ç•Œï¼ˆé¦–æ¬¡è¿›å…¥æ¸¸æˆï¼Œåˆ›å»ºä¸–ç•Œï¼‰
     bool InitMap(Json::Map * map);
 
-    // ¿ªÊ¼ÓÎÏ·
+    // å¼€å§‹æ¸¸æˆ
     bool Start();
 
-    // ÔİÍ£ÓÎÏ·
+    // æš‚åœæ¸¸æˆ
     bool Pause();
 
-    // ¼ÌĞø±»ÔİÍ£µÄÓÎÏ·
+    // ç»§ç»­è¢«æš‚åœçš„æ¸¸æˆ
     bool Resume();
 
-    // ÍË³öÓÎÏ·£¨¹Ø±Õ·şÎñ¶Ë£©
+    // é€€å‡ºæ¸¸æˆï¼ˆå…³é—­æœåŠ¡ç«¯ï¼‰
     bool Exit();
 
-    // ±£´æÓÎÏ·Êı¾İ
+    // ä¿å­˜æ¸¸æˆæ•°æ®
     bool Save();
 
-    // ¼ÓÔØÓÎÏ·Êı¾İ
-    // savesName ´æµµÃû×Ö
+    // åŠ è½½æ¸¸æˆæ•°æ®
+    // savesName å­˜æ¡£åå­—
     bool Load();
 
-    // »ñÈ¡µØÍ¼Êı¾İ
+    // è·å–åœ°å›¾æ•°æ®
     Json::Map GetMapInfo();
 
 private:
-    // Ëæ»ú´´½¨Ê÷
-    // num ´´½¨Ê÷µÄÊıÁ¿
+    // éšæœºåˆ›å»ºæ ‘
+    // num åˆ›å»ºæ ‘çš„æ•°é‡
     bool RandomCreateTree(int num);
 
 private:
-    // ±£´æÊÀ½çÊı¾İ
+    // ä¿å­˜ä¸–ç•Œæ•°æ®
     void SaveWorld();
 
-    // ´´½¨µØÍ¼
-    // width µØÍ¼¿í¶È
-    // length µØÍ¼³¤¶È
-    // return µ±ÌìµØÍ¼µÄid
+    // åˆ›å»ºåœ°å›¾
+    // width åœ°å›¾å®½åº¦
+    // length åœ°å›¾é•¿åº¦
+    // return å½“å¤©åœ°å›¾çš„id
     //int CreateMap(int width, int length);
 };

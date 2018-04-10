@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "socket_num_manager.h"
 #include "tool.h"
@@ -11,12 +11,12 @@
 #pragma comment(lib, "ws2_32.lib")
 
 
-// tcp Í¨ĞÅÀà
+// tcp é€šä¿¡ç±»
 class SocketTcp {
 private:
-    // ·şÎñ¶ËÌ×½Ó×Ö
+    // æœåŠ¡ç«¯å¥—æ¥å­—
     SOCKET socketServer;
-    // ÅĞ¶ÏÊÇ·ñÔİÍ£socketµÄ×´Ì¬
+    // åˆ¤æ–­æ˜¯å¦æš‚åœsocketçš„çŠ¶æ€
     bool isPause;
 
 private:
@@ -26,31 +26,31 @@ public:
     SocketTcp(unsigned short port);
     ~SocketTcp();
 
-    // ¿ªÆôsocket¼àÌı
+    // å¼€å¯socketç›‘å¬
     void StartSocket();
-    // ÔİÍ£socket¼àÌı
+    // æš‚åœsocketç›‘å¬
     void PauseSocket();
-    // ¹Ø±Õsocket
+    // å…³é—­socket
     void DestroySocket();
 
-    // ÓÃÓÚ¿Í»§¶ËÁ¬½ÓÊ±£¬´©¼şĞÂÏß³ÌÊ¹ÓÃ
+    // ç”¨äºå®¢æˆ·ç«¯è¿æ¥æ—¶ï¼Œç©¿ä»¶æ–°çº¿ç¨‹ä½¿ç”¨
     friend void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr);
 
 private:
-    // ³õÊ¼»¯·şÎñ¶ËÌ×½Ó×Ö
+    // åˆå§‹åŒ–æœåŠ¡ç«¯å¥—æ¥å­—
     void InitServerSocket(unsigned short port);
 
-    // ½« int32 µÄIPÊı¾İ×ªÎª¿É¶ÁĞÎÊ½µÄip
+    // å°† int32 çš„IPæ•°æ®è½¬ä¸ºå¯è¯»å½¢å¼çš„ip
     std::string GetIp(sockaddr_in socketAddrIn);
 
 private:
-    // ¸ù¾İ¿Í»§¶Ë·µ»ØµÄÊı¾İ£¬Ö´ĞĞÏàÓ¦µÄ´¦Àí
-    // clientData ¿Í»§¶Ë·¢ËÍ¹ıÀ´µÄÊı¾İ
-    // return ·µ»Ø¸ø¿Í»§¶ËµÄÊı¾İ
+    // æ ¹æ®å®¢æˆ·ç«¯è¿”å›çš„æ•°æ®ï¼Œæ‰§è¡Œç›¸åº”çš„å¤„ç†
+    // clientData å®¢æˆ·ç«¯å‘é€è¿‡æ¥çš„æ•°æ®
+    // return è¿”å›ç»™å®¢æˆ·ç«¯çš„æ•°æ®
     std::string DoBySocketAction(std::string clientData);
 
 private:
-    //UTF-8µ½GB2312µÄ×ª»»  
+    //UTF-8åˆ°GB2312çš„è½¬æ¢  
     char* UTF8ToGB2312(const char* utf8) {
         int len = MultiByteToWideChar(CP_UTF8, 0, utf8, -1, NULL, 0);
         wchar_t* wstr = new wchar_t[len + 1];
@@ -63,7 +63,7 @@ private:
         if (wstr) delete[] wstr;
         return str;
     }
-    //GB2312µ½UTF-8µÄ×ª»»  
+    //GB2312åˆ°UTF-8çš„è½¬æ¢  
     char* GB2312ToUTF8(const char* gb2312) {
         int len = MultiByteToWideChar(CP_ACP, 0, gb2312, -1, NULL, 0);
         wchar_t* wstr = new wchar_t[len + 1];
@@ -79,5 +79,5 @@ private:
 };
 
 
-// ÓÃÓÚ¿Í»§¶ËÁ¬½ÓÊ±£¬´©¼şĞÂÏß³ÌÊ¹ÓÃ
+// ç”¨äºå®¢æˆ·ç«¯è¿æ¥æ—¶ï¼Œç©¿ä»¶æ–°çº¿ç¨‹ä½¿ç”¨
 void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr);

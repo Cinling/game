@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "json.h"
 
@@ -12,48 +12,48 @@
 #include <string>
 #include <time.h>
 
-// °Ñ±äÁ¿Ãû×ªÎª×Ö·û´®
+// æŠŠå˜é‡åè½¬ä¸ºå­—ç¬¦ä¸²
 #define NameToStr(x) #x
 #define PATH_DELIMITER '\\' 
 
-// µ÷ÊÔÄ£Ê½
+// è°ƒè¯•æ¨¡å¼
 #define DEBUG
 
 namespace Tool {
-    // »ñÈ¡ÏµÍ³Ê±¼ä´Á£¨Ãë£©
+    // è·å–ç³»ç»Ÿæ—¶é—´æˆ³ï¼ˆç§’ï¼‰
     long long GetTimeSecond();
 
-    // °Ñ std::map<std::string, std::string> ×ªÎª std::string µÄjson×Ö·û´®
+    // æŠŠ std::map<std::string, std::string> è½¬ä¸º std::string çš„jsonå­—ç¬¦ä¸²
     std::string MapToJsonStr(std::map<std::string, std::string> jsonMap);
-    // °Ñ std::string µÄjson×Ö·û´® ×ªÎª std::map<std::string, std::string>
+    // æŠŠ std::string çš„jsonå­—ç¬¦ä¸² è½¬ä¸º std::map<std::string, std::string>
     std::map<std::string, std::string> JaonStrToMap(std::string jsonStr);
 
-    // ÎÄ¼ş¹¤¾ß
+    // æ–‡ä»¶å·¥å…·
     namespace File {
 
-        // ¡¾´´½¨ÎÄ¼ş¼Ğ¡¿
-        // folder ÎÄ¼şÏà¶ÔÂ·¾¶
+        // ã€åˆ›å»ºæ–‡ä»¶å¤¹ã€‘
+        // folder æ–‡ä»¶ç›¸å¯¹è·¯å¾„
         bool CreateDir(std::string folder);
-        // ¡¾É¾³ıÎÄ¼ş¡¿
-        // fileName ÎÄ¼şÏà¶ÔÂ·¾¶
-        // return [true ´¦Àí³É¹¦]£¬ [false ´¦ÀíÊ§°Ü]
+        // ã€åˆ é™¤æ–‡ä»¶ã€‘
+        // fileName æ–‡ä»¶ç›¸å¯¹è·¯å¾„
+        // return [true å¤„ç†æˆåŠŸ]ï¼Œ [false å¤„ç†å¤±è´¥]
         bool DeleteFile(std::string fileName);
-        // ¡¾ÖØÃüÃû¡¿
-        // oldDir Ô­À´ÎÄ¼şµÄÂ·¾¶
-        // newDir ĞÂµÄÎÄ¼şÂ·¾¶
-        // return [true ´¦Àí³É¹¦]£¬ [false ´¦ÀíÊ§°Ü]
+        // ã€é‡å‘½åã€‘
+        // oldDir åŸæ¥æ–‡ä»¶çš„è·¯å¾„
+        // newDir æ–°çš„æ–‡ä»¶è·¯å¾„
+        // return [true å¤„ç†æˆåŠŸ]ï¼Œ [false å¤„ç†å¤±è´¥]
         bool Rename(std::string oldDir, std::string newDir);
-        // ¡¾ÅĞ¶ÏÎÄ¼ş¼ĞÊÇ·ñ´æÔÚ¡¿
-        // folder ÎÄ¼şÏà¶ÔÂ·¾¶
-        // return [true ÎÄ¼ş´æÔÚ] [false ÎÄ¼ş²»´æÔÚ]
+        // ã€åˆ¤æ–­æ–‡ä»¶å¤¹æ˜¯å¦å­˜åœ¨ã€‘
+        // folder æ–‡ä»¶ç›¸å¯¹è·¯å¾„
+        // return [true æ–‡ä»¶å­˜åœ¨] [false æ–‡ä»¶ä¸å­˜åœ¨]
         bool IsDirExists(std::string folder);
-        // ¡¾»ñÈ¡Ä¿Â¼ÏÂËùÓĞÎÄ¼şµÄÎÄ¼şÃû¡¿
-        // folder ÎÄ¼şÏà¶ÔÂ·¾¶£¬Èç£ºsaves/   ¡¾×¢Òâ£º±ØĞëÒÔ"/"½áÎ²¡¿
-        // return [true ÎÄ¼ş´æÔÚ] [false ÎÄ¼ş²»´æÔÚ]
+        // ã€è·å–ç›®å½•ä¸‹æ‰€æœ‰æ–‡ä»¶çš„æ–‡ä»¶åã€‘
+        // folder æ–‡ä»¶ç›¸å¯¹è·¯å¾„ï¼Œå¦‚ï¼šsaves/   ã€æ³¨æ„ï¼šå¿…é¡»ä»¥"/"ç»“å°¾ã€‘
+        // return [true æ–‡ä»¶å­˜åœ¨] [false æ–‡ä»¶ä¸å­˜åœ¨]
         std::vector<std::string> GetChildFiles(std::string folder);
     }
 
-    // ¼òµ¥Àà ÀàĞÍ£¬ÓÃÓÚ·â×°²¿·ÖÊı¾İ½á¹¹£¬¼õÉÙ±äÁ¿µÄÊıÁ¿
+    // ç®€å•ç±» ç±»å‹ï¼Œç”¨äºå°è£…éƒ¨åˆ†æ•°æ®ç»“æ„ï¼Œå‡å°‘å˜é‡çš„æ•°é‡
     namespace Struct {
         class Vector3 {
         public:
@@ -67,9 +67,9 @@ namespace Tool {
         };
     }
 
-    // ³£ÓÃµÄÊıÑ§·½·¨
+    // å¸¸ç”¨çš„æ•°å­¦æ–¹æ³•
     namespace Math {
-        // »ñÈ¡Ëæ»úÊı
+        // è·å–éšæœºæ•°
         int Random(int min, int max);
     }
 }

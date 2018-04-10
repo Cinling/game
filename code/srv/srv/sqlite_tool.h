@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "tool.h"
 #include "../lib/sqlite3/sqlite3.h"
@@ -9,41 +9,41 @@
 
 class SqliteTool {
 private:
-    // µ¥Àı¶ÔÏó
+    // å•ä¾‹å¯¹è±¡
     static SqliteTool * shareInstance;
     static char * db;
-    // db Êı¾İ¿âÂ·¾¶£¬Èç£ºsaves/abc
+    // db æ•°æ®åº“è·¯å¾„ï¼Œå¦‚ï¼šsaves/abc
     SqliteTool(const char * db);
 
     sqlite3 * sqlite;
 
 public:
     /*
-    »ñÈ¡µ¥Àı¶ÔÏó
-    db Êı¾İ¿âÎÄ¼şÃû
+    è·å–å•ä¾‹å¯¹è±¡
+    db æ•°æ®åº“æ–‡ä»¶å
     */
     static SqliteTool * GetInstance();
-    // ÇĞ»»Êı¾İ¿â
+    // åˆ‡æ¢æ•°æ®åº“
     static void UseDB(const char * dbName);
     ~SqliteTool();
 
 public:
-    // ¡¾²éÑ¯Êı¾İ£¬²¢·µ»Ø½á¹û¼¯¡¿
-    // sql Ö´ĞĞµÄsqlÓï¾ä
-    // return ²éÑ¯µÃµ½µÄÊı¾İÁĞ±í
+    // ã€æŸ¥è¯¢æ•°æ®ï¼Œå¹¶è¿”å›ç»“æœé›†ã€‘
+    // sql æ‰§è¡Œçš„sqlè¯­å¥
+    // return æŸ¥è¯¢å¾—åˆ°çš„æ•°æ®åˆ—è¡¨
     std::list<std::map<std::string, std::string>> Query(const char * sql);
 
-    // ¡¾Ö´ĞĞsqlÓï¾ä£¬ÅĞ¶ÏÊÇ·ñË³ÀûÖ´ĞĞ¡¿
-    // return [true Ö´ĞĞ³É¹¦] [false Ö´ĞĞÊ§°Ü]
+    // ã€æ‰§è¡Œsqlè¯­å¥ï¼Œåˆ¤æ–­æ˜¯å¦é¡ºåˆ©æ‰§è¡Œã€‘
+    // return [true æ‰§è¡ŒæˆåŠŸ] [false æ‰§è¡Œå¤±è´¥]
     bool ExecSql(const char * sql);
 
-    // ¡¾²éÑ¯±íÊÇ·ñ´æÔÚ¡¿
-    // tableName ±íÃ÷
-    // return ÊÇ·ñ´æÔÚ£¨true ´æÔÚ£©
+    // ã€æŸ¥è¯¢è¡¨æ˜¯å¦å­˜åœ¨ã€‘
+    // tableName è¡¨æ˜
+    // return æ˜¯å¦å­˜åœ¨ï¼ˆtrue å­˜åœ¨ï¼‰
     bool IsTableExists(const char * tableName);
 
 private:
-    // ¡¾¸ù¾İdbÃû³Æ´´½¨¶ÔÓ¦µÄÎÄ¼ş¼Ğ¡¿
-    // dbName Êı¾İ¿âÃû³Æ
+    // ã€æ ¹æ®dbåç§°åˆ›å»ºå¯¹åº”çš„æ–‡ä»¶å¤¹ã€‘
+    // dbName æ•°æ®åº“åç§°
     bool CreateDirWithDBName(const char * dbName);
 };

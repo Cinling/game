@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "db_interface.h"
 #include "tool.h"
@@ -11,36 +11,36 @@ public:
     static RoleDB * GetInstance();
     ~RoleDB();
 
-    // Í¨¹ı DBInterface ¼Ì³Ğ
+    // é€šè¿‡ DBInterface ç»§æ‰¿
     virtual bool CreateTable() override;
 public:
-    // ±íÃ÷
+    // è¡¨æ˜
     static const std::string TABLE_NAME;
-    // INTEGER Ö÷¼ü£¬½ÇÉ«id
+    // INTEGER ä¸»é”®ï¼Œè§’è‰²id
     static const std::string FIELD_ID;
-    // INTEGER ½ÇÉ«ÀàĞÍ
+    // INTEGER è§’è‰²ç±»å‹
     static const std::string FIELD_TYPE;
-    // FLOAT ½ÇÉ«Î»ÖÃx
+    // FLOAT è§’è‰²ä½ç½®x
     static const std::string FIELD_X;
-    // FLOAT ½ÇÉ«Î»ÖÃy
+    // FLOAT è§’è‰²ä½ç½®y
     static const std::string FIELD_Y;
-    // FLOAT ½ÇÉ«Î»ÖÃz
+    // FLOAT è§’è‰²ä½ç½®z
     static const std::string FIELD_Z;
-    // FLOAT ½ÇÉ«ÃæÏò½Ç¶È
+    // FLOAT è§’è‰²é¢å‘è§’åº¦
     static const std::string FIELD_ROTATION;
-    // TEXT ÆäËûÌØÒìĞÔĞÅÏ¢
+    // TEXT å…¶ä»–ç‰¹å¼‚æ€§ä¿¡æ¯
     static const std::string FIELD_INFO;
 
 public:
-    // ¡¾´æ´¢Ò»Ìõ½ÇÉ«Êı¾İ¡¿
-    // id ½ÇÉ«id
-    // type ½ÇÉ«ÀàĞÍ
-    // position ½ÇÉ«Î»ÖÃ
-    // rotation ½ÇÉ«·½Ïò
-    // info ÌØÒìĞÔµÄĞÅÏ¢
+    // ã€å­˜å‚¨ä¸€æ¡è§’è‰²æ•°æ®ã€‘
+    // id è§’è‰²id
+    // type è§’è‰²ç±»å‹
+    // position è§’è‰²ä½ç½®
+    // rotation è§’è‰²æ–¹å‘
+    // info ç‰¹å¼‚æ€§çš„ä¿¡æ¯
     bool InsertOnce(int id, int type, Tool::Struct::Vector3 position, float rotation, std::string info);
 
-    // ²éÑ¯ËùÓĞÊı¾İ
+    // æŸ¥è¯¢æ‰€æœ‰æ•°æ®
     std::list<std::map<std::string, std::string>> SelectAll();
 };
 

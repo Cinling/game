@@ -1,4 +1,4 @@
-#include "map_db.h"
+ï»¿#include "map_db.h"
 
 MapDB * MapDB::shareInstance = nullptr;
 
@@ -77,14 +77,14 @@ std::list<std::map<std::string, std::string>> MapDB::SelectAll() {
 
 
 std::string MapDB::GetConfigJsonStr(int worldWidth, int worldLength) {
-    // ´´½¨JSON¶ÔÏó
+    // åˆ›å»ºJSONå¯¹è±¡
     rapidjson::Document document;
     rapidjson::Value configValue;
     configValue.SetObject();
     configValue.AddMember("worldWidth", worldWidth, document.GetAllocator());
     configValue.AddMember("worldHeight", worldLength, document.GetAllocator());
 
-    // °ÑJSON¶ÔÏó×ªÎªjson´®
+    // æŠŠJSONå¯¹è±¡è½¬ä¸ºjsonä¸²
     rapidjson::StringBuffer sb;
     rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(sb);
     configValue.Accept(writer);
