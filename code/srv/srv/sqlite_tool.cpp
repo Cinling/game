@@ -50,34 +50,21 @@ void SqliteTool::UseDB(const char * dbName) {
         SqliteTool::db = nullptr;
     }
 
-    if (SqliteTool::shareInstance != nullptr) {
-        delete SqliteTool::shareInstance;
-        SqliteTool::shareInstance = nullptr;
-    }
-
     size_t len = strlen(dbName) + 1;
     SqliteTool::db = new char[len];
     strcpy_s(SqliteTool::db, len, dbName);
+
+    if (SqliteTool::shareInstance != nullptr) {
+        SqliteTool::shareInstance->~SqliteTool();
+        SqliteTool::shareInstance = nullptr;
+    }
 }
 
 SqliteTool::~SqliteTool() {
     if (this->sqlite != nullptr) {
         sqlite3_close(this->sqlite);
-        delete this->sqlite;
         this->sqlite = nullptr;
     }
-
-    if (shareInstance != nullptr) {
-        delete shareInstance;
-        shareInstance = nullptr;
-    }
-
-    if (SqliteTool::db != nullptr) {
-        delete SqliteTool::db;
-        SqliteTool::db = nullptr;
-    }
-
-
 }
 
 // 执行sql查询时触发的方法
