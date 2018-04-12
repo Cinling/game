@@ -1,4 +1,4 @@
-#include "tool.h"
+ï»¿#include "tool.h"
 
 long long Tool::GetTimeSecond() {
 
@@ -77,18 +77,18 @@ bool Tool::File::IsDirExists(std::string folder) {
 std::vector<std::string> Tool::File::GetChildFiles(std::string folder) {
     std::vector<std::string> childFiles;
 
-    // ÎÄ¼ş¾ä±ú
+    // æ–‡ä»¶å¥æŸ„
     long long hFile = 0;
     struct _finddata_t fileInfo;
     std::string pathName;
 
-    // ÅĞ¶ÏÎÄ¼şÊÇ·ñ
+    // åˆ¤æ–­æ–‡ä»¶æ˜¯å¦
     hFile = _findfirst(pathName.assign(folder).append("*").c_str(), &fileInfo);
     if (hFile == -1) {
         return std::vector<std::string>();
     }
 
-    // ±éÀúÃ¿¸öÎÄ¼ş
+    // éå†æ¯ä¸ªæ–‡ä»¶
     do {
         std::string fileName = fileInfo.name;
         if (fileName == "." || fileName == "..") {

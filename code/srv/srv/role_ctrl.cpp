@@ -9,22 +9,7 @@ RoleCtrl::RoleCtrl() {
 }
 
 RoleCtrl::~RoleCtrl() {
-
-    if (this->roleMap != nullptr) {
-
-        if (this->roleMap->size() > 0) {
-            // 释放所有角色
-            for (std::map<int, BaseRole *>::iterator it = this->roleMap->begin(); it != roleMap->end(); ++it) {
-                BaseRole * role = it->second;
-                delete role;
-                role = nullptr;
-            }
-            this->roleMap->clear();
-        }
-
-        delete this->roleMap;
-        this->roleMap = nullptr;
-    }
+    this->FreeRoleMap();
 }
 
 RoleCtrl * RoleCtrl::GetInstance() {
@@ -63,6 +48,10 @@ bool RoleCtrl::Save() {
 bool RoleCtrl::Load() {
     bool retBool = true;
 
+    if (!this->Clear()) {
+        return false;
+    }
+
     RoleDB * roleDB = RoleDB::GetInstance();
     std::list<std::map<std::string, std::string>> roleInfoList = roleDB->SelectAll();
     if (this->roleMap != nullptr) {
@@ -93,6 +82,21 @@ bool RoleCtrl::Load() {
     return retBool;
 }
 
+bool RoleCtrl::Clear() {
+    if (!this->FreeRoleMap()) {
+        return false;
+    }
+
+    // 重新初始化 roleMap 集合
+    if (this->roleMap != nullptr) {
+        delete this->roleMap;
+    }
+    this->roleMap = new std::map<int, BaseRole *>();
+    this->roleMapId = 0;
+   
+    return true;
+}
+
 bool RoleCtrl::AddRoleByType(int id, int roleType, Tool::Struct::Vector3 * position, float rotation, std::map<std::string, std::string> &info) {
     BaseRole * baseRole = nullptr;
 
@@ -113,6 +117,26 @@ bool RoleCtrl::AddRoleByType(int id, int roleType, Tool::Struct::Vector3 * posit
     }
     return false;
 }
+
+bool RoleCtrl::FreeRoleMap() {
+    if (this->roleMap != nullptr) {
+
+        if (this->roleMap->size() > 0) {
+            // 释放所有角色
+            for (std::map<int, BaseRole *>::iterator it = this->roleMap->begin(); it != roleMap->end(); ++it) {
+                BaseRole * role = it->second;
+                delete role;
+                role = nullptr;
+            }
+            this->roleMap->clear();
+        }
+
+        delete this->roleMap;
+        this->roleMap = nullptr;
+    }
+    return true;
+}
+
 
 void RoleCtrl::PrintRoleMap() {
     for (std::map<int, BaseRole *>::iterator it = this->roleMap->begin(); it != roleMap->end(); ++it) {

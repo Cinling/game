@@ -30,6 +30,7 @@ WorldManager::~WorldManager() {
 
 bool WorldManager::InitMap(Json::Map * map) {
     this->map = map;
+    RoleCtrl::GetInstance()->Clear();// 清空所有角色
     this->RandomCreateTree(500);
     return true;
 }
@@ -94,17 +95,15 @@ bool WorldManager::RandomCreateTree(int num) {
     RoleCtrl * roleCtrl = RoleCtrl::GetInstance();
     MapManager * mapManager = MapManager::GetInstance();
 
+    // 设置随机种子
+    srand((int) time(0));
+
     for (int i = 0; i < num; ++i) {
         int x = Tool::Math::Random(minX, maxX);
         int z = Tool::Math::Random(minZ, maxZ);
 
         roleCtrl->CreateRole<Tree>(new Tool::Struct::Vector3(x, 0, z));
     }
-
-    //#ifdef DEBUG
-    //    roleCtrl->PrintRoleMap();
-    //#endif
-
 
     return true;
 }

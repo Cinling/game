@@ -37,13 +37,20 @@ public:
     bool Save();
     // 载入所有角色
     bool Load();
+    // 清除当前单例对象
+    bool Clear();
 
 private:
+    // 添加一个角色数据
     bool AddRoleByType(int id, int roleType, Tool::Struct::Vector3 * position, float rotation, std::map<std::string, std::string> &info);
+
+    // 释放所有角色对象，以及释放 roleMap
+    bool FreeRoleMap();
 
 public: //调试的方法
     void PrintRoleMap();
 };
+
 
 template<class T,
     typename std::enable_if < std::is_base_of<BaseRole, T>{}, int > ::type = 0 >
