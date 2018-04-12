@@ -70,11 +70,20 @@ public class RoleCtrl {
     }
 
     /// <summary>
-    /// 
+    /// 根据id获取 GameObject 对象
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
     public GameObject GetObjectById(int id) {
         return GameObject.Find(this.roleParent.name + "/" + id);
+    }
+
+    /// <summary>
+    /// 销毁所有的对象
+    /// </summary>
+    /// <returns></returns>
+    public bool Clean() {
+        shareInstance = null;
+        return true;
     }
 }

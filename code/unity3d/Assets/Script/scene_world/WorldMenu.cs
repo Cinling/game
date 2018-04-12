@@ -118,6 +118,7 @@ public class WorldMenu {
     /// </summary>
     private void BackTuMenu() {
         SceneCtrl.GetInstance().SwitchToMain();
+        RoleCtrl.GetInstence().Clean();
     }
     /// <summary>
     /// 关闭游戏
