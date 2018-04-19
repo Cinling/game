@@ -33,8 +33,8 @@ public:
     // 关闭socket
     void DestroySocket();
 
-    // 用于客户端连接时，穿件新线程使用
-    friend void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr);
+    // 用于客户端连接时，创建新线程使用
+    friend void Friend_Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr);
 
 private:
     // 初始化服务端套接字
@@ -79,5 +79,5 @@ private:
 };
 
 
-// 用于客户端连接时，穿件新线程使用
-void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr);
+// 用于客户端连接时，创建新线程使用
+void Friend_Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr);

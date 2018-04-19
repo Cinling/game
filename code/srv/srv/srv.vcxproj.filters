@@ -19,9 +19,6 @@
     <Filter Include="头文件\model">
       <UniqueIdentifier>{0b785311-dd7a-4162-9194-02f86dd1c37e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\model\sqlite">
-      <UniqueIdentifier>{5c233c27-3fea-4866-b1a0-6765d2904813}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\model\db">
       <UniqueIdentifier>{33d25c3a-7b4c-428f-8a03-167098ccff36}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,9 @@
     </Filter>
     <Filter Include="头文件\game\other">
       <UniqueIdentifier>{bb0b178f-0176-4809-b44a-6bd98db0751b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\model\db\sqlite">
+      <UniqueIdentifier>{5c233c27-3fea-4866-b1a0-6765d2904813}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +105,12 @@
     <ClCompile Include="role_db.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="game_ctrl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="config.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -114,7 +120,7 @@
       <Filter>头文件\model\socket</Filter>
     </ClInclude>
     <ClInclude Include="sqlite_tool.h">
-      <Filter>头文件\model\sqlite</Filter>
+      <Filter>头文件\model\db\sqlite</Filter>
     </ClInclude>
     <ClInclude Include="tool.h">
       <Filter>头文件\model</Filter>
@@ -123,10 +129,10 @@
       <Filter>头文件\model\db</Filter>
     </ClInclude>
     <ClInclude Include="db_manager.h">
-      <Filter>头文件\model\sqlite</Filter>
+      <Filter>头文件\model\db\sqlite</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\sqlite3\sqlite3.h">
-      <Filter>头文件\model\sqlite</Filter>
+      <Filter>头文件\model\db\sqlite</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\rapidjson\allocators.h">
       <Filter>头文件\model\rapidjson</Filter>
@@ -239,9 +245,6 @@
     <ClInclude Include="socket_num_manager.h">
       <Filter>头文件\model\socket</Filter>
     </ClInclude>
-    <ClInclude Include="json.h">
-      <Filter>头文件\model\socket</Filter>
-    </ClInclude>
     <ClInclude Include="saves_manager.h">
       <Filter>头文件\game</Filter>
     </ClInclude>
@@ -274,6 +277,15 @@
     </ClInclude>
     <ClInclude Include="db_interface.h">
       <Filter>头文件\model\db</Filter>
+    </ClInclude>
+    <ClInclude Include="json.h">
+      <Filter>头文件\model</Filter>
+    </ClInclude>
+    <ClInclude Include="game_ctrl.h">
+      <Filter>头文件\game</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>头文件\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="srv" />
+		<Option pch_mode="2" />
+		<Option compiler="null" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="../Debug/srv" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Debug/" />
+				<Option deps_output="../Debug/" />
+				<Option type="0" />
+				<Option compiler="null" />
+				<Compiler>
+					<Add option="/D_MBCS" />
+					<Add option="/Zi" />
+					<Add option="/Od" />
+					<Add option="/W3" />
+				</Compiler>
+			</Target>
+			<Target title="Debug x64">
+				<Option output="../Debug/srv" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Debug/" />
+				<Option deps_output="../Debug/" />
+				<Option type="0" />
+				<Option compiler="null" />
+				<Compiler>
+					<Add option="/D_MBCS" />
+					<Add option="/Zi" />
+					<Add option="/Od" />
+					<Add option="/W3" />
+				</Compiler>
+			</Target>
+			<Target title="Release x64">
+				<Option output="../Release/srv" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Release/" />
+				<Option deps_output="../Release/" />
+				<Option type="0" />
+				<Option compiler="null" />
+				<Compiler>
+					<Add option="/D_MBCS" />
+					<Add option="/O2" />
+					<Add option="/W3" />
+				</Compiler>
+				<Linker>
+					<Add library="winmm.lib" />
+					<Add library="comctl32.lib" />
+					<Add library="kernel32.lib" />
+					<Add library="user32.lib" />
+					<Add library="gdi32.lib" />
+					<Add library="winspool.lib" />
+					<Add library="comdlg32.lib" />
+					<Add library="advapi32.lib" />
+					<Add library="shell32.lib" />
+					<Add library="ole32.lib" />
+					<Add library="oleaut32.lib" />
+					<Add library="uuid.lib" />
+					<Add library="odbc32.lib" />
+					<Add library="odbccp32.lib" />
+				</Linker>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="../Release/srv" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Release/" />
+				<Option deps_output="../Release/" />
+				<Option type="0" />
+				<Option compiler="null" />
+				<Compiler>
+					<Add option="/D_MBCS" />
+					<Add option="/O2" />
+					<Add option="/W3" />
+				</Compiler>
+				<Linker>
+					<Add library="winmm.lib" />
+					<Add library="comctl32.lib" />
+					<Add library="kernel32.lib" />
+					<Add library="user32.lib" />
+					<Add library="gdi32.lib" />
+					<Add library="winspool.lib" />
+					<Add library="comdlg32.lib" />
+					<Add library="advapi32.lib" />
+					<Add library="shell32.lib" />
+					<Add library="ole32.lib" />
+					<Add library="oleaut32.lib" />
+					<Add library="uuid.lib" />
+					<Add library="odbc32.lib" />
+					<Add library="odbccp32.lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add directory="." />
+		</Compiler>
+		<ResourceCompiler>
+			<Add directory="." />
+		</ResourceCompiler>
+		<Linker>
+			<Add option="/pdb:$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).pdb" />
+		</Linker>
+		<Unit filename="../lib/rapidjson/allocators.h" />
+		<Unit filename="../lib/rapidjson/cursorstreamwrapper.h" />
+		<Unit filename="../lib/rapidjson/document.h" />
+		<Unit filename="../lib/rapidjson/encodedstream.h" />
+		<Unit filename="../lib/rapidjson/encodings.h" />
+		<Unit filename="../lib/rapidjson/error/en.h" />
+		<Unit filename="../lib/rapidjson/error/error.h" />
+		<Unit filename="../lib/rapidjson/filereadstream.h" />
+		<Unit filename="../lib/rapidjson/filewritestream.h" />
+		<Unit filename="../lib/rapidjson/fwd.h" />
+		<Unit filename="../lib/rapidjson/internal/biginteger.h" />
+		<Unit filename="../lib/rapidjson/internal/diyfp.h" />
+		<Unit filename="../lib/rapidjson/internal/dtoa.h" />
+		<Unit filename="../lib/rapidjson/internal/ieee754.h" />
+		<Unit filename="../lib/rapidjson/internal/itoa.h" />
+		<Unit filename="../lib/rapidjson/internal/meta.h" />
+		<Unit filename="../lib/rapidjson/internal/pow10.h" />
+		<Unit filename="../lib/rapidjson/internal/regex.h" />
+		<Unit filename="../lib/rapidjson/internal/stack.h" />
+		<Unit filename="../lib/rapidjson/internal/strfunc.h" />
+		<Unit filename="../lib/rapidjson/internal/strtod.h" />
+		<Unit filename="../lib/rapidjson/internal/swap.h" />
+		<Unit filename="../lib/rapidjson/istreamwrapper.h" />
+		<Unit filename="../lib/rapidjson/memorybuffer.h" />
+		<Unit filename="../lib/rapidjson/memorystream.h" />
+		<Unit filename="../lib/rapidjson/msinttypes/inttypes.h" />
+		<Unit filename="../lib/rapidjson/msinttypes/stdint.h" />
+		<Unit filename="../lib/rapidjson/ostreamwrapper.h" />
+		<Unit filename="../lib/rapidjson/pointer.h" />
+		<Unit filename="../lib/rapidjson/prettywriter.h" />
+		<Unit filename="../lib/rapidjson/rapidjson.h" />
+		<Unit filename="../lib/rapidjson/reader.h" />
+		<Unit filename="../lib/rapidjson/schema.h" />
+		<Unit filename="../lib/rapidjson/stream.h" />
+		<Unit filename="../lib/rapidjson/stringbuffer.h" />
+		<Unit filename="../lib/rapidjson/writer.h" />
+		<Unit filename="../lib/sqlite3/sqlite3.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../lib/sqlite3/sqlite3.h" />
+		<Unit filename="animal.cpp" />
+		<Unit filename="animal.h" />
+		<Unit filename="base_role.cpp" />
+		<Unit filename="base_role.h" />
+		<Unit filename="config.cpp" />
+		<Unit filename="config.h" />
+		<Unit filename="db_interface.h" />
+		<Unit filename="db_manager.cpp" />
+		<Unit filename="db_manager.h" />
+		<Unit filename="game_ctrl.cpp" />
+		<Unit filename="game_ctrl.h" />
+		<Unit filename="json.cpp" />
+		<Unit filename="json.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="main.h" />
+		<Unit filename="map_db.cpp" />
+		<Unit filename="map_db.h" />
+		<Unit filename="map_manager.cpp" />
+		<Unit filename="map_manager.h" />
+		<Unit filename="plant.cpp" />
+		<Unit filename="plant.h" />
+		<Unit filename="role_ctrl.cpp" />
+		<Unit filename="role_ctrl.h" />
+		<Unit filename="role_db.cpp" />
+		<Unit filename="role_db.h" />
+		<Unit filename="role_type.h" />
+		<Unit filename="saves_manager.cpp" />
+		<Unit filename="saves_manager.h" />
+		<Unit filename="socket_num_manager.cpp" />
+		<Unit filename="socket_num_manager.h" />
+		<Unit filename="socket_tcp.cpp" />
+		<Unit filename="socket_tcp.h" />
+		<Unit filename="sqlite_tool.cpp" />
+		<Unit filename="sqlite_tool.h" />
+		<Unit filename="srv.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="tool.cpp" />
+		<Unit filename="tool.h" />
+		<Unit filename="tree.cpp" />
+		<Unit filename="tree.h" />
+		<Unit filename="world_manager.cpp" />
+		<Unit filename="world_manager.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

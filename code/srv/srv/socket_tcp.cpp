@@ -17,7 +17,7 @@ SocketTcp::~SocketTcp() {
 }
 
 void SocketTcp::StartSocket() {
-
+    
     this->isPause = false;
 
     // 循环接收数据
@@ -40,7 +40,7 @@ void SocketTcp::StartSocket() {
             continue;
         }
 
-        std::thread th(Client, this, socketClient, remoteAddr);
+        std::thread th(Friend_Client, this, socketClient, remoteAddr);
         th.detach();
     }
 }
@@ -132,7 +132,7 @@ std::string SocketTcp::DoBySocketAction(std::string clientData) {
     return retData;
 }
 
-void Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr) {
+void Friend_Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr) {
     //std::string ip = socketTcp->GetIp(remoteAddr);
     //std::cout << "receive a connect [" << ip.c_str() << "]" << std::endl;
 
