@@ -4,7 +4,6 @@ Config * Config::shareInstance = nullptr;
 
 
 Config::Config() {
-    this->sysConfig = std::map<std::string, std::string>();
 }
 
 Config * Config::GetInstance() {
@@ -21,19 +20,38 @@ Config * Config::GetInstanceFast() {
 Config::~Config() {
 }
 
-void Config::GetFast(const short type, const std::string key, std::string & value) {
+void Config::Set(const short type, const std::string key, std::string & value) {
 
     switch (type) {
-        case Config::TYPE_SYS:
-            value = this->sysConfig[key];
+        case Config::TYPE_ENV:
+            value = this->envConfig[key];
             break;
     }
 }
 
-void Config::InitConfig() {
-    this->InitSysConfig();
+void Config::Set(const short type, const std::string key, int & value) {
+    std::string valueStr = "0";
+    this->Set(type, key, valueStr);
+    value = std::stoi(valueStr);
 }
 
-void Config::InitSysConfig() {
-    this->sysConfig["CORE_NUM"] = "4";
+void Config::Set(const short type, const std::string key, float & value) {
+    std::string valueStr = "0";
+    this->Set(type, key, valueStr);
+    value = std::stof(valueStr);
+}
+
+void Config::InitConfig() {
+    this->InitEnvConfig();
+    this->InitGameSysConfig();
+}
+
+void Config::InitEnvConfig() {
+    this->envConfig = std::map<std::string, std::string>();
+    this->envConfig["CORE_NUM"] = "3";
+}
+
+void Config::InitGameSysConfig() {
+    this->gameSysConfig = std::map<std::string, std::string>();
+    this->gameSysConfig["LPS"] = "3";
 }
