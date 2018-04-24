@@ -84,6 +84,10 @@ std::string SocketNumManager::_10004_LoadGame(std::string data) {
     return send;
 }
 
+std::string SocketNumManager::_10005_InitConfig(std::string) {
+    return std::string();
+}
+
 std::string SocketNumManager::_20001_GetMapData(std::string data) {
     WorldManager * world = WorldManager::GetInstance();
     std::string retStr = world->GetMapInfo().ToJsonStr();
@@ -110,5 +114,9 @@ std::string SocketNumManager::_20002_GetStartGameObjectData(std::string data) {
     }
 
     return retStr;
+}
+
+std::string SocketNumManager::_20003_GetInitConfigProgress(std::string data) {
+    return std::string();
 }
 

@@ -23,7 +23,7 @@ SqliteTool::SqliteTool(const char * db) {
     strcpy_s(dbName, len, dbPath);
     sqlite3_open(dbName, &this->sqlite);
 
-    delete dbName;
+    delete[] dbName;
 
 }
 
@@ -46,7 +46,7 @@ SqliteTool * SqliteTool::GetInstance() {
 void SqliteTool::UseDB(const char * dbName) {
 
     if (SqliteTool::db != nullptr) {
-        delete SqliteTool::db;
+        delete[] SqliteTool::db;
         SqliteTool::db = nullptr;
     }
 

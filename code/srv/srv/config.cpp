@@ -13,7 +13,7 @@ Config * Config::GetInstance() {
     return shareInstance;
 }
 
-Config * Config::GetInstanceFast() {
+Config * Config::UseShareInstance() {
     return shareInstance;
 }
 

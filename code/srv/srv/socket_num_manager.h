@@ -24,11 +24,15 @@ public:
     std::string _10003_GetSavesList(std::string data);
     // 载入游戏存档
     std::string _10004_LoadGame(std::string data);
+    // 【未实现】加载配置
+    std::string _10005_InitConfig(std::string);
 
     /*客户端请求服务端数据*/
     // 获取游戏的地图的数据
     std::string _20001_GetMapData(std::string data);
     // 刚刚进入游戏时，获取场景所有对象数据
     std::string _20002_GetStartGameObjectData(std::string data);
+    // 【未实现】获取配置加载的进度
+    std::string _20003_GetInitConfigProgress(std::string data);
 };
 

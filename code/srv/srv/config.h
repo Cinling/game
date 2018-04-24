@@ -18,7 +18,7 @@ public:
     // 获取单例对象，如果没有对象存在，则创建一个新的对象
     static Config * GetInstance();
     // 【性能方法】快速获取单例对象，使用前请确保 单例对象已经初始化
-    static Config * GetInstanceFast();
+    static Config * UseShareInstance();
     ~Config();
 public:
     // 初始化配置，把所有配置接在到类中

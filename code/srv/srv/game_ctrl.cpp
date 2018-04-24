@@ -29,6 +29,7 @@ GameCtrl::~GameCtrl() {
 }
 
 void GameCtrl::Init() {
+    Config::GetInstance()->InitConfig();
 }
 
 void GameCtrl::Start() {
