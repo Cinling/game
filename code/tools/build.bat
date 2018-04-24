@@ -1,0 +1,3 @@
+REM start /wait "C:\Program Files\Unity\Editor\Unity.exe"  -quit  -batchmode   -projectPath "D:\workspace\repository\u3d\code\unity3d"  -executeMethod Build.Test  %companyName%  %productName% %platform% %outPath%  %arg0%
+
+"C:\Program Files\Unity\Editor\Unity.exe" -batchmode -projectPath "D:\workspace\repository\u3d\code\unity3d" -nographics -executeMethod Build.Test -logFile "D:\workspace\repository\u3d\code\unity3d\bat_build.log"  -quit
