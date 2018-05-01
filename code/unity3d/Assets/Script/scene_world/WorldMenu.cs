@@ -124,6 +124,7 @@ public class WorldMenu {
     /// 关闭游戏
     /// </summary>
     private void ExitGame() {
-
+        SocketNum._10006_ExitServerProcess();
+        Application.Quit();
     }
 }

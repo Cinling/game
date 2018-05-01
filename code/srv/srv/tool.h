@@ -34,11 +34,11 @@ namespace Tool {
         // 【创建文件夹】
         // folder 文件相对路径
         bool CreateDir(std::string folder);
-        // 【删除文件】
+        // 【删除文件】【未实现】
         // fileName 文件相对路径
         // return [true 处理成功]， [false 处理失败]
         bool DeleteFile(std::string fileName);
-        // 【重命名】
+        // 【重命名】【未实现】
         // oldDir 原来文件的路径
         // newDir 新的文件路径
         // return [true 处理成功]， [false 处理失败]

@@ -66,6 +66,22 @@ public class SocketNum {
     }
 
     /// <summary>
+    /// 结束服务端进程
+    /// </summary>
+    /// <returns></returns>
+    public static bool _10006_ExitServerProcess() {
+        string send = "10006|";
+        try {
+            SocketTcp.Send(send);
+        } catch (System.Exception exception) {
+            Debug.LogError("socket进程异常，理论上是正常的，因为进程已经结束，无法返回数据");
+            Debug.LogError(exception.StackTrace);
+        }
+        
+        return true;
+    }
+
+    /// <summary>
     /// 获取地图的数据
     /// </summary>
     /// <returns></returns>

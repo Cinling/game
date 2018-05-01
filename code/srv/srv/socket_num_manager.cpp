@@ -88,6 +88,11 @@ std::string SocketNumManager::_10005_InitConfig(std::string) {
     return std::string();
 }
 
+std::string SocketNumManager::_10006_ExitServerProcess(std::string) {
+    exit(0);
+    return std::string();
+}
+
 std::string SocketNumManager::_20001_GetMapData(std::string data) {
     WorldManager * world = WorldManager::GetInstance();
     std::string retStr = world->GetMapInfo().ToJsonStr();

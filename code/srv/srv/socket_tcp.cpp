@@ -122,6 +122,9 @@ std::string SocketTcp::DoBySocketAction(std::string clientData) {
         case 10004:
             retData = socketNumManager->_10004_LoadGame(data);
             break;
+        case 10006:
+            retData = socketNumManager->_10006_ExitServerProcess(data);
+            break;
         case 20001:
             retData = socketNumManager->_20001_GetMapData(data);
             break;

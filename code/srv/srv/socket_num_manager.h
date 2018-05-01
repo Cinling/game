@@ -26,6 +26,8 @@ public:
     std::string _10004_LoadGame(std::string data);
     // 【未实现】加载配置
     std::string _10005_InitConfig(std::string);
+    // 结束服务端进程
+    std::string _10006_ExitServerProcess(std::string);
 
     /*客户端请求服务端数据*/
     // 获取游戏的地图的数据

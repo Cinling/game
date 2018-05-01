@@ -45,8 +45,9 @@ public class SocketTcp {
                 int len = int.Parse(System.Text.Encoding.UTF8.GetString(br.ReadBytes(7)));
                 recv = System.Text.Encoding.UTF8.GetString(br.ReadBytes(len));
             } catch (Exception e) {
-                Debug.LogError(e.StackTrace);
-                recv = "";
+                Debug.LogWarning("socket 没有返回数据" + e.Message);
+            } finally {
+                
             }
         }
 

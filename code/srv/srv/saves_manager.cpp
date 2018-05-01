@@ -7,9 +7,11 @@ SavesManager * SavesManager::shareInstance = nullptr;
 
 const std::string SavesManager::SAVES_PATH = "saves/";
 const std::string SavesManager::TEMPORARY_SAVES = "tmp_save";
+const std::string SavesManager::CURR_GAME_SAVES = "curr_game";
 
 
 SavesManager::SavesManager() {
+    this->lastLoadSavesName = "";
 }
 
 
@@ -25,6 +27,8 @@ SavesManager::~SavesManager() {
 
 bool SavesManager::Save(std::string savesName) {
     bool retBool = true;
+
+    _mkdir(SavesManager::SAVES_PATH.c_str());
 
     SqliteTool::UseDB((SavesManager::SAVES_PATH + savesName).c_str());
     DBManager * db = DBManager::GetInstance();

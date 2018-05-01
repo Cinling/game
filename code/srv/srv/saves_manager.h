@@ -13,9 +13,14 @@ private:
     static const std::string SAVES_PATH;
     // 临时存档名称
     static const std::string TEMPORARY_SAVES;
+    // 当前游戏进行时存档名称（游戏进行时会不断地进行存储，当游戏保存时，直接通过复制该文件实现）
+    static const std::string CURR_GAME_SAVES;
 public:
     static SavesManager * GetInstance();
     ~SavesManager();
+
+private:
+    std::string lastLoadSavesName;
 
 public:
     // 保存游戏

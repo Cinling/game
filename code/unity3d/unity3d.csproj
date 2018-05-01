@@ -301,6 +301,7 @@
     <Compile Include="Assets\Script\global\model\ui\UIFunc.cs" />
     <Compile Include="Assets\Script\global\PrefabPath.cs" />
     <Compile Include="Assets\Script\global\SceneCtrl.cs" />
+    <Compile Include="Assets\Script\global\SystemHandle.cs" />
     <Compile Include="Assets\Script\obj\mono\BaseRole.cs" />
     <Compile Include="Assets\Script\obj\RoleCtrl.cs" />
     <Compile Include="Assets\Script\obj\RoleType.cs" />

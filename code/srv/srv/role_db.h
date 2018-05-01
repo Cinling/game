@@ -31,6 +31,15 @@ public:
     // TEXT 其他特异性信息
     static const std::string FIELD_INFO;
 
+    // 单条角色数据的结构体
+    struct Row {
+        int id;
+        int type;
+        Tool::Struct::Vector3 position;
+        float rotation;
+        std::string info;
+    };
+
 public:
     // 【存储一条角色数据】
     // id 角色id
@@ -39,6 +48,12 @@ public:
     // rotation 角色方向
     // info 特异性的信息
     bool InsertOnce(int id, int type, Tool::Struct::Vector3 position, float rotation, std::string info);
+
+    // 插入一条数据
+    bool InsertOnce(Row row);
+
+    // 批量插入数据
+    bool InsertMultiple(std::vector<Row> &rowList);
 
     // 查询所有数据
     std::list<std::map<std::string, std::string>> SelectAll();

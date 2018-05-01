@@ -28,18 +28,25 @@ bool RoleCtrl::Save() {
 
     if (this->roleMap != nullptr) {
 
-        RoleDB * roleDB = RoleDB::GetInstance();
+        std::vector<RoleDB::Row> roleVector;
 
         for (std::map<int, BaseRole *>::iterator it = this->roleMap->begin(); it != this->roleMap->end(); ++it) {
             int roleId = it->first;
             BaseRole * baseRole = it->second;
             std::string info = Tool::MapToJsonStr(baseRole->GetInfo());
 
-            if (!roleDB->InsertOnce(roleId, baseRole->GetType(), baseRole->GetPosition(), baseRole->GetRotation(), info)) {
-                retBool = false;
-                break;
-            }
+            RoleDB::Row roleData;
+            roleData.id = roleId;
+            roleData.type = baseRole->GetType();
+            roleData.position = baseRole->GetPosition();
+            roleData.rotation = baseRole->GetRotation();
+            roleData.info = info;
+
+            roleVector.push_back(roleData);
         }
+
+        RoleDB * roleDB = RoleDB::GetInstance();
+        roleDB->InsertMultiple(roleVector);
     }
 
     return retBool;
