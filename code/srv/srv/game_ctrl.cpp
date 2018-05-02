@@ -1,6 +1,6 @@
 ﻿#include "game_ctrl.h"
 
-
+#include <Windows.h>
 
 GameCtrl * GameCtrl::shareInstance = nullptr;
 
@@ -66,19 +66,32 @@ void GameCtrl::SetUPS(int lps) {
 }
  
 void Friend_LogicManager(GameCtrl * gameCtrl) {
+    int sleepMS = 1000 / gameCtrl->lps;
 
     while (true) {
-
+        Sleep(sleepMS);
+        ++gameCtrl->currUpsNum;
     }
 }
 
 void Friend_Logic(GameCtrl * gameCtrl, int threadNum) {
+    int currLpsNum = gameCtrl->currUpsNum;
 
     while (true) {
         if (gameCtrl->isPause) {
             Sleep(100);
+            std::cout << "Sleep" << std::endl;
+            continue;
         }
 
+        if (currLpsNum > gameCtrl->currUpsNum) {
+            Sleep(1);
+            std::cout << "waiting next lps" << std::endl;
+            continue;
+        }
 
+        std::cout << "当前逻辑帧：" << currLpsNum << "，逻辑进程号：" << threadNum <<  std::endl;
+
+        ++currLpsNum;
     }
 }

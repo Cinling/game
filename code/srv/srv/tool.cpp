@@ -1,5 +1,14 @@
 ﻿#include "tool.h"
 
+
+#include <io.h>  
+#include <direct.h>  
+
+#include <time.h>
+
+#include <winsock2.h>
+
+
 long long Tool::GetTimeSecond() {
 
     time_t t = time(NULL);
@@ -67,6 +76,11 @@ bool Tool::File::CreateDir(std::string folder) {
     }
     return true;
 }
+
+bool Tool::File::RemoveFile(std::string fileName) {
+    return false;
+}
+
 bool Tool::File::IsDirExists(std::string folder) {
     if (_access(folder.c_str(), 0) == -1) {
         return false;
@@ -100,10 +114,6 @@ std::vector<std::string> Tool::File::GetChildFiles(std::string folder) {
     return childFiles;
 }
 
-bool Tool::File::DeleteFile(std::string fileName) {
-    return false;
-}
-
 Tool::Struct::Vector3::Vector3() {
     this->x = 0;
     this->y = 0;
@@ -121,4 +131,30 @@ Tool::Struct::Vector3::~Vector3() {
 
 int Tool::Math::Random(int min, int max) {
     return (rand() % (max - min + 1) + min);
+}
+
+char * Tool::Func::UTF8ToGB2312(const char * utf8) {
+    int len = MultiByteToWideChar(CP_UTF8, 0, utf8, -1, NULL, 0);
+    wchar_t* wstr = new wchar_t[len + 1];
+    memset(wstr, 0, len + 1);
+    MultiByteToWideChar(CP_UTF8, 0, utf8, -1, wstr, len);
+    len = WideCharToMultiByte(CP_ACP, 0, wstr, -1, NULL, 0, NULL, NULL);
+    char* str = new char[len + 1];
+    memset(str, 0, len + 1);
+    WideCharToMultiByte(CP_ACP, 0, wstr, -1, str, len, NULL, NULL);
+    if (wstr) delete[] wstr;
+    return str;
+}
+
+char * Tool::Func::GB2312ToUTF8(const char * gb2312) {
+    int len = MultiByteToWideChar(CP_ACP, 0, gb2312, -1, NULL, 0);
+    wchar_t* wstr = new wchar_t[len + 1];
+    memset(wstr, 0, len + 1);
+    MultiByteToWideChar(CP_ACP, 0, gb2312, -1, wstr, len);
+    len = WideCharToMultiByte(CP_UTF8, 0, wstr, -1, NULL, 0, NULL, NULL);
+    char* str = new char[len + 1];
+    memset(str, 0, len + 1);
+    WideCharToMultiByte(CP_UTF8, 0, wstr, -1, str, len, NULL, NULL);
+    if (wstr) delete[] wstr;
+    return str;
 }

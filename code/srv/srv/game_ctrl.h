@@ -3,7 +3,6 @@
 #include "config.h"
 #include "role_ctrl.h"
 
-#include <Windows.h>
 #include <thread>
 #include <queue>
 

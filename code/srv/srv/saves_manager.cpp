@@ -28,7 +28,7 @@ SavesManager::~SavesManager() {
 bool SavesManager::Save(std::string savesName) {
     bool retBool = true;
 
-    _mkdir(SavesManager::SAVES_PATH.c_str());
+    Tool::File::CreateDir(SavesManager::SAVES_PATH);
 
     SqliteTool::UseDB((SavesManager::SAVES_PATH + savesName).c_str());
     DBManager * db = DBManager::GetInstance();

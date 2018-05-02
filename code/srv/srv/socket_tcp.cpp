@@ -1,5 +1,9 @@
 ﻿#include "socket_tcp.h"
 
+#include <winsock2.h>
+#include <thread>
+
+
 #define CONNECT_NUM_MAX 10
 
 SocketTcp::SocketTcp() {
@@ -20,14 +24,18 @@ void SocketTcp::StartSocket() {
     
     this->isPause = false;
 
+    // 启动服务器端主逻辑
+    std::thread th(StartServer);
+    th.detach();
+
     // 循环接收数据
     SOCKET socketClient;
     sockaddr_in remoteAddr;
     int remoteAddrlen = sizeof(remoteAddr);
     while (true) {
-        if (this->isPause) {
-            break;
-        }
+        //if (this->isPause) {
+        //    break;
+        //}
 
 #ifdef DEBUG
         std::cout << "wating connect ..." << std::endl;
@@ -148,12 +156,11 @@ void Friend_Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr)
     if (ret > 0) {
         recvData[ret] = 0x00;
 
-        retData = socketTcp->DoBySocketAction(std::string(socketTcp->UTF8ToGB2312(recvData)));
-
+        retData = socketTcp->DoBySocketAction(std::string(Tool::Func::UTF8ToGB2312(recvData)));
     }
 
     // 发送数据
-    const char *sendData = socketTcp->GB2312ToUTF8(retData.c_str());
+    const char *sendData = Tool::Func::GB2312ToUTF8(retData.c_str());
     int sendLen = static_cast<int>(strlen(sendData));
 
     send(client, std::to_string(sendLen).c_str(), 7, 0);
@@ -166,4 +173,8 @@ void Friend_Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr)
 #endif
 
     closesocket(client);
+}
+
+void StartServer() {
+    //GameCtrl::GetInstance()->Start();
 }

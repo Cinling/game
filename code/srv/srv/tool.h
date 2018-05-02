@@ -2,15 +2,11 @@
 
 #include "json.h"
 
-#include <io.h>  
-#include <direct.h>  
-
 #include <iostream>
 #include <list>
 #include <vector>
 #include <map>
 #include <string>
-#include <time.h>
 
 // 把变量名转为字符串
 #define NameToStr(x) #x
@@ -37,7 +33,7 @@ namespace Tool {
         // 【删除文件】【未实现】
         // fileName 文件相对路径
         // return [true 处理成功]， [false 处理失败]
-        bool DeleteFile(std::string fileName);
+        bool RemoveFile(std::string fileName);
         // 【重命名】【未实现】
         // oldDir 原来文件的路径
         // newDir 新的文件路径
@@ -71,5 +67,12 @@ namespace Tool {
     namespace Math {
         // 获取随机数
         int Random(int min, int max);
+    }
+
+    namespace Func {
+        //UTF-8到GB2312的转换  
+        char* UTF8ToGB2312(const char* utf8);
+        //GB2312到UTF-8的转换  
+        char* GB2312ToUTF8(const char* gb2312);
     }
 }
