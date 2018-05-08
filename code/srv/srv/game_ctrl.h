@@ -5,13 +5,14 @@
 
 #include <thread>
 #include <queue>
+#include <vector>
 
 class GameCtrl {
 private:
     static GameCtrl * shareInstance;
     GameCtrl();
 
-private:
+public:
     // 角色控制器的指针
     std::queue<BaseRole *> * execRoleQueue;
     // LPS 进度，表示逻辑的执行的顺序
@@ -26,6 +27,10 @@ private:
 private:
     // 逻辑帧进度：基本的角色处理
     static const int LPS_PROGRESS_ROLE_EXEC = 10;
+    // 主逻辑线程，控制游戏时间的流程
+    std::thread * mainLogicThread;
+    // 子逻辑线程，主要负责逻辑处理
+    std::vector<std::thread *> logicThreadList;
 
 public:
     static GameCtrl * GetInstance();
@@ -44,13 +49,16 @@ public:
     void SetUPS(int lps);
 
 private:
+    bool IsPause();
+
+private:
     // 逻辑线程管理线程 执行的方法
     // 逻辑线程管理线程 管理整个游戏的逻辑进度
-    friend void Friend_LogicManager(GameCtrl * gameCtrl);
+    friend void Friend_LogicManager();
     // 逻辑线程 执行的方法
-    friend void Friend_Logic(GameCtrl * gameCtrl, int threadNum);
+    friend void Friend_Logic(int threadNum);
 };
 
-void Friend_Logic(GameCtrl * gameCtrl, int threadNum);
-void Friend_LogicManager(GameCtrl * gameCtrl);
+void Friend_Logic(int threadNum);
+void Friend_LogicManager();
 

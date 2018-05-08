@@ -133,6 +133,7 @@ std::string SocketTcp::DoBySocketAction(std::string clientData) {
         case 10006:
             retData = socketNumManager->_10006_ExitServerProcess(data);
             break;
+
         case 20001:
             retData = socketNumManager->_20001_GetMapData(data);
             break;
@@ -176,5 +177,5 @@ void Friend_Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr)
 }
 
 void StartServer() {
-    //GameCtrl::GetInstance()->Start();
+    GameCtrl::GetInstance()->Start();
 }

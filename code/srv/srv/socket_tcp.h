@@ -52,4 +52,6 @@ private:
 
 // 用于客户端连接时，创建新线程使用
 void Friend_Client(SocketTcp * socketTcp, SOCKET client, sockaddr_in remoteAddr);
+
+// 开启服务端主逻辑线程，加载配置进入内存
 void StartServer();

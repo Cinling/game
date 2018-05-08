@@ -26,6 +26,10 @@ void Config::Set(const short type, const std::string key, std::string & value) {
         case Config::TYPE_ENV:
             value = this->envConfig[key];
             break;
+
+        case Config::TYPE_GAME_SYS:
+            value = this->gameSysConfig[key];
+            break;
     }
 }
 
