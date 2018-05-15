@@ -9,9 +9,10 @@ GameCtrl * GameCtrl::shareInstance = nullptr;
 GameCtrl::GameCtrl() {
     this->execRoleQueue = new std::queue<BaseRole *>();
     this->lpsProgress = 0;
-    this->isPause = true;
+    this->isPause = false;
     this->currUpsNum = 0;
     this->currUpsNum = 0;
+    this->isStop = false;
 }
 
 
@@ -26,6 +27,20 @@ GameCtrl::~GameCtrl() {
     if (this->execRoleQueue) {
         delete this->execRoleQueue;
         this->execRoleQueue = nullptr;
+    }
+
+    // 结束所有线程，并释放内存
+    this->isPause = true;
+    this->isStop = true;
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));   // 等待一秒，让所有进程结束
+    if (this->mainLogicThread != nullptr) {
+        delete this->mainLogicThread;
+        this->mainLogicThread = nullptr;
+    }
+    for (std::vector<std::thread*>::iterator it = this->logicThreadList.begin(); it != this->logicThreadList.end(); ++it) {
+        std::thread * thread = *it;
+        delete thread;
+        thread = nullptr;
     }
 }
 
@@ -54,7 +69,7 @@ void GameCtrl::Start() {
 
         this->logicThreadList.push_back(logicThread);
     }
-    
+
 }
 
 void GameCtrl::Pause() {
@@ -69,49 +84,51 @@ void GameCtrl::SetUPS(int lps) {
     this->lps = lps;
 }
 
-bool GameCtrl::IsPause() {
-    bool retBool = false;
-    if (this->isPause) {
-        retBool = true;
-    }
-    return retBool;
-}
- 
 void Friend_LogicManager() {
     GameCtrl * gameCtrl = GameCtrl::GetInstance();
     int sleepMS = 1000 / gameCtrl->lps;
 
     while (true) {
         std::this_thread::sleep_for(std::chrono::milliseconds(sleepMS));
-        ++gameCtrl->currUpsNum;
+        if (!gameCtrl->isPause) {
+            // 设置
+
+            ++gameCtrl->currUpsNum;
+        } else if (gameCtrl->isStop) {
+            break;
+        }
     }
 }
 
 void Friend_Logic(int threadNum) {
-    try {
 
-        GameCtrl * gameCtrl = GameCtrl::GetInstance();
+    GameCtrl * gameCtrl = GameCtrl::GetInstance();
 
-        int currLpsNum = gameCtrl->currUpsNum;
+    int currLpsNum = gameCtrl->currUpsNum;
 
-        while (true) {
-            if (gameCtrl->IsPause()) {
+    while (true) {
+        try {
+            // 游戏暂停
+            if (gameCtrl->isPause) {
+                if (gameCtrl->isStop) {
+                    break;
+                }
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
-                std::cout << "Sleep " << threadNum << std::endl;
                 continue;
             }
 
+            // 当前线程逻辑帧数
             if (currLpsNum > gameCtrl->currUpsNum) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
-                std::cout << "waiting next lps" << std::endl;
                 continue;
             }
 
-            std::cout << "当前逻辑帧：" << currLpsNum << "，逻辑进程号：" << threadNum <<  std::endl;
+            //printf_s("当前逻辑帧：%d，逻辑线程号：%d\n", currLpsNum, threadNum);
 
             ++currLpsNum;
+        } catch (...) {
+            int exceptionSleepMS = 5000;
+            //printf_s("逻辑线程异常，休眠 %dms 后重启", exceptionSleepMS);
         }
-    } catch (...) {
-        std::cout << "异常" << std::endl;
     }
 }

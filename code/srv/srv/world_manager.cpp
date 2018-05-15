@@ -32,7 +32,7 @@ WorldManager::~WorldManager() {
 bool WorldManager::InitMap(Json::Map * map) {
     this->map = map;
     RoleCtrl::GetInstance()->Clear();// 清空所有角色
-    this->RandomCreateTree(500);
+    this->RandomCreateTree(5);
     return true;
 }
 

@@ -64,7 +64,7 @@ bool RoleDB::InsertOnce(Row row) {
 
 bool RoleDB::InsertMultiple(std::vector<Row> &rowList) {
     std::string sql = "INSERT INTO `" + RoleDB::TABLE_NAME + "`("
-        + RoleDB::FIELD_ID + "," + RoleDB::FIELD_TYPE + "," + RoleDB::FIELD_X + "," + RoleDB::FIELD_Y + "," + RoleDB::FIELD_Z + "," + RoleDB::FIELD_ROTATION + "," + RoleDB::FIELD_INFO + ") VALUES";
+        + RoleDB::FIELD_ID + "," + RoleDB::FIELD_TYPE + "," + RoleDB::FIELD_X + "," + RoleDB::FIELD_Y + "," + RoleDB::FIELD_Z + "," + RoleDB::FIELD_ROTATION + "," + RoleDB::FIELD_INFO + ") VALUES ";
 
     for (std::vector<Row>::iterator it = rowList.begin(); it != rowList.end(); ++ it) {
         Row row = *it;
@@ -77,10 +77,11 @@ bool RoleDB::InsertMultiple(std::vector<Row> &rowList) {
         std::string str_rotation = std::to_string(row.rotation);
         std::string info = row.info;
 
-        sql += "(" + str_id + ", " + str_type + ", " + str_x + ", " + str_y + ", " + str_z + ", " + str_rotation + ", '" + info + "')";
         if (it != rowList.begin()) {
             sql += ",";
         }
+        sql += "(" + str_id + ", " + str_type + ", " + str_x + ", " + str_y + ", " + str_z + ", " + str_rotation + ", '" + info + "')";
+        
     }
     SqliteTool * sqlite = SqliteTool::GetInstance();
     return sqlite->ExecSql(sql.c_str());

@@ -133,6 +133,9 @@ std::string SocketTcp::DoBySocketAction(std::string clientData) {
         case 10006:
             retData = socketNumManager->_10006_ExitServerProcess(data);
             break;
+        case 10007:
+            retData = socketNumManager->_10007_CreateRole(data);
+            break;
 
         case 20001:
             retData = socketNumManager->_20001_GetMapData(data);

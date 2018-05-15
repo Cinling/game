@@ -84,12 +84,27 @@ std::string SocketNumManager::_10004_LoadGame(std::string data) {
     return send;
 }
 
-std::string SocketNumManager::_10005_InitConfig(std::string) {
+std::string SocketNumManager::_10005_InitConfig(std::string data) {
     return std::string();
 }
 
-std::string SocketNumManager::_10006_ExitServerProcess(std::string) {
+std::string SocketNumManager::_10006_ExitServerProcess(std::string data) {
     exit(0);
+    return std::string();
+}
+
+std::string SocketNumManager::_10007_CreateRole(std::string data) {
+    using namespace rapidjson;
+
+    Document document;
+    document.Parse(data.c_str());
+
+    float x = Json::GetFloat(document, "x", 0.0f);
+    float y = Json::GetFloat(document, "y", 0.0f);
+    float z = Json::GetFloat(document, "z", 0.0f);
+
+    RoleCtrl::GetInstance()->CreateRole<Animal>(new Tool::Struct::Vector3(x, y, z));
+
     return std::string();
 }
 

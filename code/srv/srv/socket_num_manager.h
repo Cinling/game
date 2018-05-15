@@ -25,9 +25,11 @@ public:
     // 载入游戏存档
     std::string _10004_LoadGame(std::string data);
     // 【未实现】加载配置
-    std::string _10005_InitConfig(std::string);
+    std::string _10005_InitConfig(std::string data);
     // 结束服务端进程
-    std::string _10006_ExitServerProcess(std::string);
+    std::string _10006_ExitServerProcess(std::string data);
+    // 创建一个角色
+    std::string _10007_CreateRole(std::string data);
 
     /*客户端请求服务端数据*/
     // 获取游戏的地图的数据

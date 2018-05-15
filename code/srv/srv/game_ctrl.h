@@ -19,6 +19,8 @@ public:
     int lpsProgress;
     // 暂停标记
     bool isPause;
+    // 停止标记，这将会使所有进程结束运行
+    bool isStop;
     // 当前逻辑帧数目
     int currUpsNum;
     // 逻辑帧
@@ -49,7 +51,6 @@ public:
     void SetUPS(int lps);
 
 private:
-    bool IsPause();
 
 private:
     // 逻辑线程管理线程 执行的方法

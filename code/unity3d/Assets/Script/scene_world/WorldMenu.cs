@@ -49,6 +49,7 @@ public class WorldMenu {
         float pannelY = goPanel.transform.position.y;
 
         UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, Lang.Get("world.menu.save"), pannelX, pannelY + 200, OpenSavePannel);
+        UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, "createRole", pannelX, pannelY + 160, CreateRole);
 
         UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, Lang.Get("world.menu.back_to_menu"), pannelX, pannelY - 100, BackTuMenu);
         UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, Lang.Get("world.menu.exit"), pannelX, pannelY - 140, ExitGame);
@@ -80,6 +81,9 @@ public class WorldMenu {
 
         // 关闭按钮
         UIFunc.Button.CreateButton(goLoadGamePannel, PrefabPath._2D.Button, Lang.Get("world.menu.close"), panelX + 90, panelY - 220, CloseSaveGamePanel);
+    }
+    private void CreateRole() {
+        SocketNum._10007_CreateRole(new Json.BaseRole(0, 10000, 2f, 0, 2f, ""));
     }
     /// <summary>
     /// 关闭保存的面板

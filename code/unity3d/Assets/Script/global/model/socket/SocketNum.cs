@@ -82,6 +82,23 @@ public class SocketNum {
     }
 
     /// <summary>
+    /// 创建一个角色
+    /// </summary>
+    /// <param name="baseRole"></param>
+    /// <returns></returns>
+    public static bool _10007_CreateRole(Json.BaseRole baseRole) {
+        string send = "10007|" + JsonUtility.ToJson(baseRole);
+        try {
+            SocketTcp.Send(send);
+        } catch (System.Exception exception) {
+            Debug.LogError(exception.StackTrace);
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
     /// 获取地图的数据
     /// </summary>
     /// <returns></returns>

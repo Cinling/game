@@ -46,7 +46,9 @@ bool RoleCtrl::Save() {
         }
 
         RoleDB * roleDB = RoleDB::GetInstance();
-        roleDB->InsertMultiple(roleVector);
+        if (!roleDB->InsertMultiple(roleVector)) {
+            retBool = false;
+        }
     }
 
     return retBool;
