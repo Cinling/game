@@ -72,9 +72,6 @@
     <ClCompile Include="socket_num_manager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="socket_tcp.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="db_manager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -111,13 +108,16 @@
     <ClCompile Include="config.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="socket_listener.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="recv_client.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="socket_tcp.h">
-      <Filter>头文件\model\socket</Filter>
     </ClInclude>
     <ClInclude Include="sqlite_tool.h">
       <Filter>头文件\model\db\sqlite</Filter>
@@ -242,9 +242,6 @@
     <ClInclude Include="..\lib\rapidjson\error\error.h">
       <Filter>头文件\model\rapidjson</Filter>
     </ClInclude>
-    <ClInclude Include="socket_num_manager.h">
-      <Filter>头文件\model\socket</Filter>
-    </ClInclude>
     <ClInclude Include="saves_manager.h">
       <Filter>头文件\game</Filter>
     </ClInclude>
@@ -286,6 +283,15 @@
     </ClInclude>
     <ClInclude Include="config.h">
       <Filter>头文件\model</Filter>
+    </ClInclude>
+    <ClInclude Include="socket_listener.h">
+      <Filter>头文件\model\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="recv_client.h">
+      <Filter>头文件\model\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="socket_num_manager.h">
+      <Filter>头文件\model\socket</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

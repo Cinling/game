@@ -11,7 +11,7 @@ public class Instance : MonoBehaviour {
         });
 
         // 启动服务端
-        StartServer();
+        //StartServer();
 
         // 初始化幀數
         Application.targetFrameRate = 60;

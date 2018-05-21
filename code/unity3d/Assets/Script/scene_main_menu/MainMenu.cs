@@ -59,6 +59,8 @@ public class MainMenu {
 
         // 切换到UI调试界面的按钮
         UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, "UI Testing Page", width - 200, height - 160, ChangeToUIMakeScene);
+
+        UIFunc.Button.CreateButton(goPanel, PrefabPath._2D.Button, "长连接测试", width - 200, height - 120, SocketLongTest);
     }
 
     /// <summary>
@@ -170,6 +172,11 @@ public class MainMenu {
         if (goLoadGameScrollView != null) {
             Object.Destroy(goLoadGameScrollView);
         }
+    }
+
+
+    private void SocketLongTest() {
+        new SocketLong().Init();
     }
 }
 

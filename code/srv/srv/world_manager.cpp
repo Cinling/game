@@ -103,7 +103,7 @@ bool WorldManager::RandomCreateTree(int num) {
         int x = Tool::Math::Random(minX, maxX);
         int z = Tool::Math::Random(minZ, maxZ);
 
-        roleCtrl->CreateRole<Tree>(new Tool::Struct::Vector3(x, 0, z));
+        roleCtrl->CreateRole<Tree>(new Tool::Struct::Vector3(x, 0.0F, z));
     }
 
     return true;

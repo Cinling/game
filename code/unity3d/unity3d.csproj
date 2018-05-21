@@ -293,6 +293,7 @@
     <Compile Include="Assets\Script\global\model\Lang.cs" />
     <Compile Include="Assets\Script\global\model\Log.cs" />
     <Compile Include="Assets\Script\global\model\socket\Json.cs" />
+    <Compile Include="Assets\Script\global\model\socket\SocketLong.cs" />
     <Compile Include="Assets\Script\global\model\socket\SocketNum.cs" />
     <Compile Include="Assets\Script\global\model\socket\SocketTcp.cs" />
     <Compile Include="Assets\Script\global\model\SqliteTool.cs" />

@@ -1,6 +1,9 @@
 ﻿#include "main.h"
 
 int main(void) {
-    SocketTcp socketTcp(6000);
-    socketTcp.StartSocket();
+    RecvClient::StartLintener(6000);
+
+    while (true) {
+        Sleep(5000);
+    }
 }
