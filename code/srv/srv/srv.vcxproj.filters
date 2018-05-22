@@ -49,6 +49,9 @@
     <Filter Include="头文件\model\db\sqlite">
       <UniqueIdentifier>{5c233c27-3fea-4866-b1a0-6765d2904813}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\model\socket\object">
+      <UniqueIdentifier>{e7a5654c-3872-4a94-a298-fcc27925321a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -112,6 +115,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="recv_client.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="client_manager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="client.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -292,6 +301,12 @@
     </ClInclude>
     <ClInclude Include="socket_num_manager.h">
       <Filter>头文件\model\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="client_manager.h">
+      <Filter>头文件\model\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="client.h">
+      <Filter>头文件\model\socket\object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

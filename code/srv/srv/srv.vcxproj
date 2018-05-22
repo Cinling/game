@@ -119,6 +119,8 @@
     <ClCompile Include="..\lib\sqlite3\sqlite3.c" />
     <ClCompile Include="animal.cpp" />
     <ClCompile Include="base_role.cpp" />
+    <ClCompile Include="client.cpp" />
+    <ClCompile Include="client_manager.cpp" />
     <ClCompile Include="config.cpp" />
     <ClCompile Include="db_manager.cpp" />
     <ClCompile Include="game_ctrl.cpp" />
@@ -177,6 +179,8 @@
     <ClInclude Include="..\lib\rapidjson\writer.h" />
     <ClInclude Include="..\lib\sqlite3\sqlite3.h" />
     <ClInclude Include="animal.h" />
+    <ClInclude Include="client.h" />
+    <ClInclude Include="client_manager.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="db_interface.h" />
     <ClInclude Include="base_role.h" />

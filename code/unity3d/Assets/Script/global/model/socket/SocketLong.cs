@@ -13,7 +13,7 @@ public class SocketLong {
     public void Init() {
         try {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            socket.Connect("127.0.0.1", 6000);
+            socket.Connect("127.0.0.1", 6001);
 
             socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), socket);
         } catch (Exception e) {
@@ -27,6 +27,7 @@ public class SocketLong {
             var socket = ar.AsyncState as Socket;
 
             var length = socket.EndReceive(ar);
+            socket.Send(System.Text.Encoding.UTF8.GetBytes("recv"));
 
             byte[] reallData = new byte[length];
 
@@ -35,7 +36,6 @@ public class SocketLong {
             string recv = System.Text.Encoding.UTF8.GetString(reallData);
 
             Debug.Log(recv);
-            Thread.Sleep(300);
         } catch (Exception ex) {
             Debug.LogError(ex.GetBaseException());
         }
